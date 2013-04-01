@@ -21,6 +21,7 @@ gem 'ckeditor', :git => 'git://github.com/adaline/rails3-ckeditor.git'
 gem 'spreadsheet'
 gem 'gritter'
 gem 'gon'
+gem 'paperclip'
 
 
 

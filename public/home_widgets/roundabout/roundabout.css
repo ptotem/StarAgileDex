@@ -1,0 +1,122 @@
+.theme1 {
+    background-image: url('/assets/blue_background.jpg');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    color: white;
+}
+
+.theme2 {
+    background-image: url('/assets/red_background.jpg');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    color: white;
+}
+
+.theme_home {
+    background-image: url('/assets/background.jpg');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    color: white;
+}
+
+@font-face {
+    font-family: Century Gothic;
+    src: url('/assets/CenturyGothic.ttf');
+}
+
+@font-face {
+    font-family: Canela;
+    src: url('/assets/canela_roman.otf');
+}
+
+@font-face {
+    font-family: Verdana;
+    src: url('/assets/verdana.ttf');
+}
+
+
+h1 {
+    font-size: 48px;
+    line-height: 54px;
+    text-align: left;
+    margin-left: 30px;
+}
+
+h3 {
+    font-size: 18px;
+    text-align: center;
+    font-weight: normal;
+}
+
+#text_wrap_back {
+    position: absolute;
+    top: 40px;
+    left: -10px;
+    width: 600px;
+    background: #122c3b;
+    opacity: 0.7;
+    height: 280px;
+    display: none;
+    border-bottom-right-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+#text_wrap {
+    position: absolute;
+    top: 10px;
+    left: -10px;
+    height: 240px;
+    width: 500px;
+    text-align: center;
+    font-size: 18px;
+    /*font-weight: bold;*/
+    padding: 20px;
+    display: none;
+}
+
+#caption_wrap_back {
+    position: absolute;
+    right: -10px;
+    top: 500px;
+    width: 580px;
+    background: transparent;
+    opacity: 0.7;
+    height: 100px;
+    display: none;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+#caption_wrap {
+    position: absolute;
+    right: 375px;
+    top: 360px;
+    height: 100px;
+    width: 220px;
+    text-align: center;
+    font-size: 18px;
+    padding: 20px;
+    display: none;
+}
+
+#title_wrap {
+    position: absolute;
+    right: 90px;
+    top: 120px;
+    text-align: center;
+}
+
+#title_wrap h1{
+    text-align: center;
+}
+
+#title_wrap img{
+    width: 250px;
+}
+
+#widget_wrap {
+    position: absolute;
+    margin: 0 auto;
+    top: 350px;
+    left: 80px;
+}

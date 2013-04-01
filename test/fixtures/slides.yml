@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  presentation_id: 1
+  title: MyString
+  subtitle: MyString
+  sequence: 1
+
+two:
+  presentation_id: 1
+  title: MyString
+  subtitle: MyString
+  sequence: 1

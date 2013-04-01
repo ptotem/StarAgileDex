@@ -1,0 +1,220 @@
+<script type="text/javascript">
+    function include_scripts() {
+        $('#widget_wrap').append('<div id="widget_head"></div>');
+
+//        $('#widget_head').append('<script src="home_widgets/scrollpath/jquery-1.8.3.js"></scr' + 'ipt>');
+//        $('#widget_head').append('<script src="home_widgets/scrollpath/jquery.easing.js"></scr' + 'ipt>');
+//        $('#widget_head').append('<script src="home_widgets/scrollpath/prefixfree.min.js"></scr' + 'ipt>');
+        $('#widget_head').append('<script src="home_widgets/scrollpath/jquery.scrollpath.js"></scr' + 'ipt>');
+        $('#widget_head').append('<link href="home_widgets/scrollpath/scrollpath.css" rel="stylesheet" media="screen">');
+
+    }
+
+    function init_widget() {
+        $('#text_wrap_back').hide();
+        $('#caption_wrap_back').hide();
+        $('#caption_wrap').hide();
+
+        var $pather = $.fn.scrollPath("getPath");
+        // Move to 'start' element
+        $pather.moveTo(0, 0, {name: "start"});
+        var topx = 0;
+        var leftx = 0;
+        var counter, chooser, spcenterx, spcentery, spradius, spsangle, speangle;
+        $.each(images, function (index, elm) {
+                    counter = index + 1;
+                    $('#scroll_wrapper').append('<div class="sp-step" id="sp-step_' + counter + '" style="position:absolute;top:' + (topx) + 'px;left:' + (leftx) + 'px;"><table><tr><td><img src="' + elm + '"/></td><td><div class="caption">' + captions[index] + '</div></td></tr></table></div>');
+                    if (chooser == 1) {
+                        rotateq = Math.round(Math.random() * 2) * 2;
+                        $pather.arc(spcenterx, spcentery, 500, spsangle, speangle, true, {rotate: Math.PI * rotateq, name: "step_" + counter })
+                    } else {
+                        $pather.lineTo(leftx, topx, {
+                            name: "step_" + counter,
+                            callback: function () {
+
+                            }
+                        });
+                    }
+                    chooser = Math.round(Math.random() * 2);
+                    $('#nav_menu').append('<li><a href="#step_' + counter + '">' + counter + '</a></li>');
+                    if (counter != images.length) {
+                        if (chooser == 1) {
+                            spcenterx = leftx + 500;
+                            spcentery = topx;
+                            spsangle = Math.PI;
+                            speangle = (1.5 + Math.random() * 0.5) * Math.PI;
+                            topx = spcentery + Math.sin(speangle) * 500;
+                            leftx = spcenterx + Math.cos(speangle) * 500;
+                        } else {
+                            topx = topx + Math.round(Math.random() * 200) + 500;
+                            leftx = leftx + Math.round(Math.random() * 200) + 500;
+                        }
+                    } else {
+                        $pather.lineTo(0, 0);
+                        // We're done with the path, let's initate the plugin on our wrapper element
+                        $("#scroll_wrapper").scrollPath({drawPath: true, wrapAround: true});
+                        // Add scrollTo on click on the navigation anchors
+                        $("nav").find("a").each(function () {
+                            var target = $(this).attr("href").replace("#", "");
+                            $(this).click(function (e) {
+                                e.preventDefault();
+                                // Include the jQuery easing plugin (http://gsgd.co.uk/sandbox/jquery/easing/)
+                                // for extra easing functions like the one below
+                                $.fn.scrollPath("scrollTo", target, 1000, "easyInOut", function () {
+
+                                    /* Adding some post scrolling animations when menu is clicked*/
+                                    effector = Math.round(Math.random() * 3);
+                                    switch (effector) {
+                                        case 0:
+                                            $("#sp-" + target).animate({
+                                                opacity: "0.2"
+                                            }, 500, function () {
+                                                $("#sp-" + target).animate({
+                                                    opacity: "1"
+                                                }, 500);
+                                            });
+                                            break;
+                                        case 1:
+                                            $("#sp-" + target + " .caption").hide();
+                                            $("#sp-" + target + " img").animate({
+                                                width: "350px"
+                                            }, 2000, function () {
+                                                setTimeout(function () {
+                                                    $("#sp-" + target + " img").animate({
+                                                        width: "250px"
+                                                    }, 1000, function () {
+                                                        $("#sp-" + target + " .caption").fadeIn();
+                                                    });
+                                                }, 2000);
+                                            });
+                                            break;
+                                        case 2:
+                                            $("#sp-" + target + " img").hide();
+                                            $("#sp-" + target + " .caption").css('width', '400px');
+                                            $("#sp-" + target + " .caption").animate({
+                                                fontSize: "32px",
+                                                lineHeight: "40px"
+                                            }, 2000, function () {
+                                                setTimeout(function () {
+                                                    $("#sp-" + target + " .caption").animate({
+                                                        fontSize: "18px",
+                                                        lineHeight: "21px"
+                                                    }, 1000, function () {
+                                                        $("#sp-" + target + " .caption").css('width', '200px');
+                                                        $("#sp-" + target + " img").fadeIn();
+                                                    });
+                                                }, 3000);
+                                            });
+                                            break;
+                                    }
+                                });
+                            });
+                        });
+                        /* ===================================================================== */
+
+                        $(".settings .show-path").click(function (e) {
+                            e.preventDefault();
+                            $(".sp-canvas").toggle();
+                        }).toggle(function () {
+                                    $(this).text("Hide Path");
+                                }, function () {
+                                    $(this).text("Show Path");
+                                });
+                    }
+                }
+        )
+        ;
+
+        /* ========== DRAWING THE PATH AND INITIATING THE PLUGIN ============= */
+
+        $('#scroll_wrapper').css('left', '80px');
+        setTimeout(function () {
+            $('#wrapper').fadeIn(function () {
+                $('#widget_wrap').fadeIn('slow', function () {
+                    $('#scroll_wrapper').fadeIn('slow');
+                    $('#title_wrap').fadeIn();
+                    $('#text_wrap').slideDown(1000, function () {
+                        $('.navbar').fadeIn(function () {
+                            $('.ad-menu-item').slideToggle();
+                        });
+                    });
+                });
+            });
+        }, 1000);
+        $('a').css("display","block");
+        $('.settings a').css("display","block");
+    }
+
+
+    function highlight(element) {
+        if (!element.hasClass("highlight")) {
+            element.addClass("highlight");
+            setTimeout(function () {
+                element.removeClass("highlight");
+            }, 2000);
+        }
+    }
+
+    function ordinal(num) {
+        return num + (
+                (num % 10 == 1 && num % 100 != 11) ? 'st' :
+                        (num % 10 == 2 && num % 100 != 12) ? 'nd' :
+                                (num % 10 == 3 && num % 100 != 13) ? 'rd' : 'th'
+                );
+    }
+
+</script>
+
+<nav>
+    <ul id="nav_menu"></ul>
+</nav>
+
+<div class="settings ">
+    <a href="" class="show-path" style="display: block;">Show Path</a>
+</div>
+<div id="scroll_wrapper">
+
+</div>
+
+
+<!--// Arc down and line to 'syntax'-->
+<!--.arc(200, 1200, 400, -Math.PI / 2, Math.PI / 2, true)-->
+<!--.lineTo(600, 1600, {-->
+<!--callback:function () {-->
+<!--highlight($(".settings"));-->
+<!--},-->
+<!--name:"stepthree"-->
+<!--})-->
+<!--// Continue line to 'scrollbar'-->
+<!--.lineTo(1750, 1600, {-->
+<!--callback:function () {-->
+<!--highlight($(".sp-scroll-handle"));-->
+<!--},-->
+<!--name:"stepfour"-->
+<!--})-->
+<!--// Arc up while rotating-->
+<!--.arc(1800, 1000, 600, Math.PI / 2, 0, true, {rotate:Math.PI / 2 })-->
+<!--// Line to 'rotations'-->
+<!--.lineTo(2400, 750, {-->
+<!--name:"stepfive"-->
+<!--})-->
+<!--// Rotate in place-->
+<!--.lineTo(2400, 150, {-->
+<!--name:"rotated"-->
+<!--})-->
+<!--.rotate(3 * Math.PI / 2, {-->
+<!--name:"rotated"-->
+<!--})-->
+<!--// Continue upwards to 'source'-->
+<!--.lineTo(2400, -700, {-->
+<!--name:"source"-->
+<!--})-->
+<!--// Small arc downwards-->
+<!--.arc(2250, -700, 150, 0, -Math.PI / 2, true)-->
+
+<!--//Line to 'follow'-->
+<!--.lineTo(1350, -850, {-->
+<!--name:"follow"-->
+<!--})-->
+<!--// Arc and rotate back to the beginning.-->
+<!--.arc(1300, 50, 900, -Math.PI / 2, -Math.PI, true, {rotate:Math.PI * 2, name:"stepsix"});-->

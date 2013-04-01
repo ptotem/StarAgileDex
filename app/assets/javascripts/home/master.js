@@ -11,7 +11,6 @@ var elements;
 var captions = new Array();
 var images = new Array();
 var bimage = "";
-var presentation;
 var theme;
 var font_style;
 
@@ -31,7 +30,6 @@ function load_widget(index) {
     /* Empty out the current Widget Container*/
     $('#widget_head').empty().remove();
     $('#widget_wrap').html('');
-
 
     /* Load the new Widget */
     $("#widget_wrap").load('home_widgets/'+widget_list[index], function (responseTxt, statusTxt, xhr) {
@@ -71,14 +69,8 @@ function load_text_widget(index) {
 }
 
 
-// load the data from xml
+// load the data from slide_data.js
 function load_data() {
-    images=[];
-    captions=[];
-    $.each(elements,function(index,elm){
-        images.push($(elm).find('image-file-name').text());
-        captions.push($(elm).find('text').text());
-    });
     $('#title_wrap').html('<h1>'+bimage+'</h1>');
     $('#text_wrap').html(content);
 }

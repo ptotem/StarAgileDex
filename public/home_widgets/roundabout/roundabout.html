@@ -1,0 +1,51 @@
+<script>
+
+    function include_scripts() {
+        $('#widget_wrap').prepend('<div id="widget_head"></div>');
+        $('#widget_head').append('<link href="home_widgets/roundabout/roundabout.css" rel="stylesheet" media="screen">');
+        $('#widget_head').append('<link href="home_widgets/roundabout/roundabout-shapes2.css" rel="stylesheet" media="screen">');
+        $('#widget_head').append('<script src="home_widgets/roundabout/jquery.easing.js"></scr' + 'ipt>');
+        $('#widget_head').append('<script src="home_widgets/roundabout/jquery.roundabout.min.js"></scr' + 'ipt>');
+        $('#widget_head').append('<script src="home_widgets/roundabout/jquery.roundabout-shapes.min.js"></scr' + 'ipt>');
+    }
+    function init_widget() {
+
+        $.each(images, function (index, elm) {
+            $('#roundabout-box').append('<li><img src="' + elm + '" title="' + captions[index] + '" id="' + index + '" /></li>');
+            if (index == images.length - 1) {
+                $('#roundabout-box').roundabout({
+                    shape: "rollerCoaster",
+                    autoPlay: true,
+                    autoplayDuration: 8000
+                }).bind('animationEnd', function () {
+                            $('#caption_wrap').html($('#' + $('ul#roundabout-box').roundabout("getChildInFocus")).attr('title'));
+                        });
+
+                $('#caption_wrap').html($('#' + $('ul#roundabout-box').roundabout("getChildInFocus")).attr('title'));
+                $('#roundabout-box').roundabout("startAutoplay");
+            }
+        });
+
+        setTimeout(function () {
+            $('#wrapper').fadeIn(function () {
+                $('#widget_wrap').fadeIn('slow', function () {
+                    $('#title_wrap').fadeIn();
+                    $('#text_wrap_back').slideDown();
+                    $('#caption_wrap_back').fadeIn();
+                    $('#caption_wrap').fadeIn();
+                    $('#text_wrap').slideDown(1000, function () {
+                        $('#text_wrap_back').slideDown();
+                        $('.navbar').fadeIn(function () {
+                            $('.ad-menu-item').slideToggle();
+                        });
+                    });
+                });
+            });
+        }, 1000);
+    }
+
+</script>
+
+<ul id="roundabout-box"></ul>
+
+

@@ -1,0 +1,246 @@
+.theme1 {
+    background-image: url('/assets/blue_background.jpg');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    color: white;
+}
+
+.theme2 {
+    background-image: url('/assets/red_background.jpg');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    color: white;
+}
+
+.theme_home {
+    background-image: url('/assets/background.jpg');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    color: white;
+}
+
+@font-face {
+    font-family: Century Gothic;
+    src: url('/assets/CenturyGothic.ttf');
+}
+
+@font-face {
+    font-family: Canela;
+    src: url('/assets/canela_roman.otf');
+}
+
+@font-face {
+    font-family: Verdana;
+    src: url('/assets/verdana.ttf');
+}
+
+
+h1 {
+    font-size: 32px;
+    line-height: 40px;
+    text-align: right;
+}
+
+h3 {
+    font-size: 18px;
+    text-align: center;
+    font-weight: normal;
+}
+
+#text_wrap_back {
+    position: absolute;
+    bottom: 40px;
+    right: -10px;
+    width: 400px;
+    background: #122c3b;
+    opacity: 0.7;
+    height: 280px;
+    display: none;
+    border-bottom-right-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+#text_wrap {
+    position: absolute;
+    bottom: 50px;
+    right: 20px;
+    height: 240px;
+    width: 270px;
+    text-align: right;
+    font-size: 18px;
+    /*font-weight: bold;*/
+    padding: 20px;
+    display: none;
+}
+
+#caption_wrap_back {
+    position: absolute;
+    right: -10px;
+    top: 500px;
+    width: 580px;
+    background: transparent;
+    opacity: 0.7;
+    height: 100px;
+    display: none;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+#caption_wrap {
+    position: absolute;
+    right: 375px;
+    top: 360px;
+    height: 100px;
+    width: 220px;
+    text-align: center;
+    font-size: 18px;
+    padding: 20px;
+    display: none;
+}
+
+#title_wrap {
+    position: absolute;
+    right: 80px;
+    top: 0px;
+    text-align: center;
+}
+
+#title_wrap h1{
+    text-align: center;
+}
+
+#title_wrap img{
+    width: 200px;
+}
+
+#widget_wrap {
+    position: absolute;
+    margin: 0 auto;
+    top: 350px;
+    left: 80px;
+}
+
+.sp-step{
+    z-index: 9999;
+}
+.sp-step table{
+    width: 500px;
+}
+
+.sp-step img {
+    width:250px;
+}
+
+.sp-step .caption {
+    width:200px;
+    font-size: 18px;
+    line-height: 21px;
+    color:black;
+}
+
+.sp-scroll-bar {
+	position: fixed;
+	z-index: 9999;
+	right: 0;
+	top: 5%;
+	width: 10px;
+	height: 90%;
+	border-radius: 5px;
+}
+
+.sp-scroll-bar:hover {
+	background: white;
+	background: rgba(255,255,255, 0.1);
+}
+
+.sp-scroll-bar .sp-scroll-handle {
+	position: absolute;
+	width: 100%;
+	height: 50px;
+	border-radius: inherit;
+	background: gray;
+	background: rgba(0,0,0,0.7);
+}
+
+.sp-scroll-bar .sp-scroll-handle:hover {
+	background: black;
+}
+
+.settings {
+    border-top-left-radius: 10px;
+    margin:0;
+    right: -730px;
+    position: absolute;
+    z-index: 9999999;
+    top: 215px;
+    background: rgba(10,10,10, 0.5);
+    font-family: Helvetica, Arial, sans-serif;
+    font-weight: normal;
+    font-size: 24px;
+    padding: 10px 20px;
+    border-radius: 10px 0 0 0;
+}
+
+.settings a {
+    border: none;
+    color:white;
+
+}
+
+nav {
+    border-bottom-right-radius: 10px;
+    margin:0;
+    padding:0;
+    left: -75px;
+    position: relative;
+    z-index: 9999999;
+    top: -345px;
+    background: rgba(10,10,10, 0.5);
+    font-family: Helvetica, Arial, sans-serif;
+    font-weight: normal;
+    font-size: 24px;
+}
+
+nav li {
+    float: left;
+}
+
+nav a {
+    display: block;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    margin-top: -20px;
+    border: none;
+    text-align: center;
+    transition: 0.25s;
+    color:white;
+    background: rgba(10,10,10, 0.5);
+
+}
+
+nav a:hover {
+    background: rgba(0,0,0, 1);
+    color:gold;
+    text-decoration: none;
+}
+.settings a:hover {
+    color:gold;
+    text-decoration: none;
+}
+
+.sp-canvas {
+    display: none;
+}
+
+.arrow {
+    position: relative;
+    display: inline-block;
+}
+
+#scroll_wrapper{
+    margin-top: -225px;
+    margin-left: -80px;
+    display: none;
+}
+

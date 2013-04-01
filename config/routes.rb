@@ -7,7 +7,7 @@ AgileDex::Application.routes.draw do
   match '/users/auth/:provider/callback' => 'authentications#create'
 
   match '/console', :to=>"home#console", :as=>"console"
-
+  match 'create_guest_user'=>'home#create_guest_user',:as=>'create_guest_user'
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

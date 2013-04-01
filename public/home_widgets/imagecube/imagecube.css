@@ -1,0 +1,124 @@
+.theme1 {
+    background-image: url('/assets/blue_background.jpg');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    color: white;
+}
+
+.theme2 {
+    background-image: url('/assets/red_background.jpg');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    color: white;
+}
+
+.theme_home {
+    background-image: url('/assets/background.jpg');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    color: white;
+}
+
+@font-face {
+    font-family: Century Gothic;
+    src: url('/assets/CenturyGothic.ttf');
+}
+
+@font-face {
+    font-family: Canela;
+    src: url('/assets/canela_roman.otf');
+}
+
+@font-face {
+    font-family: Verdana;
+    src: url('/assets/verdana.ttf');
+}
+
+h1 {
+    font-size: 36px;
+    letter-spacing: -1px;
+    line-height: 42px;
+    margin: 1em 0 0.5em;
+    text-align: center;
+}
+
+h3 {
+    font-size: 18px;
+    font-weight: normal;
+    text-align: center;
+}
+
+#text_wrap_back {
+    background: none repeat scroll 0 0 #25281B;
+    bottom: -10px;
+    height: 310px;
+    left: 56px;
+    opacity: 0.7;
+    position: absolute;
+    width: 330px;
+}
+
+#text_wrap {
+    bottom: -10px;
+    display: none;
+    font-size: 18px;
+    height: 280px;
+    left: 56px;
+    padding: 30px;
+    position: absolute;
+    text-align: center;
+    width: 270px;
+}
+
+#text_wrap h1.header {
+    background: none repeat scroll 0 0 #353535;
+    border-radius: 10px 10px 10px 10px;
+    font-size: 18px;
+    font-weight: normal;
+    letter-spacing: 0;
+    line-height: 18px;
+    margin: 0;
+    padding: 10px 5px;
+    text-align: center;
+}
+
+#caption_wrap_back {
+    background: none repeat scroll 0 0 black;
+    height: 160px;
+    opacity: 0.8;
+    position: absolute;
+    right: 140px;
+    top: 350px;
+    width: 350px;
+}
+
+#caption_wrap {
+    font-size: 18px;
+    height: 80px;
+    padding: 30px 20px;
+    position: absolute;
+    right: 140px;
+    text-align: center;
+    top: 350px;
+    width: 310px;
+}
+
+#title_wrap {
+    display: none;
+    left: 120px;
+    position: absolute;
+    top: 0;
+}
+
+#widget_wrap {
+    display: none;
+    margin: 0 auto;
+    position: absolute;
+    right: 110px;
+    top: 100px;
+}
+
+#full3DCube {
+    height: 450px;
+    width: 450px;
+}

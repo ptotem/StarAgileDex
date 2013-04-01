@@ -3,12 +3,30 @@ class User < ActiveRecord::Base
   # :token_authenticatable, :confirmable,
   # :lockable, :timeoutable and
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable, :omniauthable
+         :recoverable, :rememberable, :trackable, :omniauthable
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me
   attr_accessible :name, :role, :provider, :uid
 
-  has_many :authentications
+  has_many :authentications, :dependent => :destroy
+  has_many :presentations, :dependent => :destroy
+
+  after_create :build_directory
+
+  require 'find'
+  require 'fileutils'
+  require 'pathname'
+  include FileUtils
+
+  def build_directory
+    if role=="guest"
+      system "mkdir #{Rails.root}/public/guestdata/"
+      system "mkdir #{Rails.root}/public/guestdata/"+id.to_s
+    else
+      system "mkdir #{Rails.root}/public/userdata/"
+      system "mkdir #{Rails.root}/public/userdata/"+name.downcase.gsub(" ", "_")
+    end
+  end
 
 end

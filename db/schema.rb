@@ -11,12 +11,19 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130401103334) do
+ActiveRecord::Schema.define(:version => 20130401110331) do
 
   create_table "authentications", :force => true do |t|
     t.integer  "user_id"
     t.string   "uid"
     t.string   "provider"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "presentations", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
@@ -33,6 +40,15 @@ ActiveRecord::Schema.define(:version => 20130401103334) do
   end
 
   add_index "rails_admin_histories", ["item", "table", "month", "year"], :name => "index_rails_admin_histories"
+
+  create_table "slides", :force => true do |t|
+    t.integer  "presentation_id"
+    t.string   "title"
+    t.string   "subtitle"
+    t.integer  "sequence"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+  end
 
   create_table "users", :force => true do |t|
     t.string   "name"
