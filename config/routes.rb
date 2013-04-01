@@ -1,7 +1,12 @@
 AgileDex::Application.routes.draw do
+  get "home/index"
+  resources :authentications
   mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'
 
   devise_for :users
+  match '/users/auth/:provider/callback' => 'authentications#create'
+
+  match '/console', :to=>"home#console", :as=>"console"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
@@ -52,7 +57,7 @@ AgileDex::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  # root :to => 'welcome#index'
+  root :to => 'home#index'
 
   # See how all your routes lay out with "rake routes"
 
