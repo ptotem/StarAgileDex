@@ -5,7 +5,23 @@ gem 'rails', '3.2.12'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
+gem 'devise'
+gem 'cancan'
 gem 'sqlite3'
+gem 'rails_admin', :git => 'git://github.com/sferik/rails_admin.git'
+gem 'thin'
+gem 'therubyracer', :platform=>:ruby
+gem 'omniauth'
+gem 'omniauth-facebook'
+gem 'omniauth-twitter'
+gem 'omniauth-google-oauth2'
+gem 'awesome_nested_fields'
+gem 'nested_form'
+gem 'ckeditor', :git => 'git://github.com/adaline/rails3-ckeditor.git'
+gem 'spreadsheet'
+gem 'gritter'
+gem 'gon'
+
 
 
 # Gems used only for assets and not required
