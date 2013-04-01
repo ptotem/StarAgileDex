@@ -1,0 +1,90 @@
+html {
+    background: #1a1d10;
+}
+
+body {
+    width:960px;
+    height:600px;
+    margin: 0 auto;
+    padding:0;
+    overflow: hidden;
+    background: #1a1d10;
+}
+
+#wrapper{
+    position: relative;
+    width:100%;
+    height:100%;
+    padding:10px;
+    overflow: hidden;
+    display: none;
+}
+
+.ad-menu-item{
+    display: none;
+}
+
+/* Buttons from AgileDex*/
+
+.ad_button {
+    background-color: #BC1815;
+    border: medium none;
+    border-radius: 3px 3px 3px 3px;
+    box-shadow: 0 -3px 1px rgba(0, 0, 0, 0.45) inset, 0 2px 2px rgba(0, 0, 0, 0.25);
+    color: #FFFFFF;
+    margin-right: 25px;
+    padding: 8px 14px 10px;
+    position: relative;
+    text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.5);
+}
+.ad_button:active {
+    box-shadow: 0 -3px 1px #FFFFFF inset, 0 0 3px rgba(0, 0, 0, 0.9) inset;
+    position: relative;
+    top: 3px;
+}
+.ad_button:active:after {
+    /*background: none repeat scroll 0 0 #FFFFFF;*/
+    background: transparent;
+    bottom: -1px;
+    content: "";
+    height: 3px;
+    left: 0;
+    position: absolute;
+    width: 100%;
+}
+.ad_button.blue {
+    background: none repeat scroll 0 0 #22C3EB;
+}
+.ad_button.green {
+    background: none repeat scroll 0 0 #67B600;
+}
+.ad_button.orange {
+    background: none repeat scroll 0 0 #DA8A00;
+}
+.ad_button.yellow {
+    background: none repeat scroll 0 0 #B3A400;
+}
+.ad_button.turquoise {
+    background: none repeat scroll 0 0 #00B1AF;
+}
+.ad_button:last-of-type {
+    margin: 0;
+}
+.ad_button.gradient {
+    background-image: -moz-linear-gradient(center bottom , rgba(0, 0, 0, 0.3) 1%, rgba(255, 255, 255, 0.2) 100%);
+}
+.ad_button.gradient:hover {
+    background-image: -moz-linear-gradient(center bottom , rgba(0, 0, 0, 0.45) 1%, rgba(255, 255, 255, 0.3) 100%);
+}
+
+#text_wrap_back, #widget_wrap, #caption_wrap, #caption_wrap_back{
+    display: none;
+}
+
+
+
+
+
+
+
+

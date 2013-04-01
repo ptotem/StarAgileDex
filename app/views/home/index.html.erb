@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+  <meta content="utf-8" http-equiv="encoding">
+  <title>Welcome to agileDex</title>
+  <link rel="stylesheet" href="/assets/bootstrap.min.css">
+  <link rel="stylesheet" href="/assets/bootstrap-responsive.min.css">
+  <link rel="stylesheet" href="/assets/normalize.css">
+  <link rel="stylesheet" href="/assets/master.css">
+  <link rel="stylesheet" href="/assets/themes.css">
+
+  <script type="text/javascript" src="/assets/jquery-1.8.3.min.js"></script>
+  <script type="text/javascript" src="/assets/jquery.easing.js"></script>
+  <script type="text/javascript" src="/assets/master.js"></script>
+  <script type="text/javascript" src="/assets/bootstrap.min.js"></script>
+
+
+  <style>
+      .navbar {
+          overflow: visible;
+          margin-bottom: 0;
+      }
+
+      .bottom-up {
+          top: auto;
+          bottom: 100%;
+      }
+
+      .navbar .dropdown-menu.bottom-up:before {
+          border-bottom: 0px solid transparent !important;
+          border-top: 7px solid rgba(0, 0, 0, 0.2);
+          top: auto !important;
+          bottom: -7px;
+      }
+
+      .navbar .dropdown-menu.bottom-up:after {
+          border-bottom: 0px solid transparent !important;
+          border-top: 6px solid white;
+          top: auto !important;
+          bottom: -6px;
+      }
+
+          /*buttons css*/
+      .btn-custom_modal_close:active a:link{
+          text-decoration: none;
+      }
+
+      .btn-custom_modal_close{
+          font-size: 16px;
+          color: #ffffff;
+          background: #a51d17;
+          border:0px solid #ffffff;
+          border-radius:5px;
+          padding:10px 10px;
+          cursor:pointer;
+          margin: 5px 0 5px 0;
+      }
+
+      .btn-custom_modal_close:active{
+          cursor:pointer;
+          position:relative;
+          top:2px;
+      }
+
+      .btn-custom_modal_close:active a:link{
+          text-decoration: none;
+      }
+
+          /*----------*/
+
+      .btn-custom_modal_login:active a:link{
+          text-decoration: none;
+      }
+
+      .btn-custom_modal_login{
+          font-size: 16px;
+          color: #ffffff;
+          background: #66B326;
+          border:0px solid #ffffff;
+          border-radius:5px;
+          padding:10px 10px;
+          cursor:pointer;
+          margin: 5px 0 5px 0;
+      }
+
+      .btn-custom_modal_login:active{
+          cursor:pointer;
+          position:relative;
+          top:2px;
+      }
+
+      .btn-custom_modal_login:active a:link{
+          text-decoration: none;
+      }
+
+      a:hover, a:active {
+          color: white;
+          text-decoration: none;
+      }
+
+
+
+  </style>
+
+  <%= include_gon(:watch => true) %>
+
+</head>
+<body>
+
+<!-- The Theme and Layout of the slide will be dependent on the classes on the wrapper. Specified in layout.css and theme.css-->
+<div id="wrapper" class="theme_home">
+
+  <ul class="nav nav-stacked nav-pills pull-right menu_select" style="margin-right: -1%;">
+    <li class="btn-warning" id="ad-menu-toggle">
+      <a href="#" onclick="$('.ad-menu-item').slideToggle()" style="text-decoration: none; color: #000000;"><i class="icon-tasks"></i>
+        Menu </a></li>
+    <li class="active ad-menu-item">
+      <a href="#" onclick="load_widget(current_widget-1)"><i class="icon-backward"></i> Back </a></li>
+    <li class="active ad-menu-item">
+      <a href="#" onclick="load_widget(current_widget+1)"><i class="icon-forward"></i> Next </a></li>
+    <li class="active ad-menu-item">
+      <a href="#theme_Modal" data-toggle="modal" onclick=""><i class="icon-th"></i> Theme </a></li>
+    <li class="active ad-menu-item">
+      <a href="#font_Modal" data-toggle="modal" onclick=""><i class="icon-font"></i> Font </a></li>
+  </ul>
+
+  <div id="title_wrap" class="text_block"></div>
+  <div id="text_wrap_back"></div>
+  <div id="text_wrap" class="text_block"></div>
+  <div id="widget_wrap"></div>
+  <div id="caption_wrap_back"></div>
+  <div id="caption_wrap" class="text_block"><h1></h1></div>
+
+  <div id="theme_Modal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="z-index: 999999999; width: 300px; text-align: center; margin-left: -145px;">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+      <h3 id="themeModalLabel" style="color: #000000;">Theme Selection</h3>
+    </div>
+    <div class="modal-body" style="color: #000000;">
+      <div class="control-group">
+        <div id="current_theme_name"> Current Theme :</div>
+        Change Theme : <select name="theme_selection" id="ts" style="width: 140px;">
+        <option value="theme_home">Blackboard</option>
+        <option value="theme1">Bluebird</option>
+        <option value="theme2">Red Velvet</option>
+      </select>
+      </div>
+    </div>
+    <div class="modal-footer" style="text-align: center;">
+      <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+      <input type="submit" id="btn_theme" name="btn_theme" value="Select Theme" class="btn btn-primary"/>
+    </div>
+  </div>
+
+
+  <div id="font_Modal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="z-index: 999999999; width: 300px; text-align: center; margin-left: -145px;">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+      <h3 id="fontModalLabel" style="color: #000000;">Font Selection</h3>
+    </div>
+    <div class="modal-body" style="color: #000000;">
+      <div class="control-group">
+        <div id="current_font_name"> Current Font :</div>
+        Change Font : <select name="theme_selection" id="fs" style="width: 160px;">
+        <% @fontarray.each_with_index do |f, index| %>
+            <option value="<%= index %>"><%= f %></option>
+        <% end %>
+      </select>
+      </div>
+    </div>
+    <div class="modal-footer" style="text-align: center;">
+      <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+      <input type="submit" id="btn_font" name="btn_font" value="Select Font" class="btn btn-primary"/>
+    </div>
+  </div>
+
+  <div id="guest_Modal" class="modal hide fade menu_select" tabindex="-1" data-backdrop="false" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="z-index: 999999999; ">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+      <h3 id="guestModalLabel" style="color: #000000;"> Wait a minute! </h3>
+    </div>
+    <div class="modal-body" style="color: #000000;">
+      <ul style="list-style: none;">
+        <li> Have you seen what agileDex can do? Check it out by going through the Menu options.</li>
+        <li> &nbsp; </li>
+        <li> Oh, there's another thing you should know. You can download the presentations you make as a guest, but you
+          can't save them unless you log-in using your Facebook or Twitter account.
+        </li>
+      </ul>
+    </div>
+    <div class="modal-footer" style="text-align: center;">
+      <button class="btn-custom_modal_close btn_guest_close" style="float: left; width: 60px;" data-dismiss="modal" aria-hidden="true">Close</button>
+      <a href="/create_guest_user" class="btn-custom_modal_login" style="float: right; width: 148px;">Continue...</a>
+    </div>
+  </div>
+
+
+</div>
+
+<div class="navbar navbar-inverse" style="margin-top: -10px;z-index: 99999;position:relative;width: 981px;">
+  <div class="navbar-inner" style="height: 50px;">
+    <ul class="nav">
+      <% if !user_signed_in? %>
+          <li><a href="#guest_Modal" data-toggle="modal" class="brand guest">Proceed as a Guest...</a></li>
+      <% end %>
+    </ul>
+    <% if !user_signed_in? %>
+        <ul class="nav pull-right">
+          <li class="dropdown bottom-up">
+            <a class="dropdown-toggle brand"
+               data-toggle="dropdown"
+               href="#">
+              Sign in &#9650;
+            </a>
+            <ul class="dropdown-menu bottom-up" id="sign_in_block">
+              <li><a href="/users/auth/facebook"><img src="/assets/Facebook.png" style="width: 200px;"/></a></li>
+              <li><a href="/users/auth/twitter"><img src="/assets/Twitter.png" style="width: 200px;"/></a></li>
+            </ul>
+          </li>
+        </ul>
+    <% else %>
+        <ul class="nav" style="float: right; margin-right: -22px;">
+          <li class="brand" style="padding: 10px 0px 0px 28px; margin-left: -12px; margin-top: 5px;">
+            <% if current_user.email.include?("guest") %>
+                Guest &#9650;
+            <% else %>
+                Welcome, <%= current_user.name %>
+            <% end %>
+            <a href="/console_page" style="float: right; top:-22px; right: 64px; position: relative;"><img src="/assets/home2.png" style="top: 0; height: 38px;"/></a>
+            <a href="/users/sign_out" style="float: right; top:-21px; right: -57px; position: relative;"><img src="/assets/logout2.png" style="top: 0; height: 36px;"/></a>
+          </li>
+        </ul>
+    <% end %>
+  </div>
+</div>
+
+
+<script type="text/javascript">
+    $(function () {
+        $(".navbar").hide();
+
+
+        $.get("home_page.xml", function (d) {
+            var page = $(d).find('slide');
+            var $a = $(page);
+            bimage = $a.find('title').text();
+            content = $a.find('content').text();
+            elements = $a.find('widget');
+            theme = $a.find('theme').text();
+            font_style = $a.find('font-family').text();
+            $('#wrapper').removeClass($('#wrapper').attr('class')).addClass(theme);
+            $('#wrapper').css('font-family', font_style);
+            load_widget(current_widget);
+        });
+
+        $(".guest").live("click", function(){
+            $("#wrapper>:not(.menu_select)").fadeTo("slow", 0.1);
+            $(".modal").hide();
+            $(".menu_select").show();
+        });
+
+        $("#guest_Modal").on('hidden', function () {
+            $("#wrapper>:not(.menu_select)").fadeTo("slow", 0.9);
+            $(".modal").hide();
+        });
+
+
+        $("#btn_theme").live("click", function(){
+            var xml_path = "home_page";
+            var selected_theme = $('#ts').val();
+            $('#wrapper').removeClass($('#wrapper').attr('class')).addClass(selected_theme);
+            $("#current_theme_name").html("Current Theme " + ': ' + $('#ts option:selected').text());
+        });
+
+
+        $('#theme_Modal').bind('show', function () {
+            $("#current_theme_name").html("Current Theme : ");
+            $("#current_theme_name").append($('#ts option:selected').text());
+        });
+
+        $("#btn_font").live("click", function(){
+            var xml_path = "home_page";
+            var font_style = $('#fs').val();
+            $('#wrapper').css('font-family', font_style);
+            $("#current_font_name").html("Current Font " + ': ' + $('#fs option:selected').text());
+            var fontsize, h1fontsize;
+            $.each($('.text_block'), function (index, elm) {
+                fontsize = (parseInt($(elm).css("font-size").replace("px", "")) - gon.fontadjustment[index]) + "px";
+                h1fontsize = (parseInt($(elm).children(elm).css("font-size").replace("px", "")) - gon.fontadjustment[index]) + "px";
+                $(elm).css("font-family", gon.fontarray[font_style]);
+                $(elm).css("font-size", fontsize);
+                $(elm).find('h1').css("font-size", h1fontsize);
+            });
+        });
+
+        $('#font_Modal').bind('show', function () {
+            $("#current_font_name").html("Current Font : ");
+            $("#current_font_name").append($('#fs option:selected').text());
+        });
+    });
+</script>
+</body>
+</html>
