@@ -1,5 +1,5 @@
 class Slide < ActiveRecord::Base
-  attr_accessible :presentation_id, :sequence, :subtitle, :title, :layout, :font, :background, :content_blocks_attributes, :titlepic
+  attr_accessible :presentation_id, :sequence, :subtitle, :title, :layout, :font, :background, :content_blocks_attributes, :titlepic, :presentation
   belongs_to :presentation
   has_many :content_blocks, :dependent => :destroy
   has_attached_file :titlepic, :path => :get_path
@@ -32,11 +32,11 @@ class Slide < ActiveRecord::Base
     require 'find'
     require 'fileutils'
     require 'pathname'
-    include FileUtils
-    if self.user.role=="guest"
+    #include FileUtils
+    if self.presentation.user.role=="guest"
       system "mkdir #{Rails.root}/public/guestdata/"+self.presentation.user_id+"/"+self.presentation.name+"/"+id
     else
-      system "mkdir #{Rails.root}/public/userdata/"+self.presentation.user.name.downcase.gsub(" ", "_")+"/"+self.presentation.name+"/"+id
+      system "mkdir #{Rails.root}/public/userdata/"+(self.presentation.user.name.downcase.gsub(" ", "_")).to_s+"/"+(self.presentation.name).to_s+"/"+id.to_s
     end
   end
 

@@ -1,0 +1,97 @@
+<!--layout is made for right_panel i.e Menu and left_panel, left_panel's contents are yielded in "span10 left_panel" class -->
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Agile Dex</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <%= javascript_include_tag "application" %>
+  <%= stylesheet_link_tag "application" %>
+
+  <%= javascript_include_tag "bootstrap.min" %>
+
+  <%= stylesheet_link_tag "bootstrap.min" %>
+
+
+  <%= csrf_meta_tags %>
+
+  <%#= yield(:head) %>
+
+  <style>
+      .navbar {
+          overflow: visible;
+          margin-bottom: 0;
+      }
+
+      .bottom-up {
+          top: auto;
+          bottom: 100%;
+      }
+
+      .navbar .dropdown-menu.bottom-up:before {
+          border-bottom: 0px solid transparent !important;
+          border-top: 7px solid rgba(0, 0, 0, 0.2);
+          top: auto !important;
+          bottom: -7px;
+      }
+
+      .navbar .dropdown-menu.bottom-up:after {
+          border-bottom: 0px solid transparent !important;
+          border-top: 6px solid white;
+          top: auto !important;
+          bottom: -6px;
+      }
+
+  </style>
+</head>
+<body>
+
+<div id="wrapper" style="overflow: hidden;">
+  <!--If user is signed display user's name, right_panel (menu), and left_panel-->
+  <% if user_signed_in? %>
+
+      <div id="right_panel" style="margin-top: 5px; padding-top: 5px; ">
+
+        <%= yield(:menu) %>
+
+      </div>
+      <div class="left_panel_block" style="width: 730px; padding: 5px; margin-top: 5px;">
+        <!--yield left_panel -->
+        <%= yield %>
+      </div>
+
+
+
+  <% end %>
+</div>
+
+<div class="navbar navbar-inverse" style="margin: -35px 0 0 -10px;z-index: 99999;position:relative;width: 981px;">
+  <div class="navbar-inner" style="height: 50px; border: none;">
+    <% if user_signed_in? %>
+        <ul class="nav" style="float: right; margin-right: 0px;">
+          <li class="brand" style="color: #999; margin-top: 5px; font-size: 18px;">
+            <% if current_user.email.include?("guest") %>
+                Welcome, Guest
+            <% else %>
+                Welcome, <%= current_user.name %>
+            <% end %>
+            <a href="/users/sign_out" style="float: right; top:-18px; right: -21px; position: relative;"><img src="/assets/logout2.png" style="top: 0; height: 36px;"/></a>
+            <a onclick="help();" id="help" style="float: right; top:-13px; position: relative; cursor: pointer;"><img src="/assets/help.png" style="top: 0; height: 36px;"/></a>
+
+          </li>
+        </ul>
+    <% end %>
+  </div>
+</div>
+
+
+<script type="text/javascript">
+    $(document).ready(function() {
+
+    });
+</script>
+
+</body>
+</html>

@@ -22,16 +22,17 @@
     <h2><span style="color: #fff;">agile</span>Dex</h2>
 
     <div id="writeup">
-     <!--TODO: Add the Writeup-->
+      Start off by clicking on the 'Create a Deck' button. You gotta name your deck before moving ahead. </br></br>
+      Now create a slide for your deck by clicking on 'Create a Slide'.</br></br>
+      Next, build your slides with the really cool plug-ins, sort them, view them, export them and you have yourself a
+      deck made on agileDex.
     </div>
 
     <div id="active_presentation">
-      Active Deck:
-      <div id="active_presentation_name"></div>
-      <a href="#" class="btn btn-inverse ">View the Deck <i class="icon-eye-open icon-white pull-right"></i></a>
-      <a href="#" class="btn btn-inverse ">Export as HTML <i class="icon-globe icon-white pull-right"></i></a>
-      <a href="#" class="btn btn-inverse ">Export as SCORM <i class="icon-briefcase icon-white pull-right"></i></a>
-      <a href="#" class="btn btn-warning" style="color:black" onclick="transitOut()">Close
+      <a href="#" class="btn btn-inverse ad_btn">View the Deck <i class="icon-eye-open icon-white pull-right"></i></a>
+      <a href="#" class="btn btn-inverse ad_btn">Export as HTML <i class="icon-globe icon-white pull-right"></i></a>
+      <a href="#" class="btn btn-inverse ad_btn">Export as SCORM <i class="icon-briefcase icon-white pull-right"></i></a>
+      <a href="#" class="btn btn-warning ad_btn" style="color:black" onclick="transitOut()">Close
         the Deck <i class="icon-asterisk pull-right"></i></a>
       <a href="#" class="btn btn-danger">Delete the Deck <i class="icon-remove icon-white pull-right"></i></a>
     </div>
@@ -51,23 +52,25 @@
   <div id="left_panel">
     <p>
     <h3>Decks</h3>
-    <a href="#" class="btn btn-info">Create a Deck <i class="icon-eye-open icon-white pull-right"></i></a>
+    <a href="#new_deck_Modal" data-toggle="modal" class="btn btn-info" id="new_deck_btn" title="Click here to create a Deck">Create a Deck <i class="icon-plus icon-white pull-right"></i></a>
     </p>
     <hr>
 
     <table id="presentations_table">
       <thead>
+      <div class="presentation_search_ico"> <img src="/assets/ic_menu_search.ico"> </div>
       <tr>
         <th></th>
         <th class="presentation_tools"></th>
       </tr>
       </thead>
       <tbody>
+
       <% @presentations.each_with_index do |presentation, index| %>
           <tr class="presentation_row">
-            <td>
+            <td class="presentation_contents">
               <a href="#?presentation<%= index+1 %>" onclick="transitIn('<%= presentation.name %>')">
-                <button class="btn btn-inverse" type="button"><%= hidden_field_tag presentation.id %><%= presentation.name %></button>
+                <button class="btn btn-inverse show_this_presentation" type="button"><%= hidden_field_tag presentation.id %><%= presentation.name %></button>
               </a>
             </td>
             <td class="presentation_tools">
@@ -85,7 +88,52 @@
       </tbody>
     </table>
   </div>
+
+  <div id="new_deck_Modal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="newModalLabel" aria-hidden="true" style="z-index: 999999999;">
+    <div class="modal-header">
+      <h3 id="new_deckModalLabel">New Deck</h3>
+    </div>
+    <div class="modal-body">
+      <div class="control-group">
+        <form accept-charset="UTF-8" action="/presentations" class="form-horizontal" id="new_presentation" method="post">
+          <fieldset>
+            <label class="control-label" for="presentation_name">Name</label>
+            <div class="controls">
+              <input id="presentation_name" name="presentation[name]" placeholder="Type Presentation Name Here ..." size="30" maxlength="25" type="text" /> <br>
+              <span style="float: right;"><sub>Max 25 characters.</sub></span>
+              <input id="presentation_user_id" name="presentation[user_id]" type="hidden" value="<%=current_user.id%>" />
+            </div>
+            <div class="form-actions" style="background: #ffffff;">
+              <input class="btn btn-primary" style="margin: 0; padding: 5px; width: auto;" name="commit" type="submit" value="Create" />
+              <button class="btn btn-danger" style="margin: 0; padding: 5px; width: auto;" data-dismiss="modal" aria-hidden="true">Close</button>
+            </div>
+          </fieldset>
+        </form>
+      </div>
+    </div>
+  </div>
+
 </div>
+
+<div class="navbar navbar-inverse">
+  <div class="navbar-inner" style="height: 50px; border: none;">
+    <% if user_signed_in? %>
+        <ul class="nav" style="float: right; margin-right: -22px;">
+          <li class="brand" style="color: #999; margin-top: 5px; font-size: 18px;">
+            <% if current_user.email.include?("guest") %>
+                Welcome, Guest
+            <% else %>
+                Welcome, <%= current_user.name %>
+            <% end %>
+            <a href="/users/sign_out" style="float: right; top:-22px; right: 4px; position: relative;"><img src="/assets/logout2.png" style="top: 0; height: 36px;"/></a>
+            <a onclick="help();" id="help" style="float: right; top:-22px; right: -5px; position: relative; cursor: pointer;"><img src="/assets/help.png" style="top: 0; height: 36px;"/></a>
+
+          </li>
+        </ul>
+    <% end %>
+  </div>
+</div>
+
 </body>
 
 <script type="text/javascript" src="/assets/jquery-1.8.3.min.js"></script>

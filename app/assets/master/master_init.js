@@ -1,6 +1,6 @@
 /* Global Variables*/
-var captions = ["Cool"];
-var images = ["/assets/Ad/cool_1.jpg"];
+var captions = gon.caption;
+var images = gon.image_list;
 
 $(function () {
     $('#title_wrap').html('<h1>' + gon.title + '</h1>');
