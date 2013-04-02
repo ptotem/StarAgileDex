@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130401110331) do
+ActiveRecord::Schema.define(:version => 20130402071645) do
 
   create_table "authentications", :force => true do |t|
     t.integer  "user_id"
@@ -19,6 +19,16 @@ ActiveRecord::Schema.define(:version => 20130401110331) do
     t.string   "provider"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "content_blocks", :force => true do |t|
+    t.string   "caption"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
   end
 
   create_table "presentations", :force => true do |t|
@@ -46,8 +56,15 @@ ActiveRecord::Schema.define(:version => 20130401110331) do
     t.string   "title"
     t.string   "subtitle"
     t.integer  "sequence"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
+    t.datetime "created_at",                                   :null => false
+    t.datetime "updated_at",                                   :null => false
+    t.string   "layout",                :default => "basic"
+    t.string   "font",                  :default => "Arial"
+    t.string   "background",            :default => "#ffffff"
+    t.string   "titlepic_file_name"
+    t.string   "titlepic_content_type"
+    t.integer  "titlepic_file_size"
+    t.datetime "titlepic_updated_at"
   end
 
   create_table "users", :force => true do |t|

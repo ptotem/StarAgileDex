@@ -1,0 +1,56 @@
+function init_widget() {
+    $.each(images, function (index, elm) {
+        $('#full3DCube').append('<img src="' + elm + '" title="' + captions[index] + '"/>');
+    });
+
+
+    $('#full3DCube').imagecube({
+        direction: 'random', // Direction of rotation: random|up|down|left|right
+        randomSelection: ['up', 'down', 'left', 'right'],
+        // If direction is random, select one of these
+        speed: 2000, // Time taken (milliseconds) to transition
+        easing: 'swing', // Name of the easing to use during transitions
+        repeat: true, // True to automatically trigger a new transition after a pause
+        pause: 5000, // Time (milliseconds) between transitions
+        selection: 'forward', // How to choose the next item to show:
+        // 'forward', 'backward', 'random'
+        shading: false, // True to add shading effects, false for no effects
+        opacity: 0.8, // Maximum opacity (0.0 - 1.0) for highlights and shadows
+        imagePath: '', // Any extra path to locate the highlight/shadow images
+        full3D: true, // True to add cubic perspective, false for 2D rotation
+        segments: 20, // The number of segments that make up each 3D face
+        reduction: 30, // The amount (pixels) of reduction for far edges of the cube
+        expansion: 10, // The amount (pixels) of expansion for the near edge of the cube
+        lineHeight: [0.0, 1.25], // Hidden and normal line height (em) for text
+        letterSpacing: [-0.4, 0.0], // Hidden and normal letter spacing (em) for text
+        beforeRotate: remove_caption, // Callback before rotating
+        afterRotate: set_caption // Callback after rotating
+    });
+
+    setTimeout(function () {
+        $('#wrapper').fadeIn(function(){
+            $('#widget_wrap').fadeIn('slow', function () {
+                $('#title_wrap').fadeIn();
+                $('#text_wrap_back').slideDown();
+                $('#caption_wrap_back').fadeIn();
+                $('#caption_wrap').html($('#full3DCube img:first').attr('title')).fadeIn();
+                $('#text_wrap').slideDown(1000, function () {
+                    $('#text_wrap_back').slideDown();
+                    $('.navbar').fadeIn(function(){
+                        $('.ad-menu-item').slideToggle();
+                    });
+                });
+            });
+        });
+    }, 1000);
+}
+
+function remove_caption(current, next) {
+    $('#caption_wrap_back').hide();
+    $('#caption_wrap').hide();
+}
+function set_caption(current, next) {
+    $('#caption_wrap').html($(next).attr('title'));
+    $('#caption_wrap_back').fadeIn();
+    $('#caption_wrap').fadeIn();
+}
