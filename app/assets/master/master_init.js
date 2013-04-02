@@ -49,5 +49,5 @@ function load_widget(index) {
         index = gon.widget_list.length - 1;
     if (index == gon.widget_list.length)
         index = 0;
-    window.location='/slides/'+1+'/'+index+'/'+gon.font+'/'+gon.background;
+    window.location='/slides/'+gon.slide_id+'/'+index+'/'+gon.font+'/'+gon.background;
 }

@@ -4,6 +4,7 @@ class SlidesController < ApplicationController
   # GET /slides/1.json
   def builder
     @slide = Slide.find(params[:id])
+    gon.slide_id=@slide.id
     gon.title=@slide.title
     gon.titlepic="@slide.titlepic"
     gon.subtitle=@slide.subtitle
