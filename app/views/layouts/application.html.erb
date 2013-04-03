@@ -18,17 +18,14 @@
 
   <!-- The Menu for cycling through the plugins, changing theme and font -->
   <ul class="nav nav-stacked nav-pills pull-right menu_select" style="margin-right: -1%;">
-    <li class="btn-warning" id="ad-menu-toggle">
-      <a href="#" onclick="$('.ad-menu-item').slideToggle()" style="text-decoration: none; color: #000000;"><i class="icon-tasks"></i>
-        Menu </a></li>
-    <li class="active ad-menu-item">
-      <a href="#" onclick="load_widget(gon.plugin-1)"><i class="icon-backward"></i> Back </a></li>
-    <li class="active ad-menu-item">
-      <a href="#" onclick="load_widget(gon.plugin+1)"><i class="icon-forward"></i> Next </a></li>
-    <li class="active ad-menu-item">
-      <a href="#theme_Modal" data-toggle="modal" onclick=""><i class="icon-th"></i> Theme </a></li>
-    <li class="active ad-menu-item">
-      <a href="#font_Modal" data-toggle="modal" onclick=""><i class="icon-font"></i> Font </a></li>
+    <li class="btn-warning" id="ad-menu-toggle"><a href="#" onclick="$('.ad-menu-item').slideToggle();"><i class="icon-tasks"></i></a></li>
+    <li class="active ad-menu-item"><a onclick="load_widget(gon.plugin-1)"><i class="icon-backward"></i></a></li>
+    <li class="active ad-menu-item"><a href="#"><i class="icon-home"></i></a></li>
+    <li class="active ad-menu-item"><a onclick="load_widget(gon.plugin+1)"><i class="icon-retweet"></i></a></li>
+    <li class="active ad-menu-item"><a href="#font_Modal" data-toggle="modal" onclick=""><i class="icon-text-width"></i></a></li>
+    <li class="active ad-menu-item"><a onclick="go_back();"><i class="icon-edit"></i></a></li>
+    <li class="active ad-menu-item"><a onclick="save_slide();"><i class="icon-hdd"></i></a></li>
+    <li class="active ad-menu-item"><a href="#theme_Modal" data-toggle="modal" onclick=""><i class="icon-th"></i></a></li>
   </ul>
 
 
@@ -53,7 +50,45 @@
   </h1></div>
 
 </div>
-
+<!--------------------------------------------------------
+Navbar
+------------------------------------------------------------>
+<div class="navbar navbar-inverse">
+  <div class="navbar-inner">
+    <ul class="nav">
+      <% if !user_signed_in? %>
+          <li><a href="#guest_Modal" data-toggle="modal" class="brand guest">Proceed as a Guest...</a></li>
+      <% end %>
+    </ul>
+    <% if !user_signed_in? %>
+        <ul class="nav pull-right">
+          <li class="dropdown bottom-up">
+            <a class="dropdown-toggle brand"
+               data-toggle="dropdown"
+               href="#">
+              Sign in &#9650;
+            </a>
+            <ul class="dropdown-menu bottom-up" id="sign_in_block">
+              <li><a href="/users/auth/facebook"><img src="/assets/Facebook.png" style="width: 200px;"/></a></li>
+              <li><a href="/users/auth/twitter"><img src="/assets/Twitter.png" style="width: 200px;"/></a></li>
+            </ul>
+          </li>
+        </ul>
+    <% else %>
+        <ul class="nav" style="float: right; margin-right: -22px;">
+          <li class="signed-up brand">
+            <% if current_user.email.include?("guest") %>
+                Guest
+            <% else %>
+                Welcome, <%= current_user.name %>
+            <% end %>
+            <a href="/console" id="console_page_link"><img src="/assets/home2.png"/></a>
+            <a href="/users/sign_out" id="sign_out_link"><img src="/assets/logout2.png"/></a>
+          </li>
+        </ul>
+    <% end %>
+  </div>
+</div>
 
 <!--------------------------------------------------------
 Modals
@@ -110,6 +145,23 @@ Modals End
 <script type="text/javascript" src="/assets/bootstrap.min.js"></script>
 <script type="text/javascript" src="/assets/master_init.js"></script>
 <%= yield :scripts %>
-
+<script type="text/javascript">
+    function save_slide(){
+        var data = {id:[],plugin:[],font:[],background:[]};
+        data["id"].push(gon.slide_id);
+        data["plugin"].push(gon.widget_list[gon.plugin]);
+        data["font"].push(gon.font);
+        data["background"].push(gon.background);
+        $.ajax({
+            url:"<%= save_slide_path %>",
+            type:"post",
+            data:JSON.stringify(data),
+            contentType:"application/json",
+            success:function (data) {
+                alert(data);
+            }
+        });
+    }
+</script>
 </body>
 </html>

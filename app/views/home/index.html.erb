@@ -67,11 +67,11 @@
         <ul class="nav" style="float: right; margin-right: -22px;">
           <li class="signed-up brand">
             <% if current_user.email.include?("guest") %>
-                Guest &#9650;
+                Guest
             <% else %>
                 Welcome, <%= current_user.name %>
             <% end %>
-            <a href="/console_page" id="console_page_link"><img src="/assets/home2.png"/></a>
+            <a href="/console" id="console_page_link"><img src="/assets/home2.png"/></a>
             <a href="/users/sign_out" id="sign_out_link"><img src="/assets/logout2.png"/></a>
           </li>
         </ul>

@@ -3,23 +3,24 @@ class SlidesController < ApplicationController
   # GET /slides/1
   # GET /slides/1.json
   def builder
-    #@slide = Slide.find(params[:id])
-    #@title = (@slide.titlepic.nil? ? TRUE:FALSE)
-    #@content_blocks = (@slide.content_blocks.nil? ? FALSE:TRUE)
-    gon.title="@slide.title"
+    @slide = Slide.find(params[:id])
+    gon.slide_id=@slide.id
+    gon.title=@slide.title
     gon.titlepic="@slide.titlepic"
-    gon.subtitle="This is testing of new agile dex..."
+    gon.subtitle=@slide.subtitle
     gon.font = params[:font]
     gon.background = params[:background]
     gon.plugin=params[:plugin].to_i
-    #gon.index=params[]
+    gon.image_list=@slide.content_blocks.map{|t| t.image.path.gsub("#{Rails.root}/public","")}
+    gon.caption=@slide.content_blocks.map{|t| t.caption}
     @themelist = ['Blackboard', 'Bluebird', 'Red Velvet']
     @fontarray = ['Century Gothic', 'Canela', 'Verdana', 'Arial']
     @fontadjustment= [0, 0, 0, 0]
-    gon.widget_list=['imagecube','jimpress']
-    @widget_list=['imagecube','jimpress']
+    gon.widget_list=['imagecube','jimpress','stack_slider','nivo_slider','imagewall','windy','slicebox','bookblock','elegant_accordion','littleboxesmenu','triplepanelimageslider','slideshow']
+    @widget_list=['imagecube','jimpress','stack_slider','nivo_slider','imagewall','windy','slicebox','bookblock','elegant_accordion','littleboxesmenu','triplepanelimageslider','slideshow']
     gon.fontarray = @fontarray
     gon.fontadjustment = @fontadjustment
+    #send_data(render_to_string, :filename => "object.html", :type => "text/html")
   end
 
   # GET /slides/1
@@ -32,11 +33,13 @@ class SlidesController < ApplicationController
   # GET /slides/new.json
   def new
     @slide = Slide.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @slide }
-    end
+    @presentation = Presentation.find(params[:presentation_id])
+    @slide.content_blocks.build
+    render :layout => "custom_layout"
+    #respond_to do |format|
+    #  format.html # new.html.erb
+    #  format.json { render json: @slide }
+    #end
   end
 
   # GET /slides/1/edit
@@ -51,7 +54,7 @@ class SlidesController < ApplicationController
 
     respond_to do |format|
       if @slide.save
-        format.html { redirect_to builder_path(@slide,"basic","Arial","#ffffff"), notice: 'Slide was successfully created.' }
+        format.html { redirect_to builder_path(@slide,"basic","Arial","bluebird"), notice: 'Slide was successfully created.' }
         format.json { render json: @slide, status: :created, location: @slide }
       else
         format.html { render action: "new" }
@@ -86,6 +89,16 @@ class SlidesController < ApplicationController
       format.html { redirect_to slides_url }
       format.json { head :no_content }
     end
+  end
+
+  def save_slide
+    @slide=Slide.find(params[:id][0])
+    @slide.layout=params[:plugin][0]
+    @slide.font= params[:font][0]
+    @slide.background=params[:background][0]
+    @slide.save
+    render :text=>'success'
+    return
   end
 
 

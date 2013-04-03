@@ -1,0 +1,21 @@
+<%= content_for :scripts do %>
+    <script type="text/javascript" src="/assets/nivo_slider/jquery.nivo.slider.js"></script>
+    <script type="text/javascript" src="/assets/nivo_slider/init.js"></script>
+<% end %>
+<%= content_for :styles do %>
+    <link rel="stylesheet" href="/assets/nivo_slider/default.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="/assets/nivo_slider/light.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="/assets/nivo_slider/dark.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="/assets/nivo_slider/bar.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="/assets/nivo_slider/nivo-slider.css" type="text/css" media="screen" />
+<% end %>
+
+
+<%= content_for :widget_wrap do %>
+    <div class="slider-wrapper theme-default">
+      <div id="slider" class="nivoSlider">
+      </div>
+    </div>
+<% end %>
+
+

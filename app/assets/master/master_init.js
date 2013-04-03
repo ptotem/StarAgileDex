@@ -1,8 +1,9 @@
 /* Global Variables*/
-var captions = ["Cool"];
-var images = ["/assets/Ad/cool_1.jpg"];
+var captions = gon.caption;
+var images = gon.image_list;
 
 $(function () {
+    $('.ad-menu-item').slideToggle();
     $('#title_wrap').html('<h1>' + gon.title + '</h1>');
     $('#text_wrap').html(gon.subtitle);
     $('#title_wrap').show();
@@ -40,7 +41,7 @@ $(function () {
             $(elm).css("font-size", fontsize);
             $(elm).find('h1').css("font-size", h1fontsize);
         });
-        gon.font=font_style;
+        gon.font=$('#fs option:selected').text();
     });
 });
 
@@ -49,5 +50,8 @@ function load_widget(index) {
         index = gon.widget_list.length - 1;
     if (index == gon.widget_list.length)
         index = 0;
-    window.location='/slides/'+1+'/'+index+'/'+gon.font+'/'+gon.background;
+    gon.plugin=index;
+    window.location='/slides/'+gon.slide_id+'/'+index+'/'+gon.font+'/'+gon.background;
 }
+
+

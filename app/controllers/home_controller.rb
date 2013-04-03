@@ -10,18 +10,32 @@ class HomeController < ApplicationController
   end
 
   def console
-    @presentations=Presentation.find_all_by_user_id(current_user.id)
-    @last_presentation = Presentation.find_all_by_user_id(current_user.id).last
-    @slides=@presentations.slides rescue nil
-
-    @slides_bank=Slide.find_all_by_user_id(current_user.id)  rescue nil
+    @presentations = Presentation.find_all_by_user_id(current_user.id)
     render :layout => false
+  end
+
+  def get_slides
+    @presentation = Presentation.find(params[:this_presentation_id][0])
+    @slides = @presentation.slides
+    @returning_data =Array.new
+    @slides.each do |i|
+      @returning_data<<"#{i.id}|#{i.title}"
+    end
+    render :text=>@returning_data
+    return
   end
 
   def create_guest_user
     @user=User.create!(:email => "guest_#{Time.now.to_i}#{rand(99)}@agileDex.com", :role => "guest", :name => "guest_#{Time.now.to_i}#{rand(99)}")
     sign_in(:user, @user)
     redirect_to console_path
+  end
+
+  def del_slide
+    @slide = Slide.find(params[:slide_id][0])
+    @slide.destroy
+    render :text => "Slide deletion successful."
+    return
   end
 
 end

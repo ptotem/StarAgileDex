@@ -1,17 +1,128 @@
-<%= form_for(@slide) do |f| %>
-  <% if @slide.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@slide.errors.count, "error") %> prohibited this slide from being saved:</h2>
+<%#= javascript_include_tag '/assets/jquery.jWizard' %>
+<%#= stylesheet_link_tag '/assets/jquery.jWizard' %>
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css"
+      xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html"/>
+<%= javascript_include_tag "jquery.nicescroll.min" %>
 
-      <ul>
-      <% @slide.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
+<div class="block1" style="margin: 0px -145px 0px 8px;">
+  <h3 style="text-align: center;">New Slide</h3>
+
+  <div class="block2" style="">
+    <div class="block3" style="background: rgba(200,200,200,0.52); width: 935px; border-radius: 5px;">
+
+      <%= nested_form_for(@slide, :html => {:class => "form-horizontal", :multipart => true}) do |f| %>
+          <div class="page">
+            <div class="control-group">
+              <div class="controls">
+                    <%= f.hidden_field :presentation_id, :value => @presentation.id %>
+              </div>
+            </div>
+          </div>
+          <div class="page" id="wizard1">
+            <div class="control-group">
+              <%= f.label :title, :class => "control-label" %>
+              <div class="controls">
+                <%= f.text_field :title, :placeholder => "Title" %>
+              </div>
+            </div>
+            <div class="control-group">
+              <%= f.label :subtitle, :class => "control-label" %>
+              <div class="controls">
+                <%= f.text_area :subtitle, :class => "ckeditor", :cols=> 25, :placeholder => "subtitle", :style => "height:20px; resize:vertical; margin-left:0px;" %>
+              </div>
+            </div>
+
+            <%= link_to 'Cancel', console_path, :class => "btn btn-danger"%>
+            <a class="btn btn-info" style="float: right; margin-right: -110px;" onclick="$('.page').hide();$('#wizard2').show(); set_active();">Next</a>
+          </div>
+
+          <div class="page" id="wizard2">
+            <%= f.fields_for :content_blocks do |widget_form| %>
+                <%= widget_form.label :content_blocks, :class => "control-label" %>
+                <div class="controls">
+                  <%= widget_form.file_field :image, :class => "span9", :placeholder => "Add Image" %>
+                  <%= widget_form.text_area :caption, :placeholder => "Enter Caption", :style=>"height:100px;resize:vertical;" %> <br/>
+                  <%= widget_form.link_to_remove "Remove this Image", :style => "color: white;" %>
+                  <hr/>
+                </div>
+            <% end %>
+            <%= f.link_to_add "Add Image", :content_blocks, :style => "color: white; margin-left: 180px;",:id=>'add_images_and_cap' %> </br>
+            <a class="btn btn-danger" style="float: left; margin-left: -48px;" onclick="$('.page').hide();$('#wizard1').show(); set_active();">Back</a>
+            <%= f.submit "Finish",:class=>'btn btn-primary', :style=>"float:right; margin-right:-110px;" %>
+          </div>
       <% end %>
-      </ul>
     </div>
-  <% end %>
-
-  <div class="actions">
-    <%= f.submit %>
   </div>
-<% end %>
+</div>
+<script>
+    var lll=$('.status').children().length;
+    $("#wrapper").css('overflow-y','auto');
+    //    $("#wrapper").niceScroll({cursorcolor:"#232836", cursorborder:"none", cursorwidth:"5px", autohidemode:false});
+    $('.cke_contents').css('height','32px');
+
+    var spinner;
+    $(document).ready(function () {
+        $('.page').hide();
+        $('#wizard1').show();
+        $('#field1').addClass('active_field');
+        $("#help").empty().remove();
+
+        $('#slide_title').focusout(function(){
+            if($(this).val().split(/ /).length-1>5)
+            {
+                alert('Only six words are allowed as title');
+                $('#slide_title').val('');
+                $('#slide_title').click();
+
+            }
+        });
+    });
+
+
+    function next(){
+        $('.page').hide();
+        $('#wizard2').show();
+    }
+
+    function hii(){
+        lll=lll+1;
+        var this_id ="field"+lll;
+        $('.status').append('<li id='+this_id+'>Images</li>');
+    }
+
+    function set_active(){
+        var current_act='#'+$('.status').find('.active_field').attr("id");
+        $(current_act).removeClass('active_field');
+        $(current_act).next().addClass('active_field');
+    }
+
+    function set_active1(){
+        var current_act='#'+$('.status').find('.active_field').attr("id");
+        $(current_act).removeClass('active_field');
+        $(current_act).prev().addClass('active_field');
+    }
+
+
+
+
+</script>
+<style>
+    .active_field{
+        color: white;
+    }
+
+    .form-horizontal{
+        margin-left: 50px;
+        padding: 20px 0 60px 10px;
+        width: 751px;
+    }
+
+    .form-horizontal .control-group{
+
+        margin-left: -100px;
+    }
+    A:link{
+        text-decoration: none;
+    }
+
+</style>
