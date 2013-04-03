@@ -35,7 +35,7 @@ class SlidesController < ApplicationController
     @slide = Slide.new
     @presentation = Presentation.find(params[:presentation_id])
     @slide.content_blocks.build
-    render :layout => "custom_layout"
+    render :layout => "slide_custom_layout"
     #respond_to do |format|
     #  format.html # new.html.erb
     #  format.json { render json: @slide }
@@ -51,6 +51,7 @@ class SlidesController < ApplicationController
   # POST /slides.json
   def create
     @slide = Slide.new(params[:slide])
+
 
     respond_to do |format|
       if @slide.save

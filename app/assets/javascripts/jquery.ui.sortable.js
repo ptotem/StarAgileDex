@@ -152,7 +152,6 @@ $.widget("ui.sortable", $.ui.mouse, {
 		};
 
 		// Only after we got the offset, we can change the helper's position to absolute
-		// TODO: Still need to figure out a way to make relative sorting possible
 		this.helper.css("position", "absolute");
 		this.cssPosition = this.helper.css("position");
 
@@ -683,7 +682,7 @@ $.widget("ui.sortable", $.ui.mouse, {
 		//Append it after the actual current item
 		self.currentItem.after(self.placeholder);
 
-		//Update the size of the placeholder (TODO: Logic to fuzzy, see line 316/317)
+		//Update the size of the placeholder
 		o.placeholder.update(self, self.placeholder);
 
 	},

@@ -322,7 +322,6 @@
     function initScrollBar() {
         if (!settings.scrollBar) return;
 
-        // TODO: Holding down the mouse on the bar should "rapidfire", like holding down space
         scrollBar = $("<div>").
             addClass("sp-scroll-bar").
             on("mousedown", function (e) {

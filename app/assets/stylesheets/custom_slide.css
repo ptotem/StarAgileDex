@@ -1,0 +1,70 @@
+#wrapper {
+    overflow: hidden;
+}
+
+.left_panel_block {
+    margin: 0 auto 0 33px;
+    padding: 5px;
+    width: 705px;
+}
+
+.navbar {
+    margin: -35px 0 0 -10px;
+    z-index: 99999;
+    position: relative;
+    width: 981px;
+}
+
+.navbar-inner {
+    height: 50px;
+    border: none;
+}
+
+.navbar .nav {
+    float: right;
+    margin-right: 0px;
+}
+
+.navbar-inverse .brand {
+    color: #999;
+    margin-top: 5px;
+    font-size: 18px;
+}
+
+#sign_out_btn {
+    float: right;
+    top: -22px;
+    right: 4px;
+    position: relative;
+}
+
+#help {
+    float: right;
+    top: -13px;
+    position: relative;
+    cursor: pointer;
+}
+
+.nav > li > a > img {
+    top: 0;
+    height: 36px;
+}
+
+.bottom-up {
+    top: auto;
+    bottom: 100%;
+}
+
+.navbar .dropdown-menu.bottom-up:before {
+    border-bottom: 0px solid transparent !important;
+    border-top: 7px solid rgba(0, 0, 0, 0.2);
+    top: auto !important;
+    bottom: -7px;
+}
+
+.navbar .dropdown-menu.bottom-up:after {
+    border-bottom: 0px solid transparent !important;
+    border-top: 6px solid white;
+    top: auto !important;
+    bottom: -6px;
+}

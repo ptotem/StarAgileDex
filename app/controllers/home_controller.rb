@@ -10,7 +10,9 @@ class HomeController < ApplicationController
   end
 
   def console
-    @presentations = Presentation.find_all_by_user_id(current_user.id)
+    @presentations = Presentation.order('created_at DESC').find_all_by_user_id(current_user.id)
+    @slide=Slide.new
+    @slide.content_blocks.build
     render :layout => false
   end
 
@@ -21,7 +23,7 @@ class HomeController < ApplicationController
     @slides.each do |i|
       @returning_data<<"#{i.id}|#{i.title}"
     end
-    render :text=>@returning_data
+    render :text => @returning_data
     return
   end
 
@@ -36,6 +38,17 @@ class HomeController < ApplicationController
     @slide.destroy
     render :text => "Slide deletion successful."
     return
+  end
+
+  def create_new_presentation
+    @presentation = Presentation.new
+    @presentation.name=params[:presentation_name][0]
+    @presentation.user_id=current_user.id
+    if @presentation.save
+      render :text => @presentation.id
+    else
+      render :text => "error in creating presentation"
+    end
   end
 
 end

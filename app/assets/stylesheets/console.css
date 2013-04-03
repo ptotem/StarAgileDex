@@ -27,7 +27,7 @@ body {
     padding: 5px;
 }
 
-.ad_btn{
+.ad_btn {
     width: 90%;
 }
 
@@ -38,7 +38,7 @@ body {
     text-align: center;
 }
 
-#middle_panel {
+.middle_panel {
     width: 400px;
     float: right;
     margin-right: 20px;
@@ -49,12 +49,12 @@ body {
     text-align: center;
 }
 
-#middle_panel #new_deck_btn {
+.middle_panel #new_deck_btn {
     width: 200px;
     text-align: center;
 }
 
-#middle_panel #new_slide_btn{
+.middle_panel #new_slide_btn {
     width: 200px;
     text-align: center;
 }
@@ -73,6 +73,7 @@ body {
     float: right;
     top: -5px;
     right: -2px;
+    cursor: pointer;
 }
 
 .slide_contents {
@@ -94,7 +95,7 @@ body {
 #presentations_table {
 }
 
-.presentation_filter{
+.presentation_filter {
     width: 155px;
 }
 
@@ -108,7 +109,7 @@ body {
     margin-top: -25px;
 }
 
-#presentations_table_filter label{
+#presentations_table_filter label {
     font-size: 12px;
 }
 
@@ -124,17 +125,16 @@ body {
     height: 28px;
 }
 
-.presentation_search_ico{
+.presentation_search_ico {
     left: 20px;
     top: 5px;
     position: relative;
     opacity: 0.50;
 }
 
-.presentation_search_ico img{
+.presentation_search_ico img {
     height: 28px;
 }
-
 
 #left_panel .btn {
     width: 200px;
@@ -148,6 +148,21 @@ body {
 #right_panel h2 {
     margin: 0 0 20px;
     padding: 0;
+}
+
+#slide_form_panel {
+    overflow: auto;
+}
+
+.content_block_caption_txt {
+    resize: vertical;
+    min-height: 42px;
+    max-height: 200px;
+    margin-top: 5px;
+}
+
+.slide_field{
+    width: 256px;
 }
 
 #writeup {
@@ -178,6 +193,39 @@ body {
     font-weight: bold;
 }
 
+.active_presentation_panel {
+    margin: 10px;
+    min-height: 418px;
+}
+
+#presentation_name_msg {
+    float: right;
+    color: graytext;
+    margin-right: 130px;
+}
+
+.modal-header h3 {
+    text-align: center;
+}
+
+.new_deck_Modal_btns {
+    margin: 0;
+    text-align: center;
+}
+
+#new_deck_Modal_close_btn {
+    width: 58px;
+    float: left;
+    margin-left: -64px;
+}
+
+#new_deck_Modal_create_btn {
+    width: 60px;
+    height: 32px;
+    float: right;
+    margin-right: 110px;
+}
+
 #presentations_table {
     margin: 0 auto;
 }
@@ -191,4 +239,48 @@ body {
 
 .navbar-inner {
     height: 50px;
+    border: none;
+}
+
+.navbar .nav {
+    float: right;
+    margin-right: -22px;
+}
+
+.navbar-inverse .brand {
+    color: #999;
+    margin-top: 5px;
+    font-size: 18px;
+}
+
+.nav > li > a > img {
+    top: 0;
+    height: 36px;
+}
+
+#sign_out_btn {
+    float: right;
+    top: -22px;
+    right: 4px;
+    position: relative;
+}
+
+#help {
+    float: right;
+    top: -22px;
+    right: -5px;
+    position: relative;
+    cursor: pointer;
+}
+
+#new_deck_Modal .form-actions {
+    background: #ffffff;
+}
+
+.slide_contents_block {
+    border: solid 1px black;
+    padding: 10px;
+    border-radius: 10px;
+    width:80%;
+    margin: 0 auto;
 }

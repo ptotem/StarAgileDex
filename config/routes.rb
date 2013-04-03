@@ -17,10 +17,12 @@ AgileDex::Application.routes.draw do
   match '/slides/:id/:plugin/:font/:background', :to=>"slides#builder", :as=>"builder"
   match '/save_slide', :to=>"slides#save_slide", :as=>"save_slide"
 
+  # Ajax routes
+  match '/presentations/new', :to=>"home#create_new_presentation", :as=>"new_presentation"
+
   # CRUD Routes
   resources :authentications
   resources :slides
-  resources :presentations
 
   # Root Route
   root :to => 'home#index'

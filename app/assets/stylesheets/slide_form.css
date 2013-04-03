@@ -1,0 +1,69 @@
+.block1 {
+    margin: 0px -145px 0px 8px;
+}
+
+.block1 h3 {
+    text-align: center;
+}
+
+.block3 {
+
+}
+
+.btn_next {
+    float: right;
+    margin-right: 140px;
+}
+
+.btn_cancel {
+    float: left;
+}
+
+.btn_back {
+    float: left;
+}
+
+.btn_finish {
+    float: right;
+    margin-right: 20px;
+}
+
+#slide_subtitle {
+    width: 205px;
+    height: 228px;
+}
+
+#wizard2 {
+    margin-left: -89px;
+}
+
+.widget_form_caption_txt {
+    height: 100px;
+    resize: vertical;
+}
+
+#add_images_and_cap {
+    color: white;
+    margin-left: 180px;
+}
+
+.active_field {
+    color: white;
+}
+
+.form-bg {
+    width: 440px;
+    margin: 0 auto;
+    padding: 20px 0px 48px 108px;
+    background: rgba(200, 200, 200, 0.52);
+    border-radius: 5px;
+}
+
+.form-horizontal .control-group {
+    margin-left: -100px;
+}
+
+A:link {
+    text-decoration: none;
+}
+

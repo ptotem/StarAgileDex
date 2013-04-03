@@ -14,7 +14,7 @@ class Presentation < ActiveRecord::Base
     if self.user.role=="guest"
       system "mkdir #{Rails.root}/public/guestdata/"+user_id.to_s+"/"+name
     else
-      system "mkdir #{Rails.root}/public/userdata/"+self.user.name.downcase.gsub(" ", "_")+"/"+name
+      system "mkdir #{Rails.root}/public/userdata/"+self.user.name.downcase.gsub(" ", "_").to_s+"/"+name
     end
   end
 
