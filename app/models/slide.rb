@@ -34,7 +34,7 @@ class Slide < ActiveRecord::Base
     require 'pathname'
     #include FileUtils
     if self.presentation.user.role=="guest"
-      system "mkdir #{Rails.root}/public/guestdata/"+self.presentation.user_id.to_s+"/"+self.presentation.name+"/"+id
+      system "mkdir #{Rails.root}/public/guestdata/"+self.presentation.user_id.to_s+"/"+self.presentation.name+"/"+id.to_s
     else
       system "mkdir #{Rails.root}/public/userdata/"+(self.presentation.user.name.downcase.gsub(" ", "_")).to_s+"/"+(self.presentation.name).to_s+"/"+id.to_s
     end

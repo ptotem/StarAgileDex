@@ -3,13 +3,15 @@ html {
 }
 
 body {
-    background: #d5b869;
+    background-image: url('console_background.jpg');
+    background-repeat: repeat;
     height: 600px;
     width: 960px;
     margin: 0 auto;
     overflow: hidden;
     padding: 10px;
-    padding-top: 40px;
+    padding-top: 20px;
+    padding-bottom: 25px;
 }
 
 #wrapper {
@@ -35,7 +37,10 @@ body {
     width: 200px;
     float: right;
     margin-right: 40px;
+    border-radius: 10px;
     text-align: center;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .middle_panel {
@@ -47,6 +52,8 @@ body {
     border-radius: 10px;
     display: none;
     text-align: center;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .middle_panel #new_deck_btn {
@@ -150,10 +157,6 @@ body {
     padding: 0;
 }
 
-#slide_form_panel {
-    overflow: auto;
-}
-
 .content_block_caption_txt {
     resize: vertical;
     min-height: 42px;
@@ -168,10 +171,9 @@ body {
 #writeup {
     width: 160px;
     margin: 0 0 5px 5px;
-    background: white;
-    border-radius: 5px;
-    padding: 20px;
-    font-size: 13px;
+    color: white;
+    padding: 10px;
+    font-size: 14px;
     line-height: 1.35em;
     height: 292px;
 }
@@ -180,7 +182,15 @@ body {
     height: 292px;
     width: 160px;
     margin: 0 0 5px 5px;
-    background: white;
+    border-radius: 5px;
+    padding: 20px;
+    display: none;
+}
+
+#active_slide {
+    height: 292px;
+    width: 160px;
+    margin: 0 0 5px 5px;
     border-radius: 5px;
     padding: 20px;
     display: none;
@@ -231,10 +241,11 @@ body {
 }
 
 .navbar {
-    margin: -35px 0px 0px -10px;
+    margin: -25px 0px 0px -10px;
     position: relative;
     width: 981px;
     z-index: 99999;
+    border-radius: 0px;
 }
 
 .navbar-inner {
@@ -242,20 +253,15 @@ body {
     border: none;
 }
 
-.navbar .nav {
-    float: right;
-    margin-right: -22px;
-}
-
 .navbar-inverse .brand {
-    color: #999;
+    color: #fff;
     margin-top: 5px;
     font-size: 18px;
 }
 
 .nav > li > a > img {
-    top: 0;
-    height: 36px;
+    top: 10px;
+    height: 32px;
 }
 
 #sign_out_btn {

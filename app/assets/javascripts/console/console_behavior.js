@@ -15,33 +15,14 @@ $(function () {
     $('.show_this_presentation').live('click', function () {
         show_presentation($(this).find(':input').attr("id"), $(this).text());
     });
-    $('#slide_title').focus(function () {
-        $('#slide_titlepic').hide();
-        $('#title_instruction').hide();
-    });
-    $('#slide_title').blur(function () {
-        if ($('#slide_title').val() == "") {
-            $('#slide_titlepic').show();
-            $('#title_instruction').show();
-        }
-    });
-    $('#slide_titlepic').change(function () {
-        $('#slide_title').hide();
-        $('#clear_titlepic').show();
-        $('#title_instruction').hide();
-    });
-    $('#clear_titlepic').click(function () {
-        $('#slide_titlepic').val('');
-        $('#clear_titlepic').hide();
-        $('#slide_title').show();
-        $('#title_instruction').show();
-    });
+    $('#left_panel').niceScroll({cursorcolor:"#232836", cursorborder:"none", cursorwidth:"5px", autohidemode:true, horizrailenabled:false});
+    $("#slide_form_panel").niceScroll({cursorcolor:"#232836", cursorborder:"none", cursorwidth:"5px", autohidemode:false, horizrailenabled:false});
+    $("#presentation_slides_index").niceScroll({cursorcolor:"#232836", cursorborder:"none", cursorwidth:"5px", autohidemode:true, horizrailenabled:false});
 });
 
 function transitIn(name) {
 
     $('.presentation_tools').hide();
-    $('#left_panel').css('overflow','hidden');
     $('#left_panel').animate({
         'width':"240px"
     }, function () {
@@ -75,6 +56,7 @@ function transitOut() {
                 'width':'400px'
             });
 
+            $('.active_slide').fadeOut();
             $('#active_presentation').fadeOut(function () {
                 $('#writeup').fadeIn();
                 $('.presentation_tools').fadeIn();
@@ -201,16 +183,11 @@ $('#new_slide_btn').live('click', function () {
         });
         $('#presentation_slides_index').animate({
             'width':"240px"
+        }, function(){
+            $('#slide_form_panel').fadeIn();
+            $('#active_presentation').fadeOut(function () {
+                $('#active_slide').fadeIn();
+            });
         });
-        $('#slide_form_panel').fadeIn();
-
-
     });
 });
-
-
-
-
-
-$('#left_panel').niceScroll({cursorcolor:"#232836", cursorborder:"none", cursorwidth:"5px", autohidemode:false});
-$("#slide_form_panel").niceScroll({cursorcolor:"#232836", cursorborder:"none", cursorwidth:"5px", autohidemode:false});
