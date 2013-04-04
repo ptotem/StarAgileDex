@@ -4,6 +4,19 @@ class SlidesController < ApplicationController
   # GET /slides/1.json
   def builder
     @slide = Slide.find(params[:id])
+    @widget_list=Array.new
+    if @slide.content_blocks.nil?
+      s=:title_plugin
+    else
+      s=:content_plugin
+    end
+
+    t(:plugins)[s].each do |k,v|
+      if(v[:working]=="true")
+        @widget_list<<k.to_s
+      end
+    end
+    @widget_list=@widget_list.map{|i| i.gsub(':','')}
     gon.slide_id=@slide.id
     gon.title=@slide.title
     gon.titlepic="@slide.titlepic"
@@ -11,16 +24,19 @@ class SlidesController < ApplicationController
     gon.font = params[:font]
     gon.background = params[:background]
     gon.plugin=params[:plugin].to_i
-    gon.image_list=@slide.content_blocks.map{|t| t.image.path.gsub("#{Rails.root}/public","")}
+    gon.image_list=@slide.content_blocks.map{|t|
+                                                 if !t.image.blank?
+                                                   t.image.path.gsub("#{Rails.root}/public","")
+                                                 end
+                                            }
     gon.caption=@slide.content_blocks.map{|t| t.caption}
     @themelist = ['Blackboard', 'Bluebird', 'Red Velvet']
     @fontarray = ['Century Gothic', 'Canela', 'Verdana', 'Arial']
     @fontadjustment= [0, 0, 0, 0]
-    gon.widget_list=['imagecube','jimpress','stack_slider','nivo_slider','imagewall','windy','slicebox','bookblock','elegant_accordion','littleboxesmenu','triplepanelimageslider','slideshow']
-    @widget_list=['imagecube','jimpress','stack_slider','nivo_slider','imagewall','windy','slicebox','bookblock','elegant_accordion','littleboxesmenu','triplepanelimageslider','slideshow']
+    @export=FALSE
+    gon.widget_list=@widget_list
     gon.fontarray = @fontarray
     gon.fontadjustment = @fontadjustment
-    #send_data(render_to_string, :filename => "object.html", :type => "text/html")
   end
 
   # GET /slides/1

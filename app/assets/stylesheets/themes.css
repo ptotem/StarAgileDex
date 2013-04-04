@@ -1,0 +1,36 @@
+/*Please make the changes also in assets/master/theme.css file to export functionality to work properly.*/
+.bluebird {
+    background-image: url('/assets/blue_background.jpg');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    color: white;
+}
+
+.red_velvet {
+    background-image: url('/assets/red_background.jpg');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    color: white;
+}
+
+.blackboard {
+    background-image: url('/assets/background.jpg');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    color: white;
+}
+
+@font-face {
+    font-family: Century Gothic;
+    src: url('/assets/CenturyGothic.ttf');
+}
+
+@font-face {
+    font-family: Canela;
+    src: url('/assets/canela_roman.otf');
+}
+
+@font-face {
+    font-family: Verdana;
+    src: url('/assets/verdana.ttf');
+}

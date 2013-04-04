@@ -17,16 +17,21 @@
 <div id="wrapper" class="theme_home">
 
   <!-- The Menu for cycling through the plugins, changing theme and font -->
-  <ul class="nav nav-stacked nav-pills pull-right menu_select" style="margin-right: -1%;">
-    <li class="btn-warning" id="ad-menu-toggle"><a href="#" onclick="$('.ad-menu-item').slideToggle();"><i class="icon-tasks"></i></a></li>
-    <li class="active ad-menu-item"><a onclick="load_widget(gon.plugin-1)"><i class="icon-backward"></i></a></li>
-    <li class="active ad-menu-item"><a href="#"><i class="icon-home"></i></a></li>
-    <li class="active ad-menu-item"><a onclick="load_widget(gon.plugin+1)"><i class="icon-retweet"></i></a></li>
-    <li class="active ad-menu-item"><a href="#font_Modal" data-toggle="modal" onclick=""><i class="icon-text-width"></i></a></li>
-    <li class="active ad-menu-item"><a onclick="go_back();"><i class="icon-edit"></i></a></li>
-    <li class="active ad-menu-item"><a onclick="save_slide();"><i class="icon-hdd"></i></a></li>
-    <li class="active ad-menu-item"><a href="#theme_Modal" data-toggle="modal" onclick=""><i class="icon-th"></i></a></li>
-  </ul>
+  <% unless @export %>
+      <ul class="nav nav-stacked nav-pills pull-right menu_select" style="margin-right: -1%;">
+        <li class="btn-warning" id="ad-menu-toggle">
+          <a href="#" onclick="$('.ad-menu-item').slideToggle();"><i class="icon-tasks"></i></a></li>
+        <li class="active ad-menu-item"><a onclick="load_widget(gon.plugin-1)"><i class="icon-backward"></i></a></li>
+        <li class="active ad-menu-item"><a href="#"><i class="icon-home"></i></a></li>
+        <li class="active ad-menu-item"><a onclick="load_widget(gon.plugin+1)"><i class="icon-retweet"></i></a></li>
+        <li class="active ad-menu-item">
+          <a href="#font_Modal" data-toggle="modal" onclick=""><i class="icon-text-width"></i></a></li>
+        <li class="active ad-menu-item"><a onclick="go_back();"><i class="icon-edit"></i></a></li>
+        <li class="active ad-menu-item"><a onclick="save_slide();"><i class="icon-hdd"></i></a></li>
+        <li class="active ad-menu-item">
+          <a href="#theme_Modal" data-toggle="modal" onclick=""><i class="icon-th"></i></a></li>
+      </ul>
+  <% end %>
 
 
   <!-- Standard Body Structure -->
@@ -50,95 +55,98 @@
   </h1></div>
 
 </div>
-<!--------------------------------------------------------
-Navbar
------------------------------------------------------------->
-<div class="navbar navbar-inverse">
-  <div class="navbar-inner">
-    <ul class="nav">
-      <% if !user_signed_in? %>
-          <li><a href="#guest_Modal" data-toggle="modal" class="brand guest">Proceed as a Guest...</a></li>
-      <% end %>
-    </ul>
-    <% if !user_signed_in? %>
-        <ul class="nav pull-right">
-          <li class="dropdown bottom-up">
-            <a class="dropdown-toggle brand"
-               data-toggle="dropdown"
-               href="#">
-              Sign in &#9650;
-            </a>
-            <ul class="dropdown-menu bottom-up" id="sign_in_block">
-              <li><a href="/users/auth/facebook"><img src="/assets/Facebook.png" style="width: 200px;"/></a></li>
-              <li><a href="/users/auth/twitter"><img src="/assets/Twitter.png" style="width: 200px;"/></a></li>
+<% unless @export %>
+    <!--------------------------------------------------------
+    Navbar
+    ------------------------------------------------------------>
+
+    <div class="navbar navbar-inverse">
+      <div class="navbar-inner">
+        <ul class="nav">
+          <% if !user_signed_in? %>
+              <li><a href="#guest_Modal" data-toggle="modal" class="brand guest">Proceed as a Guest...</a></li>
+          <% end %>
+        </ul>
+        <% if !user_signed_in? %>
+            <ul class="nav pull-right">
+              <li class="dropdown bottom-up">
+                <a class="dropdown-toggle brand"
+                   data-toggle="dropdown"
+                   href="#">
+                  Sign in &#9650;
+                </a>
+                <ul class="dropdown-menu bottom-up" id="sign_in_block">
+                  <li><a href="/users/auth/facebook"><img src="/assets/Facebook.png" style="width: 200px;"/></a></li>
+                  <li><a href="/users/auth/twitter"><img src="/assets/Twitter.png" style="width: 200px;"/></a></li>
+                </ul>
+              </li>
             </ul>
-          </li>
-        </ul>
-    <% else %>
-        <ul class="nav" style="float: right; margin-right: -22px;">
-          <li class="signed-up brand">
-            <% if current_user.email.include?("guest") %>
-                Guest
-            <% else %>
-                Welcome, <%= current_user.name %>
-            <% end %>
-            <a href="/console" id="console_page_link"><img src="/assets/home2.png"/></a>
-            <a href="/users/sign_out" id="sign_out_link"><img src="/assets/logout2.png"/></a>
-          </li>
-        </ul>
-    <% end %>
-  </div>
-</div>
-
-<!--------------------------------------------------------
-Modals
------------------------------------------------------------->
-
-<div id="theme_Modal" class="modal hide fade home_modal_style" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-    <h3 id="themeModalLabel" class="modalLabel">Theme Selection</h3>
-  </div>
-  <div class="modal-body">
-    <div class="control-group">
-      <div id="current_theme_name"> Current Theme :<%= @background %></div>
-      <br>
-      Change Theme : <select name="theme_selection" id="ts" style="width: 140px;">
-      <% @themelist.each do |theme| %>
-          <option value="<%= theme.downcase.gsub(" ", "_") %>"><%= theme %></option>
-      <% end %>
-    </select>
+        <% else %>
+            <ul class="nav" style="float: right; margin-right: -22px;">
+              <li class="signed-up brand">
+                <% if current_user.email.include?("guest") %>
+                    Guest
+                <% else %>
+                    Welcome, <%= current_user.name %>
+                <% end %>
+                <a href="/console" id="console_page_link"><img src="/assets/home2.png"/></a>
+                <a href="/users/sign_out" id="sign_out_link"><img src="/assets/logout2.png"/></a>
+              </li>
+            </ul>
+        <% end %>
+      </div>
     </div>
-  </div>
-  <div class="modal-footer" style="text-align: center;">
-    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-  </div>
-</div>
 
-<div id="font_Modal" class="modal hide fade home_modal_style" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-    <h3 id="fontModalLabel" class="modalLabel">Font Selection</h3>
-  </div>
-  <div class="modal-body">
-    <div class="control-group">
-      <div id="current_font_name"> Current Font : <%= @font %></div>
-      <br>
-      Change Font : <select name="theme_selection" id="fs" style="width: 160px;">
-      <% @fontarray.each_with_index do |f, index| %>
-          <option value="<%= index %>"><%= f %></option>
-      <% end %>
-    </select>
+    <!--------------------------------------------------------
+    Modals
+    ------------------------------------------------------------>
+
+    <div id="theme_Modal" class="modal hide fade home_modal_style" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="themeModalLabel" class="modalLabel">Theme Selection</h3>
+      </div>
+      <div class="modal-body">
+        <div class="control-group">
+          <div id="current_theme_name"> Current Theme :<%= @background %></div>
+          <br>
+          Change Theme : <select name="theme_selection" id="ts" style="width: 140px;">
+          <% @themelist.each do |theme| %>
+              <option value="<%= theme.downcase.gsub(" ", "_") %>"><%= theme %></option>
+          <% end %>
+        </select>
+        </div>
+      </div>
+      <div class="modal-footer" style="text-align: center;">
+        <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+      </div>
     </div>
-  </div>
-  <div class="modal-footer" style="text-align: center;">
-    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-  </div>
-</div>
 
-<!-----------------------------------------------------------------
-Modals End
------------------------------------------------------------------------>
+    <div id="font_Modal" class="modal hide fade home_modal_style" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="fontModalLabel" class="modalLabel">Font Selection</h3>
+      </div>
+      <div class="modal-body">
+        <div class="control-group">
+          <div id="current_font_name"> Current Font : <%= @font %></div>
+          <br>
+          Change Font : <select name="theme_selection" id="fs" style="width: 160px;">
+          <% @fontarray.each_with_index do |f, index| %>
+              <option value="<%= index %>"><%= f %></option>
+          <% end %>
+        </select>
+        </div>
+      </div>
+      <div class="modal-footer" style="text-align: center;">
+        <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+      </div>
+    </div>
+
+    <!-----------------------------------------------------------------
+    Modals End
+    ----------------------------------------------------------------------->
+<% end %>
 
 <script type="text/javascript" src="/assets/jquery-1.8.3.min.js"></script>
 <script type="text/javascript" src="/assets/jquery.easing.js"></script>
@@ -146,8 +154,8 @@ Modals End
 <script type="text/javascript" src="/assets/master_init.js"></script>
 <%= yield :scripts %>
 <script type="text/javascript">
-    function save_slide(){
-        var data = {id:[],plugin:[],font:[],background:[]};
+    function save_slide() {
+        var data = {id:[], plugin:[], font:[], background:[]};
         data["id"].push(gon.slide_id);
         data["plugin"].push(gon.widget_list[gon.plugin]);
         data["font"].push(gon.font);

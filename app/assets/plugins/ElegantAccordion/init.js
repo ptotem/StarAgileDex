@@ -20,6 +20,17 @@ function init_widget() {
             $('.description',$this).stop(true,true).fadeIn();
         }
     );
+
+    if (images.length==1)
+    {
+        $('.jj').click();
+    }
+
+    if (captions.length==0)
+    {
+        $('#caption_wrap_back').hide();
+        $('#caption_wrap').hide();
+    }
 }
 
 

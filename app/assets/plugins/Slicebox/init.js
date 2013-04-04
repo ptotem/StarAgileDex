@@ -1,6 +1,6 @@
 function init_widget() {
     $.each(images, function (index, elm) {
-        $('#sb-slider').append('<li><a><img src="' + elm + '" title="' + captions[index] + '"/></a><div class="sb-description"><h3>Serenity</h3></div></li>');
+        $('#sb-slider').append('<li><a><img src="' + elm + '" title="' + captions[index] + '"/></a><div class="sb-description"><h3>' + captions[index] + '</h3></div></li>');
     });
 
 
@@ -52,6 +52,11 @@ function init_widget() {
 
     Page.init();
 
+    setTimeout(function () {
+        if (captions.length == 1 && captions[0]=="") {
+            $('.sb-description').hide();
+        }
+    }, 300);
 
 }
 

@@ -73,4 +73,12 @@ function init_widget() {
     })();
 
     Page.init();
+
+
+    setTimeout(function () {
+        if (captions.length==1 && captions[0]=='') {
+            $('.bb-item p').hide();
+        }
+    }, 400);
+
 }
