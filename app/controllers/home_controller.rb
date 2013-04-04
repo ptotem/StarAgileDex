@@ -12,7 +12,7 @@ class HomeController < ApplicationController
   def console
     @presentations = Presentation.order('created_at DESC').find_all_by_user_id(current_user.id)
     @slide=Slide.new
-    @slide.content_blocks.build
+    #@slide.content_blocks.build
     render :layout => false
   end
 

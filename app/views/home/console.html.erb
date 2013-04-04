@@ -6,6 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="/assets/bootstrap.min.css">
   <link rel="stylesheet" href="/assets/console.css">
+  <%= javascript_include_tag :application %>
+  <script type="text/javascript" src="/assets/jquery-1.8.3.min.js"></script>
   <%= csrf_meta_tags %>
 </head>
 
@@ -14,61 +16,73 @@
 <div id="wrapper">
   <%= nested_form_for(@slide, :html => {:multipart => true}) do |f| %>
 
-  <!-----------------------------------------------------------
-  The Right Panel
-  ---------------------------------------------------------------->
-  <div id="right_panel">
-    <img src="/assets/adlogo.png"/>
+      <!-----------------------------------------------------------
+      The Right Panel
+      ---------------------------------------------------------------->
+      <div id="right_panel">
+        <img src="/assets/adlogo.png"/>
 
-    <h2><span style="color: #fff;">agileDex</span></h2>
+        <h2><span style="color: #fff;">agileDex</span></h2>
 
-    <div id="writeup">
-      Start off by clicking on the 'Create a Deck' button. You gotta name your deck before moving ahead. </br></br>
-      Now create a slide for your deck by clicking on 'Create a Slide'.</br></br>
-      Next, build your slides with the really cool plug-ins, sort them, view them, export them and you have yourself a
-      deck made on agileDex.
-    </div>
+        <div id="writeup">
+          Start off by clicking on the 'Create a Deck' button. You gotta name your deck before moving ahead. </br></br>
+          Now create a slide for your deck by clicking on 'Create a Slide'.</br></br>
+          Next, build your slides with the really cool plug-ins, sort them, view them, export them and you have yourself
+          a
+          deck made on agileDex.
+        </div>
 
-    <div id="active_presentation">
-      <a href="#" class="btn btn-inverse ad_btn">View the Deck <i class="icon-eye-open icon-white pull-right"></i></a>
-      <a href="#" class="btn btn-inverse ad_btn">Export as HTML <i class="icon-globe icon-white pull-right"></i></a>
-      <a href="#" class="btn btn-inverse ad_btn">Export as SCORM
-        <i class="icon-briefcase icon-white pull-right"></i></a>
-      <a href="#" class="btn btn-warning ad_btn" style="color:black" onclick="transitOut()">Close
-        the Deck <i class="icon-asterisk pull-right"></i></a>
-      <a href="#" class="btn btn-danger ad_btn">Delete the Deck <i class="icon-remove icon-white pull-right"></i></a>
-    </div>
+        <div id="active_presentation">
+          <a href="#" class="btn btn-inverse ad_btn">View the Deck
+            <i class="icon-eye-open icon-white pull-right"></i></a>
+          <a href="#" class="btn btn-inverse ad_btn">Export as HTML <i class="icon-globe icon-white pull-right"></i></a>
+          <a href="#" class="btn btn-inverse ad_btn">Export as SCORM
+            <i class="icon-briefcase icon-white pull-right"></i></a>
+          <a href="#" class="btn btn-warning ad_btn" style="color:black" onclick="transitOut()">Close
+            the Deck <i class="icon-asterisk pull-right"></i></a>
+          <a href="#" class="btn btn-danger ad_btn">Delete the Deck
+            <i class="icon-remove icon-white pull-right"></i></a>
+        </div>
 
-    <div id="active_slide">
-      <input type="submit" value="Save the Slide" name="commit" class="btn btn-success ad_btn" style="width: 100%; font-family: serif;">
-      <a href="#" class="btn btn-inverse ad_btn">Reset the Form  <i class="icon-retweet icon-white pull-right"></i></a>
-      <a href="#" class="btn btn-warning ad_btn" style="color:black" onclick="transitOut()">Close
-        the Form <i class="icon-asterisk pull-right"></i></a>
-    </div>
-  </div>
+        <div id="active_slide">
+          <input type="submit" value="Save the Slide" name="commit" class="btn btn-success ad_btn" style="width: 100%; font-family: serif;">
+          <a href="#" class="btn btn-inverse ad_btn">Reset the Form
+            <i class="icon-retweet icon-white pull-right"></i></a>
+          <a href="#" class="btn btn-warning ad_btn" style="color:black" onclick="transitOut()">Close
+            the Form <i class="icon-asterisk pull-right"></i></a>
+        </div>
+      </div>
 
-  <!-----------------------------------------------------------
-  The Presentation Slides Index Panel
-  ---------------------------------------------------------------->
+      <!-----------------------------------------------------------
+      The Presentation Slides Index Panel
+      ---------------------------------------------------------------->
+      <!-- TODO: Add the Edit slide functionality and the Slide view has to have contents -->
 
-  <div id="presentation_slides_index" class="middle_panel">
-  </div>
+      <div id="presentation_slides_index" class="middle_panel">
+      </div>
 
-  <!-----------------------------------------------------------
-  The Slide Form Panel
-  ---------------------------------------------------------------->
+      <!-----------------------------------------------------------
+      The Slide Form Panel
+      ---------------------------------------------------------------->
 
-  <!--TODO: All font-sizes and weights must be captured through h1-5, and all normal text should be the same size.
-  TODO: Also assign a fixed font-face to all of the console
-  TODO: Edit the slides ability -->
+      <!--TODO: All font-sizes and weights must be captured through h1-5, and all normal text should be the same size.
+      TODO: Also assign a fixed font-face to all of the console
+      TODO: Edit the slides ability -->
 
-  <div id="slide_form_panel" class="middle_panel">
-    <div id="slide_form_panel_header">Enter Slide Content</div>
-    <hr>
-        <%= f.hidden_field :presentation_id %>
-        <%= f.text_field :title, :class => "slide_field", :placeholder => "Title" %>
-        <%= f.text_field :subtitle, :class => "slide_field", :placeholder => "Subtitle", :size => "60" %>
+      <div id="slide_form_panel" class="middle_panel">
+        <div id="slide_form_panel_header">Enter Slide Content</div>
         <hr>
+        <%= f.hidden_field :presentation_id %>
+        <%= f.file_field :titlepic, :placeholder => "Add Image", :style => "display:none" %>
+        <%= f.text_field :title, :class => "slide_field", :placeholder => "Title" %>
+        <br>
+        <%= link_to "Use an image as title instead", "#", :id => "show_titlepic" %>
+        <%= link_to "Use a textline as title instead", "#", :id => "clear_titlepic", :style => "display:none; margin-top:2px" %>
+        <div style="padding: 0px 30px 30px 50px;">
+
+          <label for="subtitle_editor"><h4>Enter your main text content here:</h4></label>
+          <%= f.cktext_area :subtitle,:id=>"subtitle_editor", :ckeditor => {:toolbar => "Custom", :width => 300, :height => 100} %>
+        </div>
 
         <!----- Nested form for content_block
         -> to use nested form add gem "nested_form"
@@ -76,113 +90,115 @@
         -> include javascript jquery_nested_form
         --------->
 
-        <div id="content_block_header">Content Blocks</div>
-        <div class="slide_contents_block">
+        <label for="slide_contents_block"><h4>Add content blocks here:</h4></label>
+        <div class="slide_contents_block" style="margin-bottom: 40px;">
           <%= f.fields_for :content_blocks do |widget_form| %>
               <%= widget_form.file_field :image, :placeholder => "Add Image" %>
               <%= widget_form.text_area :caption, :placeholder => "Enter Caption", :class => "content_block_caption_txt slide_field", :rows => 3, :cols => 30 %>
               <br/>
               <%= widget_form.link_to_remove "Remove the block above" %>
               <hr>
-        <% end %>
-          <%= f.link_to_add "Add another block", :content_blocks, :id => 'add_images_and_cap',:class=>"btn btn-inverse", :onclick=>"" %> </br>
+          <% end %>
+          <%= f.link_to_add "Add a content block", :content_blocks, :id => 'add_images_and_cap', :onclick => "" %> </br>
         </div>
-  </div>
+        <!--TODO: Sort out the edit panel further -->
 
-  <!-----------------------------------------------------------
-  The Left Panel
-  ---------------------------------------------------------------->
-
-  <div id="left_panel">
-    <p>
-
-    <h3>Decks</h3>
-    <a href="#new_deck_Modal" data-toggle="modal" class="btn btn-info" id="new_deck_btn" title="Click here to create a Deck">Create
-      a Deck <i class="icon-plus icon-white pull-right"></i></a>
-    </p>
-    <hr>
-
-    <table id="presentations_table">
-      <thead>
-      <tr>
-        <th></th>
-        <th class="presentation_tools"></th>
-      </tr>
-      </thead>
-      <tbody>
-
-      <!--TODO: The most recent presentation must be on top-->
-      <!--TODO: The scroll bar has to be only on the table-->
-      <!--TODO: Please prettify the scroll bar-->
-      <!--TODO: Please check the presentation filter-->
-
-      <% @presentations.each_with_index do |presentation| %>
-          <tr class="presentation_row">
-            <td style="width: 50%;" class="presentation_contents">
-              <a href="#?presentation<%= presentation.id %>" onclick="transitIn('<%= presentation.name %>')">
-                <button class="btn btn-inverse show_this_presentation" type="button"><%= hidden_field_tag presentation.id %><%= presentation.name %></button>
-              </a>
-            </td>
-            <td style="width: 50%;"></td>
-          </tr>
-      <% end %>
-      </tbody>
-    </table>
-  </div>
-
-  <div id="new_deck_Modal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="newModalLabel" aria-hidden="true">
-    <div class="modal-header">
-      <h3 id="new_deckModalLabel">New Deck</h3>
-    </div>
-    <div class="modal-body">
-      <div class="control-group">
-        <form accept-charset="UTF-8" class="form-horizontal" id="new_presentation">
-          <fieldset>
-            <label class="control-label" for="presentation_name">Name</label>
-            <div class="controls">
-              <input id="presentation_name" name="presentation[name]" placeholder="Type Presentation Name Here ..." size="30" maxlength="25" type="text"/>
-              <br>
-              <span id="presentation_name_msg"><sub>max 25 characters.</sub></span>
-              <input id="presentation_user_id" name="presentation[user_id]" type="hidden" value="<%= current_user.id %>"/>
-            </div>
-            <div class="form-actions">
-              <button class="btn btn-danger new_deck_Modal_btns" id="new_deck_Modal_close_btn" data-dismiss="modal" aria-hidden="true">Close</button>
-              <input class="btn btn-primary new_deck_Modal_btns" id="new_deck_Modal_create_btn" name="commit" value="Create"/>
-            </div>
-          </fieldset>
-        </form>
       </div>
-    </div>
-  </div>
 
-</div>
+      <!-----------------------------------------------------------
+      The Left Panel
+      ---------------------------------------------------------------->
 
-<div class="navbar navbar-inverse">
-  <div class="navbar-inner" style="color:white">
-    <% if user_signed_in? %>
-        <ul class="nav pull-left">
-          <li class="brand">
-            <% if current_user.email.include?("guest") %>
-                Welcome, Guest
-            <% else %>
-                Welcome, <%= current_user.name %>
-            <% end %>
-          </li>
-        </ul>
-        <ul class="nav pull-right">
-          <li class="brand">
-            <a href="/users/sign_out" id="sign_out_btn"><img src="/assets/logout2.png"/>Logout</a>
-          </li>
-        </ul>
-    <% end %>
-  </div>
+      <div id="left_panel">
+        <p>
+
+        <h3>Decks</h3>
+        <a href="#new_deck_Modal" data-toggle="modal" class="btn btn-info" id="new_deck_btn" title="Click here to create a Deck">Create
+          a Deck <i class="icon-plus icon-white pull-right"></i></a>
+        </p>
+        <hr>
+
+        <table id="presentations_table">
+          <thead>
+          <tr>
+            <th></th>
+            <th class="presentation_tools"></th>
+          </tr>
+          </thead>
+          <tbody>
+
+          <!--TODO: The most recent presentation must be on top-->
+          <!--TODO: The scroll bar has to be only on the table-->
+          <!--TODO: Please prettify the scroll bar-->
+          <!--TODO: Please check the presentation filter-->
+
+          <% @presentations.each_with_index do |presentation| %>
+              <tr class="presentation_row">
+                <td style="width: 50%;" class="presentation_contents">
+                  <a href="#?presentation<%= presentation.id %>" onclick="transitIn('<%= presentation.name %>')">
+                    <button class="btn btn-inverse show_this_presentation" type="button"><%= hidden_field_tag presentation.id %><%= presentation.name %></button>
+                  </a>
+                </td>
+                <td style="width: 50%;"></td>
+              </tr>
+          <% end %>
+          </tbody>
+        </table>
+      </div>
+
+      <div id="new_deck_Modal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="newModalLabel" aria-hidden="true">
+        <div class="modal-header">
+          <h3 id="new_deckModalLabel">New Deck</h3>
+        </div>
+        <div class="modal-body">
+          <div class="control-group">
+            <form accept-charset="UTF-8" class="form-horizontal" id="new_presentation">
+              <fieldset>
+                <label class="control-label" for="presentation_name">Name</label>
+
+                <div class="controls">
+                  <input id="presentation_name" name="presentation[name]" placeholder="Type Presentation Name Here ..." size="30" maxlength="25" type="text"/>
+                  <br>
+                  <span id="presentation_name_msg"><sub>max 25 characters.</sub></span>
+                  <input id="presentation_user_id" name="presentation[user_id]" type="hidden" value="<%= current_user.id %>"/>
+                </div>
+                <div class="form-actions">
+                  <button class="btn btn-danger new_deck_Modal_btns" id="new_deck_Modal_close_btn" data-dismiss="modal" aria-hidden="true">Close</button>
+                  <input class="btn btn-primary new_deck_Modal_btns" id="new_deck_Modal_create_btn" name="commit" value="Create"/>
+                </div>
+              </fieldset>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      </div>
+
+      <div class="navbar navbar-inverse">
+        <div class="navbar-inner" style="color:white">
+          <% if user_signed_in? %>
+              <ul class="nav pull-left">
+                <li class="brand">
+                  <% if current_user.email.include?("guest") %>
+                      Welcome, Guest
+                  <% else %>
+                      Welcome, <%= current_user.name %>
+                  <% end %>
+                </li>
+              </ul>
+              <ul class="nav pull-right">
+                <li class="brand">
+                  <a href="/users/sign_out" id="sign_out_btn"><img src="/assets/logout2.png"/>Logout</a>
+                </li>
+              </ul>
+          <% end %>
+        </div>
   <% end %>
 
-</div>
+  </div>
 
-</body>
+  </body>
 
-<script type="text/javascript" src="/assets/jquery-1.8.3.min.js"></script>
 <script type="text/javascript" src="/assets/jquery.easing.js"></script>
 <script type="text/javascript" src="/assets/bootstrap.min.js"></script>
 

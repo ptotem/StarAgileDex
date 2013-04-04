@@ -283,7 +283,7 @@ body {
     margin: -25px 0px 0px -10px;
     position: relative;
     width: 981px;
-    z-index: 99999;
+    z-index: 99;
     border-radius: 0px;
 }
 
@@ -324,18 +324,10 @@ body {
     cursor: pointer;
 }
 
-.slide_contents_block {
-    border: solid 1px black;
-    padding: 10px;
-    border-radius: 10px;
-    width: 80%;
-    margin: 0 auto;
-    overflow-x: hidden;
-    overflow-y: scroll;
-    height: 232px;
-}
 
 #add_images_and_cap{
     position: relative;
 
 }
+
+

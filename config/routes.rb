@@ -1,5 +1,7 @@
 AgileDex::Application.routes.draw do
 
+  mount Ckeditor::Engine => '/ckeditor'
+
   # Authentication Routes
   mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'
   devise_for :users

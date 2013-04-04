@@ -5,7 +5,7 @@ class SlidesController < ApplicationController
   def builder
     @slide = Slide.find(params[:id])
     @widget_list=Array.new
-    if @slide.content_blocks.nil?
+    if @slide.content_blocks.blank?
       s=:title_plugin
     else
       s=:content_plugin
@@ -16,10 +16,10 @@ class SlidesController < ApplicationController
         @widget_list<<k.to_s
       end
     end
+
     @widget_list=@widget_list.map{|i| i.gsub(':','')}
     gon.slide_id=@slide.id
     gon.title=@slide.title
-    gon.titlepic="@slide.titlepic"
     gon.subtitle=@slide.subtitle
     gon.font = params[:font]
     gon.background = params[:background]

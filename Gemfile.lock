@@ -1,11 +1,4 @@
 GIT
-  remote: git://github.com/adaline/rails3-ckeditor.git
-  revision: 1870315e6523a2109f6de4d781a9548dda348623
-  specs:
-    ckeditor (3.5.4)
-      mime-types (>= 1.16)
-
-GIT
   remote: git://github.com/sferik/rails_admin.git
   revision: 8533e5abccf819e49b3e50a1dccd945ef3768175
   specs:
@@ -63,6 +56,9 @@ GEM
       sass (~> 3.2)
     builder (3.0.4)
     cancan (1.6.9)
+    ckeditor (4.0.3)
+      mime-types
+      orm_adapter
     climate_control (0.0.3)
       activesupport (>= 3.0)
     cocaine (0.5.1)
@@ -224,7 +220,7 @@ PLATFORMS
 DEPENDENCIES
   awesome_nested_fields
   cancan
-  ckeditor!
+  ckeditor
   coffee-rails (~> 3.2.1)
   devise
   gon
