@@ -3,3 +3,92 @@
 
 en:
   hello: "Hello world"
+  plugins:
+    title_plugin:
+    content_plugin:
+      imagecube:
+        ie: "6+"
+        firefox: "true"
+        chrome: "false"
+        safari: "false"
+        opera: "false"
+        working: "true"
+      jimpress:
+        ie: "6+"
+        firefox: "TRUE"
+        chrome: "false"
+        safari: "false"
+        opera: "false"
+        working: "true"
+      imagewall:
+        ie: "6+"
+        firefox: "TRUE"
+        chrome: "false"
+        safari: "false"
+        opera: "false"
+        working: "false"
+      bookblock:
+        ie: "6+"
+        firefox: "TRUE"
+        chrome: "false"
+        safari: "false"
+        opera: "false"
+        working: "false"
+      elegantaccordion:
+        ie: "6+"
+        firefox: "TRUE"
+        chrome: "false"
+        safari: "false"
+        opera: "false"
+        working: "false"
+      littleboxesmenu:
+        ie: "6+"
+        firefox: "TRUE"
+        chrome: "false"
+        safari: "false"
+        opera: "false"
+        working: "true"
+      nivoslider:
+        ie: "6+"
+        firefox: "TRUE"
+        chrome: "false"
+        safari: "false"
+        opera: "false"
+        working: "false"
+      slicebox:
+        ie: "6+"
+        firefox: "TRUE"
+        chrome: "false"
+        safari: "false"
+        opera: "false"
+        working: "false"
+      slideshow:
+        ie: "6+"
+        firefox: "TRUE"
+        chrome: "false"
+        safari: "false"
+        opera: "false"
+        working: "true"
+      stackslider:
+        ie: "6+"
+        firefox: "TRUE"
+        chrome: "false"
+        safari: "false"
+        opera: "false"
+        working: "false"
+      triplepanelimageslider:
+        ie: "6+"
+        firefox: "TRUE"
+        chrome: "false"
+        safari: "false"
+        opera: "false"
+        working: "false"
+      windy:
+        ie: "6+"
+        firefox: "TRUE"
+        chrome: "false"
+        safari: "false"
+        opera: "false"
+        working: "false"
+    advanced_plugin:
+

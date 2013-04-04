@@ -1,6 +1,12 @@
 function init_widget() {
     $.each(images, function (index, elm) {
-        $('#full3DCube').append('<img src="' + elm + '" title="' + captions[index] + '"/>');
+        if (elm != null) {
+
+            $('#full3DCube').append('<img src="' + elm + '" title="' + captions[index] + '"/>');
+        } else {
+
+            $('#full3DCube').append('<div class="face" style="padding:15px;color: white;text-align: center;">'+captions[index]+'</div>');
+        }
     });
 
     if (images.length > 1) {
@@ -34,32 +40,32 @@ function init_widget() {
     }
 
     //alert($(next).attr('src'));
-    if($('#full3DCube').children().attr('src')=="null") {
-        $('#caption_wrap').css('top','102px');
-        $('#caption_wrap').css('right','111px');
-        $('#caption_wrap_back').css('top','102px');
-        $('#caption_wrap_back').css('right','111px');
+    if ($('#full3DCube').children().attr('src') == "null") {
+        $('#caption_wrap').css('top', '102px');
+        $('#caption_wrap').css('right', '111px');
+        $('#caption_wrap_back').css('top', '102px');
+        $('#caption_wrap_back').css('right', '111px');
 
         $('#caption_wrap').width('408px');
         $('#caption_wrap').height('368px');
         $('#caption_wrap_back').height('448px');
         $('#caption_wrap_back').width('448px');
     }
-    else if($('#full3DCube').children().attr('title')==""){
+    else if ($('#full3DCube').children().attr('title') == "") {
         $('#caption_wrap').width('0px');
         $('#caption_wrap').height('0px');
         $('#caption_wrap_back').height('0px');
         $('#caption_wrap_back').width('0px');
     }
-    else{
-        $('#caption_wrap').css('top','350px');
-        $('#caption_wrap').css('right','160px');
+    else {
+        $('#caption_wrap').css('top', '350px');
+        $('#caption_wrap').css('right', '160px');
         $('#caption_wrap').width('310px');
         $('#caption_wrap').height('80px');
-        $('#caption_wrap').css('text-align','center');
+        $('#caption_wrap').css('text-align', 'center');
 
-        $('#caption_wrap_back').css('top','350px');
-        $('#caption_wrap_back').css('right','160px');
+        $('#caption_wrap_back').css('top', '350px');
+        $('#caption_wrap_back').css('right', '160px');
         $('#caption_wrap_back').height('160px');
         $('#caption_wrap_back').width('350px');
     }
@@ -86,16 +92,13 @@ function init_widget() {
     setTimeout(function () {
 
 
-        if (captions.length==1 && captions[0]=="") {
+        if (captions.length == 1 && captions[0] == "") {
 
             $('#caption_wrap_back').hide();
             $('#caption_wrap').hide();
 
         }
     }, 1700);
-
-
-
 
 
 }
@@ -106,38 +109,11 @@ function remove_caption(current, next) {
 }
 function set_caption(current, next) {
 
-    //alert($(next).attr('src'));
-    if($(next).attr('src')=="null") {
-        $('#caption_wrap').css('top','102px');
-        $('#caption_wrap').css('right','111px');
-        $('#caption_wrap_back').css('top','102px');
-        $('#caption_wrap_back').css('right','111px');
 
-        $('#caption_wrap').width('408px');
-        $('#caption_wrap').height('368px');
-        $('#caption_wrap_back').height('448px');
-        $('#caption_wrap_back').width('448px');
+    //Show caption if after rotate the face has both image and caption.
+    if (($(next).attr('title') != '') && ($(next).attr('src') != null)) {
+        $('#caption_wrap').html($(next).attr('title'));
+        $('#caption_wrap_back').fadeIn();
+        $('#caption_wrap').fadeIn();
     }
-    else if($(next).attr('title')==""){
-        $('#caption_wrap').width('0px');
-        $('#caption_wrap').height('0px');
-        $('#caption_wrap_back').height('0px');
-        $('#caption_wrap_back').width('0px');
-    }
-    else{
-        $('#caption_wrap').css('top','350px');
-        $('#caption_wrap').css('right','160px');
-        $('#caption_wrap').width('310px');
-        $('#caption_wrap').height('80px');
-        $('#caption_wrap').css('text-align','center');
-
-        $('#caption_wrap_back').css('top','350px');
-        $('#caption_wrap_back').css('right','160px');
-        $('#caption_wrap_back').height('160px');
-        $('#caption_wrap_back').width('350px');
-    }
-
-    $('#caption_wrap').html($(next).attr('title'));
-    $('#caption_wrap_back').fadeIn();
-    $('#caption_wrap').fadeIn();
 }
