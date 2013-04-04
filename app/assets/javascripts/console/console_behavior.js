@@ -1,5 +1,9 @@
 $(function () {
     $('#presentations_table').dataTable({
+            "iDisplayLength": 10,
+            "sScrollX": "100%",
+            "sScrollY": "350",
+        "aoColumns": [ { "sClass": "center", "bSortable": false, "sWidth": "33%"} , {}],
             "bPaginate":false,
             "sPaginationType":"false",
             "bLengthChange":true,
@@ -11,14 +15,32 @@ $(function () {
             "sDom":'C<"clear">lfrtip',
             "bAutoWidth":false }
     );
+    $('#presentations_table').css('margin-left','218px');
     $('#presentations_table_filter').children().children().addClass('presentation_filter');
+    $('#presentations_table tr td').css('padding', '5px');
+    $('#presentations_table .presentation_tools').css('padding', '0px 5px 0px 5px');
+
+
+
+    $('.presentation_filter').attr("placeholder", "Search Decks");
     $('.show_this_presentation').live('click', function () {
         show_presentation($(this).find(':input').attr("id"), $(this).text());
     });
-    $('#left_panel').niceScroll({cursorcolor:"#232836", cursorborder:"none", cursorwidth:"5px", autohidemode:true, horizrailenabled:false});
-    $("#slide_form_panel").niceScroll({cursorcolor:"#232836", cursorborder:"none", cursorwidth:"5px", autohidemode:false, horizrailenabled:false});
+
+    $(".middle_panel").niceScroll({cursorcolor:"#232836", cursorborder:"none", cursorwidth:"5px", autohidemode:false, horizrailenabled:false});
     $("#presentation_slides_index").niceScroll({cursorcolor:"#232836", cursorborder:"none", cursorwidth:"5px", autohidemode:true, horizrailenabled:false});
+
+
 });
+
+$(".sortable").sortable({ axis: "x" });
+
+$('#add_images_and_cap').live('click', function () {
+    $(".slide_contents_block").niceScroll({cursorcolor:"#232836", cursorborder:"none", cursorwidth:"5px", autohidemode:false, horizrailenabled:false});
+    $('.slide_contents_block').animate({ scrollTop: $("#add_images_and_cap").position().top}, 'slow');
+});
+
+
 
 function transitIn(name) {
 
@@ -26,9 +48,16 @@ function transitIn(name) {
     $('#left_panel').animate({
         'width':"240px"
     }, function () {
-        $('#presentations_table_filter').css('margin-left', '20px');
-        $('.presentation_filter').css('width', '155px');
-        $('.presentation_search_ico').css('left', '87px');
+        $('#presentations_table_filter').css('margin-left', '15px');
+        $('.presentation_filter').css('width', '185px');
+        $('#presentations_table').css({
+            'marginLeft': "10px",
+            'width': "220px"
+        });
+        $('.dataTables_scrollBody').css({
+            'overflow-x':"hidden",
+            'overflow-y':"auto"
+        });
 
         $('#writeup').fadeOut(function () {
             $('#presentation_slides_index').fadeIn();
@@ -42,13 +71,6 @@ function transitOut() {
         $('#left_panel').show().animate({
             'width':"640px"
         }, function () {
-            $('#presentations_table_filter').css('text-align', 'left');
-            $('#presentations_table_filter').css('margin-left', '152px');
-            $('#presentations_table_filter').css('margin-top', '-25px');
-
-            $('.presentation_search_ico').css('left', '20px');
-            $('.presentation_search_ico').css('top', '5px');
-            $('.presentation_search_ico').css('position', 'relative');
 
             $('#presentation_slides_index').css({
                 'float':'right',
@@ -56,9 +78,15 @@ function transitOut() {
                 'width':'400px'
             });
 
-            $('.active_slide').fadeOut();
+            $('#active_slide').fadeOut();
+
             $('#active_presentation').fadeOut(function () {
                 $('#writeup').fadeIn();
+                $('#presentations_table').css({
+                    'marginLeft': "218px",
+                    'width': "220px"
+                });
+                $('#presentations_table_filter').css('margin-left', '222px');
                 $('.presentation_tools').fadeIn();
             });
         });
@@ -81,7 +109,7 @@ $('#new_deck_Modal_create_btn').live('click', function () {
         contentType:"application/json",
         success:function (returning_data) {
             $('#presentations_table').dataTable().fnAddData([
-                '<a id="activate_presentation_' + returning_data + '" onclick="transitIn(\'' + prez_name + '\')" href="#?presentation' + returning_data + '"><button class="btn btn-inverse show_this_presentation" type="button"><input id="' + returning_data + '" type="hidden" name="' + returning_data + '">' + prez_name + '</button></a>', "" ]
+                '<a id="activate_presentation_' + returning_data + '" onclick="transitIn(\'' + prez_name + '\')" href="#?presentation' + returning_data + '"><button class="btn btn-inverse show_this_presentation" type="button"><input id="' + returning_data + '" type="hidden" name="' + returning_data + '">' + prez_name + '</button></a>',""]
             );// TODO: Add the presentations tools td content once finalized
             $('#presentations_table tbody tr:last').addClass('presentation_row');
             $('#presentations_table tbody tr:last').find('td:first').addClass('presentation_contents');
@@ -106,7 +134,7 @@ function show_presentation(this_presentation_id, this_presentation_name) {
         'Create a Slide <i class="icon-plus icon-white pull-right"></i>' +
         '</a> ' +
         '<hr>' +
-        '<div class="active_presentation_panel" id=pres_' + this_presentation_id + '>' + '</div>'
+        '<div class="active_presentation_panel sortable" id=pres_' + this_presentation_id + '>' + '</div>';
 
     $('#presentation_slides_index').html('').append(slide_panel);
 

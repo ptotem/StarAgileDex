@@ -1,5 +1,6 @@
 html {
     background: #1a1d10;
+    font-family: serif;
 }
 
 body {
@@ -12,6 +13,7 @@ body {
     padding: 10px;
     padding-top: 20px;
     padding-bottom: 25px;
+    font-family: serif;
 }
 
 #wrapper {
@@ -24,7 +26,6 @@ body {
 
 .btn {
     margin: 0 0 5px;
-    /*width: 90%;*/
     text-align: left;
     padding: 5px;
 }
@@ -39,8 +40,7 @@ body {
     margin-right: 40px;
     border-radius: 10px;
     text-align: center;
-    overflow-y: auto;
-    overflow-x: hidden;
+    overflow: hidden;
 }
 
 .middle_panel {
@@ -52,8 +52,7 @@ body {
     border-radius: 10px;
     display: none;
     text-align: center;
-    overflow-y: auto;
-    overflow-x: hidden;
+    overflow: hidden;
 }
 
 .middle_panel #new_deck_btn {
@@ -66,6 +65,12 @@ body {
     text-align: center;
 }
 
+#slide_form_panel_header {
+    font-size: 24.5px;
+    font-weight: bold;
+    padding: 20px 20px 10px;
+}
+
 .slide_layout {
     height: 120px;
     width: 165px;
@@ -74,6 +79,7 @@ body {
     margin: 5px 6px 5px 6px;
     border: 1px solid #000000;
     border-radius: 5px;
+    font-size: 14px;
 }
 
 .del_slide {
@@ -95,15 +101,22 @@ body {
     background: white;
     border-radius: 10px;
     text-align: center;
-    overflow-y: auto;
-    overflow-x: hidden;
-}
-
-#presentations_table {
+    /*overflow-y: auto;*/
+    /*overflow-x: hidden;*/
 }
 
 .presentation_filter {
-    width: 155px;
+    width: 185px;
+}
+
+#presentations_table tr td:first-child {
+    text-align: right;
+    padding: 5px 5px 5px 5px;
+}
+
+#presentations_table tr td:last-child {
+    text-align: center;
+    padding: 5px 5px 5px 5px;
 }
 
 #presentations_table tr td {
@@ -112,8 +125,7 @@ body {
 
 #presentations_table_filter {
     text-align: left;
-    margin-left: 152px;
-    margin-top: -25px;
+    margin-left: 222px;
 }
 
 #presentations_table_filter label {
@@ -132,17 +144,6 @@ body {
     height: 28px;
 }
 
-.presentation_search_ico {
-    left: 20px;
-    top: 5px;
-    position: relative;
-    opacity: 0.50;
-}
-
-.presentation_search_ico img {
-    height: 28px;
-}
-
 #left_panel .btn {
     width: 200px;
     text-align: center;
@@ -157,6 +158,12 @@ body {
     padding: 0;
 }
 
+#content_block_header {
+    font-size: 16px;
+    font-weight: bold;
+    padding-bottom: 20px;
+}
+
 .content_block_caption_txt {
     resize: vertical;
     min-height: 42px;
@@ -164,7 +171,11 @@ body {
     margin-top: 5px;
 }
 
-.slide_field{
+.remove_nested_fields {
+    font-size: 14px;
+}
+
+.slide_field {
     width: 256px;
 }
 
@@ -175,7 +186,7 @@ body {
     padding: 10px;
     font-size: 14px;
     line-height: 1.35em;
-    height: 292px;
+    height: 308px;
 }
 
 #active_presentation {
@@ -199,7 +210,7 @@ body {
 #active_presentation_name {
     margin-bottom: 5px;
     padding: 20px 20px 10px 20px;
-    font-size: 20px;
+    font-size: 24.5px;
     font-weight: bold;
 }
 
@@ -209,13 +220,39 @@ body {
 }
 
 #presentation_name_msg {
-    float: right;
     color: graytext;
+    float: right;
     margin-right: 130px;
+    position: relative;
+    right: -55px;
+    top: -12px;
+}
+
+#presentation_name_msg sub, sup {
+    font-size: 12px;
 }
 
 .modal-header h3 {
     text-align: center;
+}
+
+#new_deck_Modal {
+    margin: 10px 0px 0px -311px;
+    width: 400px;
+    height: 220px;
+    text-align: center;
+}
+
+#new_deck_Modal label {
+    display: block;
+    margin-bottom: 5px;
+    margin-left: 76px;
+    text-align: left;
+}
+
+#new_deck_Modal .form-actions {
+    border-top: none;
+    background: transparent;
 }
 
 .new_deck_Modal_btns {
@@ -224,20 +261,22 @@ body {
 }
 
 #new_deck_Modal_close_btn {
-    width: 58px;
+    width: 63px;
     float: left;
-    margin-left: -64px;
 }
 
 #new_deck_Modal_create_btn {
     width: 60px;
-    height: 32px;
     float: right;
-    margin-right: 110px;
+}
+
+#presentations_table_wrapper {
 }
 
 #presentations_table {
-    margin: 0 auto;
+    /*margin: 0 auto;*/
+    width: 33%;
+    margin-left: 215px;
 }
 
 .navbar {
@@ -257,6 +296,12 @@ body {
     color: #fff;
     margin-top: 5px;
     font-size: 18px;
+}
+
+.nav > li > a {
+    margin-right: -32px;
+    color: white;
+    margin-top: 5px
 }
 
 .nav > li > a > img {
@@ -279,14 +324,18 @@ body {
     cursor: pointer;
 }
 
-#new_deck_Modal .form-actions {
-    background: #ffffff;
-}
-
 .slide_contents_block {
     border: solid 1px black;
     padding: 10px;
     border-radius: 10px;
-    width:80%;
+    width: 80%;
     margin: 0 auto;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    height: 232px;
+}
+
+#add_images_and_cap{
+    position: relative;
+
 }
