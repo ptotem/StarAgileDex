@@ -1,6 +1,6 @@
 function init_widget() {
     $.each(images, function (index, elm) {
-        $('#wi-el').append('<li><img src="' + elm + '" title="' + captions[index] + '"/><h4>Serenity</h4><p>'+captions[index]+'</p></li>');
+        $('#wi-el').append('<li><img src="' + elm + '" title="' + captions[index] + '"/><p>'+captions[index]+'</p></li>');
     });
     $('#widget_wrap').show();
     var $el = $( '#wi-el' ),

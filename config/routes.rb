@@ -16,7 +16,7 @@ AgileDex::Application.routes.draw do
   # Slide Surfer Route
   match '/slides/:id/:plugin/:font/:background', :to=>"slides#builder", :as=>"builder"
   match '/save_slide', :to=>"slides#save_slide", :as=>"save_slide"
-
+  match '/export/:id',:to=>'presentations#export',:as=>"export"
   # Ajax routes
   match '/presentations/new', :to=>"home#create_new_presentation", :as=>"new_presentation"
 

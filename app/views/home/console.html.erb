@@ -133,7 +133,7 @@
                 <img src="/assets/save.png"/> </a>
               <a title="View Presentation" class="view_pres" href="Users/user<%= current_user.id.to_s %>/presentations/presentation<%= presentation.id %>/Presentation_Show.html" target="_blank">
                 <img src="/assets/view.png"/> </a>
-              <a href="#export_Modal" data-toggle="modal" id="export_btn" title="Export Presentation">
+              <a href="export/<%= presentation.id %>" id="export_btn" title="Export Presentation">
                 <img src="/assets/export2.png"/> </a>
               <a title="Delete Presentation" class="delete_presentation" href="#"> <%= hidden_field_tag presentation.id %>
                 <img src="/assets/delete.png"/> </a>

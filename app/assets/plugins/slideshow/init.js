@@ -6,4 +6,15 @@ function init_widget() {
     $("#widget_wrap").show();
 
     $('.box_skitter_large').skitter({fullscreen:false});
+
+
+    setTimeout(function () {
+        if (captions.length==1 && captions[0]=="")
+        {
+            $('.label_skitter p').hide();
+        }
+    }, 500);
+
+
+
 }
