@@ -13,7 +13,7 @@ a, a img { border:none; outline:none; color:#004499; }
 /*#header h1 a { width:220px; height:90px; float:left; margin:0px 0 0 0; overflow:hidden; text-indent:-9999em; background:url(../images/logo.png) no-repeat center top;  }*/
 
 #header nav { float:right; margin:30px 0 0 0; }
-#header nav a { color:#fff; padding:10px 25px; -moz-border-radius:3px;-webkit-border-radius:3px;border-radius:3px; float:left; margin:0 15px 0 0; text-decoration:none; text-shadow:#000 1px 1px 0; 
+#header nav a { color:#fff; padding:10px 25px; -moz-border-radius:3px;-webkit-border-radius:3px;border-radius:3px; float:left; margin:0 15px 0 0; text-decoration:none; text-shadow:#000 1px 1px 0;
 	-moz-transition:all ease-out 0.3s;
 	-webkit-transition:all ease-out 0.3s;
 	transition:all ease-out 0.3s;
@@ -53,8 +53,8 @@ a, a img { border:none; outline:none; color:#004499; }
 #box-config { background:url(../images/bg-config.jpg) repeat left top; margin-top:-60px; padding-bottom:10px; color:#fff; float:left; width:100%; display:none; }
 
 #nav-config { float:left; margin:60px 0 20px 190px; }
-#nav-config a { float:left; padding:10px 20px; border-bottom:5px solid #333; color:#fff; text-decoration:none; text-shadow:none; 
-	-moz-transition:all 0.2s; 
+#nav-config a { float:left; padding:10px 20px; border-bottom:5px solid #333; color:#fff; text-decoration:none; text-shadow:none;
+	-moz-transition:all 0.2s;
 }
 #nav-config a:hover { text-shadow:#000 0 0 5px; border-color:#555; }
 #nav-config a.active { border-color:#228822; }
@@ -159,3 +159,34 @@ px;-webkit-border-radius:3px;border-radius:3px; margin:0 10px 10px 0; }
 /* =Donate
 -------------------------------------------------------------- */
 #box-donate { float: left; width: 100%; text-align: center; margin: 40px 0 0 0; }
+#widget_wrap {
+    height: 300px;
+    margin-top: 50px;
+    display: none;
+    margin-left:65px;
+}
+
+#title_wrap {
+    width: auto;
+    margin:0 auto;
+    display: none;
+    text-align: center;
+}
+
+
+#text_wrap {
+    height: auto;
+    width: auto;
+    text-align: center;
+    font-size: 18px;
+    display: none;
+    margin:0 auto;
+
+}
+
+.image_main{
+    height: 300px;
+    width: 800px;
+
+}
+

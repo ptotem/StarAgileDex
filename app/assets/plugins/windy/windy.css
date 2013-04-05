@@ -20,7 +20,7 @@ ul.wi-container li {
 	position: absolute;
 	top: 0;
 	left: 0;
-	background: #fff;
+	background:#c0c0c0;
 	padding: 20px;
 	pointer-events: auto;
 }
@@ -32,4 +32,29 @@ ul.wi-container li.wi-move {
 	-o-transition: -o-transform 600ms ease, opacity 600ms ease, left 600ms ease, top 600ms ease;
 	-ms-transition: -ms-transform 600ms ease, opacity 600ms ease, left 600ms ease, top 600ms ease;
 	transition: transform 600ms ease, opacity 600ms ease, left 600ms ease, top 600ms ease;
+}
+
+
+
+#widget_wrap {
+    height: 300px;
+    margin: 0 auto;
+    margin-top: 60px;
+    display: none;
+}
+
+#title_wrap {
+    margin:0 auto;
+    display: none;
+    text-align: center;
+}
+
+
+#text_wrap {
+    height: auto;
+    width: auto;
+    text-align: center;
+    font-size: 18px;
+    display: none;
+    margin:0 auto;
 }

@@ -82,8 +82,8 @@ a:hover, a:active {
     text-indent:-9999px;
 }
 
-.slider-wrapper { 
-	width: 80%; 
+.slider-wrapper {
+	width: 80%;
 	margin: 100px auto;
 }
 
@@ -92,4 +92,30 @@ a:hover, a:active {
 /*====================*/
 .clear {
 	clear:both;
+}
+
+
+#widget_wrap {
+    height: 300px;
+    margin-top: 60px;
+    display: none;
+    margin-left:65px;
+}
+
+#title_wrap {
+    margin:0 auto;
+    display: none;
+    text-align: center;
+    background-color: rgba(0,0,0,0.5);
+}
+
+
+#text_wrap {
+    height: auto;
+    width: auto;
+    text-align: center;
+    font-size: 18px;
+    display: none;
+    margin:0 auto;
+
 }

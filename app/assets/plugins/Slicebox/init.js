@@ -1,6 +1,18 @@
 function init_widget() {
     $.each(images, function (index, elm) {
-        $('#sb-slider').append('<li><a><img src="' + elm + '" title="' + captions[index] + '"/></a><div class="sb-description"><h3>' + captions[index] + '</h3></div></li>');
+//        $('#sb-slider').append('<li><a><img src="' + elm + '" title="' + captions[index] + '"/></a><div class="sb-description"><h3>' + captions[index] + '</h3></div></li>');
+
+        if (elm != null) {
+
+            $('#sb-slider').append('<li><a><img src="' + elm + '" title="' + captions[index] + '"/></a><div class="sb-description"><h3>' + captions[index] + '</h3></div></li>');
+        } else {
+
+            $('#sb-slider').append('<li><a><img src="/assets/adlogo.png" title="' + captions[index] + '"/></a><div class="sb-description"><h3>' + captions[index] + '</h3></div></li>');
+
+
+        }
+
+
     });
 
 

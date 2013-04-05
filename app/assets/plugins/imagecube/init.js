@@ -5,7 +5,7 @@ function init_widget() {
             $('#full3DCube').append('<img src="' + elm + '" title="' + captions[index] + '"/>');
         } else {
 
-            $('#full3DCube').append('<div class="face" style="padding:15px;color: white;text-align: center;">'+captions[index]+'</div>');
+            $('#full3DCube').append('<div class="face" style="padding-top:50px;color: white;text-align: center;">'+captions[index]+'</div>');
         }
     });
 

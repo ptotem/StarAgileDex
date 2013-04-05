@@ -1,6 +1,15 @@
 function init_widget() {
     $.each(images, function (index, elm) {
-        $('#iw_thumbs').append('<li><img src="' + elm + '" title="' + captions[index] + '"/><div><p>' + captions[index] + '</p></div></li>');
+        if (elm != null) {
+
+            $('#iw_thumbs').append('<li><img src="' + elm + '" title="' + captions[index] + '"/><div><p>' + captions[index] + '</p></div></li>');
+        } else {
+            $('#iw_thumbs').append('<li><div style="display: block;"><p>' + captions[index] + '</p></div></li>');
+
+        }
+
+
+
     });
     $('#widget_wrap').show();
     var $iw_thumbs = $('#iw_thumbs'),

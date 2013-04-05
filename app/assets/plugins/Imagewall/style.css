@@ -171,3 +171,25 @@ ul.iw_thumbs li:nth-child(7n) img{
 .footer a.left{
 	float:left;
 }
+
+#widget_wrap {
+    display: none;
+    height: 300px;
+    margin: 60px auto 0 260px;
+}
+
+#title_wrap {
+    margin:0 auto;
+    display: none;
+    text-align: center;
+}
+
+
+#text_wrap {
+    height: auto;
+    width: auto;
+    text-align: center;
+    font-size: 18px;
+    display: none;
+    margin:0 auto;
+}

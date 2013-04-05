@@ -1,10 +1,17 @@
 function init_widget() {
+
     var this_top=0;
     var this_left=0;
     $.each(images, function (index, elm) {
         this_class="bg"+(index+1);
         this_cls="."+this_class
-        $('#littleBoxes').append('<div class="boxlink '+this_class+'" style="top:'+this_top+'px;left:'+this_left+'px;background-image:url('+elm+');"><a href="">'+captions[index]+'</a><div class="boxcontent"><p>'+captions[index]+'</p></div></div>');
+
+        if (captions[index]!= "") {
+
+            $('#littleBoxes').append('<div class="boxlink'+this_class+'" style="top:'+this_top+'px;left:'+this_left+'px;background-image:url('+elm+');"><a href="">'+captions[index]+'</a><div class="boxcontent"><p><img src="' + elm +'"/></p></div></div>');
+        } else {
+            $('#littleBoxes').append('<div class="boxlink'+this_class+'" style="top:'+this_top+'px;left:'+this_left+'px;background-image:url('+elm+');"><a href=""><img style="height: 400px;" src="' + elm +'"/></a><div class="boxcontent"></div></div>');
+        }
         this_top=this_top+95;
         this_left=this_left+95;
     });

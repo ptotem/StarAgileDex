@@ -33,14 +33,14 @@ en:
         chrome: "false"
         safari: "false"
         opera: "false"
-        working: "false"
+        working: "true"
       bookblock:
         ie: "6+"
         firefox: "TRUE"
         chrome: "false"
         safari: "false"
         opera: "false"
-        working: "false"
+        working: "true"
       elegantaccordion:
         ie: "6+"
         firefox: "TRUE"
@@ -61,7 +61,7 @@ en:
         chrome: "false"
         safari: "false"
         opera: "false"
-        working: "false"
+        working: "true"
       slicebox:
         ie: "6+"
         firefox: "TRUE"
@@ -82,7 +82,7 @@ en:
         chrome: "false"
         safari: "false"
         opera: "false"
-        working: "false"
+        working: "true"
       triplepanelimageslider:
         ie: "6+"
         firefox: "TRUE"
@@ -96,6 +96,6 @@ en:
         chrome: "false"
         safari: "false"
         opera: "false"
-        working: "false"
+        working: "true"
     advanced_plugin:
 

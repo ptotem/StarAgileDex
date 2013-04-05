@@ -3,8 +3,8 @@ function init_widget() {
         if (elm!=null){
             $('#slide').append('<li><a href="#cube'+index+'"><img src="'+elm+'" class="cube'+index+'" /></a><div class="label_text"><p>'+captions[index]+'</p></div></li>');
         } else {
-            $('#slide').append('<li><a href="#cube'+index+'"><img src="/assets/add.png" class="cube'+index+'" /></a><div class="label_text"><p>'+captions[index]+'</p></div></li>');
-            $('.label_skitter')
+            $('#slide').append('<li><a href="#cube'+index+'"><img src="/assets/adlogo.png" class="cube'+index+'" /></a><div class="label_text"><p>'+captions[index]+'</p></div></li>');
+
         }
 
     });
@@ -18,6 +18,8 @@ function init_widget() {
         if (captions.length==1 && captions[0]=="")
         {
             $('.label_skitter p').hide();
+
+
         }
     }, 500);
 
