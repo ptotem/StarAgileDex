@@ -94,8 +94,9 @@ body {
     cursor: pointer;
 }
 
-.slide_contents {
-    text-align: left;
+.show_this_slide{
+    width: 200px;
+    text-align: center;
 }
 
 #left_panel {
@@ -106,11 +107,13 @@ body {
     background: white;
     border-radius: 10px;
     text-align: center;
-    /*overflow-y: auto;*/
-    /*overflow-x: hidden;*/
 }
 
 .presentation_filter {
+    width: 185px;
+}
+
+.slide_filter {
     width: 185px;
 }
 
@@ -237,44 +240,16 @@ body {
     font-size: 12px;
 }
 
-.modal-header h3 {
-    text-align: center;
-}
-
 #new_deck_Modal {
     margin: 10px 0px 0px -311px;
     width: 400px;
-    height: 220px;
     text-align: center;
 }
 
-#new_deck_Modal label {
-    display: block;
-    margin-bottom: 5px;
-    margin-left: 76px;
-    text-align: left;
-}
-
-#new_deck_Modal .form-actions {
-    border-top: none;
-    background: transparent;
-}
-
-.new_deck_Modal_btns {
-    margin: 0;
-    text-align: center;
-}
-
-#new_deck_Modal_close_btn {
-    width: 63px;
-    float: left;
-}
-
-#new_deck_Modal_create_btn {
+#new_presentation .modal-footer .btn{
     width: 60px;
-    float: right;
+    text-align: center;
 }
-
 #presentations_table_wrapper {
 }
 
@@ -282,6 +257,12 @@ body {
     /*margin: 0 auto;*/
     width: 33%;
     margin-left: 215px;
+}
+
+#presentations_slides_table {
+    margin: 0 auto;
+    width: 100%;
+    text-align: center;
 }
 
 .navbar {
@@ -333,6 +314,10 @@ body {
 #add_images_and_cap{
     position: relative;
 
+}
+
+.form-horizontal .controls {
+    margin-left: 0px;
 }
 
 

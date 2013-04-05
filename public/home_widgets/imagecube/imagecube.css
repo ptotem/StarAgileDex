@@ -87,7 +87,7 @@ h3 {
     height: 160px;
     opacity: 0.8;
     position: absolute;
-    right: 140px;
+    right: 160px;
     top: 350px;
     width: 350px;
 }
@@ -97,9 +97,9 @@ h3 {
     height: 80px;
     padding: 30px 20px;
     position: absolute;
-    right: 140px;
+    right: 160px;
     text-align: center;
-    top: 350px;
+    top: 340px;
     width: 310px;
 }
 

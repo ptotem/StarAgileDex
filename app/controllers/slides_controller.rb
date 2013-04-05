@@ -48,27 +48,26 @@ class SlidesController < ApplicationController
   # GET /slides/new
   # GET /slides/new.json
   def new
+    unless params[:presentation_id].nil?
+      @presentation=Presentation.find(params[:presentation_id])
+    end
     @slide = Slide.new
-    @presentation = Presentation.find(params[:presentation_id])
-    @slide.content_blocks.build
-    render :layout => "slide_custom_layout"
-    #respond_to do |format|
-    #  format.html # new.html.erb
-    #  format.json { render json: @slide }
-    #end
+    render :layout => false
   end
 
   # GET /slides/1/edit
   def edit
+    unless params[:presentation_id].nil?
+      @presentation=Presentation.find(params[:presentation_id])
+    end
     @slide = Slide.find(params[:id])
+    render :layout=>false
   end
 
   # POST /slides
   # POST /slides.json
   def create
     @slide = Slide.new(params[:slide])
-
-
     respond_to do |format|
       if @slide.save
         format.html { redirect_to builder_path(@slide,"basic","Arial","bluebird"), notice: 'Slide was successfully created.' }
@@ -83,6 +82,7 @@ class SlidesController < ApplicationController
   # PUT /slides/1
   # PUT /slides/1.json
   def update
+
     @slide = Slide.find(params[:id])
 
     respond_to do |format|
@@ -95,6 +95,7 @@ class SlidesController < ApplicationController
       end
     end
   end
+
 
   # DELETE /slides/1
   # DELETE /slides/1.json

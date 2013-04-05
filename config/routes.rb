@@ -21,6 +21,10 @@ AgileDex::Application.routes.draw do
   match '/export/:id',:to=>'presentations#export',:as=>"export"
   # Ajax routes
   match '/presentations/new', :to=>"home#create_new_presentation", :as=>"new_presentation"
+  match '/delete_presentation', :to=>"home#delete_presentation", :as=>"delete_presentation"
+  match '/slides/new/(:presentation_id)', :to=>"slides#new"
+  match '/slides/:id/edit/(:presentation_id)', :to=>"slides#edit"
+
 
   # CRUD Routes
   resources :authentications

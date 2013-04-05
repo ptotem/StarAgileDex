@@ -51,4 +51,10 @@ class HomeController < ApplicationController
     end
   end
 
+  def delete_presentation
+    @presentation = Presentation.find(params[:this_presentation_id][0])
+    @presentation.destroy
+    render :text => "Presentation Deleted"
+  end
+
 end
