@@ -66,3 +66,28 @@
 .bg5{
     background-image:url(../images/5.jpg);
 }
+
+
+
+#widget_wrap {
+    margin: 0 auto;
+    display: none;
+}
+
+#title_wrap {
+    height: auto;
+    width: auto;
+    margin:0 auto;
+    display: none;
+    text-align: center;
+}
+
+
+#text_wrap {
+    height: auto;
+    width: auto;
+    text-align: center;
+    font-size: 18px;
+    display: none;
+    margin:0 auto;
+}

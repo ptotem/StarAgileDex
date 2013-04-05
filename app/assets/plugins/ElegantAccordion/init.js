@@ -3,7 +3,12 @@ function init_widget() {
         $('.accordion').append('<li class="jj bg1" style="background-image:url('+elm+') ;"><div class="heading"></div><div class="bgDescription"></div><div class="description"><h2></h2><p>'+captions[index]+'</p></div></li>');
     });
 
+
+
+
+
     $('#widget_wrap').show();
+
     $('.jj').click(
         function(){
             var $this = $(this);

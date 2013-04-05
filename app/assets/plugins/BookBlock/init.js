@@ -1,8 +1,22 @@
 function init_widget() {
     $.each(images, function (index, elm) {
-        $('#bb-bookblock').append('<div class="bb-item"><a><img src="' + elm + '" title="' + captions[index] + '"/></a><p style="position:absolute;left:85px;top:100px;padding: 10px;opacity:0.7;background-color: #000000;">' + captions[index] + '</p></div>');
+
+
+        if (elm != null) {
+
+            $('#bb-bookblock').append('<div class="bb-item"><a><img src="' + elm + '" title="' + captions[index] + '"/></a><p style="position:absolute;left:85px;top:100px;padding: 10px;opacity:0.7;background-color: #000000;">' + captions[index] + '</p></div>');
+        } else {
+
+            $('#bb-bookblock').append('<div class="bb-item"><a></a><p style="padding:30px;position:absolute;left:0px;margin-top:0px;opacity:0.7;background-color: #000000;height: 80%;width: 85%;font-size: 25px;">' + captions[index] + '</p></div>');
+
+
+        }
+
+
     });
+
     $('#widget_wrap').show();
+
     var Page = (function () {
 
         var config = {
@@ -76,9 +90,10 @@ function init_widget() {
 
 
     setTimeout(function () {
+
         if (captions.length==1 && captions[0]=='') {
             $('.bb-item p').hide();
         }
-    }, 400);
+    }, 1000);
 
 }
