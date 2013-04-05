@@ -8,6 +8,6 @@ CKEDITOR.editorConfig = function (config) {
     config.toolbar_Custom =
         [
             { name: 'basicstyles', items: [ 'Bold', 'Italic', 'Underline', 'Font', 'FontSize' ] },
-            { name: 'paragraph', items: [ 'NumberedList', 'BulletedList','Table', '-', 'Link', 'Unlink', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight','-', 'Maximize' ] },
+            { name: 'paragraph', items: [ 'NumberedList', 'BulletedList','Table', '-', 'Link', 'Unlink', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight','-', 'Maximize' ] }
         ];
 };

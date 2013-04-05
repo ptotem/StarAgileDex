@@ -12,6 +12,13 @@ en:
         safari: "false"
         opera: "false"
         working: "true"
+      simple_title_content:
+        ie: "6+"
+        firefox: "true"
+        chrome: "false"
+        safari: "false"
+        opera: "false"
+        working: "true"
     content_plugin:
       imagecube:
         ie: "6+"
