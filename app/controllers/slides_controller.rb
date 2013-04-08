@@ -97,7 +97,9 @@ class SlidesController < ApplicationController
   # GET /slides/new
   # GET /slides/new.json
   def new
-    unless params[:presentation_id].nil?
+    if params[:presentation_id].nil?
+      @presentation=Presentation.new
+    else
       @presentation=Presentation.find(params[:presentation_id])
     end
     @slide = Slide.new
@@ -107,7 +109,9 @@ class SlidesController < ApplicationController
 
   # GET /slides/1/edit
   def edit
-    unless params[:presentation_id].nil?
+    if params[:presentation_id].nil?
+      @presentation=Presentation.new
+    else
       @presentation=Presentation.find(params[:presentation_id])
     end
     @slide = Slide.find(params[:id])
@@ -121,10 +125,10 @@ class SlidesController < ApplicationController
     @slide = Slide.new(params[:slide])
     respond_to do |format|
       if @slide.save
-        format.html { redirect_to builder_path(@slide, "basic", "Arial", "bluebird"), notice: 'Slide was successfully created.' }
+        format.html { redirect_to builder_path(@slide, @slide.layout, @slide.font, @slide.background), notice: 'Slide was successfully created.' }
         format.json { render json: @slide, status: :created, location: @slide }
       else
-        format.html { render action: "new" }
+        format.html { redirect_to builder_path(@slide, @slide.layout, @slide.font, @slide.background), notice: 'Slide could not be created.' }
         format.json { render json: @slide.errors, status: :unprocessable_entity }
       end
     end
@@ -141,7 +145,7 @@ class SlidesController < ApplicationController
         format.html { redirect_to builder_path(@slide, @slide.layout, @slide.font, @slide.background), notice: 'Slide was successfully updated.' }
         format.json { head :no_content }
       else
-        format.html { render action: "edit" }
+        format.html { redirect_to builder_path(@slide, @slide.layout, @slide.font, @slide.background), notice: 'Slide could not be updated.' }
         format.json { render json: @slide.errors, status: :unprocessable_entity }
       end
     end

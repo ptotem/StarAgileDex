@@ -22,6 +22,8 @@ gem 'spreadsheet'
 gem 'gritter'
 gem 'gon'
 gem 'paperclip'
+gem 'docsplit'
+gem 'docsplit-paperclip-processor'
 
 
 

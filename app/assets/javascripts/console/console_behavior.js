@@ -324,16 +324,33 @@ function form_bindings(){
     $('#show_wysiwyg').click(function () {
         $('#show_wysiwyg').hide();
         $('#clear_wysiwyg').show();
+        $('#upload_ppt').show();
         $('#content_block_section').show();
         $('#text_block_section').hide();
+        $('#import_ppt_block').hide();
+        $('.extra').hide();
     });
 
 // This function toggles from Content blocks to WYSIWYG editor
     $('#clear_wysiwyg').click(function () {
+        $('#upload_ppt').show();
         $('#show_wysiwyg').show();
         $('#clear_wysiwyg').hide();
         $('#content_block_section').hide();
         $('#text_block_section').show();
+        $('#import_ppt_block').hide();
+        $('.extra').show();
+    });
+
+// This function toggles from Content blocks to WYSIWYG editor
+    $('#upload_ppt').click(function () {
+        $('#import_ppt_block').show();
+        $('#upload_ppt').hide();
+        $('#show_wysiwyg').show();
+        $('#clear_wysiwyg').show();
+        $('#content_block_section').hide();
+        $('#text_block_section').hide();
+        $('.extra').show();
     });
 
 }

@@ -1,8 +1,15 @@
 class Slide < ActiveRecord::Base
-  attr_accessible :presentation_id, :sequence, :subtitle, :title, :layout, :font, :background, :content_blocks_attributes, :titlepic, :presentation, :main
+  attr_accessible :presentation_id, :sequence, :subtitle, :title, :layout, :font, :background, :content_blocks_attributes, :titlepic, :presentation, :main, :ppt
   belongs_to :presentation
   has_many :content_blocks, :dependent => :destroy
   has_attached_file :titlepic, :path => :get_path
+  has_attached_file :ppt, :path => :get_path,
+                    :styles => {
+                        :pdf => {
+                            :format => "jpg",
+                            :processors => [:docsplit_image]
+                        }
+                    }
   accepts_nested_attributes_for :content_blocks, :reject_if => proc { |attrs| reject = %w(caption image).all? { |a| attrs[a].blank? } }, :allow_destroy => true
 
   before_create :set_sequence
@@ -12,9 +19,9 @@ class Slide < ActiveRecord::Base
   # TODO: Test the directory creation paths
   def get_path
     if self.user.role=="guest"
-      "#{Rails.root}/public/guestdata/"+self.presentation.user_id+"/"+self.presentation.name+"/"+id+"/images/:filename"
+      "#{Rails.root}/public/guestdata/"+self.presentation.user_id.to_s+"/"+self.presentation.name+"/"+id.to_s+"/images/:filename"
     else
-      "#{Rails.root}/public/userdata/"+self.presentation.user.name.downcase.gsub(" ", "_")+"/"+self.presentation.name+"/"+id+"/images/:filename"
+      "#{Rails.root}/public/userdata/"+self.presentation.user.name.downcase.gsub(" ", "_")+"/"+self.presentation.name+"/"+id.to_s+"/images/:filename"
     end
   end
 

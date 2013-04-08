@@ -76,6 +76,12 @@ GEM
       orm_adapter (~> 0.1)
       railties (~> 3.1)
       warden (~> 1.2.1)
+    docsplit (0.7.2)
+    docsplit-paperclip-processor (0.2.2)
+      docsplit
+      paperclip
+      paperclip (~> 3.1)
+      ruby-filemagic
     erubis (2.7.0)
     eventmachine (1.0.3)
     execjs (1.4.0)
@@ -180,6 +186,7 @@ GEM
       json (~> 1.4)
     ref (1.0.4)
     remotipart (1.0.5)
+    ruby-filemagic (0.4.2)
     ruby-ole (1.2.11.6)
     safe_yaml (0.9.0)
     sass (3.2.7)
@@ -223,6 +230,8 @@ DEPENDENCIES
   ckeditor
   coffee-rails (~> 3.2.1)
   devise
+  docsplit
+  docsplit-paperclip-processor
   gon
   gritter
   jquery-rails
