@@ -1,0 +1,23 @@
+<%= content_for :scripts do %>
+    <script type="text/javascript" src="/assets/<%= @plugin %>/modernizr.custom.26887.js"></script>
+    <script type="text/javascript" src="/assets/<%= @plugin %>/jquery.imgslider.js"></script>
+    <script type="text/javascript" src="/assets/<%= @plugin %>/init.js"></script>
+
+<% end %>
+<%= content_for :styles do %>
+    <link rel="stylesheet" type="text/css" href="/assets/<%= @plugin %>/demo.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/<%= @plugin %>/style.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/<%= @plugin %>/noscript.css" />
+
+<% end %>
+
+
+<%= content_for :widget_wrap do %>
+    <div class="main">
+      <div class="fs-slider" id="fs-slider">
+      </div>
+    </div>
+
+<% end %>
+
+

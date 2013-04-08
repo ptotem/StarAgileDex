@@ -299,6 +299,9 @@ function load_bindings() {
 
 }
 
+//TODO: Change such that the hidden fields get cleared on switching
+//TODO: Put in jquery validation for Title presence
+
 function form_bindings(){
 
 // This function toggles from subtitle to titlepic

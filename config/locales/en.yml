@@ -1,8 +1,8 @@
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 # Sample localization file for English. Add more files in this directory for other locales.
 
+# TODO: Change the Paths in the Content Plugins to handle the new path structure
 en:
-  hello: "Hello world"
   plugins:
     title_plugin:
       allcentered:
@@ -12,12 +12,13 @@ en:
         safari: "false"
         opera: "false"
         working: "true"
+    wysiwyg_plugin:
       simple_title_content:
         ie: "6+"
         firefox: "true"
         chrome: "false"
-        safari: "false"
         opera: "false"
+        safari: "false"
         working: "true"
     content_plugin:
       imagecube:
@@ -105,4 +106,11 @@ en:
         opera: "false"
         working: "true"
     advanced_plugin:
-
+  themes:
+    blackboard: "Blackboard"
+    bluebird: "Bluebird"
+    redvelvet: "Red Velvet"
+  fonts:
+    canela: "Canela"
+    arial: "Arial"
+    verdana: "Verdana"
