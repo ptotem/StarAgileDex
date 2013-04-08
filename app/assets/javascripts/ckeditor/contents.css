@@ -21,3 +21,16 @@ ol,ul,dl
 {
     padding-right:40px;
 }
+
+.cke_full {
+    display:none;
+}
+.cke_basic {
+    display:block;
+}
+.cke_maximized .cke_full {
+    display:block;
+}
+.cke_maximized .cke_basic {
+    display:none;
+}

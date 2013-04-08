@@ -34,10 +34,12 @@ function transitInNewSlide(slide_id, presentation_id) {
     $.get("/slides/new/"+presentation_id, function (data) {
         $("#slide_form_panel").html("");
         $("#slide_form_panel").html(data);
+        form_bindings();
     });
     }else{
         $.get("/slides/" + slide_id + "/edit/"+presentation_id, function (data) {
             $("#slide_form_panel").html(data);
+            form_bindings();
         });
     }
 
@@ -245,9 +247,9 @@ function delete_presentation() {
         data:JSON.stringify(data),
         contentType:"application/json",
         success:function (data) {
-            // TODO: remove the row
+            // TODO: remove the row functionality not working
             var pres_row_id = "#activate_presentation_" + $('#slide_presentation_id').val();
-            nTr = pres_row_id.parent().parent();
+            nTr = $(pres_row_id).parent().parent();
             $('#presentations_table').dataTable().fnDeleteRow($('#presentations_table').dataTable().fnGetPosition(nTr));
             transitOut();
         }
@@ -291,24 +293,44 @@ function load_bindings() {
         show_presentation($(this).find(':input').attr("id"), $(this).text());
     });
 
-// This function toggles from title to titlepic
+// These functions manage the scroll bindings for the panels
+//    $(".middle_panel").niceScroll({cursorcolor:"#232836", cursorborder:"none", cursorwidth:"5px", autohidemode:false, horizrailenabled:false});
+    $("#presentation_slides_index").niceScroll({cursorcolor:"#232836", cursorborder:"none", cursorwidth:"5px", autohidemode:true, horizrailenabled:false});
+
+}
+
+function form_bindings(){
+
+// This function toggles from subtitle to titlepic
     $('#show_titlepic').click(function () {
         $('#show_titlepic').hide();
         $('#clear_titlepic').show();
         $('#slide_titlepic').show();
-        $('#slide_title').hide();
+        $('#slide_subtitle').hide();
     });
 
-// This function toggles from titlepic to title
+// This function toggles from titlepic to subtitle
     $('#clear_titlepic').click(function () {
         $('#show_titlepic').show();
         $('#clear_titlepic').hide();
         $('#slide_titlepic').hide();
-        $('#slide_title').show();
+        $('#slide_subtitle').show();
     });
 
-// These functions manage the scroll bindings for the panels
-//    $(".middle_panel").niceScroll({cursorcolor:"#232836", cursorborder:"none", cursorwidth:"5px", autohidemode:false, horizrailenabled:false});
-    $("#presentation_slides_index").niceScroll({cursorcolor:"#232836", cursorborder:"none", cursorwidth:"5px", autohidemode:true, horizrailenabled:false});
+// This function toggles from WYSIWYG editor to Content blocks
+    $('#show_wysiwyg').click(function () {
+        $('#show_wysiwyg').hide();
+        $('#clear_wysiwyg').show();
+        $('#content_block_section').show();
+        $('#text_block_section').hide();
+    });
+
+// This function toggles from Content blocks to WYSIWYG editor
+    $('#clear_wysiwyg').click(function () {
+        $('#show_wysiwyg').show();
+        $('#clear_wysiwyg').hide();
+        $('#content_block_section').hide();
+        $('#text_block_section').show();
+    });
 
 }

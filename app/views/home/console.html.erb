@@ -6,8 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="/assets/bootstrap.min.css">
   <link rel="stylesheet" href="/assets/console.css">
-  <%= javascript_include_tag :application %>
   <script type="text/javascript" src="/assets/jquery-1.8.3.min.js"></script>
+  <%= javascript_include_tag :application %>
   <%= csrf_meta_tags %>
 </head>
 
@@ -24,11 +24,9 @@
     <h2><span style="color: #fff;">agileDex</span></h2>
 
     <div id="writeup">
-      Start off by clicking on the 'Create a Deck' button. You gotta name your deck before moving ahead. </br></br>
-      Now create a slide for your deck by clicking on 'Create a Slide'.</br></br>
-      Next, build your slides with the really cool plug-ins, sort them, view them, export them and you have yourself
-      a
-      deck made on agileDex.
+      Click the 'Create a Deck' button to start. </br></br>
+      Then create a slide for your deck by clicking on 'Create a Slide'.</br></br>
+
     </div>
 
     <div id="active_presentation">
@@ -43,17 +41,17 @@
         the Deck <i class="icon-asterisk icon-white pull-right"></i></a>
     </div>
 
-    <div id="active_slide">
-      <input type="submit" value="Save the Slide" name="commit" class="btn ad_btn" style="width: 104%;height: 80px;">
-      <a href="#" class="btn ad_btn btn-inverse" onclick="transitOut()">Close
-        the Form <i class="icon-asterisk icon-white pull-right"></i></a>
+    <div id="active_slide" style="color:white">
+      Use the WYSIWYG editor to create your basic slides.
+      <br>
+      <br>
+      But if you want to build your slides with some really cool (but not too jazzy) plug-ins, try the content blocks method instead.
     </div>
   </div>
 
   <!-----------------------------------------------------------
   The Presentation Slides Index Panel
   ---------------------------------------------------------------->
-  <!-- TODO: Add the Edit slide functionality and the Slide view has to have contents -->
 
   <div id="presentation_slides_index" class="middle_panel">
   </div>
@@ -64,45 +62,10 @@
 
   <!--TODO: All font-sizes and weights must be captured through h1-5, and all normal text should be the same size.
 TODO: Also assign a fixed font-face to all of the console
-TODO: Edit the slides ability -->
+    -->
 
   <div id="slide_form_panel" class="middle_panel">
-    <%= nested_form_for(@slide, :html => {:multipart => true}) do |f| %>
 
-        <div id="slide_form_panel_header">Enter Slide Content</div>
-        <hr>
-        <%= f.hidden_field :presentation_id %>
-        <%= f.file_field :titlepic, :placeholder => "Add Image", :style => "display:none" %>
-        <%= f.text_field :title, :class => "slide_field", :placeholder => "Title" %>
-        <br>
-        <%= link_to "Use an image as title instead", "#", :id => "show_titlepic" %>
-        <%= link_to "Use a textline as title instead", "#", :id => "clear_titlepic", :style => "display:none; margin-top:2px" %>
-        <div style="padding: 0px 30px 30px 50px;">
-
-          <label for="subtitle_editor"><h4>Enter your main text content here:</h4></label>
-          <%= f.cktext_area :subtitle, :id => "subtitle_editor", :ckeditor => {:toolbar => "Custom", :width => 300, :height => 100} %>
-        </div>
-
-        <!----- Nested form for content_block
-        -> to use nested form add gem "nested_form"
-        -> then add it to the Asset Pipeline in the application.js file: //= require jquery_nested_form
-        -> include javascript jquery_nested_form
-        --------->
-
-        <label for="slide_contents_block"><h4>Add content blocks here:</h4></label>
-
-        <div class="slide_contents_block" style="margin-bottom: 40px;">
-          <%= f.fields_for :content_blocks do |widget_form| %>
-              <%= widget_form.file_field :image, :placeholder => "Add Image" %>
-              <%= widget_form.text_area :caption, :placeholder => "Enter Caption", :class => "content_block_caption_txt slide_field", :rows => 3, :cols => 30 %>
-              <br/>
-              <%= widget_form.link_to_remove "Remove the block above" %>
-              <hr>
-          <% end %>
-          <%= f.link_to_add "Add a content block", :content_blocks %> </br>
-        </div>
-        <!--TODO: Sort out the edit panel further -->
-    <% end %>
   </div>
 
   <!-----------------------------------------------------------
@@ -128,8 +91,6 @@ TODO: Edit the slides ability -->
       <tbody>
 
       <!--TODO: The most recent presentation must be on top-->
-      <!--TODO: The scroll bar has to be only on the table-->
-      <!--TODO: Please prettify the scroll bar-->
       <!--TODO: Please check the presentation filter-->
 
       <% @presentations.each_with_index do |presentation| %>

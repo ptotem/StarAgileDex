@@ -286,7 +286,6 @@
 		},
 		_setSize : function() {
 
-			// todo: factor should depend on the perspective value. The lower the perpsective value, the higher the width..
 			var itemH = this.$items.height(),
 				pileW = 1.25 * itemH;
 			// distance between one pile's center point to the center of the wrapper

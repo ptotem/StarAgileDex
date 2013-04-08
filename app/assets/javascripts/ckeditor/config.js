@@ -7,7 +7,11 @@ CKEDITOR.editorConfig = function (config) {
     config.resize_dir = 'vertical';
     config.toolbar_Custom =
         [
-            { name: 'basicstyles', items: [ 'Bold', 'Italic', 'Underline', 'Font', 'FontSize' ] },
-            { name: 'paragraph', items: [ 'NumberedList', 'BulletedList','Table', '-', 'Link', 'Unlink', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight','-', 'Maximize' ] }
+            { name: 'basicstyles', items: [ 'Bold', 'Italic', 'Underline'] },
+            { name: 'paragraph', items: [ 'BulletedList','Table', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight','-', 'Maximize' ] }
+        ];
+    config.toolbar_Basic =
+        [
+            ['Bold', 'Italic', '-', 'NumberedList', 'BulletedList', '-', 'Link', 'Unlink','-','Maximize']
         ];
 };

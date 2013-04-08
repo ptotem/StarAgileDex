@@ -1,42 +1,45 @@
 <%= nested_form_for(@slide, :html => {:multipart => true}) do |f| %>
 
     <div id="slide_form_panel_header">Enter Slide Content</div>
-    <hr>
-    <div class="main_form_body" style="height: 330px;overflow-y: auto;">
+    <a href="#" class="btn btn-inverse" onclick="transitOut()">Cancel</a>
+    <%= f.submit "Save the slide", :class => "btn btn-primary" %>
 
-      <%= f.hidden_field :presentation_id, :value=>@presentation.id %>
-      <%= f.file_field :titlepic, :placeholder => "Add Image", :style => "display:none" %>
+    <hr>
+    <div class="main_form_body" style="height: 390px;overflow-y: auto;">
+
+      <%= f.hidden_field :presentation_id, :value => @presentation.id %>
       <%= f.text_field :title, :class => "slide_field", :placeholder => "Title" %>
+      <%= f.text_field :subtitle, :class => "slide_field", :placeholder => "Subtitle" %>
+      <%= f.file_field :titlepic, :placeholder => "Add Image", :style => "display:none; margin-bottom:10px" %>
       <br>
-      <%= link_to "Use an image as title instead", "#", :id => "show_titlepic" %>
-      <%= link_to "Use a textline as title instead", "#", :id => "clear_titlepic", :style => "display:none; margin-top:2px" %>
-      <div style="padding: 0px 30px 30px 50px;">
-
-        <label for="subtitle_editor"><h4>Enter your main text content here:</h4></label>
-        <%= f.cktext_area :subtitle, :id => "subtitle_editor", :ckeditor => {:toolbar => "Custom", :width => 300, :height => 100} %>
+      <%= link_to "Use an image instead of a subtitle", "#", :id => "show_titlepic" %>
+      <%= link_to "Use a subtitle instead of an image", "#", :id => "clear_titlepic", :style => "display:none;" %>
+      <br>
+      <hr>
+      <div id="text_block_section" style="padding: 0px 30px 0px 50px;">
+        <%= f.cktext_area :main, :id => "subtitle_editor", :ckeditor => {:toolbar => "Custom", :width => 300, :height => 100} %>
       </div>
-
-      <!----- Nested form for content_block
-      -> to use nested form add gem "nested_form"
-      -> then add it to the Asset Pipeline in the application.js file: //= require jquery_nested_form
-      -> include javascript jquery_nested_form
-      --------->
-
-      <label for="slide_contents_block"><h4>Add content blocks here:</h4></label>
-
-      <div class="slide_contents_block" style="margin-bottom: 40px;">
-        <%= f.fields_for :content_blocks do |widget_form| %>
-            <%= widget_form.file_field :image, :placeholder => "Add Image" %>
-            <%= widget_form.text_area :caption, :placeholder => "Enter Caption", :class => "content_block_caption_txt slide_field", :rows => 3, :cols => 30 %>
-            <br/>
-            <%= widget_form.link_to_remove "Remove the block above" %>
-            <hr>
+      <div id="content_block_section" style="display: none">
+        <!----- Nested form for content_block
+        -> to use nested form add gem "nested_form"
+        -> then add it to the Asset Pipeline in the application.js file: //= require jquery_nested_form
+        -> include javascript jquery_nested_form
+        --------->
+        <div class="slide_contents_block" style="margin-top: -20px;">
+          <%= f.fields_for :content_blocks do |widget_form| %>
+              <hr/>
+              <%= widget_form.link_to_remove "x", :class=>"pull-right", :style=>"margin-right:40px;" %>
+              <%= widget_form.text_area :caption, :placeholder => "Enter Caption", :class => "content_block_caption_txt slide_field", :rows => 2, :cols => 30, :style=>"margin-right:-40px" %>
+              <%= widget_form.file_field :image, :placeholder => "Add Image" %>
+              <br/>
+              <br/>
         <% end %>
-        <%= f.link_to_add "Add a content block", :content_blocks %> </br>
+          <%= f.link_to_add "Add another content block", :content_blocks, :class=>"btn" %>
+        </div>
       </div>
+      <hr/>
+      <%= link_to "Use Content Blocks instead", "#", :id => "show_wysiwyg" %>
+      <%= link_to "Use a WYSIWYG editor instead", "#", :id => "clear_wysiwyg", :style => "display:none;" %>
+
     </div>
-
-    <hr>
-    <%= f.submit "Save the slide", :class => "btn ad_btn" %>
-
 <% end %>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130405043941) do
+ActiveRecord::Schema.define(:version => 20130407050110) do
 
   create_table "authentications", :force => true do |t|
     t.integer  "user_id"
@@ -82,6 +82,7 @@ ActiveRecord::Schema.define(:version => 20130405043941) do
     t.string   "titlepic_content_type"
     t.integer  "titlepic_file_size"
     t.datetime "titlepic_updated_at"
+    t.text     "main"
   end
 
   create_table "users", :force => true do |t|
