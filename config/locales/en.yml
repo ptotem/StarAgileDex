@@ -105,6 +105,14 @@ en:
         safari: "false"
         opera: "false"
         working: "true"
+    ppt_plugin:
+      bookblock:
+            ie: "6+"
+            firefox: "true"
+            chrome: "false"
+            safari: "false"
+            opera: "false"
+            working: "true"
     advanced_plugin:
   themes:
     blackboard: "Blackboard"

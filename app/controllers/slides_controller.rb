@@ -12,7 +12,10 @@ class SlidesController < ApplicationController
     # Else it is a content block slide
     # -------------------------
     @widget_list=Array.new
-    if @slide.content_blocks.blank? and @slide.main.blank?
+    if @slide.ppt.exists?
+      s=:ppt_plugin
+      @plugin_category="Powerpoint_Plugins"
+    elsif @slide.content_blocks.blank? and @slide.main.blank?
       s=:title_plugin
       @plugin_category="Title_Slide_Plugins"
     elsif @slide.content_blocks.blank?

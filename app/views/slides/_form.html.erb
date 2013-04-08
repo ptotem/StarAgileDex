@@ -40,13 +40,17 @@
       <div id="import_ppt_block" style="display: none">
         <h4>Upload a PPT</h4>
         <%= f.file_field :ppt, :placeholder => "Add Image" %>
+        <br>
+        <br>
+        <p style="width:250px;margin: 0 auto;">Okay...this takes anywhere between 1 to 5 minutes depending upon how large the PPT is. So maybe
+          you want to start this off and go grab a cup of coffee ?  </p>
       </div>
       <hr/>
-      <%= link_to "Use a WYSIWYG editor instead", "#", :id => "clear_wysiwyg", :style => "display:none;" %>
+      <%= link_to "Use an HTML editor instead", "#", :id => "clear_wysiwyg", :style => "display:none;" %>
       <br class="extra">
       <%= link_to "Use Content Blocks instead", "#", :id => "show_wysiwyg" %>
       <br>
-      <%= link_to "Upload a PPT instead", "#", :id => "upload_ppt" %>
+      <%= link_to "Upload a .ppt(x) file instead", "#", :id => "upload_ppt" %>
 
     </div>
 <% end %>

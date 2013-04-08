@@ -5,11 +5,15 @@ class ContentBlock < ActiveRecord::Base
   belongs_to :slide
   has_attached_file :image, :path=> :get_path
 
+  # These constants are used for specifying quality of PPT import
+  QUALITY = 30
+  DENSITY = '80x80'
+
   def get_path
     if self.slide.presentation.user.role=="guest"
-      "#{Rails.root}/public/guestdata/"+self.slide.presentation.user_id.to_s+"/"+self.slide.presentation.name+"/"+self.slide.id.to_s+"/images/content_blocks/:filename"
+      "#{Rails.root}/public/guestdata/"+self.slide.presentation.user_id.to_s+"/"+self.slide.presentation.id.to_s+"/"+self.slide.id.to_s+"/content_blocks/:filename"
     else
-      "#{Rails.root}/public/userdata/"+self.slide.presentation.user.name.downcase.gsub(" ", "_")+"/"+self.slide.presentation.name+"/"+self.slide.id.to_s+"/images/content_blocks/:filename"
+      "#{Rails.root}/public/userdata/"+self.slide.presentation.user.name.downcase.gsub(" ", "_")+"/"+self.slide.presentation.name.downcase.gsub(" ", "_")+"/"+self.slide.id.to_s+"/content_blocks/:filename"
     end
   end
 

@@ -142,7 +142,9 @@ body {
     bottom: -6px;
 }
 
-
+:focus {
+    outline: 0;
+}
 
 
 
