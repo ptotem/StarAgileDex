@@ -42,7 +42,7 @@ h1 {
     line-height: 48px;
 }
 
-/*#text_wrap_back {*/
+/*#subtitle_back {*/
     /*position: absolute;*/
     /*left: 56px;*/
     /*bottom: 50px;*/
@@ -51,7 +51,7 @@ h1 {
     /*opacity: 0.7;*/
     /*height: 220px;*/
 /*}*/
-/*#text_wrap {*/
+/*#subtitle {*/
     /*position: absolute;*/
     /*left: 56px;*/
     /*bottom: 50px;*/
@@ -64,7 +64,7 @@ h1 {
     /*display: none;*/
 /*}*/
 
-#text_wrap h1.header {
+#subtitle h1.header {
     padding: 5px;
     padding-top: 10px;
     padding-bottom: 10px;
@@ -112,13 +112,17 @@ h1 {
 }
 
 #title_wrap {
-    margin:0 auto;
     display: none;
-    text-align: center;
+    position: absolute;
+    margin-top: 18px;
+    background-color:rgba(0,0,0,0.5);
+    width: 69%;
+    margin-left: 240px;
+
 }
 
 
-#text_wrap {
+#subtitle {
     height: auto;
     width: auto;
     text-align: center;
@@ -126,6 +130,19 @@ h1 {
     display: none;
     margin:0 auto;
 }
+
+
+#subtitle_back {
+    max-height: 200px;
+    max-width: 200px;
+    text-align: center;
+    font-size: 1.2em;
+    display: none;
+    margin-top: 18px;
+    margin-left: 32px;
+
+}
+
 /*#title_wrap {*/
     /*position: absolute;*/
     /*left: 60px;*/

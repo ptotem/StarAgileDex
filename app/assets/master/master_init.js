@@ -5,9 +5,15 @@ var images = gon.image_list;
 $(function () {
     $('.ad-menu-item').slideToggle();
     $('#title_wrap').html('<h1>' + gon.title + '</h1>');
-    $('#text_wrap').html(gon.subtitle);
+    if (!gon.no_subtitle) {
+        $('#subtitle').html(gon.subtitle);
+        $('#subtitle').show();
+    } else{
+        $('#subtitle_back').html('<img src='+gon.titlepic+'>');
+        $('#subtitle_back').show();
+    }
     $('#title_wrap').show();
-    $('#text_wrap').show();
+
     $('.text_buttons').show();
     $(".navbar").hide();
     $("#wrapper").show();
@@ -20,7 +26,7 @@ $(function () {
         var selected_theme = $('#ts').val();
         $('#wrapper').removeClass($('#wrapper').attr('class')).addClass(selected_theme);
         $("#current_theme_name").html("Current Theme " + ': ' + $('#ts option:selected').text());
-        gon.background=selected_theme;
+        gon.background = selected_theme;
     });
 
     $('#theme_Modal').bind('show', function () {
@@ -41,7 +47,7 @@ $(function () {
             $(elm).css("font-size", fontsize);
             $(elm).find('h1').css("font-size", h1fontsize);
         });
-        gon.font=$('#fs option:selected').text();
+        gon.font = $('#fs option:selected').text();
     });
 });
 
@@ -50,8 +56,8 @@ function load_widget(index) {
         index = gon.widget_list.length - 1;
     if (index == gon.widget_list.length)
         index = 0;
-    gon.plugin=index;
-    window.location='/slides/'+gon.slide_id+'/'+index+'/'+gon.font+'/'+gon.background;
+    gon.plugin = index;
+    window.location = '/slides/' + gon.slide_id + '/' + index + '/' + gon.font + '/' + gon.background;
 }
 
 

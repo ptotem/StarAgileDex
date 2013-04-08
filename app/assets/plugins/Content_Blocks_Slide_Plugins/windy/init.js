@@ -4,7 +4,7 @@ function init_widget() {
             $('#wi-el').append('<li><img src="' + elm + '" title="' + captions[index] + '"/><p>'+captions[index]+'</p></li>');
         } else {
 
-            $('#wi-el').append('<li><p style="background-color: rgba(0,0,0,0.5);height: 80%;font-size: 25px;padding: 25px;">'+captions[index]+'</p></li>');
+            $('#wi-el').append('<li><p style="background-color: rgba(0,0,0,0.5);height: 80%;font-size: 1em;padding: 25px;">'+captions[index]+'</p></li>');
         }
 
 

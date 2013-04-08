@@ -6,23 +6,21 @@ h1 {
     line-height: 48px;
 }
 
-#text_wrap_back {
+#subtitle_back {
     position: absolute;
     left: 40px;
     top: 120px;
-    width: 900px;
-    background: #ffffff;
-    opacity: 0.7;
-    height: 450px;
+    width: 400px;
+    height: 350px;
     display: none;
     border-radius: 10px;
 }
-#text_wrap {
+#subtitle {
     position: absolute;
     left: 60px;
     top: 100px;
     height: 360px;
-    width: 790px;
+    width: 400px;
     text-align: left;
     padding: 30px;
     padding-top: 40px;
@@ -41,7 +39,7 @@ li{
     padding-top: 40px;
 }
 
-#text_wrap h1.header {
+#subtitle h1.header {
     padding: 5px;
     padding-top: 10px;
     padding-bottom: 10px;
@@ -59,4 +57,14 @@ li{
     left: 40px;
     top: 0px;
     display: none;
+}
+
+#widget_wrap{
+    position: absolute;
+    width: 350px;
+    right:  80px;
+    top: 120px;
+    color: white;
+    padding: 20px;
+    background-color: rgba(0,0,0,0.7);
 }

@@ -36,27 +36,24 @@
 
   <!-- Standard Body Structure -->
   <div id="title_wrap" class="text_block">
-    <%= yield :title_wrap %>
   </div>
-  <div id="text_wrap_back">
-    <%= yield :title_wrap_back %>
+  <div id="subtitle_back">
   </div>
-  <div id="text_wrap" class="text_block">
-    <%= yield :text_wrap %>
+  <div id="subtitle" class="text_block">
   </div>
-  <!--TODO: Add the functionality where a user can use an image instead of a subtitle-->
-  <div id="subtitle_image">
-    <%= yield :text_wrap %>
+  <div id="titlepic">
   </div>
+
   <div id="main_block" class="text_block">
-    <%= yield :main %>
   </div>
+
   <div id="widget_wrap">
     <%= yield :widget_wrap %>
   </div>
+
   <div id="caption_wrap_back">
-    <%= yield :caption_wrap_back %>
   </div>
+
   <div id="caption_wrap" class="text_block"><h1>
     <%= yield :caption_wrap %>
   </h1></div>
@@ -162,8 +159,9 @@
 <script type="text/javascript" src="/assets/master_init.js"></script>
 <%= yield :scripts %>
 
-<!--TODO: What is this? Do not delete it till you have explained to me why this is here-->
 <script type="text/javascript">
+
+  <!--function to save slide with a single widget font and background image-->
     function save_slide() {
         var data = {id:[], plugin:[], font:[], background:[]};
         data["id"].push(gon.slide_id);

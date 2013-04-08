@@ -1,5 +1,6 @@
 class Slide < ActiveRecord::Base
   attr_accessible :presentation_id, :sequence, :subtitle, :title, :layout, :font, :background, :content_blocks_attributes, :titlepic, :presentation, :main
+  #validates :title, :presence => true
   belongs_to :presentation
   has_many :content_blocks, :dependent => :destroy
   has_attached_file :titlepic, :path => :get_path
@@ -8,13 +9,12 @@ class Slide < ActiveRecord::Base
   before_create :set_sequence
   after_create :build_directory
 
-  # TODO: Test the paperclip attachment
-  # TODO: Test the directory creation paths
+
   def get_path
-    if self.user.role=="guest"
-      "#{Rails.root}/public/guestdata/"+self.presentation.user_id+"/"+self.presentation.name+"/"+id+"/images/:filename"
+    if self.presentation.user.role=="guest"
+      "#{Rails.root}/public/guestdata/"+self.presentation.user_id.to_s+"/"+self.presentation.name+"/"+id.to_s+"/images/:filename"
     else
-      "#{Rails.root}/public/userdata/"+self.presentation.user.name.downcase.gsub(" ", "_")+"/"+self.presentation.name+"/"+id+"/images/:filename"
+      "#{Rails.root}/public/userdata/"+self.presentation.user.name.downcase.gsub(" ", "_")+"/"+self.presentation.name+"/"+id.to_s+"/images/:filename"
     end
   end
 

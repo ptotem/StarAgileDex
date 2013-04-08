@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/sferik/rails_admin.git
-  revision: 8533e5abccf819e49b3e50a1dccd945ef3768175
+  revision: 97246a14a5fde5d6828fe7e746e9dbd0e156d06b
   specs:
     rails_admin (0.4.6)
       bootstrap-sass (~> 2.2)
@@ -56,7 +56,7 @@ GEM
       sass (~> 3.2)
     builder (3.0.4)
     cancan (1.6.9)
-    ckeditor (4.0.3)
+    ckeditor (4.0.4)
       mime-types
       orm_adapter
     climate_control (0.0.3)
@@ -89,7 +89,7 @@ GEM
       actionpack (>= 2.3.0)
       json
     gritter (1.0.3)
-    haml (4.0.1)
+    haml (4.0.2)
       tilt
     hashie (1.2.0)
     hike (1.2.1)
@@ -116,7 +116,7 @@ GEM
     mime-types (1.22)
     multi_json (1.7.2)
     multipart-post (1.2.0)
-    nested_form (0.3.1)
+    nested_form (0.3.2)
     nokogiri (1.5.9)
     oauth (0.4.7)
     oauth2 (0.8.1)
@@ -139,7 +139,7 @@ GEM
     omniauth-oauth2 (1.1.1)
       oauth2 (~> 0.8.0)
       omniauth (~> 1.0)
-    omniauth-twitter (0.0.15)
+    omniauth-twitter (0.0.16)
       multi_json (~> 1.3)
       omniauth-oauth (~> 1.0)
     orm_adapter (0.4.0)
@@ -208,7 +208,7 @@ GEM
       polyglot
       polyglot (>= 0.3.1)
     tzinfo (0.3.37)
-    uglifier (1.3.0)
+    uglifier (2.0.1)
       execjs (>= 0.3.0)
       multi_json (~> 1.0, >= 1.0.2)
     warden (1.2.1)

@@ -5,6 +5,7 @@
 	position: relative;
 	background: #fff;
 	z-index: 100;
+    margin-top: 50px;
 }
 
 .bb-page {
@@ -117,29 +118,52 @@
 }
 
 #widget_wrap {
-    display: none;
     height: 300px;
-    margin: 60px auto 0 260px;
+    margin: 0 auto;
+    margin-top: -250px;
+    margin-left: 43px;
+    display: none;
 }
+
 
 #title_wrap {
-    margin:0 auto;
     display: none;
+    position: absolute;
+    margin-top: 18px;
+    background-color:rgba(0,0,0,0.5);
+    width: 90%;
+    margin-left: 43px;
     text-align: center;
+
 }
 
 
-#text_wrap {
+
+
+#subtitle {
     height: auto;
     width: auto;
     text-align: center;
     font-size: 18px;
     display: none;
     margin:0 auto;
+    float: right;
+}
+
+
+#subtitle_back {
+    max-height: 200px;
+    max-width: 200px;
+    text-align: center;
+    font-size: 1.2em;
+    display: none;
+    margin-top: 200px;
+    margin-left: 560px;
+
 }
 
 #buttonss{
-    margin:0 auto;
+    /*margin:0 auto;*/
     height:20px;
     width:330px;
     margin-left:30px;

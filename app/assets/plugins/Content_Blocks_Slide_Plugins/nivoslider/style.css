@@ -16,20 +16,20 @@ small, strike, strong, sub, sup, tt, var,
 dl, dt, dd, ol, ul, li,
 fieldset, form, label, legend,
 table, caption, tbody, tfoot, thead, tr, th, td {
-	margin:0;
-	padding:0;
-	border:0;
-	outline:0;
-	font-weight:inherit;
-	font-style:inherit;
-	font-size:100%;
-	font-family:inherit;
-	vertical-align:baseline;
+	/*margin:0;*/
+	/*padding:0;*/
+	/*border:0;*/
+	/*outline:0;*/
+	/*font-weight:inherit;*/
+	/*font-style:inherit;*/
+	/*font-size:100%;*/
+	/*font-family:inherit;*/
+	/*vertical-align:baseline;*/
 }
 body {
-	line-height:1;
-	color:black;
-	background:white;
+	/*line-height:1;*/
+	/*color:black;*/
+	/*background:white;*/
 }
 table {
 	border-collapse:separate;
@@ -97,25 +97,47 @@ a:hover, a:active {
 
 #widget_wrap {
     height: 300px;
-    margin-top: 60px;
+    margin-top: -80px;
     display: none;
     margin-left:65px;
 }
 
+/*#widget_wrap {*/
+    /*height: 300px;*/
+    /*margin: 0 auto;*/
+    /*margin-top: 60px;*/
+    /*display: none;*/
+/*}*/
+
 #title_wrap {
-    margin:0 auto;
     display: none;
+    position: absolute;
+    margin-top: 18px;
+    background-color:rgba(0,0,0,0.5);
+    width: 69%;
+    margin-left: 240px;
     text-align: center;
-    background-color: rgba(0,0,0,0.5);
+
 }
 
 
-#text_wrap {
+#subtitle {
     height: auto;
     width: auto;
     text-align: center;
     font-size: 18px;
     display: none;
     margin:0 auto;
+}
+
+
+#subtitle_back {
+    max-height: 200px;
+    max-width: 200px;
+    text-align: center;
+    font-size: 1.2em;
+    display: none;
+    margin-top: 18px;
+    margin-left: 32px;
 
 }

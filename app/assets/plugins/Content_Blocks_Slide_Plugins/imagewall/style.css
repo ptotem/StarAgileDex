@@ -11,11 +11,11 @@ a{
 }
 header h1{
 	margin:10px 0 0 20px;
-	font-size:100px;
+	font-size:2.5em;
 	text-transform:uppercase;
 	text-shadow:0px 0px 1px #fff;
 	color:#444;
-	font-family: 'Wire One', arial, serif; 
+	font-family: 'Wire One', arial, serif;
 }
 header span{
 	font-style:italic;
@@ -171,25 +171,42 @@ ul.iw_thumbs li:nth-child(7n) img{
 .footer a.left{
 	float:left;
 }
-
 #widget_wrap {
-    display: none;
     height: 300px;
-    margin: 60px auto 0 260px;
+    margin: 0 auto;
+    margin-top: 60px;
+    display: none;
 }
 
 #title_wrap {
-    margin:0 auto;
     display: none;
+    position: absolute;
+    margin-top: 18px;
+    background-color:rgba(0,0,0,0.5);
+    width: 69%;
+    margin-left: 240px;
     text-align: center;
+
 }
 
 
-#text_wrap {
+#subtitle {
     height: auto;
     width: auto;
     text-align: center;
     font-size: 18px;
     display: none;
     margin:0 auto;
+}
+
+
+#subtitle_back {
+    max-height: 200px;
+    max-width: 200px;
+    text-align: center;
+    font-size: 1.2em;
+    display: none;
+    margin-top: 18px;
+    margin-left: 32px;
+
 }

@@ -161,28 +161,53 @@ px;-webkit-border-radius:3px;border-radius:3px; margin:0 10px 10px 0; }
 #box-donate { float: left; width: 100%; text-align: center; margin: 40px 0 0 0; }
 #widget_wrap {
     height: 300px;
-    margin-top: 50px;
+    margin-top: -50px;
     display: none;
-    margin-left:65px;
+    margin-left:80px;
 }
+
+/*#widget_wrap {*/
+    /*height: 300px;*/
+    /*margin: 0 auto;*/
+    /*margin-top: 60px;*/
+    /*display: none;*/
+/*}*/
 
 #title_wrap {
-    width: auto;
-    margin:0 auto;
     display: none;
+    position: absolute;
+    margin-top: 18px;
+    background-color:rgba(0,0,0,0.5);
+    width: 69%;
+    margin-left: 240px;
     text-align: center;
+
 }
 
 
-#text_wrap {
+#subtitle {
     height: auto;
     width: auto;
     text-align: center;
     font-size: 18px;
     display: none;
     margin:0 auto;
+}
+
+
+#subtitle_back {
+    max-height: 200px;
+    max-width: 200px;
+    text-align: center;
+    font-size: 1.2em;
+    display: none;
+    margin-top: 18px;
+    margin-left: 32px;
 
 }
+
+
+
 
 .image_main{
     height: 300px;
