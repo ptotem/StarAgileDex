@@ -1,0 +1,33 @@
+
+.roundabout-holder {
+    padding: 0;
+    height: 600px;
+    width: 240px;
+    margin: 0 auto;
+    list-style: none;
+}
+
+.roundabout-moveable-item {
+    height: 240px;
+    width: 240px;
+    cursor: pointer;
+    background: #333;
+    background: -moz-linear-gradient(90deg, #bbb 0%, #fcfcfc 100%);
+    background: -webkit-gradient(linear, left bottom, left top, color-stop(0.0, #bbb), color-stop(1.0, #fcfcfc));
+    border: 1px solid #999;
+    overflow: hidden;
+    text-align: center;
+    line-height: 3em;
+    border-radius: 10px;
+}
+
+.roundabout-moveable-item img {
+    height: 240px;
+    width: 240px;
+    border-radius: 10px;
+
+}
+
+.roundabout-in-focus {
+    cursor: auto;
+}

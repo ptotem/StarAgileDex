@@ -4,7 +4,7 @@ html {
 }
 
 body {
-    background-image: url('console_background.jpg');
+    background-image: url('/assets/console_background.jpg');
     background-repeat: repeat;
     height: 600px;
     width: 960px;
@@ -32,40 +32,90 @@ body {
 
 .ad_btn {
     width: 90%;
-    padding:10px;
+    padding: 10px;
+    text-align: center;
+    font-size: 16px;
 }
+
+/* Right Panel Styles*/
+/* ------------------------------------- */
 
 #right_panel {
-    width: 200px;
+    width: 480px;
     float: right;
-    margin-right: 40px;
+    margin-right: 30px;
     border-radius: 10px;
     text-align: center;
-    overflow: hidden;
 }
 
-#right_panel img, #right_panel span{
-    margin-left: 20px;
+#logo {
+    text-align: left;
+    margin-left: 40px;
 }
 
-.middle_panel {
+#logo img {
+    width: 150px;
+}
+
+#right_panel h2 {
+    margin: 0 0 20px;
+    padding: 0;
+}
+
+#waterwheel {
+    margin-top: -30px;
+    float: right;
+    display: none;
+}
+
+#writeup {
+    width: 160px;
+    margin: 0 0 5px 5px;
+    color: white;
+    padding: 20px;
+    font-size: 20px;
+    line-height: 1.35em;
+    height: 288px;
+    border-radius: 10px;
+}
+
+#active_presentation {
+    height: 292px;
+    width: 160px;
+    margin: 0 0 5px 5px;
+    border-radius: 5px;
+    padding: 20px;
+    display: none;
+}
+
+#active_slide {
+    height: 292px;
+    width: 160px;
+    margin: 0 0 5px 5px;
+    border-radius: 5px;
+    padding: 20px;
+    display: none;
+}
+
+/* -------------------------------- */
+
+.main_panel {
     width: 400px;
     float: right;
-    margin-right: 20px;
     height: 545px;
-    background: white;
+    background: #f5f5f5;
     border-radius: 10px;
     display: none;
     text-align: center;
     overflow: hidden;
 }
 
-.middle_panel #new_deck_btn {
-    width: 200px;
-    text-align: center;
+#deck_list {
+    float:left;
+    margin-left: 20px;
 }
 
-.middle_panel #new_slide_btn {
+.main_panel #new_deck_btn, .main_panel #new_slide_btn {
     width: 200px;
     text-align: center;
 }
@@ -94,76 +144,39 @@ body {
     cursor: pointer;
 }
 
-.show_this_slide{
+.show_this_slide {
+    width: 100%;
+    text-align: center;
+}
+
+/* Presentations DataTable*/
+/*------------------------------------*/
+
+#presentations_table_wrapper, #presentations_table, #presentations_slides_table, .datatables_scroll {
+    width: 215px;
+    overflow: auto;
+    margin: 0 auto;
+    padding-right: 5px;
+}
+
+.presentation_filter, .slide_filter {
     width: 200px;
+    overflow: auto;
+    margin: 0 auto;
     text-align: center;
 }
 
-#left_panel {
-    width: 640px;
-    float: left;
-    margin-left: 40px;
-    height: 545px;
-    background: white;
-    border-radius: 10px;
+.datatable_button, .show_this_presentation {
+    width: 100%;
     text-align: center;
 }
 
-.presentation_filter {
-    width: 185px;
-}
 
-.slide_filter {
-    width: 185px;
-}
-
-#presentations_table tr td:first-child {
-    text-align: right;
-    padding: 5px 5px 5px 5px;
-}
-
-#presentations_table tr td:last-child {
-    text-align: center;
-    padding: 5px 5px 5px 5px;
-}
-
-#presentations_table tr td {
-    padding: 5px 5px 5px 5px;
-}
-
-#presentations_table_filter {
-    text-align: left;
-    margin-left: 222px;
-}
-
-#presentations_table_filter label {
-    font-size: 12px;
-}
-
-.presentation_contents {
-    text-align: center;
-}
-
-#presentations_table .presentation_tools {
-    padding: 0px 5px 0px 5px;
-}
-
-.presentation_tools img {
-    height: 28px;
-}
+/* ------------------------------------------ */
 
 #left_panel .btn {
     width: 200px;
     text-align: center;
-}
-
-#right_panel img {
-    width: 150px;
-}
-
-#right_panel h2 {
-    margin: 0 0 20px;
-    padding: 0;
 }
 
 #content_block_header {
@@ -187,41 +200,6 @@ body {
     width: 256px;
 }
 
-#writeup {
-    width: 160px;
-    margin: 0 0 5px 5px;
-    color: white;
-    padding: 10px;
-    font-size: 14px;
-    line-height: 1.35em;
-    height: 308px;
-}
-
-#active_presentation {
-    height: 292px;
-    width: 160px;
-    margin: 0 0 5px 5px;
-    border-radius: 5px;
-    padding: 20px;
-    display: none;
-}
-
-#active_slide {
-    height: 292px;
-    width: 160px;
-    margin: 0 0 5px 5px;
-    border-radius: 5px;
-    padding: 20px;
-    display: none;
-}
-
-#active_presentation_name {
-    margin-bottom: 5px;
-    padding: 20px 20px 10px 20px;
-    font-size: 24.5px;
-    font-weight: bold;
-}
-
 .active_presentation_panel {
     margin: 10px;
     min-height: 418px;
@@ -240,30 +218,15 @@ body {
     font-size: 12px;
 }
 
-#new_deck_Modal {
-    margin: 10px 0px 0px -311px;
-    width: 400px;
-    text-align: center;
-}
-
-#new_presentation .modal-footer .btn{
+#new_presentation .modal-footer .btn {
     width: 60px;
     text-align: center;
 }
-#presentations_table_wrapper {
-}
 
-#presentations_table {
-    /*margin: 0 auto;*/
-    width: 33%;
-    margin-left: 215px;
-}
 
-#presentations_slides_table {
-    margin: 0 auto;
-    width: 100%;
-    text-align: center;
-}
+
+/* Navbar */
+/*----------------------------------*/
 
 .navbar {
     margin: -25px 0px 0px -10px;
@@ -310,8 +273,9 @@ body {
     cursor: pointer;
 }
 
+/* -------------------------------------------------------- */
 
-#add_images_and_cap{
+#add_images_and_cap {
     position: relative;
 
 }
@@ -320,7 +284,7 @@ body {
     margin-left: 0px;
 }
 
-hr{
+hr {
     margin: 15px;
 }
 

@@ -2,7 +2,7 @@
 
     <div id="slide_form_panel_header">Enter Slide Content</div>
     <a href="#" class="btn btn-inverse" onclick="transitOut()">Cancel</a>
-    <%= f.submit "Save the slide", :class => "btn btn-primary" %>
+    <%= f.submit "Save the slide", :class => "btn btn-info" %>
 
     <hr>
     <div class="main_form_body" style="height: 390px;overflow-y: auto;">
@@ -45,12 +45,5 @@
         <p style="width:250px;margin: 0 auto;">Okay...this takes anywhere between 1 to 5 minutes depending upon how large the PPT is. So maybe
           you want to start this off and go grab a cup of coffee ?  </p>
       </div>
-      <hr/>
-      <%= link_to "Use an HTML editor instead", "#", :id => "clear_wysiwyg", :style => "display:none;" %>
-      <br class="extra">
-      <%= link_to "Use Content Blocks instead", "#", :id => "show_wysiwyg" %>
-      <br>
-      <%= link_to "Upload a .ppt(x) file instead", "#", :id => "upload_ppt" %>
-
     </div>
 <% end %>

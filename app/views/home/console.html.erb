@@ -5,7 +5,8 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="/assets/bootstrap.min.css">
-  <link rel="stylesheet" href="/assets/console.css">
+  <link rel="stylesheet" href="/assets/console/roundabout-shapes2.css">
+  <link rel="stylesheet" href="/assets/console/console.css">
   <script type="text/javascript" src="/assets/jquery-1.8.3.min.js"></script>
   <%= javascript_include_tag :application %>
   <%= csrf_meta_tags %>
@@ -19,72 +20,64 @@
   The Right Panel
   ---------------------------------------------------------------->
   <div id="right_panel">
-    <img src="/assets/adlogo.png"/>
 
-    <h2><span style="color: #fff;">agileDex</span></h2>
+    <ul id="waterwheel">
+      <li><%= image_tag "Ad/export_1.jpg" %></li>
+      <li><%= image_tag "Ad/free_1.jpg" %></li>
+      <li><%= image_tag "Ad/intuitive_1.jpg" %></li>
+      <li><%= image_tag "Ad/cool_1.jpg" %></li>
+    </ul>
 
-    <div id="writeup">
-      Click the 'Create a Deck' button to start. </br></br>
-      Then create a slide for your deck by clicking on 'Create a Slide'.</br></br>
+    <div id="logo">
+      <img src="/assets/adlogo.png"/>
+
+      <h2><span style="color: #fff;">agileDex</span></h2>
 
     </div>
 
+    <div id="writeup">
+      Welcome to agileDex
+      <!--TODO: Put in a better phrase here-->
+      <br/>
+      <br/>
+        <!--TODO: Sign in and transfer functionality to be built in-->
+      <a href="#" class="btn ad_btn">Sign In</a>
+      <a href="#" class="btn ad_btn">Instruction Video</a>
+      <a href="/users/sign_out" class="btn ad_btn">Logout</a>
+
+    </div>
+
+
     <div id="active_presentation">
-      <a href="#" class="btn ad_btn">View the Deck
-        <i class="icon-eye-open pull-right"></i></a>
-      <a href="#" class="btn ad_btn">Export as HTML <i class="icon-globe icon-white pull-right"></i></a>
-      <a href="#" class="btn ad_btn">Export as SCORM
-        <i class="icon-briefcase pull-right"></i></a>
-      <a href="#" id="del_deck_btn" class="btn ad_btn">Delete the Deck
-        <i class="icon-remove pull-right"></i></a>
-      <a href="#" class="btn ad_btn btn-inverse" onclick="transitOut()">Close
-        the Deck <i class="icon-asterisk icon-white pull-right"></i></a>
+      <a href="#" class="btn ad_btn">View the Deck</a>
+      <a href="#" class="btn ad_btn">Export as HTML</a>
+      <a href="#" class="btn ad_btn">Export as SCORM</a>
+      <a href="#" id="del_deck_btn" class="btn ad_btn">Delete the Deck</a>
+      <a href="#" class="btn ad_btn btn-inverse" onclick="transitOut()">Close the Deck</a>
     </div>
 
     <div id="active_slide" style="color:white">
-      Use the WYSIWYG editor to create your basic slides.
+      <h4>You can also edit the slide in:</h4>
       <br>
-      <br>
-      But if you want to build your slides with some really cool (but not too jazzy) plug-ins, try the content blocks method instead.
+      <%= link_to "HTML editor Mode", "#", :id => "clear_wysiwyg", :style => "display:none;", :class => "btn ad_btn" %>
+      <%= link_to "Blocks Mode", "#", :id => "show_wysiwyg", :class => "btn ad_btn" %>
+      <%= link_to "PPT Upload Mode", "#", :id => "upload_ppt", :class => "btn ad_btn" %>
     </div>
   </div>
 
   <!-----------------------------------------------------------
-  The Presentation Slides Index Panel
+  The Deck List Panel
   ---------------------------------------------------------------->
 
-  <div id="presentation_slides_index" class="middle_panel">
-  </div>
-
-  <!-----------------------------------------------------------
-  The Slide Form Panel
-  ---------------------------------------------------------------->
-
-  <!--TODO: All font-sizes and weights must be captured through h1-5, and all normal text should be the same size.
-TODO: Also assign a fixed font-face to all of the console
-    -->
-
-  <div id="slide_form_panel" class="middle_panel">
-
-  </div>
-
-  <!-----------------------------------------------------------
-  The Left Panel
-  ---------------------------------------------------------------->
-
-  <div id="left_panel">
-    <p>
-
+  <div id="deck_list" class="main_panel" style="display: block;">
     <h3>Decks</h3>
     <a href="#new_deck_Modal" data-toggle="modal" class="btn btn-info" id="new_deck_btn" title="Click here to create a Deck">Create
       a Deck <i class="icon-plus icon-white pull-right"></i></a>
-    </p>
     <hr>
 
     <table id="presentations_table">
       <thead>
       <tr>
-        <th></th>
         <th class="presentation_tools"></th>
       </tr>
       </thead>
@@ -95,16 +88,42 @@ TODO: Also assign a fixed font-face to all of the console
 
       <% @presentations.each_with_index do |presentation| %>
           <tr class="presentation_row">
-            <td style="width: 50%;" class="presentation_contents">
-              <a href="#?presentation<%= presentation.id %>" onclick="transitInDeck('<%= presentation.name %>')">
-                <button class="btn btn-inverse show_this_presentation" type="button"><%= hidden_field_tag presentation.id %><%= presentation.name %></button>
+            <td class="presentation_contents">
+              <a href="#?presentation<%= presentation.id %>" onclick="transitInDeck('<%= presentation.name %>')" class="datatable_button">
+                <button class="btn btn-info show_this_presentation" type="button"><%= hidden_field_tag presentation.id %><%= presentation.name.titlecase %></button>
               </a>
             </td>
-            <td style="width: 50%;"></td>
           </tr>
       <% end %>
       </tbody>
     </table>
+  </div>
+
+  <!-----------------------------------------------------------
+  The Presentation Slides Index Panel
+  ---------------------------------------------------------------->
+
+  <div id="presentation_slides_index" class="main_panel">
+  </div>
+
+  <!-----------------------------------------------------------
+  The Slide Form Panel
+  ---------------------------------------------------------------->
+
+  <!--TODO: All font-sizes and weights must be captured through h1-5, and all normal text should be the same size.
+TODO: Also assign a fixed font-face to all of the console
+    -->
+
+  <div id="slide_form_panel" class="main_panel">
+
+  </div>
+
+  <!-----------------------------------------------------------
+  The Left Panel
+  ---------------------------------------------------------------->
+
+  <div id="left_panel">
+
   </div>
 
   <div id="new_deck_Modal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="newModalLabel" aria-hidden="true">
@@ -113,12 +132,12 @@ TODO: Also assign a fixed font-face to all of the console
     </div>
     <form accept-charset="UTF-8" class="form-horizontal" id="new_presentation" style="margin:0">
       <div class="modal-body">
-              <input id="presentation_name" name="presentation[name]" placeholder="Type Presentation Name Here ..." size="30" maxlength="25" type="text"/>
-              <input id="presentation_user_id" name="presentation[user_id]" type="hidden" value="<%= current_user.id %>"/>
+        <input id="presentation_name" name="presentation[name]" placeholder="Type Presentation Name Here ..." size="30" maxlength="25" type="text"/>
+        <input id="presentation_user_id" name="presentation[user_id]" type="hidden" value="<%= current_user.id %>"/>
       </div>
       <div class="modal-footer">
-          <button class="btn btn-danger pull-left" data-dismiss="modal" aria-hidden="true">Close</button>
-          <input class="btn btn-primary pull-right" id="new_deck_Modal_create_btn" name="commit" value="Create"/>
+        <button class="btn btn-danger pull-left" data-dismiss="modal" aria-hidden="true">Close</button>
+        <input class="btn btn-primary pull-right" id="new_deck_Modal_create_btn" name="commit" value="Create"/>
       </div>
     </form>
   </div>
@@ -147,8 +166,6 @@ TODO: Also assign a fixed font-face to all of the console
 
 </div>
 
-</body>
-
 <script type="text/javascript" src="/assets/jquery.easing.js"></script>
 <script type="text/javascript" src="/assets/bootstrap.min.js"></script>
 
@@ -159,8 +176,12 @@ TODO: Also assign a fixed font-face to all of the console
 <%= javascript_include_tag "jquery.dataTables.min" %>
 <%= javascript_include_tag "jquery.powertip" %>
 <%= javascript_include_tag "jquery.nicescroll.min" %>
+<%= javascript_include_tag "jquery.easing" %>
+<%= javascript_include_tag "console/jquery.roundabout.min" %>
+<%= javascript_include_tag "console/jquery.roundabout-shapes.min" %>
 <%= javascript_include_tag "console/console_behavior" %>
 <%= javascript_include_tag "jquery_nested_form" %>
 
+</body>
 </html>
 

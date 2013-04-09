@@ -20,7 +20,7 @@ class HomeController < ApplicationController
     @slides = @presentation.slides
     @returning_data =Array.new
     @slides.each do |i|
-      @returning_data<<"#{i.id}|#{i.title}"
+      @returning_data<<"#{i.id}|#{i.title.titlecase}"
     end
     render :text => @returning_data
     return
