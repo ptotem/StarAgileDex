@@ -112,6 +112,13 @@ en:
             safari: "false"
             opera: "false"
             working: "true"
+      mascotbook:
+            ie: "6+"
+            firefox: "true"
+            chrome: "false"
+            safari: "false"
+            opera: "false"
+            working: "true"
     advanced_plugin:
   themes:
     blackboard: "Blackboard"

@@ -15,10 +15,11 @@ AgileDex::Application.routes.draw do
   match '/console', :to=>"home#console", :as=>"console"
   match '/home', :to=>"home#index", :as=>"home"
 
-  # Slide Surfer Route
+  # Slide Surfer Routes
   match '/slides/:id/:plugin/:font/:background', :to=>"slides#builder", :as=>"builder"
   match '/save_slide', :to=>"slides#save_slide", :as=>"save_slide"
   match '/export/:id',:to=>'presentations#export',:as=>"export"
+
   # Ajax routes
   match '/presentations/new', :to=>"home#create_new_presentation", :as=>"new_presentation"
   match '/delete_presentation', :to=>"home#delete_presentation", :as=>"delete_presentation"

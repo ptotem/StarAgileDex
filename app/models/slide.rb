@@ -5,12 +5,12 @@ class Slide < ActiveRecord::Base
   has_many :content_blocks, :dependent => :destroy
   accepts_nested_attributes_for :content_blocks, :reject_if => proc { |attrs| reject = %w(caption image).all? { |a| attrs[a].blank? } }, :allow_destroy => true
 
-  has_attached_file :titlepic, :path => :get_path
+  has_attached_file :titlepic, :path => :get_path, :url=>:get_url
 
   # This is the code for importing of a PPT
   # ------------------------------------------------------------------------------------------
 
-  # Uses two post processors : docsplit_pdf for PPT to PDF (from the docsplit-paperclip-processor gem) and pdf_imager (in lib)
+  # Uses two post processors : docsplit_pdf for PPT to PDF (from the docsplit-paperclip-processor gem) and pdf_imager for PDF to Images (in lib)
   has_attached_file :ppt, :path => :get_path,
                     :styles => {
                         :pdf => {
@@ -66,6 +66,14 @@ class Slide < ActiveRecord::Base
       "#{Rails.root}/public/guestdata/"+self.presentation.user_id.to_s+"/"+self.presentation.id.to_s+"/images/:filename"
     else
       "#{Rails.root}/public/userdata/"+self.presentation.user.name.downcase.gsub(" ", "_")+"/"+self.presentation.name.downcase.gsub(" ", "_")+"/images/:filename"
+    end
+  end
+
+  def get_url
+    if self.presentation.user.role=="guest"
+      "/guestdata/"+self.presentation.user_id.to_s+"/"+self.presentation.id.to_s+"/images/:filename"
+    else
+      "/userdata/"+self.presentation.user.name.downcase.gsub(" ", "_")+"/"+self.presentation.name.downcase.gsub(" ", "_")+"/images/:filename"
     end
   end
 
