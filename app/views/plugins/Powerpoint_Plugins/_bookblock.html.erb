@@ -1,0 +1,29 @@
+<%= content_for :scripts do %>
+    <script type="text/javascript" src="/assets/<%= @plugin %>/modernizr.custom.79639.js"></script>
+    <script type="text/javascript" src="/assets/<%= @plugin %>/jquerypp.custom.js"></script>
+    <script type="text/javascript" src="/assets/<%= @plugin %>/jquery.bookblock.js"></script>
+    <script type="text/javascript" src="/assets/<%= @plugin %>/init.js"></script>
+
+<% end %>
+<%= content_for :styles do %>
+    <link rel="stylesheet" type="text/css" href="/assets/<%= @plugin %>/style.css"/>
+    <link rel="stylesheet" type="text/css" href="/assets/<%= @plugin %>/custom.css"/>
+    <noscript>
+      <link rel="stylesheet" type="text/css" href="assets/BookBlock/noJS.css"/>
+    </noscript>
+<% end %>
+
+
+<%= content_for :widget_wrap do %>
+    <div id="bb-bookblock" class="bb-bookblock">
+
+    </div>
+    <div id="buttonss">
+      <nav id="buttons">
+        <a class='ggg' id="bb-nav-prev" href="#">Previous</a>
+        <a class='ggg' id="bb-nav-next" href="#">Next</a>
+      </nav>
+    </div>
+<% end %>
+
+

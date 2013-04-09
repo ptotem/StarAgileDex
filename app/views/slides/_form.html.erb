@@ -15,7 +15,7 @@
       <%= link_to "Use an image instead of a subtitle", "#", :id => "show_titlepic" %>
       <%= link_to "Use a subtitle instead of an image", "#", :id => "clear_titlepic", :style => "display:none;" %>
       <br>
-      <hr>
+      <br>
       <div id="text_block_section" style="padding: 0px 30px 0px 50px;">
         <%= f.cktext_area :main, :id => "subtitle_editor", :ckeditor => {:toolbar => "Custom", :width => 300, :height => 100} %>
       </div>
@@ -37,9 +37,20 @@
           <%= f.link_to_add "Add another content block", :content_blocks, :class=>"btn" %>
         </div>
       </div>
+      <div id="import_ppt_block" style="display: none">
+        <h4>Upload a PPT</h4>
+        <%= f.file_field :ppt, :placeholder => "Add Image" %>
+        <br>
+        <br>
+        <p style="width:250px;margin: 0 auto;">Okay...this takes anywhere between 1 to 5 minutes depending upon how large the PPT is. So maybe
+          you want to start this off and go grab a cup of coffee ?  </p>
+      </div>
       <hr/>
+      <%= link_to "Use an HTML editor instead", "#", :id => "clear_wysiwyg", :style => "display:none;" %>
+      <br class="extra">
       <%= link_to "Use Content Blocks instead", "#", :id => "show_wysiwyg" %>
-      <%= link_to "Use a WYSIWYG editor instead", "#", :id => "clear_wysiwyg", :style => "display:none;" %>
+      <br>
+      <%= link_to "Upload a .ppt(x) file instead", "#", :id => "upload_ppt" %>
 
     </div>
 <% end %>

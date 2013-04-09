@@ -42,27 +42,6 @@ h1 {
     line-height: 48px;
 }
 
-/*#subtitle_back {*/
-    /*position: absolute;*/
-    /*left: 56px;*/
-    /*bottom: 50px;*/
-    /*width: 850px;*/
-    /*background: #572320;*/
-    /*opacity: 0.7;*/
-    /*height: 220px;*/
-/*}*/
-/*#subtitle {*/
-    /*position: absolute;*/
-    /*left: 56px;*/
-    /*bottom: 50px;*/
-    /*height: 200px;*/
-    /*width: 790px;*/
-    /*text-align: center;*/
-    /*font-size: 18px;*/
-    /*font-weight: bold;*/
-    /*padding: 30px;*/
-    /*display: none;*/
-/*}*/
 
 #subtitle h1.header {
     padding: 5px;
@@ -106,8 +85,8 @@ h1 {
 
 #widget_wrap {
     height: 300px;
-    margin: 0 auto;
-    margin-top: 60px;
+    /*margin: 0 auto;*/
+    margin-top: 200px;
     display: none;
 }
 
@@ -123,12 +102,14 @@ h1 {
 
 
 #subtitle {
-    height: auto;
-    width: auto;
+    max-height: 200px;
+    max-width: 200px;
     text-align: center;
-    font-size: 18px;
+    font-size: 1.2em;
     display: none;
-    margin:0 auto;
+    margin-top: 18px;
+    margin-left: 32px;
+    position: absolute;
 }
 
 
@@ -140,24 +121,9 @@ h1 {
     display: none;
     margin-top: 18px;
     margin-left: 32px;
+    position: absolute;
 
 }
-
-/*#title_wrap {*/
-    /*position: absolute;*/
-    /*left: 60px;*/
-    /*top: 0px;*/
-    /*display: none;*/
-/*}*/
-
-/*#widget_wrap {*/
-    /*position: absolute;*/
-    /*margin: 0 auto;*/
-    /*top: 0px;*/
-    /*right: 90px;*/
-    /*display: none;*/
-/*}*/
-
 
 
 .jms-slideshow {

@@ -1,4 +1,4 @@
-@import url('reset.css');
+/*@import url('reset.css');*/
 body{
 	background:#f7f7f7 url(../images/pinstripe.gif) repeat top left;
 	color:#000;
@@ -173,8 +173,8 @@ ul.iw_thumbs li:nth-child(7n) img{
 }
 #widget_wrap {
     height: 300px;
-    margin: 0 auto;
-    margin-top: 60px;
+    /*margin: 0 auto;*/
+    margin-top: 200px;
     display: none;
 }
 
@@ -191,12 +191,14 @@ ul.iw_thumbs li:nth-child(7n) img{
 
 
 #subtitle {
-    height: auto;
-    width: auto;
+    max-height: 200px;
+    max-width: 200px;
     text-align: center;
-    font-size: 18px;
+    font-size: 1.2em;
     display: none;
-    margin:0 auto;
+    margin-top: 18px;
+    margin-left: 32px;
+    position: absolute;
 }
 
 
@@ -208,5 +210,6 @@ ul.iw_thumbs li:nth-child(7n) img{
     display: none;
     margin-top: 18px;
     margin-left: 32px;
+    position: absolute;
 
 }

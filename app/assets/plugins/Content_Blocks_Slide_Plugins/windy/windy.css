@@ -38,9 +38,7 @@ ul.wi-container li.wi-move {
 
 #widget_wrap {
     height: 300px;
-    margin: 0 auto;
-    margin-top: -250px;
-    margin-left: -550px;
+    margin: 116px auto 0 -550px;
     display: none;
 }
 
@@ -60,13 +58,14 @@ ul.wi-container li.wi-move {
 
 
 #subtitle {
-    height: auto;
-    width: auto;
+    max-height: 200px;
+    max-width: 200px;
     text-align: center;
-    font-size: 18px;
+    font-size: 1.2em;
     display: none;
-    margin:0 auto;
-    float: right;
+    margin-top: 200px;
+    margin-left: 560px;
+    position: absolute;
 }
 
 
@@ -78,5 +77,286 @@ ul.wi-container li.wi-move {
     display: none;
     margin-top: 200px;
     margin-left: 560px;
+    position: absolute;
 
 }
+
+
+/*start of demo.css*/
+
+a {
+    color: #555;
+    text-decoration: none;
+}
+
+.container {
+    width: 100%;
+    position: relative;
+}
+
+.main {
+    width: 90%;
+    margin: 0 auto;
+    position: relative;
+}
+
+.container > header {
+    margin: 10px;
+    padding: 20px 10px 10px 10px;
+    position: relative;
+    display: block;
+    text-shadow: 1px 1px 1px rgba(0,0,0,0.2);
+    text-align: center;
+}
+
+.container > header h1 {
+    font-size: 36px;
+    line-height: 36px;
+    margin: 0;
+    position: relative;
+    font-weight: 300;
+    color: #666;
+    text-shadow: 1px 1px 1px rgba(255,255,255,0.7);
+}
+
+.container > header h2 {
+    font-size: 14px;
+    font-weight: 300;
+    margin: 0;
+    padding: 15px 0 5px 0;
+    color: #888;
+    font-family: Cambria, Georgia, serif;
+    font-style: italic;
+    text-shadow: 1px 1px 1px rgba(255,255,255,0.9);
+}
+
+/* Header Style */
+
+.codrops-top {
+    line-height: 24px;
+    font-size: 11px;
+    background: #fff;
+    background: rgba(255, 255, 255, 0.5);
+    text-transform: uppercase;
+    z-index: 9999;
+    position: relative;
+    font-family: Cambria, Georgia, serif;
+    box-shadow: 1px 0px 2px rgba(0,0,0,0.2);
+}
+
+/* Clearfix hack by Nicolas Gallagher: http://nicolasgallagher.com/micro-clearfix-hack/ */
+
+.codrops-top:before,
+.codrops-top:after {
+    content: " "; /* 1 */
+    display: table; /* 2 */
+}
+
+.codrops-top:after {
+    clear: both
+}
+
+/**
+ * For IE 6/7 only
+ * Include this rule to trigger hasLayout and contain floats.
+ */
+
+.codrops-top {
+    *zoom: 1
+}
+
+.codrops-top a {
+    padding: 0px 10px;
+    letter-spacing: 1px;
+    color: #333;
+    display: inline-block;
+}
+
+.codrops-top a:hover {
+    background: rgba(255,255,255,0.6)
+}
+
+.codrops-top span.right {
+    float: right
+}
+
+.codrops-top span.right a {
+    float: left;
+    display: block;
+}
+
+
+
+
+
+/* Demo Buttons Style */
+
+.codrops-demos {
+    text-align: center;
+    display: block;
+    line-height: 30px;
+    padding: 5px 0px;
+}
+
+.codrops-demos a {
+    display: inline-block;
+    margin: 0px 4px;
+    padding: 0px 6px;
+    color: #aaa;
+    line-height: 20px;
+    font-size: 13px;
+    text-shadow: 1px 1px 1px #fff;
+    border: 1px solid #fff;
+    background: #ffffff; /* Old browsers */
+    background: -moz-linear-gradient(top, #ffffff 0%, #f6f6f6 47%, #ededed 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(47%,#f6f6f6), color-stop(100%,#ededed)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, #ffffff 0%,#f6f6f6 47%,#ededed 100%);
+    background: -o-linear-gradient(top, #ffffff 0%,#f6f6f6 47%,#ededed 100%);
+    background: -ms-linear-gradient(top, #ffffff 0%,#f6f6f6 47%,#ededed 100%);
+    background: linear-gradient(top, #ffffff 0%,#f6f6f6 47%,#ededed 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#ededed',GradientType=0 ); /* IE6-9 */
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+}
+
+.codrops-demos a:hover {
+    color: #333;
+    background: #fff;
+}
+
+.codrops-demos a:active {
+    background: #fff
+}
+
+.codrops-demos a.current-demo,
+.codrops-demos a.current-demo:hover {
+    background: #f0f0f0;
+    border-color: #d9d9d9;
+    color: #aaa;
+    box-shadow: 0 1px 1px rgba(255,255,255,0.7);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f6f6f6', endColorstr='#f6f6f6',GradientType=0 ); /* IE6-9 */
+}
+
+p.info {
+    font-family: Cambria, Georgia, serif;
+    font-style: italic;
+    color: #666;
+    text-shadow: 0 1px 0 rgba(255,255,255,0.9);
+    padding: 20px;
+    display: block;
+    clear: both;
+    text-align: center;
+    width: 240px;
+    margin: 0 auto;
+}
+
+
+
+/*end of demo css*/
+
+
+
+
+/*start of style1.css*/
+.windy-demo {
+    width: 200px;
+    margin: 40px auto;
+    color: #aaa;
+}
+
+.windy-demo ul.wi-container {
+    border-radius: 5px;
+}
+
+.windy-demo ul.wi-container::before,
+.windy-demo ul.wi-container::after {
+    content: '';
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background: white;
+    left: 0;
+    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+}
+
+.windy-demo ul.wi-container::before {
+    top: 10px;
+    z-index: -2;
+    box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.2);
+}
+
+.windy-demo ul.wi-container::after {
+    top: 7px;
+    z-index: -1;
+}
+
+.windy-demo h4 {
+    color: #666;
+    font-size: 14px;
+    padding: 8px 0 5px;
+    margin: 5px 0;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.windy-demo p {
+    font-size: 12px;
+    font-weight: bold;
+    padding: 0;
+    margin: 0;
+    color: black;
+}
+
+.windy-demo ul.wi-container li {
+    border-radius: 5px;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.windy-demo li img {
+    display: block;
+    margin: 0 auto;
+    max-width: 100%;
+    box-shadow: 0 0 1px 1px rgba(255,255,255,0.6), 0 0 0 4px rgba(0,0,0,0.1);
+}
+
+.windy-demo nav {
+    position: relative;
+    width: 96px;
+    margin: 60px;
+}
+
+.windy-demo nav span {
+    width: 40px;
+    height: 40px;
+    margin: 0 4px;
+    float: left;
+    background: url('nav.png') no-repeat 100% 0;
+    text-indent: -9000px;
+    cursor: pointer;
+    border-radius: 50%;
+    box-shadow: 0 2px 3px rgba(0,0,0,0.5);
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.windy-demo nav span:first-child {
+    background-position: 0 0;
+}
+
+.windy-demo nav span:active {
+    box-shadow: 0 1px 1px rgba(0,0,0,0.3);
+    background-position: 100% 2px;
+}
+
+.windy-demo nav span:first-child:active {
+    background-position: 0 2px;
+}
+
+
+/*end of style1.css*/

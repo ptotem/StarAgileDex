@@ -23,7 +23,7 @@
 
 .st-wrapper {
     height: 400px;
-    margin-top: 5px;
+    margin-top: 90px;
     perspective: 1200px;
     perspective-origin: 50% 100%;
     position: relative;
@@ -237,6 +237,7 @@
 	max-width: 80%;
 	display: block;
     margin-left: 60px;
+    margin-top:60px;
 }
 
 .st-wrapper .st-item a {
@@ -334,12 +335,15 @@
 
 
 #subtitle {
-    height: auto;
-    width: auto;
+    max-height: 200px;
+    max-width: 200px;
     text-align: center;
-    font-size: 18px;
+    font-size: 1.2em;
     display: none;
-    margin:0 auto;
+    margin-top: 18px;
+    margin-left: 32px;
+    position: absolute;
+
 }
 
 
@@ -351,6 +355,7 @@
     display: none;
     margin-top: 18px;
     margin-left: 32px;
+    position: absolute;
 
 }
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130407050110) do
+ActiveRecord::Schema.define(:version => 20130408083833) do
 
   create_table "authentications", :force => true do |t|
     t.integer  "user_id"
@@ -83,6 +83,10 @@ ActiveRecord::Schema.define(:version => 20130407050110) do
     t.integer  "titlepic_file_size"
     t.datetime "titlepic_updated_at"
     t.text     "main"
+    t.string   "ppt_file_name"
+    t.string   "ppt_content_type"
+    t.integer  "ppt_file_size"
+    t.datetime "ppt_updated_at"
   end
 
   create_table "users", :force => true do |t|
