@@ -22,6 +22,11 @@ gem 'gritter'
 gem 'gon'
 gem 'paperclip'
 gem 'docsplit'
+
+#For ruby-filemagic error open terminal and run following commands
+#sudo apt-get install libmagic1 libmagic-dev
+
+
 gem 'docsplit-paperclip-processor'
 gem "binding_of_caller"
 

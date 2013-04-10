@@ -41,14 +41,15 @@
       <br/>
       <br/>
         <!--TODO: Sign in and transfer functionality to be built in-->
-      <a href="#" class="btn ad_btn">Sign In</a>
-      <a href="#" class="btn ad_btn">Instruction Video</a>
-      <a href="/users/sign_out" class="btn ad_btn">Logout</a>
+
+
+      <a href="#" onClick="window.open ('/demo', 'newwindow', config='height=660,width=1054, toolbar=no, menubar=no, scrollbars=no, resizable=no, location=no, directories=no, status=no');" class="btn ad_btn">Demo</a>
 
     </div>
 
 
     <div id="active_presentation">
+      <input type="hidden" id="presentation">
       <a href="#" class="btn ad_btn">View the Deck</a>
       <a href="#" class="btn ad_btn">Export as HTML</a>
       <a href="#" class="btn ad_btn">Export as SCORM</a>
@@ -85,16 +86,17 @@
 
       <!--TODO: The most recent presentation must be on top-->
       <!--TODO: Please check the presentation filter-->
-
-      <% @presentations.each_with_index do |presentation| %>
-          <tr class="presentation_row">
-            <td class="presentation_contents">
-              <a href="#?presentation<%= presentation.id %>" onclick="transitInDeck('<%= presentation.name %>')" class="datatable_button">
-                <button class="btn btn-info show_this_presentation" type="button"><%= hidden_field_tag presentation.id %><%= presentation.name.titlecase %></button>
-              </a>
-            </td>
-          </tr>
-      <% end %>
+      <% if user_signed_in? %>
+          <% @presentations.each_with_index do |presentation| %>
+              <tr class="presentation_row">
+                <td class="presentation_contents">
+                  <a href="#?presentation<%= presentation.id %>" onclick="transitInDeck('<%= presentation.name %>')" class="datatable_button">
+                    <button class="btn btn-info show_this_presentation" type="button"><%= hidden_field_tag presentation.id %><%= presentation.name.titlecase %></button>
+                  </a>
+                </td>
+              </tr>
+          <% end %>
+      <%end%>
       </tbody>
     </table>
   </div>
@@ -115,7 +117,6 @@ TODO: Also assign a fixed font-face to all of the console
     -->
 
   <div id="slide_form_panel" class="main_panel">
-
   </div>
 
   <!-----------------------------------------------------------
@@ -133,7 +134,9 @@ TODO: Also assign a fixed font-face to all of the console
     <form accept-charset="UTF-8" class="form-horizontal" id="new_presentation" style="margin:0">
       <div class="modal-body">
         <input id="presentation_name" name="presentation[name]" placeholder="Type Presentation Name Here ..." size="30" maxlength="25" type="text"/>
-        <input id="presentation_user_id" name="presentation[user_id]" type="hidden" value="<%= current_user.id %>"/>
+        <% if user_signed_in? %>
+            <input id="presentation_user_id" name="presentation[user_id]" type="hidden" value="<%= current_user.id %>"/>
+        <%end %>
       </div>
       <div class="modal-footer">
         <button class="btn btn-danger pull-left" data-dismiss="modal" aria-hidden="true">Close</button>
@@ -144,18 +147,36 @@ TODO: Also assign a fixed font-face to all of the console
 
 </div>
 
-<div class="navbar navbar-inverse">
-  <div class="navbar-inner" style="color:white">
-    <% if user_signed_in? %>
-        <ul class="nav pull-left">
-          <li class="brand">
+<div id="not_signed_in" class="navbar navbar-inverse">
+  <div class="navbar-inner">
+    <ul class="nav pull-left">
+      <% if !user_signed_in? %>
+          <li><a href="#guest_Modal" data-toggle="modal" class="brand guest">Proceed as a Guest...</a></li>
+      <%else %>
+          <li id="this_sig" class="brand">
             <% if current_user.email.include?("guest") %>
                 Welcome, Guest
             <% else %>
                 Welcome, <%= current_user.name %>
             <% end %>
           </li>
+      <% end %>
+    </ul>
+    <% if !user_signed_in? or current_user.email.include?("guest") %>
+        <ul class="nav pull-right">
+          <li class="dropdown bottom-up">
+            <a class="dropdown-toggle brand"
+               data-toggle="dropdown"
+               href="#">
+              Sign in &#9650;
+            </a>
+            <ul class="dropdown-menu bottom-up" id="sign_in_block">
+              <li><a href="/users/auth/facebook"><img src="/assets/Facebook.png" style="width: 200px;"/></a></li>
+              <li><a href="/users/auth/twitter"><img src="/assets/Twitter.png" style="width: 200px;"/></a></li>
+            </ul>
+          </li>
         </ul>
+    <%else%>
         <ul class="nav pull-right">
           <li class="brand">
             <a href="/users/sign_out" id="sign_out_btn"><img src="/assets/logout2.png"/>Logout</a>
@@ -163,8 +184,34 @@ TODO: Also assign a fixed font-face to all of the console
         </ul>
     <% end %>
   </div>
-
 </div>
+
+<div id="signed_in" class="navbar navbar-inverse">
+  <div class="navbar-inner">
+    <ul class="nav pull-left">
+          <li  class="brand">
+                Welcome, Guest
+          </li>
+    </ul>
+    <ul class="nav pull-right">
+      <li class="dropdown bottom-up">
+        <a class="dropdown-toggle brand"
+           data-toggle="dropdown"
+           href="#">
+          Sign in &#9650;
+        </a>
+        <ul class="dropdown-menu bottom-up" id="sign_in_blok">
+          <li><a href="/users/auth/facebook"><img src="/assets/Facebook.png" style="width: 200px;"/></a></li>
+          <li><a href="/users/auth/twitter"><img src="/assets/Twitter.png" style="width: 200px;"/></a></li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>
+
+
+
+
 
 <script type="text/javascript" src="/assets/jquery.easing.js"></script>
 <script type="text/javascript" src="/assets/bootstrap.min.js"></script>

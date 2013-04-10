@@ -42,42 +42,6 @@
 
 </div>
 
-<div class="navbar navbar-inverse">
-  <div class="navbar-inner">
-    <ul class="nav">
-      <% if !user_signed_in? %>
-          <li><a href="#guest_Modal" data-toggle="modal" class="brand guest">Proceed as a Guest...</a></li>
-      <% end %>
-    </ul>
-    <% if !user_signed_in? %>
-        <ul class="nav pull-right">
-          <li class="dropdown bottom-up">
-            <a class="dropdown-toggle brand"
-               data-toggle="dropdown"
-               href="#">
-              Sign in &#9650;
-            </a>
-            <ul class="dropdown-menu bottom-up" id="sign_in_block">
-              <li><a href="/users/auth/facebook"><img src="/assets/Facebook.png" style="width: 200px;"/></a></li>
-              <li><a href="/users/auth/twitter"><img src="/assets/Twitter.png" style="width: 200px;"/></a></li>
-            </ul>
-          </li>
-        </ul>
-    <% else %>
-        <ul class="nav" style="float: right; margin-right: -22px;">
-          <li class="signed-up brand">
-            <% if current_user.email.include?("guest") %>
-                Guest
-            <% else %>
-                Welcome, <%= current_user.name %>
-            <% end %>
-            <a href="/console" id="console_page_link"><img src="/assets/home2.png"/></a>
-            <a href="/users/sign_out" id="sign_out_link"><img src="/assets/logout2.png"/></a>
-          </li>
-        </ul>
-    <% end %>
-  </div>
-</div>
 
 <!--------------------------------------------------------
 Modals

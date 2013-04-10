@@ -13,7 +13,7 @@ AgileDex::Application.routes.draw do
 
   # Page Routes
   match '/console', :to=>"home#console", :as=>"console"
-  match '/home', :to=>"home#index", :as=>"home"
+  match '/demo', :to=>"home#index", :as=>"demo"
 
   # Slide Surfer Routes
   match '/slides/:id/:plugin/:font/:background', :to=>"slides#builder", :as=>"builder"
@@ -32,7 +32,7 @@ AgileDex::Application.routes.draw do
   resources :slides
 
   # Root Route
-  root :to => 'home#index'
+  root :to => 'home#console'
 
 
 end

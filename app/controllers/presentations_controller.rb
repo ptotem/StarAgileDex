@@ -6,7 +6,6 @@ class PresentationsController < ApplicationController
 
   def create
     @presentation = Presentation.new(params[:presentation])
-
     respond_to do |format|
       if @presentation.save
         #After presentation create redirect to console page

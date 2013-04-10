@@ -10,7 +10,12 @@ class HomeController < ApplicationController
   end
 
   def console
-    @presentations = Presentation.order('created_at DESC').find_all_by_user_id(current_user.id)
+    #todo:Set the width of the headers.
+    #todo:Guest logout delete
+    #todo:Counter on how many user logged in.(Analytics)
+    if user_signed_in?
+      @presentations = Presentation.order('created_at DESC').find_all_by_user_id(current_user.id)
+    end
     @slide=Slide.new
     render :layout => false
   end
@@ -42,9 +47,17 @@ class HomeController < ApplicationController
   def create_new_presentation
     @presentation = Presentation.new
     @presentation.name=params[:presentation_name][0]
+    if !user_signed_in?
+      @user=User.create!(:email => "guest_#{Time.now.to_i}#{rand(99)}@agileDex.com", :role => "guest", :name => "guest_#{Time.now.to_i}#{rand(99)}")
+      sign_in(:user, @user)
+    end
     @presentation.user_id=current_user.id
     if @presentation.save
-      render :text => @presentation.id
+      if @presentation.user.email.include?("guest")
+        render :text => "#{@presentation.id}|guest"
+      else
+        render :text=> "#{@presentation.id}|normal"
+      end
     else
       render :text => "error in creating presentation"
     end

@@ -11,6 +11,9 @@ class AuthenticationsController < ApplicationController
   # This creates a user if none exists or signs in a user if he exists
 
   def create
+    require 'find'
+    require 'fileutils'
+    require 'pathname'
     auth=request.env["omniauth.auth"]
     if auth.provider=='facebook' # Checking if request comes from facebook or twitter
       if User.find_by_email(auth.info.email).nil?
@@ -25,6 +28,15 @@ class AuthenticationsController < ApplicationController
         @user=User.find_by_uid(auth['uid'])
       end
     end
+
+    if user_signed_in?
+      current_user.presentations.each do |presentation|
+        presentation.user_id=@user.id
+        presentation.save
+        FileUtils.cp_r("#{Rails.root}/public/guestdata/"+current_user.id.to_s+"/.", "#{Rails.root}/public/userdata/"+@user.name.downcase.gsub(" ", "_").to_s+"/")
+      end
+    end
+
     sign_in(:user, @user)
     redirect_to console_path
   end

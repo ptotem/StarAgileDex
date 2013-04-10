@@ -75,9 +75,9 @@ ActiveRecord::Schema.define(:version => 20130408083833) do
     t.integer  "sequence"
     t.datetime "created_at",                                   :null => false
     t.datetime "updated_at",                                   :null => false
-    t.string   "layout",                :default => "basic"
-    t.string   "font",                  :default => "Arial"
-    t.string   "background",            :default => "#ffffff"
+    t.string   "layout",                :default => "0"
+    t.string   "font",                  :default => "default"
+    t.string   "background",            :default => "default"
     t.string   "titlepic_file_name"
     t.string   "titlepic_content_type"
     t.integer  "titlepic_file_size"

@@ -3,18 +3,6 @@ class SlidesController < ApplicationController
   # GET /slides/1
   # GET /slides/1.json
   def builder
-    @themelist=Array.new
-    t(:themes).each do |k,v|
-     @themelist<<v
-    end
-
-    @fontarray=Array.new
-    t(:fonts).each do |k,v|
-    @fontarray<<v
-    end
-
-
-
     @slide = Slide.find(params[:id])
     @export=FALSE # This is the Screen View
 
@@ -85,7 +73,15 @@ class SlidesController < ApplicationController
     # --------------------------------------------
 
     # Setup the DropDown List for Theme, Font and Plugin
+    @themelist=Array.new
+    t(:themes).each do |k,v|
+      @themelist<<v
+    end
 
+    @fontarray=Array.new
+    t(:fonts).each do |k,v|
+      @fontarray<<v
+    end
 
     gon.widget_list=@widget_list
     gon.fontarray = @fontarray

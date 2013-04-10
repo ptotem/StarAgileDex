@@ -104,6 +104,13 @@ en:
         safari: "false"
         opera: "false"
         working: "true"
+      baraja:
+        ie: "6+"
+        firefox: "TRUE"
+        chrome: "false"
+        safari: "false"
+        opera: "false"
+        working: "true"
     ppt_plugin:
       bookblock:
             ie: "6+"
