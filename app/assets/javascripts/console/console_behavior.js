@@ -87,13 +87,13 @@ function create_new_deck() {
         contentType:"application/json",
         success:function (returning_data) {
             guest = returning_data.split('|')[1] == 'guest' ? true : false;
-            returning_data == returning_data.split('|')[0];
+            returning_data = returning_data.split('|')[0];
             $('#presentations_table').dataTable().fnAddData([
                 '<a id="activate_presentation_' + returning_data + '" onclick="transitInDeck(\'' + prez_name + '\')" href="#?presentation' + returning_data + '"><button class="btn btn-inverse show_this_presentation" type="button"><input id="' + returning_data + '" type="hidden" name="' + returning_data + '">' + prez_name + '</button></a>', ""]
             );
-            $('#presentations_table tbody tr:last').addClass('presentation_row');
-            $('#presentations_table tbody tr:last').find('td:first').addClass('presentation_contents');
-            $('#presentations_table tbody tr:last').find('td:last').addClass('presentation_tools');
+            $('#presentations_table tbody tr:first').addClass('presentation_row');
+//            $('#presentations_table tbody tr:last').find('td:first').addClass('presentation_contents');
+//            $('#presentations_table tbody tr:last').find('td:last').addClass('presentation_tools');
             $('#new_deck_Modal').modal('hide');
             show_presentation(returning_data, prez_name);
             transitInDeck(prez_name);
@@ -112,6 +112,7 @@ function create_new_deck() {
 function initialize_deck_list() {
     $('#presentations_table').dataTable({
             "iDisplayLength":10,
+            "aaSorting": [[ 0, "desc" ]],
             "sScrollX":"100%",
             "sScrollY":"350",
             "aoColumns":[
@@ -121,7 +122,7 @@ function initialize_deck_list() {
             "sPaginationType":"false",
             "bLengthChange":true,
             "bFilter":true,
-            "bSort":false,
+            "bSort":true,
             "bInfo":false,
             "oSearch":{"sSearch":""},
             "oLanguage":{ "sSearch":"" },
@@ -198,7 +199,9 @@ function show_presentation(this_presentation_id, this_presentation_name) {
                     my_slide = ele.split('|');
                     this_id = 'slide' + my_slide[0];
                     this_id = this_id.replace(/ /g, '');
-                    //Todo: Clean up the Regex here
+
+                    // Regex to clean slide title, i.e. to clear if slide title contains/formatted with html tags, then remove html tags
+                    // \ Escapes character, \r matches carriage return, \n matches linefeed, \t matches horizontal tab,
                     cleaned_slide_title = my_slide[1].replace(/\\r/g, '').replace(/\\n/g, '').replace(/\\t/g, '').replace(/<\s*\w.*?>/g, '').replace(/<\s*\/\s*\w\s*.*?>|<\s*br\s*>/g, '');
 
                     slide_block = '' + '<tr class="slide_row">' +
@@ -293,9 +296,18 @@ function load_bindings() {
 }
 
 //TODO: Change such that the hidden fields get cleared on switching
-//TODO: Put in jquery validation for Title presence
 
 function form_bindings() {
+
+//    These functions validates Title presence
+    $('#slide_title').focusout(function() {
+        if ($('#slide_title').val() == "")
+            $('#slide_title').attr("placeholder", "Title cannot be blank");
+    });
+    $('#slide_title').focusin(function() {
+        if ($('#slide_title').val() == "")
+            $('#slide_title').attr("placeholder", "Title");
+    });
 
 // This function toggles from subtitle to titlepic
     $('#show_titlepic').click(function () {

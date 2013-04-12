@@ -84,8 +84,6 @@
       </thead>
       <tbody>
 
-      <!--TODO: The most recent presentation must be on top-->
-      <!--TODO: Please check the presentation filter-->
       <% if user_signed_in? %>
           <% @presentations.each_with_index do |presentation| %>
               <tr class="presentation_row">
@@ -112,9 +110,6 @@
   The Slide Form Panel
   ---------------------------------------------------------------->
 
-  <!--TODO: All font-sizes and weights must be captured through h1-5, and all normal text should be the same size.
-TODO: Also assign a fixed font-face to all of the console
-    -->
 
   <div id="slide_form_panel" class="main_panel">
   </div>
