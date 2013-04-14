@@ -121,6 +121,7 @@ body {
     overflow: visible;
     margin-bottom: 0;
     width:102%;
+    display: none;
 }
 
 .bottom-up {
@@ -146,11 +147,6 @@ body {
     outline: 0;
 }
 
-#title_wrap{
-    width:800px;
-    height:50px;
-    padding: 20px;
-}
 
 
 

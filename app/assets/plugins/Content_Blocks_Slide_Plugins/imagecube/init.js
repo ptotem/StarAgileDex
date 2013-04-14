@@ -1,119 +1,93 @@
+
+var $cube = $('#full3DCube');
+
 function init_widget() {
+
     $.each(images, function (index, elm) {
-        if (elm != null) {
-
-            $('#full3DCube').append('<img src="' + elm + '" title="' + captions[index] + '"/>');
-        } else {
-
-            $('#full3DCube').append('<div class="face" style="padding-top:50px;color: white;text-align: center;">'+captions[index]+'</div>');
-        }
+        $cube.append('<img src="' + elm + '" title="' + captions[index] + '"/>');
     });
 
-    if (images.length > 1) {
-        $('#full3DCube').imagecube({
-            direction:'random', // Direction of rotation: random|up|down|left|right
-            randomSelection:['up', 'down', 'left', 'right'],
-            // If direction is random, select one of these
-            speed:2000, // Time taken (milliseconds) to transition
-            easing:'swing', // Name of the easing to use during transitions
-            repeat:true, // True to automatically trigger a new transition after a pause
-            pause:5000, // Time (milliseconds) between transitions
-            selection:'forward', // How to choose the next item to show:
-            // 'forward', 'backward', 'random'
-            shading:false, // True to add shading effects, false for no effects
-            opacity:0.8, // Maximum opacity (0.0 - 1.0) for highlights and shadows
-            imagePath:'', // Any extra path to locate the highlight/shadow images
-            full3D:true, // True to add cubic perspective, false for 2D rotation
-            segments:20, // The number of segments that make up each 3D face
-            reduction:30, // The amount (pixels) of reduction for far edges of the cube
-            expansion:10, // The amount (pixels) of expansion for the near edge of the cube
-            lineHeight:[0.0, 1.25], // Hidden and normal line height (em) for text
-            letterSpacing:[-0.4, 0.0], // Hidden and normal letter spacing (em) for text
-            beforeRotate:remove_caption, // Callback before rotating
-            afterRotate:set_caption // Callback after rotating
-        });
+    $cube.imagecube({
+        direction: 'random', // Direction of rotation: random|up|down|left|right
+        randomSelection: ['up', 'down', 'left', 'right'],
+        // If direction is random, select one of these
+        speed: 2000, // Time taken (milliseconds) to transition
+        easing: 'swing', // Name of the easing to use during transitions
+        repeat: false, // True to automatically trigger a new transition after a pause
+        pause: 5000, // Time (milliseconds) between transitions
+        selection: 'forward', // How to choose the next item to show:
+        // 'forward', 'backward', 'random'
+        shading: false, // True to add shading effects, false for no effects
+        opacity: 0.8, // Maximum opacity (0.0 - 1.0) for highlights and shadows
+        imagePath: '', // Any extra path to locate the highlight/shadow images
+        full3D: true, // True to add cubic perspective, false for 2D rotation
+        segments: 20, // The number of segments that make up each 3D face
+        reduction: 30, // The amount (pixels) of reduction for far edges of the cube
+        expansion: 10, // The amount (pixels) of expansion for the near edge of the cube
+        lineHeight: [0.0, 1.25], // Hidden and normal line height (em) for text
+        letterSpacing: [-0.4, 0.0], // Hidden and normal letter spacing (em) for text
+        beforeRotate: remove_caption, // Callback before rotating
+        afterRotate: set_caption // Callback after rotating
+    });
+    $subtitle.append('<br/><br/><a href="#" class="btn btn-inverse" id="rotator" onclick="$(\'#full3DCube\').imagecube(\'rotate\')"><h1>Spin the Cube</h1></a>');
+
+    if ($cube.children().attr('title') == "") {
+        $caption.width('0px');
+        $caption.height('0px');
+        $caption_back.height('0px');
+        $caption_back.width('0px');
     }
     else {
-        $('#full3DCube').imagecube({
-            repeat:false
-        });
+        $caption.css('top', '350px');
+        $caption.css('right', '160px');
+        $caption.width('310px');
+        $caption.height('80px');
+        $caption.css('text-align', 'center');
+
+        $caption_back.css('top', '350px');
+        $caption_back.css('right', '160px');
+        $caption_back.height('160px');
+        $caption_back.width('350px');
     }
 
-    //alert($(next).attr('src'));
-    if ($('#full3DCube').children().attr('src') == "null") {
-        $('#caption_wrap').css('top', '102px');
-        $('#caption_wrap').css('right', '111px');
-        $('#caption_wrap_back').css('top', '102px');
-        $('#caption_wrap_back').css('right', '111px');
-
-        $('#caption_wrap').width('408px');
-        $('#caption_wrap').height('368px');
-        $('#caption_wrap_back').height('448px');
-        $('#caption_wrap_back').width('448px');
+    if (gon.no_subtitle) {
+        $('#rotator').css({
+            'height': "300px",
+            'fontSize': "36px"
+        }).find('h1').css({
+                'lineHeight': "72px"
+            });
     }
-    else if ($('#full3DCube').children().attr('title') == "") {
-        $('#caption_wrap').width('0px');
-        $('#caption_wrap').height('0px');
-        $('#caption_wrap_back').height('0px');
-        $('#caption_wrap_back').width('0px');
-    }
-    else {
-        $('#caption_wrap').css('top', '350px');
-        $('#caption_wrap').css('right', '160px');
-        $('#caption_wrap').width('310px');
-        $('#caption_wrap').height('80px');
-        $('#caption_wrap').css('text-align', 'center');
-
-        $('#caption_wrap_back').css('top', '350px');
-        $('#caption_wrap_back').css('right', '160px');
-        $('#caption_wrap_back').height('160px');
-        $('#caption_wrap_back').width('350px');
-    }
-
 
     setTimeout(function () {
         $('#wrapper').fadeIn(function () {
-            $('#widget_wrap').fadeIn('slow', function () {
-                $('#title_wrap').fadeIn();
-                $('#text_wrap_back').slideDown();
-                $('#caption_wrap_back').fadeIn();
-                $('#caption_wrap').html($('#full3DCube img:first').attr('title')).fadeIn();
-                $('#text_wrap').slideDown(1000, function () {
-                    $('#text_wrap_back').slideDown();
-                    $('.navbar').fadeIn(function () {
-                        $('.ad-menu-item').slideToggle();
-                    });
-                });
-            });
+            $title.boxfit({multiline: true, maximum_font_size: 36});
+            $subtitle.boxfit({multiline: true, maximum_font_size: 36});
+            $caption.html($cube.find('img:first').attr('title'));
+            $('.elements').fade1by1();
         });
-    }, 1000);
+    }, 500);
 
 
     setTimeout(function () {
-
-
         if (captions.length == 1 && captions[0] == "") {
-
-            $('#caption_wrap_back').hide();
-            $('#caption_wrap').hide();
-
+            $caption_back.hide();
+            $caption.hide();
         }
     }, 1700);
-
-
 }
 
 function remove_caption(current, next) {
-    $('#caption_wrap_back').hide();
-    $('#caption_wrap').hide();
+    $caption_back.hide();
+    $caption.hide();
 }
 function set_caption(current, next) {
 
 
     //Show caption if after rotate the face has both image and caption.
     if (($(next).attr('title') != '') && ($(next).attr('src') != null)) {
-        $('#caption_wrap').html($(next).attr('title'));
-        $('#caption_wrap_back').fadeIn();
-        $('#caption_wrap').fadeIn();
+        $caption.html($(next).attr('title'));
+        $caption_back.fadeIn();
+        $caption.fadeIn();
     }
 }

@@ -35,26 +35,22 @@
 
 
   <!-- Standard Body Structure -->
-  <div id="title_wrap">
+  <div id="title_wrap" class="elements">
   </div>
-  <div id="subtitle_back">
+  <div id="subtitle_back" class="elements">
   </div>
-  <div id="subtitle" class="text_block">
+  <div id="subtitle" class="elements">
   </div>
-  <div id="titlepic">
+  <div id="titlepic" class="elements">
   </div>
-
-  <div id="main_block" class="text_block">
+  <div id="main_block" class="text_block" class="elements">
   </div>
-
-  <div id="widget_wrap">
+  <div id="widget_wrap" class="elements">
     <%= yield :widget_wrap %>
   </div>
-
-  <div id="caption_wrap_back">
+  <div id="caption_wrap_back" class="elements">
   </div>
-
-  <div id="caption_wrap" class="text_block"><h1>
+  <div id="caption_wrap" class="text_block elements"><h1>
     <%= yield :caption_wrap %>
   </h1></div>
 
@@ -155,7 +151,7 @@
 <script type="text/javascript" src="/assets/jquery-1.8.3.min.js"></script>
 <script type="text/javascript" src="/assets/jquery.easing.js"></script>
 <script type="text/javascript" src="/assets/bootstrap.min.js"></script>
-<script type="text/javascript" src="/assets/jquery.textfill.min.js"></script>
+<script type="text/javascript" src="/assets/jquery.boxfit.js"></script>
 <script type="text/javascript" src="/assets/master_init.js"></script>
 <%= yield :scripts %>
 

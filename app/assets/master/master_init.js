@@ -1,24 +1,35 @@
+/*TODO: Content Blocks without Images are not to be allowed*/
+
 /* Global Variables*/
 var captions = gon.caption;
 var images = gon.image_list;
 
-$(function () {
-    $('.ad-menu-item').slideToggle();
-    var $title = $('#title_wrap');
-    $title.html('<span>' + gon.title + '</span>');
-    $title.textfill();
-    $title.fadeIn();
-    if (!gon.no_subtitle) {
-        $('#subtitle').html(gon.subtitle).show();
-    } else {
-        $('#subtitle_back').html('<img src=' + gon.titlepic + '>').show();
-    }
+var $caption = $('#caption_wrap');
+var $caption_back = $('#caption_wrap_back');
+var $title = $('#title_wrap');
+var $subtitle;
+var $widget = $('#widget_wrap');
 
-    $('.text_buttons').show();
-    $(".navbar").hide();
-    $("#wrapper").show();
+$(function () {
+    // Set up the Title and the Subtitle
+    $title.html(gon.title);
+    if (!gon.no_subtitle) {
+        $subtitle=$('#subtitle');
+        $subtitle.html(gon.subtitle);
+    } else {
+        $subtitle=$('#titlepic');
+        $subtitle.html('<img src=' + gon.titlepic + '>');
+    }
+    // Initialize Widget
     $('#wrapper').addClass(gon.background).css('font-family', gon.font);
     init_widget();
+    load_menu_bindings();
+});
+
+// TODO: Clean up this code
+
+function load_menu_bindings(){
+    $('.ad-menu-item').slideToggle();
 
     //change class of a wrapper (i.e. bg, theme) based on theme selection drop-down from theme modal, and display currently selected theme in theme modal
     $("#ts").live("change", function () {
@@ -49,7 +60,7 @@ $(function () {
         });
         gon.font = $font;
     });
-});
+}
 
 function load_widget(index) {
     if (index < 0)
@@ -58,6 +69,19 @@ function load_widget(index) {
         index = 0;
     gon.plugin = index;
     window.location = '/slides/' + gon.slide_id + '/' + index + '/' + gon.font + '/' + gon.background;
+}
+
+$.fn.fade1by1 = function (ops) {
+    var
+        o = $.extend({
+            delay: 200,
+            speed: 500,
+            ease: 'swing' // Other requires easing plugin
+        }, ops),
+        $el = this
+    for (var i=0, d=0, l=$el.length; i<l; i++, d+=o.delay)
+        $el.eq(i).delay(d).fadeIn(o.speed, o.ease);
+    return $el
 }
 
 
