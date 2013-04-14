@@ -146,6 +146,11 @@ body {
     outline: 0;
 }
 
+#title_wrap{
+    width:800px;
+    height:50px;
+    padding: 20px;
+}
 
 
 
