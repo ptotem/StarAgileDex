@@ -48,9 +48,7 @@
 
               <% @slide.content_blocks.each_with_index do |cbi, index| %>
                   <% if index < (@slide.content_blocks.length)-1 %>
-                      <%= index %>
                   <% if !cbi.image.blank? %>
-                        <%= cbi %>
                       <%= cbi.caption %>
                       <%= cbi.image_file_name %>
                       <a href="#" onclick="">(Change)</a>
