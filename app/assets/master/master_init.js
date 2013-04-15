@@ -13,12 +13,12 @@ var $widget = $('#widget_wrap');
 $(function () {
     // Set up the Title and the Subtitle
     $title.html(gon.title);
-    if (!gon.no_subtitle) {
-        $subtitle=$('#subtitle');
-        $subtitle.html(gon.subtitle);
-    } else {
+    if (gon.no_subtitle && !gon.no_titlepic) {
         $subtitle=$('#titlepic');
         $subtitle.html('<img src=' + gon.titlepic + '>');
+    } else {
+        $subtitle=$('#subtitle');
+        $subtitle.html(gon.subtitle);
     }
     // Initialize Widget
     $('#wrapper').addClass(gon.background).css('font-family', gon.font);

@@ -20,7 +20,6 @@ function init_widget() {
         if (gon.no_subtitle) {
             $('#subtitle_back').removeClass('elements');
             $title.css({width:"760px"});
-
         }
         $('#wrapper').fadeIn(function () {
             $title.boxfit({multiline: true, maximum_font_size: 36});

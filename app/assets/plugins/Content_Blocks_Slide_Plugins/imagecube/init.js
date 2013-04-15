@@ -50,31 +50,15 @@ function init_widget() {
         $caption_back.width('350px');
     }
 
-    if (gon.no_subtitle) {
-        $('#rotator').css({
-            'height': "300px",
-            'fontSize': "36px"
-        }).find('h1').css({
-                'lineHeight': "72px"
-            });
-    }
-
-    setTimeout(function () {
-        $('#wrapper').fadeIn(function () {
-            $title.boxfit({multiline: true, maximum_font_size: 36});
-            $subtitle.boxfit({multiline: true, maximum_font_size: 36});
-            $caption.html($cube.find('img:first').attr('title'));
-            $('.elements').fade1by1();
-        });
-    }, 500);
-
-
     setTimeout(function () {
         if (captions.length == 1 && captions[0] == "") {
             $caption_back.hide();
             $caption.hide();
         }
     }, 1700);
+
+    layout1();
+
 }
 
 function remove_caption(current, next) {
@@ -82,8 +66,6 @@ function remove_caption(current, next) {
     $caption.hide();
 }
 function set_caption(current, next) {
-
-
     //Show caption if after rotate the face has both image and caption.
     if (($(next).attr('title') != '') && ($(next).attr('src') != null)) {
         $caption.html($(next).attr('title'));
