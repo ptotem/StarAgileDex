@@ -1,0 +1,47 @@
+#caption_wrap_back, #caption_wrap  {
+    display: none;
+}
+
+#widget_wrap {
+    height: 300px;
+    margin-top: 280px;
+    display: none;
+}
+
+#title_wrap {
+    display: none;
+    position: absolute;
+    background-color:rgba(0,0,0,0.5);
+    left: 76px;
+    text-align: center;
+    width:370px;
+    height:200px;
+    padding: 30px;
+    top: 18px;
+    color: white;
+}
+
+#subtitle {
+    height: 200px;
+    width: 320px;
+    text-align: center;
+    font-size: 1.2em;
+    display: none;
+    top: 18px;
+    left: 530px;
+    position: absolute;
+    padding: 30px;
+}
+
+#subtitle_back {
+    background-color:rgba(0,0,0,0.5);
+    height: 200px;
+    width: 320px;
+    text-align: center;
+    font-size: 1.2em;
+    display: none;
+    top: 18px;
+    left: 530px;
+    position: absolute;
+    padding: 30px;
+}
