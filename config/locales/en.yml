@@ -21,6 +21,7 @@ en:
         working: "true"
     content_plugin:
       imagecube:
+        layout: "layout1"
         ie: "6+"
         firefox: "true"
         chrome: "false"

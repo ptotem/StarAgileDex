@@ -11,6 +11,8 @@ var $subtitle;
 var $widget = $('#widget_wrap');
 
 $(function () {
+    eval(gon.plugin_layout);
+
     // Set up the Title and the Subtitle
     $title.html(gon.title);
     if (gon.no_subtitle && !gon.no_titlepic) {

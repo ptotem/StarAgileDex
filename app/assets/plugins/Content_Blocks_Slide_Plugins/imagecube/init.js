@@ -57,7 +57,7 @@ function init_widget() {
         }
     }, 1700);
 
-    layout1();
+    //layout1();
 
 }
 
