@@ -25,7 +25,9 @@ class HomeController < ApplicationController
       gon.presentation=@slide.presentation.name
       gon.presentation_id=@slide.presentation.id
       gon.slide_id=@slide.id
+      gon.nosub=@slide.nosub
     end
+    gon.titlepic=(@slide.titlepic.nil? ? false:true)
     render :layout => false
   end
 

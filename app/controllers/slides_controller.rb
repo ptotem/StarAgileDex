@@ -43,6 +43,8 @@ class SlidesController < ApplicationController
 
     gon.slide_id=@slide.id
     gon.title=@slide.title
+    gon.mode=@slide.mode
+    gon.nosub=@slide.nosub
 
     # If there is no titlepic or subtitle, don't show either
     # If there is subtitle, show subtitle in subtitle_block and adjust text size with Textfill plugin
@@ -134,6 +136,7 @@ class SlidesController < ApplicationController
     @slide = Slide.new(params[:slide])
     respond_to do |format|
       if @slide.save
+        @slide.remove_redundancy
         format.html { redirect_to builder_path(@slide, @slide.layout, @slide.font, @slide.background), notice: 'Slide was successfully created.' }
         format.json { render json: @slide, status: :created, location: @slide }
       else
@@ -151,6 +154,7 @@ class SlidesController < ApplicationController
 
     respond_to do |format|
       if @slide.update_attributes(params[:slide])
+        @slide.remove_redundancy
         format.html { redirect_to builder_path(@slide, @slide.layout, @slide.font, @slide.background), notice: 'Slide was successfully updated.' }
         format.json { head :no_content }
       else
