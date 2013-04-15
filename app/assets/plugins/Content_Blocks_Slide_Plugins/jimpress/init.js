@@ -17,10 +17,20 @@ function init_widget() {
     });
 
     setTimeout(function () {
-        if (gon.no_subtitle) {
+        if (gon.no_subtitle && gon.no_titlepic) {
+//            $('#subtitle_back').removeClass('elements');
+            $title.css({width:"776px"});
             $('#subtitle_back').removeClass('elements');
-            $title.css({width:"760px"});
         }
+        else if(gon.no_subtitle){
+            $title.css({width:"320px"});
+            $('#subtitle_back').removeClass('elements');
+        }
+        else{
+            $title.css({width:"320px"});
+            $('#subtitle_back').addClass('elements');
+        }
+
         $('#wrapper').fadeIn(function () {
             $title.boxfit({multiline: true, maximum_font_size: 36});
             $subtitle.boxfit({multiline: true, maximum_font_size: 36});
