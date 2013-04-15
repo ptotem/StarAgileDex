@@ -1,5 +1,5 @@
 class Slide < ActiveRecord::Base
-  attr_accessible :presentation_id, :sequence, :subtitle, :title, :layout, :font, :background, :content_blocks_attributes, :titlepic, :presentation, :main, :ppt
+  attr_accessible :presentation_id, :sequence, :subtitle, :title, :layout, :font, :background, :content_blocks_attributes, :titlepic, :presentation, :main, :ppt, :mode
   belongs_to :presentation
 
   has_many :content_blocks, :dependent => :destroy

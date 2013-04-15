@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130408083833) do
+ActiveRecord::Schema.define(:version => 20130415090442) do
 
   create_table "authentications", :force => true do |t|
     t.integer  "user_id"
@@ -75,9 +75,9 @@ ActiveRecord::Schema.define(:version => 20130408083833) do
     t.integer  "sequence"
     t.datetime "created_at",                                   :null => false
     t.datetime "updated_at",                                   :null => false
-    t.string   "layout",                :default => "0"
-    t.string   "font",                  :default => "default"
-    t.string   "background",            :default => "default"
+    t.string   "layout",                :default => "basic"
+    t.string   "font",                  :default => "Arial"
+    t.string   "background",            :default => "#ffffff"
     t.string   "titlepic_file_name"
     t.string   "titlepic_content_type"
     t.integer  "titlepic_file_size"
@@ -87,6 +87,7 @@ ActiveRecord::Schema.define(:version => 20130408083833) do
     t.string   "ppt_content_type"
     t.integer  "ppt_file_size"
     t.datetime "ppt_updated_at"
+    t.string   "mode",                  :default => "HTML"
   end
 
   create_table "users", :force => true do |t|

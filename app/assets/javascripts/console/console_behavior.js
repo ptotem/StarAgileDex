@@ -325,42 +325,47 @@ function form_bindings() {
         $('#slide_subtitle').show();
     });
 
-// This function toggles from WYSIWYG editor to Content blocks
-    $('#show_wysiwyg').click(function () {
-        $('#show_wysiwyg').hide();
-        $('#clear_wysiwyg').show();
-        $('#upload_ppt').show();
-        $('#content_block_section').show();
-        $('#text_block_section').hide();
-        $('#import_ppt_block').hide();
-        $('.extra').hide();
-    });
-
-// This function toggles from Content blocks to WYSIWYG editor
-    $('#clear_wysiwyg').click(function () {
-        $('#upload_ppt').show();
-        $('#show_wysiwyg').show();
-        $('#clear_wysiwyg').hide();
-        $('#content_block_section').hide();
-        $('#text_block_section').show();
-        $('#import_ppt_block').hide();
-        $('.extra').show();
-    });
-
-// This function toggles from Content blocks to WYSIWYG editor
-    $('#upload_ppt').click(function () {
-        $('#import_ppt_block').show();
-        $('#upload_ppt').hide();
-        $('#show_wysiwyg').show();
-        $('#clear_wysiwyg').show();
-        $('#content_block_section').hide();
-        $('#text_block_section').hide();
-        $('.extra').show();
-    });
+    $('#show_wysiwyg').click(open_wysiwyg_mode);
+    $('#clear_wysiwyg').click(open_blocks_mode);
+    $('#upload_ppt').click(open_ppt_mode);
 
 }
 
+// This function switches the form to WYSIWYG editor
+function open_wysiwyg_mode(){
+    $('#show_wysiwyg').hide();
+    $('#clear_wysiwyg').show();
+    $('#upload_ppt').show();
+    $('#content_block_section').show();
+    $('#text_block_section').hide();
+    $('#import_ppt_block').hide();
+    $('.extra').hide();
+    $('#slide_mode').val("HTML");
+}
 
+// This function switches the form to Content blocks
+function open_blocks_mode(){
+    $('#upload_ppt').show();
+    $('#show_wysiwyg').show();
+    $('#clear_wysiwyg').hide();
+    $('#content_block_section').hide();
+    $('#text_block_section').show();
+    $('#import_ppt_block').hide();
+    $('.extra').show();
+    $('#slide_mode').val("Blocks");
+}
+
+// This function switches the form to Upload PPT
+function open_ppt_mode(){
+    $('#import_ppt_block').show();
+    $('#upload_ppt').hide();
+    $('#show_wysiwyg').show();
+    $('#clear_wysiwyg').show();
+    $('#content_block_section').hide();
+    $('#text_block_section').hide();
+    $('.extra').show();
+    $('#slide_mode').val("PPT");
+}
 
 
 
