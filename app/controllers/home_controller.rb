@@ -10,13 +10,22 @@ class HomeController < ApplicationController
   end
 
   def console
-    #todo:Set the width of the headers.
     #todo:Guest logout delete
     #todo:Counter on how many user logged in.(Analytics)
     if user_signed_in?
       @presentations = Presentation.order('created_at DESC').find_all_by_user_id(current_user.id)
     end
-    @slide=Slide.new
+
+    if params[:slide_id].blank?
+      @slide=Slide.new
+      gon.edit=false
+    else
+      @slide=Slide.find(params[:slide_id])
+      gon.edit=true
+      gon.presentation=@slide.presentation.name
+      gon.presentation_id=@slide.presentation.id
+      gon.slide_id=@slide.id
+    end
     render :layout => false
   end
 

@@ -1,5 +1,5 @@
 class Slide < ActiveRecord::Base
-  attr_accessible :presentation_id, :sequence, :subtitle, :title, :layout, :font, :background, :content_blocks_attributes, :titlepic, :presentation, :main, :ppt
+  attr_accessible :presentation_id, :sequence, :subtitle, :title, :layout, :font, :background, :content_blocks_attributes, :titlepic, :presentation, :main, :ppt, :mode
   belongs_to :presentation
 
   has_many :content_blocks, :dependent => :destroy
@@ -59,7 +59,6 @@ class Slide < ActiveRecord::Base
 
   after_create :build_directory
 
-  # TODO: Test the paperclip attachment
   # TODO: Test the directory creation paths
   def get_path
     if self.presentation.user.role=="guest"

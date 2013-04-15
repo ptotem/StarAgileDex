@@ -8,6 +8,7 @@
     <div class="main_form_body" style="height: 390px;overflow-y: auto;">
 
       <%= f.hidden_field :presentation_id, :value => @presentation.id %>
+      <%= f.hidden_field :mode, :value => @slide.mode %>
       <%= f.text_field :title, :class => "slide_field", :placeholder => "Title" %>
       <%= f.text_field :subtitle, :class => "slide_field", :placeholder => "Subtitle" %>
       <%= f.file_field :titlepic, :placeholder => "Add Image", :style => "display:none; margin-bottom:10px" %>
@@ -47,3 +48,17 @@
       </div>
     </div>
 <% end %>
+
+<script type="text/javascript">
+  $(function(){
+     if($('slide_mode').val()=="HTML"){
+        open_wysiwyg_mode();
+     }else{
+         if($('slide_mode').val()=="Blocks"){
+           open_blocks_mode();
+         }else{
+           open_ppt_mode();
+         }
+     }
+  });
+</script>
