@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="/assets/console/console.css">
   <script type="text/javascript" src="/assets/jquery-1.8.3.min.js"></script>
   <%= javascript_include_tag :application %>
+  <%= include_gon %>
   <%= csrf_meta_tags %>
 </head>
 
@@ -40,9 +41,6 @@
       <!--TODO: Put in a better phrase here-->
       <br/>
       <br/>
-        <!--TODO: Sign in and transfer functionality to be built in-->
-
-
       <a href="#" onClick="window.open ('/demo', 'newwindow', config='height=660,width=1054, toolbar=no, menubar=no, scrollbars=no, resizable=no, location=no, directories=no, status=no');" class="btn ad_btn">Demo</a>
 
     </div>

@@ -82,6 +82,6 @@ $.fn.fade1by1 = function (ops) {
     for (var i=0, d=0, l=$el.length; i<l; i++, d+=o.delay)
         $el.eq(i).delay(d).fadeIn(o.speed, o.ease);
     return $el
-}
+};
 
 

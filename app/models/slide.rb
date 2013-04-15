@@ -59,7 +59,6 @@ class Slide < ActiveRecord::Base
 
   after_create :build_directory
 
-  # TODO: Test the paperclip attachment
   # TODO: Test the directory creation paths
   def get_path
     if self.presentation.user.role=="guest"

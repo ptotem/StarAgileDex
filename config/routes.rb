@@ -12,7 +12,7 @@ AgileDex::Application.routes.draw do
   match 'slides/new/:presentation_id'=>'slides#new',:as=>'new_slide'
 
   # Page Routes
-  match '/console', :to=>"home#console", :as=>"console"
+  match '/console/(:slide_id)', :to=>"home#console", :as=>"console"
   match '/demo', :to=>"home#index", :as=>"demo"
 
   # Slide Surfer Routes
