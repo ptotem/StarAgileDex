@@ -113,7 +113,7 @@ en:
         opera: "false"
         working: "false"
     ppt_plugin:
-      bookblock:
+      mascotbook:
         layout: "layout3"
         ie: "6+"
         firefox: "true"
@@ -121,7 +121,7 @@ en:
         safari: "false"
         opera: "false"
         working: "true"
-      mascotbook:
+      bookblock:
         layout: "layout3"
         ie: "6+"
         firefox: "true"

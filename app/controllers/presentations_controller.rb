@@ -82,12 +82,14 @@ class PresentationsController < ApplicationController
       gon.background = slide.background
       gon.plugin=0
 
-      gon.image_list=slide.content_blocks.map{|t| t.image.path.gsub("#{Rails.root}/public/userdata/#{@presentation.user.name.downcase.gsub(" ", "_")}/#{@presentation.name}/#{slide.id}/images","assets/img/#{slide.id}")}
+      gon.image_list=slide.content_blocks.map{|t| t.image.path.gsub("#{Rails.root}/public/userdata/#{@presentation.user.name.downcase.gsub(" ", "_")}/#{@presentation.name.downcase}/#{slide.id}","assets/img/#{slide.id}")}
+
       gon.caption=slide.content_blocks.map{|t| t.caption}
       gon.fontarray = @fontarray
       gon.fontadjustment = @fontadjustment
       gon.widget_list=[slide.layout]
       @plugin="#{@plugin_category}/#{slide.layout}"
+      s=:ppt_plugin
 
       #plugin_layout=(":"+slide.layout).to_hash
       plugin_layout=t(:plugins)[s][:"#{slide.layout}"][:layout]
