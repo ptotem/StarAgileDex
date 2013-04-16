@@ -376,7 +376,6 @@ function switch_to_titlepic() {
     $('#show_titlepic').hide();
     $('#clear_titlepic').show();
     $('#titlepic_block').show();
-    $('#slide_titlepic').show();
     $('#existing_titlepic').show();
     $('#change_titlepic').hide();
     $('#slide_subtitle').hide();
@@ -388,6 +387,7 @@ function switch_to_subtitle() {
     $('#show_titlepic').show();
     $('#clear_titlepic').hide();
     $('#titlepic_block').hide();
+    $('#slide_titlepic').show();
     $('#slide_subtitle').show();
     $('#slide_nosub').val(false);
 }
