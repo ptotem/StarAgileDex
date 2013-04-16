@@ -22,7 +22,8 @@
       <ul class="nav nav-stacked nav-pills pull-right menu_select" style="margin-top: 0px">
         <li class="btn-warning" id="ad-menu-toggle"><a href="#" onclick="$('.ad-menu-item').slideToggle();"><i class="icon-tasks"></i></a></li>
         <li class="active ad-menu-item"><a href="/console/<%= @slide.id rescue ""%>"><i class="icon-edit"></i></a></li>
-        <li class="active ad-menu-item"><a onclick="/slides/<%= @slide %>/<%= @font %>/<%= @background %>"><i class="icon-retweet"></i></a></li>
+        <li class="active ad-menu-item"><a onclick="/slides/<%= @slide.id %>/<%= @font %>/<%= @background %>"><i class="icon-retweet"></i></a></li>
+        <!--TODO: Give me notification when slide has been saved-->
         <li class="active ad-menu-item"><a onclick="save_slide();"><i class="icon-download"></i></a></li>
         <li class="active ad-menu-item"><a href="#font_Modal" data-toggle="modal" onclick=""><i class="icon-text-width"></i></a></li>
         <li class="active ad-menu-item"><a href="#theme_Modal" data-toggle="modal" onclick=""><i class="icon-th"></i></a></li>
