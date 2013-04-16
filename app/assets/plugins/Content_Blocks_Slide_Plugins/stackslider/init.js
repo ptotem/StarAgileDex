@@ -11,6 +11,7 @@ function init_widget() {
     });
     $('#widget_wrap').show();
     $( '#st-stack' ).stackslider();
+    layout2();
 }
 
 

@@ -69,6 +69,7 @@ function init_widget() {
             $('.sb-description').hide();
         }
     }, 300);
+    layout1();
 
 }
 

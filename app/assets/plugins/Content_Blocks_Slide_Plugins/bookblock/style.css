@@ -83,7 +83,7 @@
 	z-index: 999;
 }
 
-.bb-overlay, 
+.bb-overlay,
 .bb-flipoverlay {
 	background-color: rgba(0, 0, 0, 0.7);
 	position: absolute;

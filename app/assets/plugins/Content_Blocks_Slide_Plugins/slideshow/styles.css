@@ -159,30 +159,6 @@ px;-webkit-border-radius:3px;border-radius:3px; margin:0 10px 10px 0; }
 /* =Donate
 -------------------------------------------------------------- */
 #box-donate { float: left; width: 100%; text-align: center; margin: 40px 0 0 0; }
-#widget_wrap {
-    height: 300px;
-    margin-top: 50px;
-    display: none;
-    margin-left:65px;
-}
-
-#title_wrap {
-    width: auto;
-    margin:0 auto;
-    display: none;
-    text-align: center;
-}
-
-
-#text_wrap {
-    height: auto;
-    width: auto;
-    text-align: center;
-    font-size: 18px;
-    display: none;
-    margin:0 auto;
-
-}
 
 .image_main{
     height: 300px;
@@ -262,65 +238,3 @@ px;-webkit-border-radius:3px;border-radius:3px; margin:0 10px 10px 0; }
 .box_skitter .play_pause_button {position:absolute;top:50%;z-index:151;width:42px;height:42px;overflow:hidden;text-indent:-9999em;margin-top:-25px;background:url(../images/pause-button.png) no-repeat left top;opacity:0;}
 .box_skitter .play_pause_button.play_button {background:url(../images/play-button.png) no-repeat left top;}
 
-/* =Example for dimenions
--------------------------------------------------------------- */
-.box_skitter_large {width:800px;height:300px;}
-.box_skitter_small {width:200px;height:100px;}
-
-/*end of skitter style.css*/
-
-
-
-#widget_wrap {
-    height: 300px;
-    margin-top: 200px;
-    display: none;
-}
-
-
-
-#text_wrap {
-    height: auto;
-    width: auto;
-    text-align: center;
-    font-size: 18px;
-    display: none;
-    margin:0 auto;
-}
-
-
-#title_wrap {
-    display: none;
-    position: absolute;
-    margin-top: 18px;
-    background-color:rgba(0,0,0,0.5);
-    width: 69%;
-    margin-left: 240px;
-    text-align: center;
-
-}
-
-
-#subtitle {
-    max-height: 200px;
-    max-width: 200px;
-    text-align: center;
-    font-size: 1.2em;
-    display: none;
-    margin-top: 18px;
-    margin-left: 32px;
-    position: absolute;
-}
-
-
-#subtitle_back {
-    max-height: 200px;
-    max-width: 200px;
-    text-align: center;
-    font-size: 1.2em;
-    display: none;
-    margin-top: 18px;
-    margin-left: 32px;
-    position: absolute;
-
-}

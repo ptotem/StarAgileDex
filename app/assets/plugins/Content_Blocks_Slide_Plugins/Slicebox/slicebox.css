@@ -94,3 +94,11 @@
 	-ms-transform-style: preserve-3d;
 	transform-style: preserve-3d;
 }
+
+.wrapper {
+    position: relative;
+    max-width: 840px;
+    width: 100%;
+    padding: 0 50px;
+    margin: 0 auto;
+}
