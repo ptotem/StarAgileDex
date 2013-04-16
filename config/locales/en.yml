@@ -29,6 +29,7 @@ en:
         opera: "false"
         working: "true"
       jimpress:
+        layout: "layout3"
         ie: "6+"
         firefox: "TRUE"
         chrome: "false"
@@ -113,6 +114,14 @@ en:
         opera: "false"
         working: "false"
     ppt_plugin:
+      iebook:
+        layout: "layout4"
+        ie: "6+"
+        firefox: "true"
+        chrome: "false"
+        safari: "false"
+        opera: "false"
+        working: "true"
       mascotbook:
         layout: "layout3"
         ie: "6+"

@@ -31,6 +31,8 @@ class PresentationsController < ApplicationController
     FileUtils.cp_r("#{Rails.root}/app/assets/master/.", "#{Rails.root}/public/slides/assets/")
     FileUtils.cp_r("#{Rails.root}/app/assets/backgrounds/.", "#{Rails.root}/public/slides/assets/")
     FileUtils.cp_r("#{Rails.root}/public/favicon.ico", "#{Rails.root}/public/slides/assets/")
+
+
     @presentation.slides.each do |slide|
 
 
@@ -42,7 +44,7 @@ class PresentationsController < ApplicationController
       @export=TRUE
       #Make directory with slide.id name in public/slides/assets/img and copying the slides images in to that directory
       system "mkdir #{Rails.root}/public/slides/assets/img/#{slide.id}"
-      FileUtils.cp_r("#{Rails.root}/public/userdata/#{@presentation.user.name.downcase.gsub(" ", "_")}/#{@presentation.name}/#{slide.id}/content_blocks/","#{Rails.root}/public/slides/assets/img/#{slide.id}/" )
+      FileUtils.cp_r("#{Rails.root}/public/userdata/#{@presentation.user.name.downcase.gsub(" ", "_")}/#{@presentation.name.downcase.gsub(" ", "_")}/#{slide.id}/content_blocks/","#{Rails.root}/public/slides/assets/img/#{slide.id}/" )
 
       #Making javascript varriables
       gon.slide_id=slide.id
@@ -56,14 +58,16 @@ class PresentationsController < ApplicationController
         gon.subtitle=slide.subtitle
         gon.no_titlepic=TRUE
       else
-        gon.titlepic=slide.titlepic.path.gsub("#{Rails.root}/public", "")
+        gon.titlepic=slide.titlepic.url(:ie).gsub("#{Rails.root}/public", "")
+        FileUtils.cp_r("#{Rails.root}/public/userdata/#{@presentation.user.name.downcase.gsub(" ", "_")}/#{@presentation.name.downcase.gsub(" ", "_")}/images/title_pic/.", "#{Rails.root}/public/slides/assets/img/")
         gon.no_subtitle=TRUE
+        gon.no_titlepic=FALSE
       end
 
       if slide.ppt.exists?
         s=:ppt_plugin
         @plugin_category="Powerpoint_Plugins"
-      elsif slide.content_blocks.blank? and @slide.main.blank?
+      elsif slide.content_blocks.blank? and slide.main.blank?
         s=:title_plugin
         @plugin_category="Title_Slide_Plugins"
       elsif slide.content_blocks.blank?
@@ -89,9 +93,7 @@ class PresentationsController < ApplicationController
       gon.fontadjustment = @fontadjustment
       gon.widget_list=[slide.layout]
       @plugin="#{@plugin_category}/#{slide.layout}"
-      s=:ppt_plugin
 
-      #plugin_layout=(":"+slide.layout).to_hash
       plugin_layout=t(:plugins)[s][:"#{slide.layout}"][:layout]
 
       #For including best suited layout for selected plugins and executing it's function
@@ -101,8 +103,8 @@ class PresentationsController < ApplicationController
       FileUtils.cp_r("#{Rails.root}/app/assets/plugins/#{@plugin_category}/#{slide.layout}/","#{Rails.root}/public/slides/assets/" )
       FileUtils.cp_r("#{Rails.root}/app/assets/layouts/#{plugin_layout}.css", "#{Rails.root}/public/slides/assets/")
       ##################################################
-
-      File.open("#{Rails.root}/public/slides/#{slide.id}.html", 'w') {|f| f.write(render_to_string(:file => 'slides/builder').gsub('/assets','assets').gsub('themes.css','theme.css').gsub("#{@plugin_category}/",'')) }
+      @slide=slide
+      File.open("#{Rails.root}/public/slides/#{slide.id}.html", 'w') {|f| f.write(render_to_string(:file => 'slides/builder').gsub('/assets','assets').gsub('themes.css','theme.css').gsub("#{@plugin_category}/",'').gsub("/userdata/#{@presentation.user.name.downcase.gsub(" ", "_")}/#{@presentation.name.downcase}/images/title_pic/","assets/img/")) }
     end
     @zipped_name = (@presentation.name).gsub(" ", "_")
     Dir.chdir("#{Rails.root}/public/slides")
