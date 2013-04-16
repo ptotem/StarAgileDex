@@ -57,6 +57,7 @@ body {
 
 .ad-menu-item{
     display: none;
+    cursor: pointer;
 }
 
 /* Buttons from AgileDex*/
