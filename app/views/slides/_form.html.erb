@@ -106,11 +106,23 @@
             $(this).hide();
         });
 
-        if ($('#slide_nosub').val()) {
-            switch_to_subtitle();
-        } else {
-            switch_to_titlepic();
+//        if ($('#slide_nosub').val()) {
+//            switch_to_titlepic();
+//        } else {
+//            switch_to_subtitle();
+//        }
+
+        switch ($('#slide_nosub').val()) {
+            case "false":
+                switch_to_subtitle();
+                break;
+            case "true":
+                switch_to_titlepic();
+                break;
+            default:
+                switch_to_subtitle();
         }
+
         if (!gon.titlepic) {
             $('#slide_titlepic').show();
         }
