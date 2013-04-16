@@ -257,6 +257,10 @@ function delete_presentation() {
     });
 
 }
+function export_as_html() {
+    window.location='export/'+$('#slide_presentation_id').val();
+}
+
 function delete_slide(slide_id_string) {
     var conf = confirm("Are you sure?");
     if (conf == true) {
@@ -293,6 +297,10 @@ function load_bindings() {
     $('.show_this_presentation').on('click', function () {
         show_presentation($(this).find(':input').attr("id"), $(this).text());
     });
+
+// This function handles the export as html of a deck
+    $('#export_html_btn').on('click', export_as_html);
+
 
 // These functions manage the scroll bindings for the panels
 //    $(".main_panel").niceScroll({cursorcolor:"#232836", cursorborder:"none", cursorwidth:"5px", autohidemode:false, horizrailenabled:false});
