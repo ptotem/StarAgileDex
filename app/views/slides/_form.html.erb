@@ -1,6 +1,6 @@
 <%= nested_form_for(@slide, :html => {:multipart => true}) do |f| %>
 
-    <div id="slide_form_panel_header">Enter Slide Content</div>
+    <div id="slide_form_panel_header" xmlns="http://www.w3.org/1999/html">Enter Slide Content</div>
     <a href="#" class="btn btn-inverse" onclick="transitOut()">Cancel</a>
     <%= f.submit "Save the slide", :class => "btn btn-info" %>
 
@@ -21,12 +21,13 @@
         <% end %>
         <%= f.file_field :titlepic, :placeholder => "Add Image", :style => "display:none; margin-bottom:10px" %>
         <div id="change_titlepic">
-          <a href="#" onclick="$('#existing_titlepic').show(); $('#slide_titlepic').hide(); $('#change_titlepic').hide();">(Cancel)</a>
+          <a href="#" onclick=" $('#existing_titlepic').show(); $('#slide_titlepic').hide(); $('#change_titlepic').hide();">(Cancel)</a>
         </div>
       </div>
       <br>
       <%= link_to "Use an image instead of a subtitle", "#", :id => "show_titlepic" %>
       <%= link_to "Use a subtitle instead of an image", "#", :id => "clear_titlepic", :style => "display:none;" %>
+      <br>
       <br>
       <br>
 
@@ -41,29 +42,27 @@
         --------->
 
         <div class="slide_contents_block" style="margin-top: -20px;">
-
+          <% @slide.content_blocks.each_with_index do |cb, index| %>
+              <% if !cb.image.blank? or !cb.caption.blank? %>
+                  <div class="existing_cb_imgs">
+                      Image File : <br>
+                      <%= cb.image_file_name %>
+                    <br/>
+                    <hr>
+                  </div>
+              <% end %>
+          <% end %>
           <%= f.fields_for :content_blocks do |widget_form| %>
               <hr/>
               <%= widget_form.link_to_remove "x", :class => "pull-right", :style => "margin-right:40px;" %>
-
-              <% @slide.content_blocks.each_with_index do |cbi, index| %>
-                  <% if index < (@slide.content_blocks.length)-1 %>
-                  <% if !cbi.image.blank? %>
-                      <%= cbi.caption %>
-                      <%= cbi.image_file_name %>
-                      <a href="#" onclick="">(Change)</a>
-                  <% else %>
-                      <%= widget_form.text_area :caption, :placeholder => "Enter Caption", :class => "content_block_caption_txt slide_field", :rows => 2, :cols => 30, :style => "margin-right:-40px" %>
-                      <%= widget_form.file_field :image, :placeholder => "Add Image" , :value=> @slide.content_blocks.first.image.url %>
-                  <% end %>
-                  <% end %>
-
-              <% end %>
+              <%= widget_form.text_area :caption, :placeholder => "Enter Caption", :class => "content_block_caption_txt slide_field", :rows => 2, :cols => 30, :style => "margin-right:-40px" %>
+              <%= widget_form.file_field :image, :placeholder => "Add Image" %>
               <br/>
               <br/>
           <% end %>
-
-          <%= f.link_to_add "Add another content block", :content_blocks, :class => "btn" %>
+          <%= f.link_to_add "Add another content block", :content_blocks, :class => "btn" %> <br>
+          <a href="#" id="display_edit_view_btn" style="display: none;">(Change Images)</a>
+          <!--<a href="#" id="hide_edit_view_btn">(Done)</a>-->
         </div>
       </div>
       <div id="import_ppt_block" style="display: none">
@@ -88,6 +87,8 @@
                 break;
             case "Blocks":
                 open_blocks_mode();
+                $('.fields').hide();
+                $('#display_edit_view_btn').show();
                 break;
             case "PPT":
                 open_ppt_mode();
@@ -95,11 +96,20 @@
             default:
                 open_wysiwyg_mode();
         }
+
         $('#change_titlepic').hide();
+
+        // This displays form in edit view for content blocks (images)
+        $('#display_edit_view_btn').on('click', function () {
+            $('.existing_cb_imgs').hide();
+            $('.fields').show();
+            $(this).hide();
+        });
+
         if ($('#slide_nosub').val()) {
-            switch_to_titlepic();
-        } else {
             switch_to_subtitle();
+        } else {
+            switch_to_titlepic();
         }
         if (!gon.titlepic) {
             $('#slide_titlepic').show();

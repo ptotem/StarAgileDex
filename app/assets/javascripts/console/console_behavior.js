@@ -329,22 +329,6 @@ function form_bindings() {
     $('#show_titlepic').click(switch_to_titlepic);
     $('#clear_titlepic').click(switch_to_subtitle);
 
-//    if (gon.mode=="HTML"){
-//        $('#text_block_section').show();
-//        $('#content_block_section').hide();
-//        $('#import_ppt_block').hide();
-//    }
-//    else if (gon.mode=="Blocks"){
-//        $('#content_block_section').show();
-//        $('#text_block_section').hide();
-//        $('#import_ppt_block').hide();
-//    }
-//    else if (gon.mode=="PPT"){
-//        $('#content_block_section').show();
-//        $('#text_block_section').hide();
-//        $('#import_ppt_block').hide();
-//    }
-
     $('#show_wysiwyg').click(open_blocks_mode);
     $('#clear_wysiwyg').click(open_wysiwyg_mode);
     $('#upload_ppt').click(open_ppt_mode);
@@ -392,6 +376,9 @@ function switch_to_titlepic() {
     $('#show_titlepic').hide();
     $('#clear_titlepic').show();
     $('#titlepic_block').show();
+    $('#slide_titlepic').show();
+    $('#existing_titlepic').show();
+    $('#change_titlepic').hide();
     $('#slide_subtitle').hide();
     $('#slide_nosub').val(true);
 }

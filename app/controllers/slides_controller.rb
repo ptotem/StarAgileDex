@@ -126,7 +126,6 @@ class SlidesController < ApplicationController
       @presentation=Presentation.find(params[:presentation_id])
     end
     @slide = Slide.find(params[:id])
-    @slide.content_blocks.build
     render :layout => false
   end
 

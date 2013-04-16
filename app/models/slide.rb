@@ -109,11 +109,22 @@ class Slide < ActiveRecord::Base
           cb.destroy
         end
     end
-    if self.nosub
-      self.subtitle=""
-    else
+    if self.nosub == false
+      self.subtitle=self.subtitle
       self.titlepic.destroy
+    else
+      self.subtitle=""
+      self.titlepic=self.titlepic
     end
+
+    #if self.nosub == false
+    #  self.subtitle=""
+    #  self.titlepic=self.titlepic
+    #else
+    #  self.subtitle=self.subtitle
+    #  self.titlepic.destroy
+    #end
+
     self.save
   end
 end
