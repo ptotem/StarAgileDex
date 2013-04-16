@@ -256,7 +256,7 @@ function delete_presentation() {
 
 }
 function export_as_html() {
-    window.location='export/'+$('#slide_presentation_id').val();
+    window.location='/export/'+$('#slide_presentation_id').val();
 }
 
 function delete_slide(slide_id_string) {

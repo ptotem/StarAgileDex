@@ -24,7 +24,7 @@ class PresentationsController < ApplicationController
     require 'fileutils'
     require 'pathname'
     @presentation=Presentation.find(params[:id])
-
+    #Please, make slides directory in public folder
     #Make Directory in public file copy all the component of assets/master,assets/background in public/slides/assets directory.
     system "mkdir #{Rails.root}/public/slides/assets"
     system "mkdir #{Rails.root}/public/slides/assets/img"
