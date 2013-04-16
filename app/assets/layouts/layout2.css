@@ -14,7 +14,7 @@
     background-color:rgba(0,0,0,0.5);
     left: 76px;
     text-align: center;
-    width:370px;
+    width:320px;
     height:200px;
     padding: 30px;
     top: 18px;
@@ -44,4 +44,22 @@
     left: 530px;
     position: absolute;
     padding: 30px;
+}
+#titlepic {
+    height: 200px;
+    width: 320px;
+    text-align: center;
+    font-size: 1.2em;
+    display: none;
+    top: 18px;
+    left: 530px;
+    position: absolute;
+    padding: 30px;
+}
+
+#titlepic img{
+    height: 258px;
+    margin-top: -29px;
+    width: 338px;
+
 }

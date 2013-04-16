@@ -1,0 +1,21 @@
+#widget_wrap {
+    display: none;
+    position: absolute;
+    left: 100px;
+    top: 10px;
+}
+
+#titlepic {
+    max-width: 200px;
+    text-align: center;
+    font-size: 1.2em;
+    display: none;
+    top: 170px;
+    left: 740px;
+    position: absolute;
+    padding: 30px;
+}
+
+#titlepic img{
+
+}

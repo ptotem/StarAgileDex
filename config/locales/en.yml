@@ -21,6 +21,7 @@ en:
         working: "true"
     content_plugin:
       imagecube:
+        layout: "layout1"
         ie: "6+"
         firefox: "true"
         chrome: "false"
@@ -28,6 +29,7 @@ en:
         opera: "false"
         working: "true"
       jimpress:
+        layout: "layout3"
         ie: "6+"
         firefox: "TRUE"
         chrome: "false"
@@ -112,20 +114,30 @@ en:
         opera: "false"
         working: "false"
     ppt_plugin:
-      bookblock:
-            ie: "6+"
-            firefox: "true"
-            chrome: "false"
-            safari: "false"
-            opera: "false"
-            working: "true"
+      iebook:
+        layout: "layout4"
+        ie: "6+"
+        firefox: "true"
+        chrome: "false"
+        safari: "false"
+        opera: "false"
+        working: "true"
       mascotbook:
-            ie: "6+"
-            firefox: "true"
-            chrome: "false"
-            safari: "false"
-            opera: "false"
-            working: "true"
+        layout: "layout3"
+        ie: "6+"
+        firefox: "true"
+        chrome: "false"
+        safari: "false"
+        opera: "false"
+        working: "true"
+      bookblock:
+        layout: "layout3"
+        ie: "6+"
+        firefox: "true"
+        chrome: "false"
+        safari: "false"
+        opera: "false"
+        working: "true"
     advanced_plugin:
   themes:
     blackboard: "Blackboard"

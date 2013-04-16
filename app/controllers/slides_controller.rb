@@ -37,7 +37,9 @@ class SlidesController < ApplicationController
 
     # Pick the Plugin based on the params in the URL and the category it belongs to
     @plugin="#{@plugin_category}/#{@widget_list[params[:plugin].to_i]}"
-
+    #For including best suited layout for selected plugins and executing it's function
+    @plugin_layout=t(:plugins)[s][:"#{@widget_list[params[:plugin].to_i]}"][:layout]
+    gon.plugin_layout="#{@plugin_layout}()"
     # Put the contents into JS variables to be processed by master_init.js
     # ----------------------------------------
 
@@ -84,6 +86,7 @@ class SlidesController < ApplicationController
     t(:fonts).each do |k,v|
       @fontarray<<v
     end
+
 
     gon.widget_list=@widget_list
     gon.fontarray = @fontarray

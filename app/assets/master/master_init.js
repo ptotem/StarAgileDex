@@ -11,6 +11,8 @@ var $subtitle;
 var $widget = $('#widget_wrap');
 
 $(function () {
+    eval(gon.plugin_layout);
+
     // Set up the Title and the Subtitle
     $title.html(gon.title);
     if (gon.no_subtitle && !gon.no_titlepic) {
@@ -60,15 +62,6 @@ function load_menu_bindings(){
         });
         gon.font = $font;
     });
-}
-
-function load_widget(index) {
-    if (index < 0)
-        index = gon.widget_list.length - 1;
-    if (index == gon.widget_list.length)
-        index = 0;
-    gon.plugin = index;
-    window.location = '/slides/' + gon.slide_id + '/' + index + '/' + gon.font + '/' + gon.background;
 }
 
 $.fn.fade1by1 = function (ops) {

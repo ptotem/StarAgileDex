@@ -5,7 +5,13 @@ class Slide < ActiveRecord::Base
   has_many :content_blocks, :dependent => :destroy
   accepts_nested_attributes_for :content_blocks, :reject_if => proc { |attrs| reject = %w(caption image).all? { |a| attrs[a].blank? } }, :allow_destroy => true
 
-  has_attached_file :titlepic, :path => :get_path, :url => :get_url
+  has_attached_file :titlepic, :path => :get_path_title_pic, :url=>:get_url_title_pic ,
+                    :styles=>{
+                        :ie=>["256x256>",:jpg]
+                    },
+                    :convert_options=>{
+                        :all=>"-quality 60"
+                    }
 
   # This is the code for importing of a PPT
   # ------------------------------------------------------------------------------------------
@@ -90,6 +96,22 @@ class Slide < ActiveRecord::Base
       system "mkdir #{Rails.root}/public/guestdata/"+self.presentation.user_id.to_s+"/"+self.presentation.id.to_s+"/"+self.id.to_s
     else
       system "mkdir #{Rails.root}/public/userdata/"+(self.presentation.user.name.downcase.gsub(" ", "_")).to_s+"/"+(self.presentation.name.downcase.gsub(" ", "_")).to_s+"/"+self.id.to_s
+    end
+  end
+
+  def get_path_title_pic
+    if self.presentation.user.role=="guest"
+      "#{Rails.root}/public/guestdata/"+self.presentation.user_id.to_s+"/"+self.presentation.id.to_s+"/images/title_pic/:filename"
+    else
+      "#{Rails.root}/public/userdata/"+self.presentation.user.name.downcase.gsub(" ", "_")+"/"+self.presentation.name.downcase.gsub(" ", "_")+"/images/title_pic/:filename"
+    end
+  end
+
+  def get_url_title_pic
+    if self.presentation.user.role=="guest"
+      "/guestdata/"+self.presentation.user_id.to_s+"/"+self.presentation.id.to_s+"/images/title_pic/:filename"
+    else
+      "/userdata/"+self.presentation.user.name.downcase.gsub(" ", "_")+"/"+self.presentation.name.downcase.gsub(" ", "_")+"/images/title_pic/:filename"
     end
   end
 

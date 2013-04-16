@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="/assets/normalize.css">
   <link rel="stylesheet" href="/assets/master.css">
   <link rel="stylesheet" href="/assets/themes.css">
+  <link rel="stylesheet" href="/assets/<%= @plugin_layout %>.css">
   <%= yield :styles %>
   <%= include_gon %>
 </head>
@@ -18,18 +19,14 @@
 
   <!-- The Menu for cycling through the plugins, changing theme and font -->
   <% unless @export %>
-      <ul class="nav nav-stacked nav-pills pull-right menu_select" style="margin-right: -1%;">
-        <li class="btn-warning" id="ad-menu-toggle">
-          <a href="#" onclick="$('.ad-menu-item').slideToggle();"><i class="icon-tasks"></i></a></li>
-        <li class="active ad-menu-item"><a onclick="load_widget(gon.plugin-1)"><i class="icon-backward"></i></a></li>
-        <li class="active ad-menu-item"><a href="/"><i class="icon-home"></i></a></li>
-        <li class="active ad-menu-item"><a onclick="load_widget(gon.plugin+1)"><i class="icon-retweet"></i></a></li>
-        <li class="active ad-menu-item">
-          <a href="#font_Modal" data-toggle="modal" onclick=""><i class="icon-text-width"></i></a></li>
+      <ul class="nav nav-stacked nav-pills pull-right menu_select" style="margin-top: 0px">
+        <li class="btn-warning" id="ad-menu-toggle"><a href="#" onclick="$('.ad-menu-item').slideToggle();"><i class="icon-tasks"></i></a></li>
         <li class="active ad-menu-item"><a href="/console/<%= @slide.id rescue ""%>"><i class="icon-edit"></i></a></li>
-        <li class="active ad-menu-item"><a onclick="save_slide();"><i class="icon-hdd"></i></a></li>
-        <li class="active ad-menu-item">
-          <a href="#theme_Modal" data-toggle="modal" onclick=""><i class="icon-th"></i></a></li>
+        <li class="active ad-menu-item"><a onclick="/slides/<%= @slide.id %>/<%= params[:font] %>/<%= params[:background] %>"><i class="icon-retweet"></i></a></li>
+        <!--TODO: Give me notification when slide has been saved-->
+        <li class="active ad-menu-item"><a onclick="save_slide();"><i class="icon-download"></i></a></li>
+        <li class="active ad-menu-item"><a href="#font_Modal" data-toggle="modal" onclick=""><i class="icon-text-width"></i></a></li>
+        <li class="active ad-menu-item"><a href="#theme_Modal" data-toggle="modal" onclick=""><i class="icon-th"></i></a></li>
       </ul>
   <% end %>
 
