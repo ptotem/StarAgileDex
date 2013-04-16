@@ -13,7 +13,7 @@ function init_widget() {
 
     });
 
-
+    layout1();
     $('#widget_wrap').show();
 
 
@@ -26,37 +26,37 @@ function init_widget() {
 
 					allownavprev = true;
 					navprev();
-				
+
 				} ).on( 'mouseup mouseleave', function( event ) {
 
 					allownavprev = false;
-				
+
 				} );
 
 				$( '#nav-next' ).on( 'mousedown', function( event ) {
 
 					allownavnext = true;
 					navnext();
-				
+
 				} ).on( 'mouseup mouseleave', function( event ) {
 
 					allownavnext = false;
-				
+
 				} );
 
 				function navnext() {
 					if( allownavnext ) {
 						windy.next();
-						setTimeout( function() {	
+						setTimeout( function() {
 							navnext();
 						}, 150 );
 					}
 				}
-				
+
 				function navprev() {
 					if( allownavprev ) {
 						windy.prev();
-						setTimeout( function() {	
+						setTimeout( function() {
 							navprev();
 						}, 150 );
 					}

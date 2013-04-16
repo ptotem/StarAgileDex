@@ -23,6 +23,6 @@ function init_widget() {
         }
     }, 500);
 
-
+    layout2();
 
 }

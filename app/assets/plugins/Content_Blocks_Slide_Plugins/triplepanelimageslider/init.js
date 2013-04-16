@@ -6,4 +6,5 @@ function init_widget() {
     $("#widget_wrap").show();
 
     $( '#fs-slider' ).imgslider();
+    layout1();
 }
