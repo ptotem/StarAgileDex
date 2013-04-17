@@ -12,8 +12,10 @@
 
 # Ignore all logfiles and tempfiles.
 /log/*.log
-/tmp
+#/tmp
 
 /.idea
-/public/guestdata
-/public/userdata
+#/public/guestdata
+#/public/userdata
+#/public/slides
+#/public/papertemp
