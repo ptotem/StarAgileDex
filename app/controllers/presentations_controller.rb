@@ -19,6 +19,7 @@ class PresentationsController < ApplicationController
   end
 
   #function to export the file as html
+  #TODO: Export needs to be build for guest
   def export
     require 'find'
     require 'fileutils'
