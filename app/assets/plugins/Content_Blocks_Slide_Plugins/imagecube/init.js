@@ -38,16 +38,16 @@ function init_widget() {
         $caption_back.width('0px');
     }
     else {
-        $caption.css('top', '350px');
-        $caption.css('right', '160px');
-        $caption.width('310px');
-        $caption.height('80px');
+        $caption.css('top', '474px');
+        $caption.css('right', '108px');
+        $caption.width('452px');
+        $caption.height('117px');
         $caption.css('text-align', 'center');
 
-        $caption_back.css('top', '350px');
-        $caption_back.css('right', '160px');
-        $caption_back.height('160px');
-        $caption_back.width('350px');
+        $caption_back.css('top', '462px');
+        $caption_back.css('right', '108px');
+        $caption_back.height('117px');
+        $caption_back.width('452px');
     }
 
     setTimeout(function () {

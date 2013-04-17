@@ -1,5 +1,6 @@
 class Slide < ActiveRecord::Base
-  attr_accessible :presentation_id, :sequence, :subtitle, :title, :layout, :font, :background, :content_blocks_attributes, :titlepic, :presentation, :main, :ppt, :mode, :nosub
+  attr_accessible :presentation_id, :sequence, :subtitle, :title, :layout, :font, :background, :content_blocks_attributes, :titlepic, :presentation, :main, :ppt, :ppt_delete, :mode, :nosub
+
   belongs_to :presentation
 
   has_many :content_blocks, :dependent => :destroy
@@ -66,6 +67,7 @@ class Slide < ActiveRecord::Base
   before_create :set_sequence
   after_create :build_directory
 
+  # TODO: Test the directory creation paths
   def get_path
     if self.presentation.user.role=="guest"
       "#{Rails.root}/public/guestdata/"+self.presentation.user_id.to_s+"/"+self.presentation.id.to_s+"/images/:filename"
@@ -118,16 +120,22 @@ class Slide < ActiveRecord::Base
     case self.mode
       when "HTML"
         self.content_blocks.each do |cb|
-          cb.destroy
+          cb.image.destroy
         end
         self.ppt.destroy
       when "Blocks"
+        #TODO: If PPT is present destroy its contents_blocks and save self content_blocks, needs to be discussed, put <attached_file>_delete as attr_accessible
         self.main=""
+        if !self.ppt.blank?
+          self.content_blocks.each do |cb|
+            cb.image.destroy
+          end
+        end
         self.ppt.destroy
       when "PPT"
         self.main=""
         self.content_blocks.each do |cb|
-          cb.destroy
+          cb.image.destroy
         end
     end
     if self.nosub == false

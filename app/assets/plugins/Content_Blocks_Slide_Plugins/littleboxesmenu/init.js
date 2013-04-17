@@ -15,7 +15,7 @@ function init_widget() {
         this_top=this_top+95;
         this_left=this_left+95;
     });
-
+    layout1();
     $("#widget_wrap").show();
 
       /* object to save the initial positions of each box */
@@ -104,4 +104,5 @@ function init_widget() {
             }
             e.preventDefault();
     });
+
 }

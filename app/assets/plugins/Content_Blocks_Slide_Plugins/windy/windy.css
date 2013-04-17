@@ -46,21 +46,6 @@ ul.wi-container li.wi-move {
     margin-top:40px;
 }
 
-.windy-demo ul.wi-container {
-    border-radius: 5px;
-}
-
-.windy-demo ul.wi-container::before,
-.windy-demo ul.wi-container::after {
-    content: '';
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    background: white;
-    left: 0;
-    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.1);
-    border-radius: 5px;
-}
 
 .windy-demo ul.wi-container::before {
     top: 10px;
@@ -84,8 +69,8 @@ ul.wi-container li.wi-move {
 .windy-demo p {
     font-size: 12px;
     font-weight: bold;
-    padding: 0;
-    margin: 0;
+    padding: 10px;
+    margin: 10px;
     color: black;
 }
 
@@ -109,6 +94,7 @@ ul.wi-container li.wi-move {
     position: relative;
     width: 96px;
     margin: 60px;
+    margin-left:100px;"
 }
 
 .windy-demo nav span {

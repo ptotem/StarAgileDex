@@ -162,7 +162,7 @@ px;-webkit-border-radius:3px;border-radius:3px; margin:0 10px 10px 0; }
 
 .image_main{
     height: 300px;
-    width: 800px;
+    width: 835px;
 
 }
 
@@ -172,7 +172,7 @@ px;-webkit-border-radius:3px;border-radius:3px; margin:0 10px 10px 0; }
 
 /* =Skitter styles
 ----------------------------------------------- */
-.box_skitter {position:relative;width:800px;height:300px;background:#000;}
+.box_skitter {position:absolute;width:835px;height:300px;background:#000;margin-top:-87px;}
 .box_skitter img { max-width:none; } /* Tip for stildv */
 .box_skitter ul {display:none;}
 .box_skitter .container_skitter {overflow:hidden;position:relative;}
@@ -238,3 +238,8 @@ px;-webkit-border-radius:3px;border-radius:3px; margin:0 10px 10px 0; }
 .box_skitter .play_pause_button {position:absolute;top:50%;z-index:151;width:42px;height:42px;overflow:hidden;text-indent:-9999em;margin-top:-25px;background:url(../images/pause-button.png) no-repeat left top;opacity:0;}
 .box_skitter .play_pause_button.play_button {background:url(../images/play-button.png) no-repeat left top;}
 
+ /* borderbox  */
+.border_box{
+    margin-top:-47px;
+    margin-left:64px;
+}

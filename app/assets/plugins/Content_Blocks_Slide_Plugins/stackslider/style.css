@@ -253,31 +253,4 @@
 
 
 
-@media screen and (max-width: 450px){
-	.st-wrapper .st-item {
-		width: 200px;
-	}
-	.st-wrapper .st-title {
-		bottom: 150px;
-		padding-left: 0px;
-		padding-right: 0px;
-	}
-	.st-wrapper .st-title h2 {
-		font-size: 22px;
-		line-height: 32px;
-	}
-	.st-wrapper nav {
-		bottom: 140px;
-	}
-	.st-wrapper {
-         margin-top: -100px;
-		height: 300px;
-	}
-}
 
-#widget_wrap {
-    height: 300px;
-    margin: 0 auto;
-    margin-top: 0px;
-    display: none;
-}

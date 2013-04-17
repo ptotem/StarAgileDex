@@ -16,4 +16,26 @@ h3 {
     width: 450px;
     bottom: -30px;
 }
+#caption_wrap_back {
+    background: none repeat scroll 0 0 black;
+    height: 93px;
+    opacity: 0.8;
+    position: absolute;
+    right: 110px;
+    top: 350px;
+    width: 500px;
+    display: none;
+}
+
+#caption_wrap {
+    font-size: 18px;
+    height: 80px;
+    padding: 30px 20px;
+    position: absolute;
+    right: 140px;
+    text-align: center;
+    top: 350px;
+    width: 500px;
+    display: none;
+}
 
