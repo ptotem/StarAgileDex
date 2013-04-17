@@ -94,7 +94,7 @@ en:
         chrome: "false"
         safari: "false"
         opera: "false"
-        working: "true"
+        working: "false"
       triplepanelimageslider:
         ie: "6+"
         firefox: "TRUE"
