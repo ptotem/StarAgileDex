@@ -31,26 +31,6 @@
 	background-clip: padding-box;
 	outline: none;
 }
-.color-1 {
-	/*background-color: #E3D8FF;*/
-	/*background-color: rgba(227, 216, 268, 1);*/
-}
-.color-2 {
-	/*background-color: #EBBBBC;*/
-	/*background-color: rgba(235, 187, 188, 1);*/
-}
-.color-3 {
-	/*background-color: #EED9C0;*/
-	/*background-color: rgba(238, 217, 192, 1);*/
-}
-.color-4 {
-	/*background-color: #DFEBB1;*/
-	/*background-color: rgba(223, 235, 177, 1);*/
-}
-.color-5{
-	/*background-color: #C1E6E5;*/
-	/*background-color: rgba(193, 230, 229, 1);*/
-}
 .step {	
 	width: 900px;
     height: 420px;
@@ -181,7 +161,7 @@ a.jms-link{
 	position: absolute;
 	top: 50%;
 	margin-top: -40px;
-	height: 80px;
+	height: 32px;
 	width: 30px;
 	cursor: pointer;
 	z-index: 2000;
@@ -189,12 +169,14 @@ a.jms-link{
 	border-radius: 3px;
 }
 .jms-arrows span.jms-arrows-prev{
-	background: #fff url(../images/arrow_left.png) no-repeat 50% 50%;
+	background: #fff url(arrow_left.png) no-repeat 50% 50%;
 	left: -10px;
+    background-size:100%;
 }
 .jms-arrows span.jms-arrows-next{
-	background: #fff url(../images/arrow_right.png) no-repeat 50% 50%;
-	right: -10px;
+	background: #fff url(arrow_right.png) no-repeat 50% 50%;
+	right: -23px;
+    background-size:100%;
 }
 /* Not supported style */
 .jms-wrapper.not-supported{

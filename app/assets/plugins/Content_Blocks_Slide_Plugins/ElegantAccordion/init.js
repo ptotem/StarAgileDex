@@ -36,6 +36,7 @@ function init_widget() {
         $('#caption_wrap_back').hide();
         $('#caption_wrap').hide();
     }
+
 }
 
 

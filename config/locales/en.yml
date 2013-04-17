@@ -89,7 +89,7 @@ en:
         chrome: "false"
         safari: "false"
         opera: "false"
-        working: "true"
+        working: "false"
       triplepanelimageslider:
         ie: "6+"
         firefox: "TRUE"
@@ -125,7 +125,7 @@ en:
             chrome: "false"
             safari: "false"
             opera: "false"
-            working: "true"
+            working: "false"
     advanced_plugin:
   themes:
     blackboard: "Blackboard"

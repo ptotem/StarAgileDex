@@ -7,6 +7,7 @@
  */
 
 function layout1(){
+    var $cube = $('#full3DCube');
     if (gon.no_subtitle && gon.no_titlepic) {
         $('#subtitle_back').removeClass('elements');
         $('#titlepic').removeClass('elements');
@@ -25,7 +26,7 @@ function layout1(){
         $('#wrapper').fadeIn(function () {
             $title.boxfit({multiline: true, maximum_font_size: 36});
             $subtitle.boxfit({multiline: true, maximum_font_size: 36});
-//            $caption.html($cube.find('img:first').attr('title'));
+            $caption.html($cube.find('img:first').attr('title'));
             $('.elements').fade1by1();
         });
     }, 500);
