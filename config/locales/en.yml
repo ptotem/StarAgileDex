@@ -28,6 +28,7 @@ en:
         opera: "false"
         working: "true"
       jimpress:
+        layout: "layout2"
         ie: "6+"
         firefox: "TRUE"
         chrome: "false"
@@ -77,6 +78,7 @@ en:
         opera: "false"
         working: "false"
       slideshow:
+        layout: "layout2"
         ie: "6+"
         firefox: "TRUE"
         chrome: "false"
@@ -98,6 +100,7 @@ en:
         opera: "false"
         working: "false"
       windy:
+        layout: "layout1"
         ie: "6+"
         firefox: "TRUE"
         chrome: "false"
