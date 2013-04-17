@@ -321,7 +321,6 @@ function load_bindings() {
     }).fadeIn("slow");
 }
 
-//TODO: Change such that the hidden fields get cleared on switching
 
 function form_bindings() {
 

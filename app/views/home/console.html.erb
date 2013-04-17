@@ -144,7 +144,7 @@
   <div class="navbar-inner">
     <ul class="nav pull-left">
       <% if !user_signed_in? %>
-          <li><a href="#guest_Modal" data-toggle="modal" class="brand guest">Proceed as a Guest...</a></li>
+          <li></li>
       <%else %>
           <li id="this_sig" class="brand">
             <% if current_user.email.include?("guest") %>

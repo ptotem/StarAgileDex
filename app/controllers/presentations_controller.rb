@@ -24,6 +24,7 @@ class PresentationsController < ApplicationController
     require 'fileutils'
     require 'pathname'
     @presentation=Presentation.find(params[:id])
+    system("rm -rf #{Rails.root}/public/slides/*.zip")
     #Please, make slides directory in public folder
     #Make Directory in public file copy all the component of assets/master,assets/background in public/slides/assets directory.
     system "mkdir #{Rails.root}/public/slides/assets"
@@ -107,7 +108,7 @@ class PresentationsController < ApplicationController
       File.open("#{Rails.root}/public/slides/#{slide.id}.html", 'w') {|f| f.write(render_to_string(:file => 'slides/builder').gsub('/assets','assets').gsub('themes.css','theme.css').gsub("#{@plugin_category}/",'').gsub("/userdata/#{@presentation.user.name.downcase.gsub(" ", "_")}/#{@presentation.name.downcase.gsub(" ", "_")}/images/title_pic/","assets/img/")) }
     end
     @zipped_name = (@presentation.name).gsub(" ", "_")
-    Dir.chdir("#{Rails.root}/public/slides")
+    Dir.chdir("#{Rails.root}/public/slides/")
     system("zip -r #{@zipped_name} . ")
     send_file "#{Rails.root}/public/slides/#{@zipped_name}.zip"
     system("rm -rf #{Rails.root}/public/slides/assets/")

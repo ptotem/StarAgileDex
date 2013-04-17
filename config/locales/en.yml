@@ -5,6 +5,7 @@ en:
   plugins:
     title_plugin:
       allcentered:
+        layout: "layout1"
         ie: "6+"
         firefox: "true"
         chrome: "false"
@@ -13,6 +14,7 @@ en:
         working: "true"
     wysiwyg_plugin:
       simple_title_content:
+        layout: "layout1"
         ie: "6+"
         firefox: "true"
         chrome: "false"
@@ -29,7 +31,7 @@ en:
         opera: "false"
         working: "true"
       jimpress:
-        layout: "layout3"
+        layout: "layout2"
         ie: "6+"
         firefox: "TRUE"
         chrome: "false"

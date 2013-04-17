@@ -64,6 +64,7 @@ function load_menu_bindings(){
     });
 }
 
+
 $.fn.fade1by1 = function (ops) {
     var
         o = $.extend({

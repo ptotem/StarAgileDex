@@ -100,6 +100,16 @@ class SlidesController < ApplicationController
 
     # ---------------------------------------
 
+
+    if !params[:plugin].is_a?(Integer)
+      @widget_list.each_with_index do |i, index|
+        if (i==params[:plugin].to_i)
+          params[:plugin]=index
+        end
+      end
+    end
+
+
   end
 
   # GET /slides/1

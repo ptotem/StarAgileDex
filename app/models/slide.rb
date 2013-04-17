@@ -66,7 +66,6 @@ class Slide < ActiveRecord::Base
   before_create :set_sequence
   after_create :build_directory
 
-  # TODO: Test the directory creation paths
   def get_path
     if self.presentation.user.role=="guest"
       "#{Rails.root}/public/guestdata/"+self.presentation.user_id.to_s+"/"+self.presentation.id.to_s+"/images/:filename"
