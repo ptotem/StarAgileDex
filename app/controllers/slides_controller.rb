@@ -37,12 +37,17 @@ class SlidesController < ApplicationController
 
     # Pick the Plugin based on the params in the URL and the category it belongs to
     @plugin="#{@plugin_category}/#{@widget_list[params[:plugin].to_i]}"
-
+    #For including best suited layout for selected plugins and executing it's function
+    #TODO: Check for plugins
+    @plugin_layout=t(:plugins)[s][:"#{@widget_list[params[:plugin].to_i]}"][:layout]
+    gon.plugin_layout="#{@plugin_layout}()"
     # Put the contents into JS variables to be processed by master_init.js
     # ----------------------------------------
 
     gon.slide_id=@slide.id
     gon.title=@slide.title
+    gon.mode=@slide.mode
+    gon.nosub=@slide.nosub
 
     # If there is no titlepic or subtitle, don't show either
     # If there is subtitle, show subtitle in subtitle_block and adjust text size with Textfill plugin
@@ -83,6 +88,7 @@ class SlidesController < ApplicationController
       @fontarray<<v
     end
 
+
     gon.widget_list=@widget_list
     gon.fontarray = @fontarray
     gon.fontadjustment = @fontadjustment
@@ -94,6 +100,16 @@ class SlidesController < ApplicationController
     gon.plugin=params[:plugin].to_i
 
     # ---------------------------------------
+
+
+    if !params[:plugin].is_a?(Integer)
+      @widget_list.each_with_index do |i, index|
+        if (i==params[:plugin].to_i)
+          params[:plugin]=index
+        end
+      end
+    end
+
 
   end
 
@@ -124,7 +140,6 @@ class SlidesController < ApplicationController
       @presentation=Presentation.find(params[:presentation_id])
     end
     @slide = Slide.find(params[:id])
-    @slide.content_blocks.build
     render :layout => false
   end
 
@@ -134,6 +149,7 @@ class SlidesController < ApplicationController
     @slide = Slide.new(params[:slide])
     respond_to do |format|
       if @slide.save
+        @slide.remove_redundancy
         format.html { redirect_to builder_path(@slide, @slide.layout, @slide.font, @slide.background), notice: 'Slide was successfully created.' }
         format.json { render json: @slide, status: :created, location: @slide }
       else
@@ -151,6 +167,7 @@ class SlidesController < ApplicationController
 
     respond_to do |format|
       if @slide.update_attributes(params[:slide])
+        @slide.remove_redundancy
         format.html { redirect_to builder_path(@slide, @slide.layout, @slide.font, @slide.background), notice: 'Slide was successfully updated.' }
         format.json { head :no_content }
       else

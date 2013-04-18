@@ -13,6 +13,13 @@
     color: white;
 }
 
+.none {
+    background: #000000;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    color: white;
+}
+
 .red_velvet {
     background-image: url('/assets/red_background.jpg');
     background-size: 100% 100%;

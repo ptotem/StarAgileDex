@@ -1,11 +1,18 @@
 class Slide < ActiveRecord::Base
-  attr_accessible :presentation_id, :sequence, :subtitle, :title, :layout, :font, :background, :content_blocks_attributes, :titlepic, :presentation, :main, :ppt, :mode
+  attr_accessible :presentation_id, :sequence, :subtitle, :title, :layout, :font, :background, :content_blocks_attributes, :titlepic, :presentation, :main, :ppt, :ppt_delete, :mode, :nosub
+
   belongs_to :presentation
 
   has_many :content_blocks, :dependent => :destroy
   accepts_nested_attributes_for :content_blocks, :reject_if => proc { |attrs| reject = %w(caption image).all? { |a| attrs[a].blank? } }, :allow_destroy => true
 
-  has_attached_file :titlepic, :path => :get_path, :url=>:get_url
+  has_attached_file :titlepic, :path => :get_path_title_pic, :url=>:get_url_title_pic ,
+                    :styles=>{
+                        :ie=>["256x256>",:jpg]
+                    },
+                    :convert_options=>{
+                        :all=>"-quality 60"
+                    }
 
   # This is the code for importing of a PPT
   # ------------------------------------------------------------------------------------------
@@ -25,6 +32,7 @@ class Slide < ActiveRecord::Base
   # Before you start processing the ppt, create a presentation specific directory in the temporary root
   # and remove the content blocks that were there earlier
   before_ppt_post_process :create_papertemp
+
   def create_papertemp
     require 'find'
     require 'fileutils'
@@ -40,6 +48,7 @@ class Slide < ActiveRecord::Base
   # After that is done, it deletes the temporary directory as garbage cleanup
 
   after_save :make_content_blocks
+
   def make_content_blocks
     require 'find'
     require 'fileutils'
@@ -48,7 +57,7 @@ class Slide < ActiveRecord::Base
       line.match(/(\d+)\.jpg$/)[1].to_i
     end
     images.each do |page_image|
-      ContentBlock.create!(:slide_id=>id,:image => File.open(page_image))
+      ContentBlock.create!(:slide_id => id, :image => File.open(page_image))
     end
     system "rm -rf #{Rails.root}/public/papertemp/#{self.presentation_id}"
   end
@@ -56,7 +65,6 @@ class Slide < ActiveRecord::Base
   # -------------------------------------------------------------------------------------------------------
 
   before_create :set_sequence
-
   after_create :build_directory
 
   # TODO: Test the directory creation paths
@@ -92,4 +100,50 @@ class Slide < ActiveRecord::Base
     end
   end
 
+  def get_path_title_pic
+    if self.presentation.user.role=="guest"
+      "#{Rails.root}/public/guestdata/"+self.presentation.user_id.to_s+"/"+self.presentation.id.to_s+"/images/title_pic/:filename"
+    else
+      "#{Rails.root}/public/userdata/"+self.presentation.user.name.downcase.gsub(" ", "_")+"/"+self.presentation.name.downcase.gsub(" ", "_")+"/images/title_pic/:filename"
+    end
+  end
+
+  def get_url_title_pic
+    if self.presentation.user.role=="guest"
+      "/guestdata/"+self.presentation.user_id.to_s+"/"+self.presentation.id.to_s+"/images/title_pic/:filename"
+    else
+      "/userdata/"+self.presentation.user.name.downcase.gsub(" ", "_")+"/"+self.presentation.name.downcase.gsub(" ", "_")+"/images/title_pic/:filename"
+    end
+  end
+
+  def remove_redundancy
+    case self.mode
+      when "HTML"
+        self.content_blocks.each do |cb|
+          cb.image.destroy
+        end
+        self.ppt.destroy
+      when "Blocks"
+        #TODO: If PPT is present destroy its contents_blocks and save self content_blocks, needs to be discussed, put <attached_file>_delete as attr_accessible
+        self.main=""
+        if !self.ppt.blank?
+          self.content_blocks.each do |cb|
+            cb.image.destroy
+          end
+        end
+        self.ppt.destroy
+      when "PPT"
+        self.main=""
+        self.content_blocks.each do |cb|
+          cb.image.destroy
+        end
+    end
+    if self.nosub == false
+      self.titlepic.destroy
+    else
+      self.subtitle=""
+    end
+
+    self.save
+  end
 end

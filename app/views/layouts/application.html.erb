@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE>
 <html xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
 <head>
   <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="/assets/normalize.css">
   <link rel="stylesheet" href="/assets/master.css">
   <link rel="stylesheet" href="/assets/themes.css">
+  <link rel="stylesheet" href="/assets/<%= @plugin_layout %>.css">
   <%= yield :styles %>
   <%= include_gon %>
 </head>
@@ -18,18 +19,14 @@
 
   <!-- The Menu for cycling through the plugins, changing theme and font -->
   <% unless @export %>
-      <ul class="nav nav-stacked nav-pills pull-right menu_select" style="margin-right: -1%;">
-        <li class="btn-warning" id="ad-menu-toggle">
-          <a href="#" onclick="$('.ad-menu-item').slideToggle();"><i class="icon-tasks"></i></a></li>
-        <li class="active ad-menu-item"><a onclick="load_widget(gon.plugin-1)"><i class="icon-backward"></i></a></li>
-        <li class="active ad-menu-item"><a href="/"><i class="icon-home"></i></a></li>
-        <li class="active ad-menu-item"><a onclick="load_widget(gon.plugin+1)"><i class="icon-retweet"></i></a></li>
-        <li class="active ad-menu-item">
-          <a href="#font_Modal" data-toggle="modal" onclick=""><i class="icon-text-width"></i></a></li>
-        <li class="active ad-menu-item"><a href="/console/<%= @slide.id rescue ""%>"><i class="icon-edit"></i></a></li>
-        <li class="active ad-menu-item"><a onclick="save_slide();"><i class="icon-hdd"></i></a></li>
-        <li class="active ad-menu-item">
-          <a href="#theme_Modal" data-toggle="modal" onclick=""><i class="icon-th"></i></a></li>
+      <ul class="nav nav-stacked nav-pills pull-right menu_select" style="margin-top: 0px">
+        <li class="btn-warning" id="ad-menu-toggle"><a href="#" onclick="$('.ad-menu-item').slideToggle();"><i class="icon-tasks"></i></a></li>
+        <li class="active ad-menu-item"><a href="/console"><i class="icon-home"></i></a></li>
+        <li class="active ad-menu-item"><a href="/console/<%= @slide.id rescue "" %>"><i class="icon-edit"></i></a></li>
+        <li class="active ad-menu-item"><a href="/slides/<%= @slide.id %>/<%= params[:plugin].to_i + 1 %>/<%= params[:font] %>/<%= params[:background] %>"><i class="icon-retweet"></i></a></li>
+        <li class="active ad-menu-item"><a onclick="save_slide();"><i class="icon-download"></i></a></li>
+        <li class="active ad-menu-item"><a href="#font_Modal" data-toggle="modal" onclick=""><i class="icon-text-width"></i></a></li>
+        <li class="active ad-menu-item"><a href="#theme_Modal" data-toggle="modal" onclick=""><i class="icon-th"></i></a></li>
       </ul>
   <% end %>
 
@@ -64,7 +61,7 @@
       <div class="navbar-inner">
         <ul class="nav">
           <% if !user_signed_in? %>
-              <li><a href="#guest_Modal" data-toggle="modal" class="brand guest">Proceed as a Guest...</a></li>
+              <li></li>
           <% end %>
         </ul>
         <% if !user_signed_in? %>
@@ -155,11 +152,19 @@
 <script type="text/javascript" src="/assets/master_init.js"></script>
 <script type="text/javascript" src="/assets/layout.js"></script>
 
+<script type="text/javascript" src="/assets/noty.js"></script>
+<script type="text/javascript" src="/assets/noty.top.js"></script>
+<script type="text/javascript" src="/assets/noty.topRight.js"></script>
+<script type="text/javascript" src="/assets/noty.bottomRight.js"></script>
+<script type="text/javascript" src="/assets/noty.bottomCenter.js"></script>
+<!-- You can add more layouts if you want -->
+<script type="text/javascript" src="/assets/noty.default.js"></script>
+
 <%= yield :scripts %>
 
 <script type="text/javascript">
 
-  /*function to save slide with a single widget font and background image*/
+    /*function to save slide with a single widget font and background image*/
     function save_slide() {
         var data = {id:[], plugin:[], font:[], background:[]};
         data["id"].push(gon.slide_id);
@@ -172,10 +177,19 @@
             data:JSON.stringify(data),
             contentType:"application/json",
             success:function (data) {
-
+                display_noty();
             }
         });
     }
+
+    // This function displays notification on successful slide save
+    // Resuorce : http://needim.github.io/noty/
+    // javascripts for noty are in assets/master/noty.* (js names starting with noty)
+    var noty;
+    function display_noty(){
+        noty = noty({ text: 'Slide saved successfully!', layout: 'bottomCenter'});
+    }
+
 </script>
 </body>
 </html>

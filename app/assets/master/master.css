@@ -53,11 +53,11 @@ body {
     height:100%;
     padding:10px;
     overflow: hidden;
-    display: none;
 }
 
 .ad-menu-item{
     display: none;
+    cursor: pointer;
 }
 
 /* Buttons from AgileDex*/

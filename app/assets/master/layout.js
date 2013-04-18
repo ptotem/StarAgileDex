@@ -57,6 +57,20 @@ function layout2(){
         });
     }, 500);
 
+}
 
+function layout3() {
+    setTimeout(function () {
+        $('#wrapper').fadeIn(function () {
+            $('.elements').fade1by1();
+        });
+    }, 500);
+}
 
+function layout4() {
+    setTimeout(function () {
+        $('#wrapper').fadeIn(function () {
+            $('.elements').fade1by1();
+        });
+    }, 500);
 }
