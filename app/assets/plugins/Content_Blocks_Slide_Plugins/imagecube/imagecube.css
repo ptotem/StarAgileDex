@@ -18,24 +18,23 @@ h3 {
 }
 #caption_wrap_back {
     background: none repeat scroll 0 0 black;
-    height: 93px;
+    height: 80px;
     opacity: 0.8;
     position: absolute;
-    right: 110px;
-    top: 350px;
-    width: 500px;
+    right: 108px;
+    top: 474px;
+    width: 452px;
     display: none;
 }
 
 #caption_wrap {
-    font-size: 18px;
     height: 80px;
-    padding: 30px 20px;
+    /*padding: 30px 20px;*/
     position: absolute;
-    right: 140px;
+    right: 108px;
     text-align: center;
-    top: 350px;
-    width: 500px;
+    top: 474px;
+    width: 452px;
     display: none;
 }
 

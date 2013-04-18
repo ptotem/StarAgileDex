@@ -26,10 +26,14 @@ function layout1(){
         $('#wrapper').fadeIn(function () {
             $title.boxfit({multiline: true, maximum_font_size: 36});
             $subtitle.boxfit({multiline: true, maximum_font_size: 36});
-            $caption.html($cube.find('img:first').attr('title'));
             $('.elements').fade1by1();
         });
     }, 500);
+    $caption.hide();
+    $caption_back.hide();
+    $caption.html($cube.find('img:first').attr('title'));
+    $caption.boxfit({multiline: true, maximum_font_size: 36});
+
 }
 
 function layout2(){

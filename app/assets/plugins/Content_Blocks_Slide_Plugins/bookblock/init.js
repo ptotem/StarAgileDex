@@ -1,18 +1,20 @@
 function init_widget() {
     $.each(images, function (index, elm) {
 
+        var this_caption='caption'+index;
 
         if (elm != null) {
 
-            $('#bb-bookblock').append('<div class="bb-item"><a><img src="' + elm + '" title="' + captions[index] + '"/></a><p style="position:absolute;left:85px;top:100px;padding: 10px;opacity:0.7;background-color: #000000;">' + captions[index] + '</p></div>');
+            $('#bb-bookblock').append('<div class="bb-item"><a><img src="' + elm + '" title="' + captions[index] + '"/></a><div id='+this_caption+' class="xyz">' + captions[index] + '</div></div>');
         } else {
 
-            $('#bb-bookblock').append('<div class="bb-item"><a></a><p style="padding:30px;position:absolute;left:0px;margin-top:0px;opacity:0.7;background-color: #000000;height: 80%;width: 85%;font-size: 1em;line-height: 1.5em;">' + captions[index] + '</p></div>');
+            $('#bb-bookblock').append('<div class="bb-item"><a></a><div id='+this_caption+' class="xyz">' + captions[index] + '</div></div>');
 
 
         }
 
-
+        this_caption='#'+this_caption;
+        $(this_caption).boxfit({multiline: true, maximum_font_size: 36});
     });
 
     $('#widget_wrap').show();
@@ -84,6 +86,8 @@ function init_widget() {
 
         return { init:init };
 
+
+
     })();
 
     Page.init();
@@ -95,6 +99,7 @@ function init_widget() {
             $('.bb-item p').hide();
         }
     }, 1000);
-    layout1();
+    //layout1();
+
 
 }

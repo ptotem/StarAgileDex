@@ -11,8 +11,8 @@ ul.accordion{
 ul.accordion li{
     float:right;
     width:115px;
-    margin-top:130px;
-    height:400px;
+    margin-top:300px;
+    height:250px;
     display:block;
     border-right:2px solid #fff;
     border-bottom:2px solid #fff;
@@ -26,21 +26,7 @@ ul.accordion li{
     -webkit-box-shadow:1px 3px 15px #555;
     box-shadow:1px 3px 15px #555;
 }
-ul.accordion li.bg1{
-    background-image:url(../images/1.jpg);
-}
-ul.accordion li.bg2{
-    background-image:url(../images/2.jpg);
-}
-ul.accordion li.bg3{
-    background-image:url(../images/3.jpg);
-}
-ul.accordion li.bg4{
-    background-image:url(../images/4.jpg);
-}
-ul.accordion li.bleft{
-    border-left:2px solid #fff;
-}
+
 ul.accordion li .heading{
     background-color:#fff;
     padding:10px;
@@ -102,7 +88,6 @@ ul.accordion li .description a:hover{
 }
 
 ul.accordion li .bgDescription{
-    background:transparent url(../images/bgDescription.png) repeat-x top left;
     height:340px;
     position:absolute;
     bottom:0px;
@@ -111,26 +96,3 @@ ul.accordion li .bgDescription{
     display:none;
 }
 
-
-#widget_wrap {
-    height: 300px;
-    margin: 0 auto;
-    margin-top: 60px;
-    display: none;
-}
-
-#title_wrap {
-    margin:0 auto;
-    display: none;
-    text-align: center;
-}
-
-
-#subtitle {
-    height: auto;
-    width: auto;
-    text-align: center;
-    font-size: 18px;
-    display: none;
-    margin:0 auto;
-}

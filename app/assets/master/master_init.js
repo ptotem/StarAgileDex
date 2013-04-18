@@ -9,7 +9,6 @@ var $subtitle;
 var $widget = $('#widget_wrap');
 
 $(function () {
-    eval(gon.plugin_layout);
 
     // Set up the Title and the Subtitle
     $title.html(gon.title);
@@ -26,11 +25,16 @@ $(function () {
     load_menu_bindings();
 });
 
+
+
+
+
+
 // TODO: Clean up this code
 
 function load_menu_bindings(){
     $('.ad-menu-item').slideToggle();
-
+    eval(gon.plugin_layout);
     //change class of a wrapper (i.e. bg, theme) based on theme selection drop-down from theme modal, and display currently selected theme in theme modal
     $("#ts").live("change", function () {
         var selected_theme = $('#ts').val();
@@ -62,6 +66,14 @@ function load_menu_bindings(){
     });
 }
 
+function load_widget(index) {
+    if (index < 0)
+        index = gon.widget_list.length - 1;
+    if (index == gon.widget_list.length)
+        index = 0;
+    gon.plugin = index;
+    window.location = '/slides/' + gon.slide_id + '/' + index + '/' + gon.font + '/' + gon.background;
+}
 
 $.fn.fade1by1 = function (ops) {
     var
@@ -74,6 +86,6 @@ $.fn.fade1by1 = function (ops) {
     for (var i=0, d=0, l=$el.length; i<l; i++, d+=o.delay)
         $el.eq(i).delay(d).fadeIn(o.speed, o.ease);
     return $el
-};
+}
 
 
