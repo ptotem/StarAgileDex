@@ -10,6 +10,7 @@ $(function () {
             transitInNewSlide(gon.slide_id, gon.presentation_id);
         }, 1000);
     }
+
 });
 
 // These functions manage the transitions between the Deck view, Slides view and New Slide View

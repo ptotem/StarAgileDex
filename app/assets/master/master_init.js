@@ -63,6 +63,15 @@ function load_menu_bindings(){
     });
 }
 
+function load_widget(index) {
+    if (index < 0)
+        index = gon.widget_list.length - 1;
+    if (index == gon.widget_list.length)
+        index = 0;
+    gon.plugin = index;
+    window.location = '/slides/' + gon.slide_id + '/' + index + '/' + gon.font + '/' + gon.background;
+}
+
 
 $.fn.fade1by1 = function (ops) {
     var
