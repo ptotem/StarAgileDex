@@ -1,5 +1,3 @@
-/*TODO: Content Blocks without Images are not to be allowed*/
-
 /* Global Variables*/
 var captions = gon.caption;
 var images = gon.image_list;
