@@ -1,4 +1,4 @@
-<%= nested_form_for(@slide, :html => {:multipart => true}) do |f| %>
+<%= nested_form_for(@slide, :html => {:multipart => true, :class=>"cmxform"}) do |f| %>
 
     <div id="slide_form_panel_header" xmlns="http://www.w3.org/1999/html">Enter Slide Content</div>
     <a href="#" class="btn btn-inverse" onclick="transitOut()">Cancel</a>
@@ -10,7 +10,7 @@
       <%= f.hidden_field :presentation_id, :value => @presentation.id %>
       <%= f.hidden_field :mode, :value => @slide.mode %>
       <%= f.hidden_field :nosub, :value => @slide.nosub %>
-      <%= f.text_field :title, :class => "slide_field", :placeholder => "Title" %>
+      <%= f.text_field :title, :class => "slide_field required", :placeholder => "Title" %>
       <%= f.text_field :subtitle, :class => "slide_field", :placeholder => "Subtitle" %>
       <div id="titlepic_block">
         <% if !@slide.titlepic.blank? %>
@@ -56,7 +56,7 @@
               <hr/>
               <%= widget_form.link_to_remove "x", :class => "pull-right", :style => "margin-right:40px;" %>
               <%= widget_form.text_area :caption, :placeholder => "Enter Caption", :class => "content_block_caption_txt slide_field", :rows => 2, :cols => 30, :style => "margin-right:-40px" %>
-              <%= widget_form.file_field :image, :placeholder => "Add Image" %>
+              <%= widget_form.file_field :image, :placeholder => "Add Image", :class => "required" %>
               <br/>
               <br/>
           <% end %>
@@ -121,6 +121,13 @@
         if (!gon.titlepic) {
             $('#slide_titlepic').show();
         }
+
+        // Form validation
+        // Resource : http://docs.jquery.com/Plugins/validation#Validate_forms_like_you.27ve_never_been_validating_before.21
+        // Resource : http://jzaefferer.github.com/jquery-validation/jquery.validate.js
+        // js source included in console
+        var slide_form_id = $('form').attr('id');
+        $("#"+slide_form_id).validate();
 
     });
 </script>
