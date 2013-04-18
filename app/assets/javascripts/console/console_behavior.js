@@ -256,7 +256,7 @@ function delete_presentation() {
 
 }
 function export_as_html() {
-    window.location='/export/'+$('#slide_presentation_id').val();
+    window.location = '/export/' + $('#slide_presentation_id').val();
 }
 
 function delete_slide(slide_id_string) {
@@ -329,6 +329,14 @@ function form_bindings() {
         if ($('#slide_title').val() == "")
             $('#slide_title').attr("placeholder", "Title cannot be blank");
     });
+
+    $('.content_block_caption_txt').focusout(function () {
+        if($(this).val().split(/ /).length-1>20)
+        {
+            $(this).val('');
+            $(this).attr("placeholder", "Only twenty words are allowed as title");
+        }
+    });
     $('#slide_title').focusin(function () {
         if ($('#slide_title').val() == "")
             $('#slide_title').attr("placeholder", "Title");
@@ -339,6 +347,14 @@ function form_bindings() {
     $('#show_wysiwyg').click(open_blocks_mode);
     $('#clear_wysiwyg').click(open_wysiwyg_mode);
     $('#upload_ppt').click(open_ppt_mode);
+
+    $(':file').on("change", function () {
+        $this = $(this);
+        if ($this.val() != "") {
+            $this.parent().find('.overlap_file_field').hide();
+            $this.parent().find(':checkbox').attr("checked", false);
+        }
+    });
 
 }
 
@@ -384,6 +400,7 @@ function switch_to_titlepic() {
     $('#clear_titlepic').show();
     $('#titlepic_block').show();
     $('#existing_titlepic').show();
+    $('#slide_titlepic').show();
     $('#change_titlepic').hide();
     $('#slide_subtitle').hide();
     $('#slide_nosub').val(true);

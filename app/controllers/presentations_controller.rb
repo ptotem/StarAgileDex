@@ -88,7 +88,7 @@ class PresentationsController < ApplicationController
       gon.background = slide.background
       gon.plugin=0
 
-      gon.image_list=slide.content_blocks.map{|t| t.image.path.gsub("#{Rails.root}/public/userdata/#{@presentation.user.name.downcase.gsub(" ", "_")}/#{@presentation.name.downcase}/#{slide.id}","assets/img/#{slide.id}")}
+      gon.image_list=slide.content_blocks.map{|t| t.image.path.gsub("#{Rails.root}/public/userdata/#{@presentation.user.name.downcase.gsub(" ", "_")}/#{@presentation.name.downcase.gsub(" ", "_")}/#{slide.id}","assets/img/#{slide.id}")}
 
       gon.caption=slide.content_blocks.map{|t| t.caption}
       gon.fontarray = @fontarray

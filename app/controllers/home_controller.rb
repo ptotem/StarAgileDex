@@ -22,6 +22,7 @@ class HomeController < ApplicationController
     else
       @slide=Slide.find(params[:slide_id])
       gon.edit=true
+      gon.fieldset_id=@slide.content_blocks.map{|t| t.id}
       gon.presentation=@slide.presentation.name
       gon.presentation_id=@slide.presentation.id
       gon.slide_id=@slide.id

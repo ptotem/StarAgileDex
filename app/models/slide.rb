@@ -13,6 +13,13 @@ class Slide < ActiveRecord::Base
                     :convert_options=>{
                         :all=>"-quality 60"
                     }
+  attr_accessor :delete_titlepic
+  attr_accessible :delete_titlepic
+  before_validation { titlepic.clear if delete_titlepic == '1' }
+
+  attr_accessor :delete_image
+  attr_accessible :delete_image
+  #before_validation { image.clear if delete_image == '1' }
 
   # This is the code for importing of a PPT
   # ------------------------------------------------------------------------------------------
@@ -120,22 +127,17 @@ class Slide < ActiveRecord::Base
     case self.mode
       when "HTML"
         self.content_blocks.each do |cb|
-          cb.image.destroy
+          cb.destroy
         end
         self.ppt.destroy
       when "Blocks"
         #TODO: If PPT is present destroy its contents_blocks and save self content_blocks, needs to be discussed, put <attached_file>_delete as attr_accessible
         self.main=""
-        if !self.ppt.blank?
-          self.content_blocks.each do |cb|
-            cb.image.destroy
-          end
-        end
         self.ppt.destroy
       when "PPT"
         self.main=""
         self.content_blocks.each do |cb|
-          cb.image.destroy
+          cb.destroy
         end
     end
     if self.nosub == false
