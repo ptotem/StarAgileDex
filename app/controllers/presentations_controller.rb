@@ -48,7 +48,10 @@ class PresentationsController < ApplicationController
       gon.view_deck=@view_deck
       #Make directory with slide.id name in public/slides/assets/img and copying the slides images in to that directory
       system "mkdir #{Rails.root}/public/slides/assets/img/#{slide.id}"
-      FileUtils.cp_r("#{Rails.root}/public/userdata/#{@presentation.user.name.downcase.gsub(" ", "_")}/#{@presentation.name.downcase.gsub(" ", "_")}/#{slide.id}/content_blocks/","#{Rails.root}/public/slides/assets/img/#{slide.id}/" )
+      if !slide.content_blocks.blank?
+        FileUtils.cp_r("#{Rails.root}/public/userdata/#{@presentation.user.name.downcase.gsub(" ", "_")}/#{@presentation.name.downcase.gsub(" ", "_")}/#{slide.id}/content_blocks/","#{Rails.root}/public/slides/assets/img/#{slide.id}/" )
+      end
+
 
       #Making javascript varriables
       gon.slide_id=slide.id

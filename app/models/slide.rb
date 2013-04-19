@@ -72,7 +72,7 @@ class Slide < ActiveRecord::Base
   # -------------------------------------------------------------------------------------------------------
 
   before_create :set_sequence
-  after_create :build_directory
+  after_create :build_directory, :set_next_slide
 
   # TODO: Test the directory creation paths
   def get_path
@@ -93,6 +93,7 @@ class Slide < ActiveRecord::Base
 
   def set_sequence
     self.sequence=self.presentation.slides.count+1
+
   end
 
   def build_directory
@@ -107,8 +108,16 @@ class Slide < ActiveRecord::Base
     end
   end
 
+  #TODO: set next_slide on slide create
   def set_next_slide
-    self.parent.next_slide=self.id
+    #self.next_slide=self.id+1
+    #self.presentation.slides.find_by_sequence(self.sequence-1).next_slide=self.id
+    #self.presentation.slides.find_by_sequence(self.sequence-1).save
+    if self.sequence-1>=1
+      @slide=Slide.find_by_sequence_and_presentation_id(self.sequence-1,self.presentation_id)
+      @slide.next_slide=self.id
+      @slide.save
+    end
   end
 
   def get_path_title_pic
@@ -140,9 +149,6 @@ class Slide < ActiveRecord::Base
         self.ppt.destroy
       when "PPT"
         self.main=""
-        self.content_blocks.each do |cb|
-          cb.destroy
-        end
     end
     if self.nosub == false
       self.titlepic.destroy
