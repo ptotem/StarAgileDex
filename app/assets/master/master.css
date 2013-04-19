@@ -154,8 +154,8 @@ body {
 .modal-body table td{
     width:95px;
 }
-.modal-body table td input{
-    margin-left: 40px;
+.modal-body table td img{
+    margin-left: 20px;
 }
 
 

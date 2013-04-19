@@ -154,18 +154,55 @@
         <table>
           <tr>
             <th>Select</th>
-            <th>Select</th>
+            <th>Plugin</th>
             <th>IE</th>
             <th>Chrome</th>
             <th>Firefox</th>
+            <th>Safari</th>
+            <th>Opera</th>
           </tr>
+
           <% @widget_list.each_with_index do |widget,index| %>
               <tr>
+
                 <td><input class="select_plugin" type="radio" name="plugin" value=<%=index%>></td>
                 <td><%= widget %></td>
-                <td><input type="checkbox" name="support" disabled="true"></td>
-                <td><input type="checkbox" name="support" disabled="true" checked="true"></td>
-                <td><input type="checkbox" name="support" disabled="true" checked="true"></td>
+                <td>
+                  <% if @ie_support[index]!="6+" %>
+                      <img src="/assets/tick.png" alt="">
+                  <% else %>
+                      <img src="/assets/cross.jpg" alt="">
+                  <% end %>
+                </td>
+
+                <td>
+                  <% if @chrome_support[index]!="false" %>
+                      <img src="/assets/tick.png" alt="">
+                  <% else %>
+                      <img src="/assets/cross.jpg" alt="">
+                  <% end %>
+                </td>
+                <td>
+                  <% if @firefox_support[index]!="false" %>
+                      <img src="/assets/tick.png" alt="">
+                  <% else %>
+                      <img src="/assets/cross.jpg" alt="">
+                  <% end %>
+                </td>
+                <td>
+                  <% if @safari_support[index]!="false" %>
+                      <img src="/assets/tick.png" alt="">
+                  <% else %>
+                      <img src="/assets/cross.jpg" alt="">
+                  <% end %>
+                </td>
+                <td>
+                  <% if @opera_support[index]!="false" %>
+                      <img src="/assets/tick.png" alt="">
+                  <% else %>
+                      <img src="/assets/cross.jpg" alt="">
+                  <% end %>
+                </td>
               </tr>
           <% end %>
         </table>
@@ -187,7 +224,6 @@
 <script type="text/javascript" src="/assets/jquery.boxfit.js"></script>
 <script type="text/javascript" src="/assets/master_init.js"></script>
 <script type="text/javascript" src="/assets/layout.js"></script>
-<script type="text/javascript" src="/assets/jquery.blockUI.js"></script>
 
 <script type="text/javascript" src="/assets/noty.js"></script>
 <script type="text/javascript" src="/assets/noty.top.js"></script>
