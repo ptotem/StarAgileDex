@@ -147,6 +147,16 @@ body {
     outline: 0;
 }
 
+.modal-body table th{
+    width:95px;
+}
+
+.modal-body table td{
+    width:95px;
+}
+.modal-body table td input{
+    margin-left: 40px;
+}
 
 
 
