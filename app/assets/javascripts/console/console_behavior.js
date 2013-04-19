@@ -27,6 +27,7 @@ function transitInDeck(name) {
         }, function () {
             $('#presentation_slides_index').fadeIn();
             $('#active_presentation').fadeIn();
+
         });
     });
 
@@ -162,6 +163,7 @@ function initialize_slide_list() {
     $('#presentations_slides_table_filter').children().children().addClass('slide_filter');
 
     $('.slide_filter').attr("placeholder", "Search Slides");
+
 }
 
 // This function handles the opening of the presentation panel and population of slides in it.
@@ -201,7 +203,8 @@ function show_presentation(this_presentation_id, this_presentation_name) {
         success:function (data) {
             var slide_block, my_slide, this_id, cleaned_slide_title;
 
-            $('.active_presentation_panel').append('<table id="presentations_slides_table">' + '<thead> <tr> <th></th> </tr> </thead>' + '<tbody></tbody>');
+//            $('.active_presentation_panel').append('<table id="presentations_slides_table">' + '<thead> <tr> <th></th> </tr> </thead>' + '<tbody></tbody>');
+            $('.active_presentation_panel').append('<ul id="presentations_slides_list"></ul>');
 
             $.each(data.split(','), function (d, ele) {
                 ele = ele.toString().replace('[', '').replace(']', '').replace(/"/g, '');
@@ -214,21 +217,85 @@ function show_presentation(this_presentation_id, this_presentation_name) {
                     // \ Escapes character, \r matches carriage return, \n matches linefeed, \t matches horizontal tab,
                     cleaned_slide_title = my_slide[1].replace(/\\r/g, '').replace(/\\n/g, '').replace(/\\t/g, '').replace(/<\s*\w.*?>/g, '').replace(/<\s*\/\s*\w\s*.*?>|<\s*br\s*>/g, '');
 
-                    slide_block = '' + '<tr class="slide_row">' +
-                        '<td>' +
-                        '<a href="#?slide' + my_slide[0].replace(/ /g, '') + '">' +
+//                    slide_block = '' + '<tr class="slide_row">' +
+//                        '<td>' +
+//                        '<a href="#?slide' + my_slide[0].replace(/ /g, '') + '">' +
+//                        '<button class="btn btn-info show_this_slide" onclick="transitInNewSlide(' + my_slide[0].replace(/ /g, '') + ',' + this_presentation_id + ')" type="button">' +
+//                        cleaned_slide_title +
+//                        '<input id="' + my_slide[0].replace(/ /g, '') + '" type="hidden" name="' + "slide_" + my_slide[0].replace(/ /g, '') + '">' +
+//                        '</button>' +
+//                        '</a>' +
+//                        '</td>' +
+//                        '</tr>';
+
+                    slide_block = '' + '<li id="slide_' + my_slide[0].replace(/ /g, '') + '">' +
+                        '<a href="#?slide' + my_slide[0].replace(/ /g, '') + '" style="float:left;">' +
                         '<button class="btn btn-info show_this_slide" onclick="transitInNewSlide(' + my_slide[0].replace(/ /g, '') + ',' + this_presentation_id + ')" type="button">' +
                         cleaned_slide_title +
                         '<input id="' + my_slide[0].replace(/ /g, '') + '" type="hidden" name="' + "slide_" + my_slide[0].replace(/ /g, '') + '">' +
                         '</button>' +
                         '</a>' +
-                        '</td>' +
-                        '</tr>';
+                        '<div class="slide_controls" style="float:right; font-weight:bold; padding-top: 3px;">' +
+                        '<span id="move_up_slide_' + my_slide[0].replace(/ /g, '') + '">' + "&uarr;" + '</span>' +
+                        '<span id="move_down_slide_' + my_slide[0].replace(/ /g, '') + '">' + "&darr;" + '</span>' +
+                        '</div>' +
+                        '</li>';
+
 
                     $('.active_presentation_panel').attr("id", "#pres_" + this_presentation_id);
-                    $('#presentations_slides_table tbody').append(slide_block);
+//                    $('#presentations_slides_table tbody').append(slide_block);
+                    $('#presentations_slides_list').append(slide_block);
+
+                    function move_slide_up() {
+                        var slide_id = $(this).parent().prev().find('input').attr('id');
+                        var thisLine = $(this).parent().parent();
+
+                        var data = {slide_id:[]};
+                        data["slide_id"].push(slide_id);
+                        $.ajax({
+                            url:"move_slide_up",
+                            type:"post",
+                            async:false,
+                            data:JSON.stringify(data),
+                            contentType:"application/json",
+                            success:function (data) {
+                                //var thisLine = $(this).parent().parent();
+                                var prevLine = thisLine.prev();
+                                prevLine.before(thisLine);
+                            }
+                        });
+
+                    }
+
+                    function move_slide_down() {
+                        var slide_id = $(this).parent().prev().find('input').attr('id');
+                        var thisLine = $(this).parent().parent();
+
+                        var data = {slide_id:[]};
+                        data["slide_id"].push(slide_id);
+                        $.ajax({
+                            url:"move_slide_down",
+                            type:"post",
+                            async:false,
+                            data:JSON.stringify(data),
+                            contentType:"application/json",
+                            success:function (data) {
+                                //var thisLine = $(this).parent().parent();
+                                var prevLine = thisLine.next();
+                                prevLine.after(thisLine);
+                            }
+                        });
+
+                    }
+
+                    $('#move_up_slide_' + my_slide[0].replace(/ /g, '')).on('click', move_slide_up);
+                    $('#move_down_slide_' + my_slide[0].replace(/ /g, '')).on('click', move_slide_down);
+
+
                 }
             });
+//            $("#view_deck").attr("href", '/view_prez/' + this_presentation_id);
+            $("#view_deck").attr("href", '/view_deck/' + this_presentation_id);
             initialize_slide_list();
         }
     });
@@ -320,6 +387,8 @@ function load_bindings() {
         autoPlay:true,
         autoplayDuration:500
     }).fadeIn("slow");
+
+
 }
 
 
@@ -332,8 +401,7 @@ function form_bindings() {
     });
 
     $('.content_block_caption_txt').focusout(function () {
-        if($(this).val().split(/ /).length-1>20)
-        {
+        if ($(this).val().split(/ /).length - 1 > 20) {
             $(this).val('');
             $(this).attr("placeholder", "Only twenty words are allowed as title");
         }

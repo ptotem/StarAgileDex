@@ -44,6 +44,8 @@ class PresentationsController < ApplicationController
       @fontarray = [slide.font]
       @fontadjustment= [0, 0, 0, 0]
       @export=TRUE
+      @view_deck=FALSE
+      gon.view_deck=@view_deck
       #Make directory with slide.id name in public/slides/assets/img and copying the slides images in to that directory
       system "mkdir #{Rails.root}/public/slides/assets/img/#{slide.id}"
       FileUtils.cp_r("#{Rails.root}/public/userdata/#{@presentation.user.name.downcase.gsub(" ", "_")}/#{@presentation.name.downcase.gsub(" ", "_")}/#{slide.id}/content_blocks/","#{Rails.root}/public/slides/assets/img/#{slide.id}/" )
@@ -51,6 +53,11 @@ class PresentationsController < ApplicationController
       #Making javascript varriables
       gon.slide_id=slide.id
       gon.title=slide.title
+
+
+      gon.next_slide = slide.next_slide
+      @prev_slide = Slide.find_by_next_slide(gon.slide_id) rescue nil
+      gon.prev_slide = @prev_slide.id rescue nil
 
 
       if slide.titlepic_file_name.blank? and slide.subtitle.blank?
@@ -106,7 +113,7 @@ class PresentationsController < ApplicationController
       FileUtils.cp_r("#{Rails.root}/app/assets/layouts/#{plugin_layout}.css", "#{Rails.root}/public/slides/assets/")
       ##################################################
       @slide=slide
-      File.open("#{Rails.root}/public/slides/#{slide.id}.html", 'w') {|f| f.write(render_to_string(:file => 'slides/builder').gsub('/assets','assets').gsub('themes.css','theme.css').gsub("#{@plugin_category}/",'').gsub("/userdata/#{@presentation.user.name.downcase.gsub(" ", "_")}/#{@presentation.name.downcase.gsub(" ", "_")}/images/title_pic/","assets/img/")) }
+      File.open("#{Rails.root}/public/slides/#{slide.id}.html", 'w') {|f| f.write(render_to_string(:file => 'home/view_deck').gsub('/assets','assets').gsub('themes.css','theme.css').gsub("#{@plugin_category}/",'').gsub("/userdata/#{@presentation.user.name.downcase.gsub(" ", "_")}/#{@presentation.name.downcase.gsub(" ", "_")}/images/title_pic/","assets/img/")) }
     end
     @zipped_name = (@presentation.name).gsub(" ", "_")
     Dir.chdir("#{Rails.root}/public/slides/")
@@ -117,4 +124,8 @@ class PresentationsController < ApplicationController
     #render :text=>'success'
   end
 
+  def view_prez
+    @presentation=Presentation.find(params[:id])
+    redirect_to builder_path(@presentation.slides.first.id,@presentation.slides.first.layout,@presentation.slides.first.font,@presentation.slides.first.background,TRUE)
+  end
 end

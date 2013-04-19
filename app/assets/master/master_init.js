@@ -32,6 +32,30 @@ $(function () {
 function load_menu_bindings(){
     $('.ad-menu-item').slideToggle();
 
+    if (gon.view_deck) {
+
+        if (gon.prev_slide!=null){
+            $('#slide_prev').attr('href','/view_deck/'+gon.presentation_id+'/'+gon.prev_slide);
+        }else{
+            $('#slide_prev').attr('href','');
+        }
+        if (gon.next_slide!=''){
+            $('#slide_next').attr('href','/view_deck/'+gon.presentation_id+'/'+gon.next_slide);
+        }else{
+            $('#slide_next').attr('href','');
+        }
+
+    } else {
+        if(gon.prev_slide!=null)  {
+            $('#slide_prev').attr('href',gon.prev_slide+'.html');
+        }
+        if(gon.next_slide!="0")  {
+            $('#slide_next').attr('href',gon.next_slide+'.html');
+        }
+    }
+
+
+
     //change class of a wrapper (i.e. bg, theme) based on theme selection drop-down from theme modal, and display currently selected theme in theme modal
     $("#ts").live("change", function () {
         var selected_theme = $('#ts').val();

@@ -1,5 +1,5 @@
 class Slide < ActiveRecord::Base
-  attr_accessible :presentation_id, :sequence, :subtitle, :title, :layout, :font, :background, :content_blocks_attributes, :titlepic, :presentation, :main, :ppt, :ppt_delete, :mode, :nosub
+  attr_accessible :presentation_id, :sequence, :subtitle, :title, :layout, :font, :background, :content_blocks_attributes, :titlepic, :presentation, :main, :ppt, :ppt_delete, :mode, :nosub, :next_slide
 
   belongs_to :presentation
 
@@ -92,7 +92,7 @@ class Slide < ActiveRecord::Base
   end
 
   def set_sequence
-    sequence=self.presentation.slides.count+1
+    self.sequence=self.presentation.slides.count+1
   end
 
   def build_directory
@@ -105,6 +105,10 @@ class Slide < ActiveRecord::Base
     else
       system "mkdir #{Rails.root}/public/userdata/"+(self.presentation.user.name.downcase.gsub(" ", "_")).to_s+"/"+(self.presentation.name.downcase.gsub(" ", "_")).to_s+"/"+self.id.to_s
     end
+  end
+
+  def set_next_slide
+    self.parent.next_slide=self.id
   end
 
   def get_path_title_pic

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130415135047) do
+ActiveRecord::Schema.define(:version => 20130419103255) do
 
   create_table "authentications", :force => true do |t|
     t.integer  "user_id"
@@ -89,6 +89,7 @@ ActiveRecord::Schema.define(:version => 20130415135047) do
     t.datetime "ppt_updated_at"
     t.string   "mode",                  :default => "HTML"
     t.boolean  "nosub",                 :default => false
+    t.integer  "next_slide"
   end
 
   create_table "users", :force => true do |t|
