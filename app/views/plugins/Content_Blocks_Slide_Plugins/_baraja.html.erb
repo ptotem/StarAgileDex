@@ -1,0 +1,25 @@
+<%= content_for :scripts do %>
+    <script type="text/javascript" src="/assets/<%= @plugin %>/modernizr.custom.79639.js"></script>
+    <script type="text/javascript" src="/assets/<%= @plugin %>/jquery.baraja.js"></script>
+    <script type="text/javascript" src="/assets/<%= @plugin %>/init.js"></script>
+
+
+<% end %>
+<%= content_for :styles do %>
+    <link rel="stylesheet" type="text/css" href="/assets/<%= @plugin %>/baraja.css"/>
+<% end %>
+
+
+<%= content_for :widget_wrap do %>
+    <div class="baraja-demo">
+      <ul id="baraja-el" class="baraja-container">
+      </ul>
+    </div>
+    <nav class="actions light">
+      <span id="nav-prev">&lt;</span>
+      <span id="nav-next">&gt;</span>
+    </nav>
+
+<% end %>
+
+
