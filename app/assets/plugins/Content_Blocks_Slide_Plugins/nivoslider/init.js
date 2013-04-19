@@ -12,6 +12,7 @@ function init_widget() {
     });
     $('#widget_wrap').show();
     $('#slider').nivoSlider();
+    layout2();
 }
 
 

@@ -21,15 +21,15 @@
 }
 
 #titlepic {
-    bottom: 100px;
+    bottom: 14px;
     display: none;
-    /*height: 280px;*/
     left: 56px;
     padding: 30px;
     position: absolute;
     text-align: center;
     width: 270px;
 }
+           /*height: 280px;*/
 
 #titlepic img{
     width:250px;

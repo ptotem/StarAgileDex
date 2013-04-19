@@ -1,36 +1,4 @@
-/*=================================*/
-/* Nivo Slider Demo
-/* November 2010
-/* By: Gilbert Pellegrom
-/* http://dev7studios.com
-/*=================================*/
 
-/*====================*/
-/*=== Reset Styles ===*/
-/*====================*/
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, font, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td {
-	/*margin:0;*/
-	/*padding:0;*/
-	/*border:0;*/
-	/*outline:0;*/
-	/*font-weight:inherit;*/
-	/*font-style:inherit;*/
-	/*font-size:100%;*/
-	/*font-family:inherit;*/
-	/*vertical-align:baseline;*/
-}
-body {
-	/*line-height:1;*/
-	/*color:black;*/
-	/*background:white;*/
-}
 table {
 	border-collapse:separate;
 	border-spacing:0;
@@ -52,14 +20,6 @@ aside, nav, article, figure {
 	display: block;
 }
 
-/*===================*/
-/*=== Main Styles ===*/
-/*===================*/
-/*body {*/
-	/*font:14px/1.6 Georgia, Palatino, Palatino Linotype, Times, Times New Roman, serif;*/
-	/*color:#333;*/
-	/*background:#eee;*/
-/*}*/
 
 a, a:visited {
 	color:blue;
@@ -97,26 +57,6 @@ a:hover, a:active {
 
 
 
-
-/*#widget_wrap {*/
-    /*height: 300px;*/
-    /*margin: 0 auto;*/
-    /*margin-top: 60px;*/
-    /*display: none;*/
-/*}*/
-
-
-/*start of bar.css*/
-
-/*
-Skin Name: Nivo Slider Bar Theme
-Skin URI: http://nivo.dev7studios.com
-Description: The bottom bar skin for the Nivo Slider.
-Version: 1.0
-Author: Gilbert Pellegrom
-Author URI: http://dev7studios.com
-Supports Thumbs: false
-*/
 
 .theme-bar.slider-wrapper {
     position: relative;
@@ -242,21 +182,6 @@ Supports Thumbs: false
 }
 
 
-/*end of bar.css*/
-
-
-
-/*start of dark.css*/
-
-/*
-Skin Name: Nivo Slider Dark Theme
-Skin URI: http://nivo.dev7studios.com
-Description: A dark skin for the Nivo Slider.
-Version: 1.0
-Author: Gilbert Pellegrom
-Author URI: http://dev7studios.com
-Supports Thumbs: true
-*/
 
 .theme-dark.slider-wrapper {
     background: #222;
@@ -353,22 +278,6 @@ Supports Thumbs: true
 
 
 
-/*end of dark.css*/
-
-
-
-
-/*start of default.css*/
-
-/*
-Skin Name: Nivo Slider Default Theme
-Skin URI: http://nivo.dev7studios.com
-Description: The default skin for the Nivo Slider.
-Version: 1.3
-Author: Gilbert Pellegrom
-Author URI: http://dev7studios.com
-Supports Thumbs: true
-*/
 
 .theme-default .nivoSlider {
     position:relative;
@@ -383,7 +292,7 @@ Supports Thumbs: true
     top:0px;
     left:0px;
     display:none;
-    height: 400px;
+    height: 250px;
 }
 .theme-default .nivoSlider a {
     border:0;
@@ -458,77 +367,7 @@ Supports Thumbs: true
 }
 
 
-#widget_wrap {
-    height: 300px;
-    margin-top: 150px;
-    display: none;
-    margin-left: 100px;
-}
 
-
-
-#text_wrap {
-    height: auto;
-    width: auto;
-    text-align: center;
-    font-size: 18px;
-    display: none;
-    margin:0 auto;
-}
-
-
-#title_wrap {
-    display: none;
-    position: absolute;
-    margin-top: 18px;
-    background-color:rgba(0,0,0,0.5);
-    width: 69%;
-    margin-left: 240px;
-    text-align: center;
-
-}
-
-
-#subtitle {
-    max-height: 200px;
-    max-width: 200px;
-    text-align: center;
-    font-size: 1.2em;
-    display: none;
-    margin-top: 18px;
-    margin-left: 32px;
-    position: absolute;
-}
-
-
-#subtitle_back {
-    max-height: 200px;
-    max-width: 200px;
-    text-align: center;
-    font-size: 1.2em;
-    display: none;
-    margin-top: 18px;
-    margin-left: 32px;
-    position: absolute;
-
-}
-
-
-/*end of default.css*/
-
-
-
-/*start of light.css*/
-
-/*
-Skin Name: Nivo Slider Light Theme
-Skin URI: http://nivo.dev7studios.com
-Description: A light skin for the Nivo Slider.
-Version: 1.0
-Author: Gilbert Pellegrom
-Author URI: http://dev7studios.com
-Supports Thumbs: true
-*/
 
 .theme-light.slider-wrapper {
     background: #fff;
@@ -624,23 +463,6 @@ Supports Thumbs: true
 }
 
 
-/*end of light.css*/
-
-
-
-
-/*start of nivo-slider.css*/
-
-/*
- * jQuery Nivo Slider v3.2
- * http://nivo.dev7studios.com
- *
- * Copyright 2012, Dev7studios
- * Free to use and abuse under the MIT license.
- * http://www.opensource.org/licenses/mit-license.php
- */
-
-/* The Nivo Slider styles */
 .nivoSlider {
     position:relative;
     width:80%;
