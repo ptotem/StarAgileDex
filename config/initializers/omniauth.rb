@@ -4,6 +4,7 @@ Rails.application.config.middleware.use OmniAuth::Builder do
     config.path_prefix = '/auth'
   end
 
+
   #old for server
   #provider :facebook, '222280634572524', '25d7fbbc976579512a48c28fb1800490'
 

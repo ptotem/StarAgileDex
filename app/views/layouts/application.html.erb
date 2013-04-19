@@ -20,14 +20,21 @@
   <!-- The Menu for cycling through the plugins, changing theme and font -->
   <% unless @export %>
       <ul class="nav nav-stacked nav-pills pull-right menu_select" style="margin-top: 0px">
-        <li class="btn-warning" id="ad-menu-toggle"><a href="#" onclick="$('.ad-menu-item').slideToggle();"><i class="icon-tasks"></i></a></li>
+        <li class="btn-warning" id="ad-menu-toggle">
+          <a href="#" onclick="$('.ad-menu-item').slideToggle();"><i class="icon-tasks"></i></a></li>
         <li class="active ad-menu-item"><a href="/console"><i class="icon-home"></i></a></li>
         <li class="active ad-menu-item"><a href="/console/<%= @slide.id rescue "" %>"><i class="icon-edit"></i></a></li>
-        <li class="active ad-menu-item"><a onclick="load_widget(gon.plugin+1)"><i class="icon-retweet"></i></a></li>
-        <!--<li class="active ad-menu-item"><a href="/slides/<%#= @slide.id %>/<%#= params[:plugin].to_i + 1 %>/<%#= params[:font] %>/<%#= params[:background] %>"><i class="icon-retweet"></i></a></li>-->
+
+
+
+        <li class="active ad-menu-item">
+          <a href="#plugin_modal" data-toggle="modal" onclick=""><i class="icon-retweet"></i></a></li>
+
         <li class="active ad-menu-item"><a onclick="save_slide();"><i class="icon-download"></i></a></li>
-        <li class="active ad-menu-item"><a href="#font_Modal" data-toggle="modal" onclick=""><i class="icon-text-width"></i></a></li>
-        <li class="active ad-menu-item"><a href="#theme_Modal" data-toggle="modal" onclick=""><i class="icon-th"></i></a></li>
+        <li class="active ad-menu-item">
+          <a href="#font_Modal" data-toggle="modal" onclick=""><i class="icon-text-width"></i></a></li>
+        <li class="active ad-menu-item">
+          <a href="#theme_Modal" data-toggle="modal" onclick=""><i class="icon-th"></i></a></li>
       </ul>
   <% end %>
 
@@ -155,6 +162,74 @@
       </div>
     </div>
 
+    <div id="plugin_modal" class="modal hide fade home_modal_style" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 class="modalLabel">Plugin Browser</h3>
+      </div>
+      <div class="modal-body">
+        <table>
+          <tr>
+            <th>Select</th>
+            <th>Plugin</th>
+            <th>IE</th>
+            <th>Chrome</th>
+            <th>Firefox</th>
+            <th>Safari</th>
+            <th>Opera</th>
+          </tr>
+
+          <% @widget_list.each_with_index do |widget,index| %>
+              <tr>
+
+                <td><input class="select_plugin" type="radio" name="plugin" value=<%=index%>></td>
+                <td><%= widget %></td>
+                <td>
+                  <% if @ie_support[index]!="6+" %>
+                      <img src="/assets/tick.png" alt="">
+                  <% else %>
+                      <img src="/assets/cross.jpg" alt="">
+                  <% end %>
+                </td>
+
+                <td>
+                  <% if @chrome_support[index]!="false" %>
+                      <img src="/assets/tick.png" alt="">
+                  <% else %>
+                      <img src="/assets/cross.jpg" alt="">
+                  <% end %>
+                </td>
+                <td>
+                  <% if @firefox_support[index]!="false" %>
+                      <img src="/assets/tick.png" alt="">
+                  <% else %>
+                      <img src="/assets/cross.jpg" alt="">
+                  <% end %>
+                </td>
+                <td>
+                  <% if @safari_support[index]!="false" %>
+                      <img src="/assets/tick.png" alt="">
+                  <% else %>
+                      <img src="/assets/cross.jpg" alt="">
+                  <% end %>
+                </td>
+                <td>
+                  <% if @opera_support[index]!="false" %>
+                      <img src="/assets/tick.png" alt="">
+                  <% else %>
+                      <img src="/assets/cross.jpg" alt="">
+                  <% end %>
+                </td>
+              </tr>
+          <% end %>
+        </table>
+      </div>
+      <div class="modal-footer" style="text-align: center;">
+        <button id="select_plugin_btn" class="btn btn-info" aria-hidden="true">Select</button>
+        <button class="btn btn-danger" data-dismiss="modal" aria-hidden="true">Close</button>
+      </div>
+    </div>
+
     <!-----------------------------------------------------------------
     Modals End
     ----------------------------------------------------------------------->
@@ -201,8 +276,8 @@
     // Resuorce : http://needim.github.io/noty/
     // javascripts for noty are in assets/master/noty.* (js names starting with noty)
     var noty;
-    function display_noty(){
-        noty = noty({ text: 'Slide saved successfully!', layout: 'bottomCenter'});
+    function display_noty() {
+        noty = noty({ text:'Slide saved successfully!', layout:'bottomCenter'});
     }
 
 </script>

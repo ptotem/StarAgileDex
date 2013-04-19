@@ -93,6 +93,11 @@ function load_menu_bindings(){
         });
         gon.font = $font;
     });
+
+    $("#select_plugin_btn").on("click",function(){
+        var layout=$('input:radio[name=plugin]:checked').val();
+        window.location="/slides/"+gon.slide_id+"/"+layout+"/"+gon.font+"/"+gon.background;
+    });
 }
 
 function load_widget(index) {

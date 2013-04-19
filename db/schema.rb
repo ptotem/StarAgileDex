@@ -11,6 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
+
 ActiveRecord::Schema.define(:version => 20130419103255) do
 
   create_table "authentications", :force => true do |t|
@@ -46,6 +47,15 @@ ActiveRecord::Schema.define(:version => 20130419103255) do
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
     t.integer  "slide_id"
+  end
+
+  create_table "feedbacks", :force => true do |t|
+    t.string   "subject"
+    t.string   "email"
+    t.text     "comment"
+    t.integer  "user_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "presentations", :force => true do |t|

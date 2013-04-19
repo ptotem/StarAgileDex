@@ -12,6 +12,11 @@ class SlidesController < ApplicationController
     # Else it is a content block slide
     # -------------------------
     @widget_list=Array.new
+    @ie_support=Array.new
+    @chrome_support=Array.new
+    @firefox_support=Array.new
+    @safari_support=Array.new
+    @opera_support=Array.new
     if @slide.ppt.exists?
       s=:ppt_plugin
       @plugin_category="Powerpoint_Plugins"
@@ -30,6 +35,11 @@ class SlidesController < ApplicationController
     t(:plugins)[s].each do |k, v|
       if (v[:working]=="true")
         @widget_list<<k.to_s
+        @ie_support<<v[:ie]
+        @chrome_support<<v[:chrome]
+        @firefox_support<<v[:firefox]
+        @safari_support<<v[:safari]
+        @opera_support<<v[:opera]
       end
     end
     @widget_list=@widget_list.map { |i| i.gsub(':', '') }

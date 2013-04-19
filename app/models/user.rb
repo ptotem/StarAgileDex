@@ -11,6 +11,7 @@ class User < ActiveRecord::Base
 
   has_many :authentications, :dependent => :destroy
   has_many :presentations, :dependent => :destroy
+  has_many :feedbacks
 
   after_create :build_directory
 
