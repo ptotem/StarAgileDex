@@ -3,10 +3,11 @@
 	position: relative;
 	overflow: hidden;
 	list-style-type: none;
-	padding: 0;
-    height: 300px;
-    width:500px;
-    margin-left:30px;
+	padding: 10px;
+    height: 200px;
+    width:300px;
+    margin-top:210px;
+    margin-right: 96px;
 }
 
 .sb-slider li {
@@ -22,49 +23,21 @@
 .sb-slider li > a img {
 	border: none;
 }
-
-.sb-slider img {
-	max-width: 100%;
-	display: block;
+sb-description{
+    height:200px;
+    width:200px;
+    background-color: red;
 }
 
-.sb-description {
-	padding: 20px;
-	bottom: 10px;
-	left: 10px;
-	right: 10px;
-	z-index: 1000;
-	position: absolute;
-	background: #CBBFAE;
-	background: rgba(190,176,155, 0.4);
-	border-left: 4px solid rgba(255,255,255,0.7);
-	-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
-	filter: alpha(opacity=0);
-	opacity: 0;
-	color: #fff;
 
-	-webkit-transition: all 200ms;
-	-moz-transition: all 200ms;
-	-o-transition: all 200ms;
-	-ms-transition: all 200ms;
-	transition: all 200ms;
-}
+ #nav-arrows a {
+     background: #fff url('nav.png') no-repeat 50% 50%;
+     width:100px;
+     height: 20px;
+      margin-left:72px;
+ }
 
-.sb-slider li.sb-current .sb-description {
-	-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
-	filter: alpha(opacity=80);
-	opacity: 1;
-}
 
-.sb-slider li.sb-current .sb-description:hover {
-	-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=99)";
-	filter: alpha(opacity=99);
-	background: rgba(190,176,155, 0.7);
-}
-
-.sb-perspective {
-	position: relative;
-}
 
 .sb-perspective > div {
 	position: absolute;
@@ -96,10 +69,25 @@
 	transform-style: preserve-3d;
 }
 
-.wrapper {
-    position: relative;
-    max-width: 840px;
-    width: 100%;
-    padding: 0 50px;
-    margin: 0 auto;
+#caption_wrap_back {
+    background: none repeat scroll 0 0 black;
+    height: 80px;
+    opacity: 0.8;
+    position: absolute;
+    right: 108px;
+    top: 474px;
+    width: 135px;
+    display: none;
 }
+
+#caption_wrap {
+    height: 80px;
+    /*padding: 30px 20px;*/
+    position: absolute;
+    right: 108px;
+    text-align: center;
+    top: 135px;
+    width: 452px;
+    display: none;
+}
+

@@ -13,7 +13,7 @@ function init_widget() {
 
 
     });
-
+     $('p').boxfit({multiline: true, maximum_font_size: 36});
     layout1();
     $('#widget_wrap').show();
 

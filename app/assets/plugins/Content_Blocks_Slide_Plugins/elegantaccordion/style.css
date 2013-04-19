@@ -7,6 +7,7 @@ ul.accordion{
     font-size: 16px;
     font-style: italic;
     line-height: 1.5em;
+    background-size: 100%;
 }
 ul.accordion li{
     float:right;
@@ -14,6 +15,7 @@ ul.accordion li{
     margin-top:300px;
     height:250px;
     display:block;
+    background-size: 100%;
     border-right:2px solid #fff;
     border-bottom:2px solid #fff;
     background-color:#fff;
@@ -27,25 +29,11 @@ ul.accordion li{
     box-shadow:1px 3px 15px #555;
 }
 
-ul.accordion li .heading{
-    background-color:#fff;
-    padding:10px;
-    margin-top:60px;
-    opacity:0.9;
-    text-transform:uppercase;
-    font-style:normal;
-    font-weight:bold;
-    letter-spacing:1px;
-    font-size:14px;
-    color:#444;
-    text-align:center;
-    text-shadow:-1px -1px 1px #ccc;
-}
 ul.accordion li .description{
     position:absolute;
-    width:480px;
+    width:380px;
     height:175px;
-    bottom:0px;
+    bottom:10px;
     left:0px;
     display:none;
 }
@@ -71,6 +59,7 @@ ul.accordion li .description p{
     letter-spacing: normal;
     line-height: 1.6em;
     background-color: rgba(0,0,0,0.5) ;
+    padding:10px;
 }
 ul.accordion li .description a{
     position:absolute;
