@@ -19,49 +19,49 @@ function init_widget() {
 
 
     var $el = $( '#wi-el' ),
-					windy = $el.windy(),
-					allownavnext = false,
-					allownavprev = false;
+        windy = $el.windy(),
+        allownavnext = false,
+        allownavprev = false;
 
-				$( '#nav-prev' ).on( 'mousedown', function( event ) {
+    $( '#nav-prev' ).on( 'mousedown', function( event ) {
 
-					allownavprev = true;
-					navprev();
+        allownavprev = true;
+        navprev();
 
-				} ).on( 'mouseup mouseleave', function( event ) {
+    } ).on( 'mouseup mouseleave', function( event ) {
 
-					allownavprev = false;
+            allownavprev = false;
 
-				} );
+        } );
 
-				$( '#nav-next' ).on( 'mousedown', function( event ) {
+    $( '#nav-next' ).on( 'mousedown', function( event ) {
 
-					allownavnext = true;
-					navnext();
+        allownavnext = true;
+        navnext();
 
-				} ).on( 'mouseup mouseleave', function( event ) {
+    } ).on( 'mouseup mouseleave', function( event ) {
 
-					allownavnext = false;
+            allownavnext = false;
 
-				} );
+        } );
 
-				function navnext() {
-					if( allownavnext ) {
-						windy.next();
-						setTimeout( function() {
-							navnext();
-						}, 150 );
-					}
-				}
+    function navnext() {
+        if( allownavnext ) {
+            windy.next();
+            setTimeout( function() {
+                navnext();
+            }, 150 );
+        }
+    }
 
-				function navprev() {
-					if( allownavprev ) {
-						windy.prev();
-						setTimeout( function() {
-							navprev();
-						}, 150 );
-					}
-				}
+    function navprev() {
+        if( allownavprev ) {
+            windy.prev();
+            setTimeout( function() {
+                navprev();
+            }, 150 );
+        }
+    }
 
 }
 

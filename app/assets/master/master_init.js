@@ -10,7 +10,6 @@ var $subtitle;
 var $widget = $('#widget_wrap');
 
 $(function () {
-    eval(gon.plugin_layout);
 
     // Set up the Title and the Subtitle
     $title.html(gon.title);
@@ -27,10 +26,16 @@ $(function () {
     load_menu_bindings();
 });
 
+
+
+
+
+
 // TODO: Clean up this code
 
 function load_menu_bindings(){
     $('.ad-menu-item').slideToggle();
+
 
     if (gon.view_deck) {
 
@@ -55,6 +60,9 @@ function load_menu_bindings(){
     }
 
 
+
+
+    eval(gon.plugin_layout);
 
     //change class of a wrapper (i.e. bg, theme) based on theme selection drop-down from theme modal, and display currently selected theme in theme modal
     $("#ts").live("change", function () {

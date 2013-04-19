@@ -41,15 +41,17 @@ function init_widget() {
         $caption.css('top', '474px');
         $caption.css('right', '108px');
         $caption.width('452px');
-        $caption.height('117px');
+        $caption.height('80px');
         $caption.css('text-align', 'center');
 
-        $caption_back.css('top', '462px');
+        $caption_back.css('top', '474px');
         $caption_back.css('right', '108px');
-        $caption_back.height('117px');
+        $caption_back.height('80px');
         $caption_back.width('452px');
     }
 
+    $caption.boxfit({multiline: true, maximum_font_size: 36});
+    $caption.show();
     setTimeout(function () {
         if (captions.length == 1 && captions[0] == "") {
             $caption_back.hide();
@@ -57,7 +59,7 @@ function init_widget() {
         }
     }, 1700);
 
-    //layout1();
+    layout1();
 
 }
 
@@ -69,6 +71,7 @@ function set_caption(current, next) {
     //Show caption if after rotate the face has both image and caption.
     if (($(next).attr('title') != '') && ($(next).attr('src') != null)) {
         $caption.html($(next).attr('title'));
+        $caption.boxfit({multiline: true, maximum_font_size: 36});
         $caption_back.fadeIn();
         $caption.fadeIn();
     }
