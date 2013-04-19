@@ -23,7 +23,8 @@
         <li class="btn-warning" id="ad-menu-toggle"><a href="#" onclick="$('.ad-menu-item').slideToggle();"><i class="icon-tasks"></i></a></li>
         <li class="active ad-menu-item"><a href="/console"><i class="icon-home"></i></a></li>
         <li class="active ad-menu-item"><a href="/console/<%= @slide.id rescue "" %>"><i class="icon-edit"></i></a></li>
-        <li class="active ad-menu-item"><a href="/slides/<%= @slide.id %>/<%= params[:plugin].to_i + 1 %>/<%= params[:font] %>/<%= params[:background] %>"><i class="icon-retweet"></i></a></li>
+        <li class="active ad-menu-item"><a onclick="load_widget(gon.plugin+1)"><i class="icon-retweet"></i></a></li>
+        <!--<li class="active ad-menu-item"><a href="/slides/<%#= @slide.id %>/<%#= params[:plugin].to_i + 1 %>/<%#= params[:font] %>/<%#= params[:background] %>"><i class="icon-retweet"></i></a></li>-->
         <li class="active ad-menu-item"><a onclick="save_slide();"><i class="icon-download"></i></a></li>
         <li class="active ad-menu-item"><a href="#font_Modal" data-toggle="modal" onclick=""><i class="icon-text-width"></i></a></li>
         <li class="active ad-menu-item"><a href="#theme_Modal" data-toggle="modal" onclick=""><i class="icon-th"></i></a></li>

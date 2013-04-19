@@ -1,3 +1,4 @@
+
 /* Global Variables*/
 var captions = gon.caption;
 var images = gon.image_list;
@@ -74,6 +75,7 @@ function load_widget(index) {
     gon.plugin = index;
     window.location = '/slides/' + gon.slide_id + '/' + index + '/' + gon.font + '/' + gon.background;
 }
+
 
 $.fn.fade1by1 = function (ops) {
     var

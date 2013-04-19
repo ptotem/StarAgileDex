@@ -111,7 +111,7 @@ body {
 }
 
 #deck_list {
-    float:left;
+    float: left;
     margin-left: 20px;
 }
 
@@ -171,7 +171,6 @@ body {
     text-align: center;
 }
 
-
 /* ------------------------------------------ */
 
 #left_panel .btn {
@@ -222,8 +221,6 @@ body {
     width: 60px;
     text-align: center;
 }
-
-
 
 /* Navbar */
 /*----------------------------------*/
@@ -294,7 +291,7 @@ hr {
     z-index: 999999;
 }
 
-.bottom-up li{
+.bottom-up li {
     position: relative;
     z-index: 999999;
 }
@@ -313,3 +310,29 @@ hr {
     top: auto !important;
     bottom: -6px;
 }
+
+.file_block{
+    position: relative;
+}
+.file_block a:hover{
+    text-decoration: none;
+}
+
+#existing_titlepic{
+    position: absolute;
+    top: 7px;
+    left:70px;
+    text-align: left;
+}
+
+.overlap_file_field {
+    color:gray;
+}
+
+/*.existing_cb_imgs{*/
+    /*left: -55px;*/
+    /*line-height: 3em;*/
+    /*margin-top: 10px;*/
+    /*position: relative;*/
+    /*top: 208px;*/
+/*}*/

@@ -1,3 +1,4 @@
+<%= include_gon %>
 <%= nested_form_for(@slide, :html => {:multipart => true, :class=>"cmxform"}) do |f| %>
 
     <div id="slide_form_panel_header" xmlns="http://www.w3.org/1999/html">Enter Slide Content</div>
@@ -12,17 +13,15 @@
       <%= f.hidden_field :nosub, :value => @slide.nosub %>
       <%= f.text_field :title, :class => "slide_field required", :placeholder => "Title" %>
       <%= f.text_field :subtitle, :class => "slide_field", :placeholder => "Subtitle" %>
-      <div id="titlepic_block">
-        <% if !@slide.titlepic.blank? %>
-            <div id="existing_titlepic">
-              <%= @slide.titlepic_file_name %>
-              <a href="#" onclick="$('#slide_titlepic').show();$('#existing_titlepic').hide(); $('#change_titlepic').show();">(Change)</a>
+      <!--TODO: Remove functionality-->
+      <div id="titlepic_block" class="file_block">
+        <%  unless @slide.titlepic.blank? %>
+            <div id="existing_titlepic" class="overlap_file_field">
+              <a href="#" onclick='$("#slide_delete_titlepic").attr("checked", true);$(this).parent().hide();'>&times; </a><%= @slide.titlepic_file_name.truncate(22) %>
             </div>
         <% end %>
-        <%= f.file_field :titlepic, :placeholder => "Add Image", :style => "display:none; margin-bottom:10px" %>
-        <div id="change_titlepic">
-          <a href="#" onclick=" $('#existing_titlepic').show(); $('#slide_titlepic').hide(); $('#change_titlepic').hide();">(Cancel)</a>
-        </div>
+        <%= f.file_field :titlepic, :placeholder => "Add Image", :style => "display:none;" %>
+        <%= f.check_box(:delete_titlepic, :style=>"display:none") %>
       </div>
       <br>
       <%= link_to "Use an image instead of a subtitle", "#", :id => "show_titlepic" %>
@@ -44,12 +43,12 @@
         <div class="slide_contents_block" style="margin-top: -20px;">
           <% @slide.content_blocks.each_with_index do |cb, index| %>
               <% if !cb.image.blank? or !cb.caption.blank? %>
-                  <div class="existing_cb_imgs">
-                      Image File : <br>
-                      <%= cb.image_file_name %>
-                    <br/>
-                    <hr>
-                  </div>
+                  <ul class="existing_cb_imgs overlap_file_field" id="">
+                      <!--Image File : <br>-->
+                      <%= cb.image_file_name.truncate(22) %>
+                    <!--<br/>-->
+                    <!--<hr>-->
+                  </ul>
               <% end %>
           <% end %>
           <%= f.fields_for :content_blocks do |widget_form| %>
@@ -57,11 +56,13 @@
               <%= widget_form.link_to_remove "x", :class => "pull-right", :style => "margin-right:40px;" %>
               <%= widget_form.text_area :caption, :placeholder => "Enter Caption", :class => "content_block_caption_txt slide_field", :rows => 2, :cols => 30, :style => "margin-right:-40px" %>
               <%= widget_form.file_field :image, :placeholder => "Add Image", :class => "required" %>
+              <% fieldset_id = "#{widget_form.object.class}_#{widget_form.object.id}" %>
+              <%= widget_form.check_box(:delete_image, :style=>"display:none", :id=>"#{fieldset_id}") %>
               <br/>
               <br/>
           <% end %>
           <%= f.link_to_add "Add another content block", :content_blocks, :class => "btn" %> <br>
-          <a href="#" id="display_edit_view_btn" style="display: none;">(Change Images)</a>
+          <!--<a href="#" id="display_edit_view_btn" style="display: none;">(Change Images)</a>-->
           <!--<a href="#" id="hide_edit_view_btn">(Done)</a>-->
         </div>
       </div>
@@ -87,8 +88,8 @@
                 break;
             case "Blocks":
                 open_blocks_mode();
-                $('.fields').hide();
-                $('#display_edit_view_btn').show();
+//                $('.fields').hide();
+//                $('#display_edit_view_btn').show();
                 break;
             case "PPT":
                 open_ppt_mode();
@@ -118,16 +119,23 @@
                 switch_to_subtitle();
         }
 
-        if (!gon.titlepic) {
-            $('#slide_titlepic').show();
-        }
-
         // Form validation
         // Resource : http://docs.jquery.com/Plugins/validation#Validate_forms_like_you.27ve_never_been_validating_before.21
         // Resource : http://jzaefferer.github.com/jquery-validation/jquery.validate.js
         // js source included in console
         var slide_form_id = $('form').attr('id');
         $("#"+slide_form_id).validate();
+
+
+//        $.each($('.existing_cb_imgs'), function (index, elm) {
+//            $(elm).attr('id', "ContentBlock_"+gon.fieldset_id[index]);
+//            //TODO: get related contents blocks file field position and adjust top css accordingly
+//            $("#ContentBlock_"+gon.fieldset_id[index]).css({ left: "-45px", position: "relative", top: "200px", lineHeight:"2", paddingBottom:"10px"});
+//            $(elm).prepend('<a href="#">' + "&times;" + '</a>');
+////            $(elm).prepend('<a href="#" onclick=$("#ContentBlock_"+gon.fieldset_id[index]).attr("checked",true);$(this).parent().hide();>' + "&times;" + '</a>');
+//        });
+
+
 
     });
 </script>

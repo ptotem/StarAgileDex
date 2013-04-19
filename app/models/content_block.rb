@@ -5,6 +5,10 @@ class ContentBlock < ActiveRecord::Base
   belongs_to :slide
   has_attached_file :image, :path=> :get_path
 
+  attr_accessor :delete_image
+  attr_accessible :delete_image
+  before_validation { image.clear if delete_image == '1' }
+
   # These constants are used for specifying quality of PPT import
   QUALITY = 30
   DENSITY = '80x80'
