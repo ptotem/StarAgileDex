@@ -13,7 +13,7 @@ AgileDex::Application.routes.draw do
   match 'get_slides'=>'home#get_slides',:as=>'get_slides'
   match 'move_slide_up'=>'home#move_slide_up',:as=>'move_slide_up'
   match 'move_slide_down'=>'home#move_slide_down',:as=>'move_slide_down'
-  match 'del_slide'=>'home#del_slide',:as=>'del_slide'
+  match 'delete_slide/(:presentation_id)'=>'home#delete_slide',:as=>'delete_slide'
   match 'create_guest_user'=>'home#create_guest_user',:as=>'create_guest_user'
   match 'slides/new/:presentation_id'=>'slides#new',:as=>'new_slide'
 

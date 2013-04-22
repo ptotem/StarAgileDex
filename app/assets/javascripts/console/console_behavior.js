@@ -207,6 +207,18 @@ function show_presentation(this_presentation_id, this_presentation_name) {
             $('.active_presentation_panel').append('<ul id="presentations_slides_list"></ul>');
 
             $.each(data.split(','), function (d, ele) {
+                        if(data!="[]")
+                        {
+                            $('#export_html_btn').show();
+                            $('#export_scorm_btn').show();
+                            $('#view_deck').show();
+                        }
+                        else{
+                            $('#export_html_btn').hide();
+                            $('#export_scorm_btn').hide();
+                            $('#view_deck').hide();
+
+                        }
                 ele = ele.toString().replace('[', '').replace(']', '').replace(/"/g, '');
                 if (ele != '') {
                     my_slide = ele.split('|');
@@ -228,6 +240,7 @@ function show_presentation(this_presentation_id, this_presentation_name) {
 //                        '</td>' +
 //                        '</tr>';
 
+
                     slide_block = '' + '<li id="slide_' + my_slide[0].replace(/ /g, '') + '">' +
                         '<a href="#?slide' + my_slide[0].replace(/ /g, '') + '" style="float:left;">' +
                         '<button class="btn btn-info show_this_slide" onclick="transitInNewSlide(' + my_slide[0].replace(/ /g, '') + ',' + this_presentation_id + ')" type="button">' +
@@ -235,9 +248,10 @@ function show_presentation(this_presentation_id, this_presentation_name) {
                         '<input id="' + my_slide[0].replace(/ /g, '') + '" type="hidden" name="' + "slide_" + my_slide[0].replace(/ /g, '') + '">' +
                         '</button>' +
                         '</a>' +
-                        '<div class="slide_controls" style="float:right; font-weight:bold; padding-top: 3px;">' +
-                        '<span id="move_up_slide_' + my_slide[0].replace(/ /g, '') + '">' + "&uarr;" + '</span>' +
-                        '<span id="move_down_slide_' + my_slide[0].replace(/ /g, '') + '">' + "&darr;" + '</span>' +
+                        '<div class="slide_controls" style="float:right; padding-top: 3px;">' +
+                        '<span style="font-weight:normal; cursor: pointer; font-size: 20px; position: relative; left: -15px;" id="delete_slide_' + my_slide[0].replace(/ /g, '') + '">' + "&times;" + '</span>' +
+                        '<span style="font-weight:bold; cursor: pointer; font-size: 22px;" id="move_up_slide_' + my_slide[0].replace(/ /g, '') + '">' + "&uarr;" + '</span>' +
+                        '<span style="font-weight: bold; cursor: pointer; font-size: 22px;" id="move_down_slide_' + my_slide[0].replace(/ /g, '') + '">' + "&darr;" + '</span>' +
                         '</div>' +
                         '</li>';
 
@@ -288,14 +302,42 @@ function show_presentation(this_presentation_id, this_presentation_name) {
 
                     }
 
+                    function delete_slide() {
+                        var conf = confirm("Are you sure?");
+                        if (conf == true) {
+                            var slide_id = $(this).parent().prev().find('input').attr('id');
+                            var presentation_id = this_presentation_id;
+                            var thisLine = $(this).parent().parent();
+
+                            var data = {slide_id:[], presentation_id:[]};
+                            data["slide_id"].push(slide_id);
+                            data["presentation_id"].push(presentation_id);
+                            $.ajax({
+                                url:"delete_slide",
+                                type:"post",
+                                async:false,
+                                data:JSON.stringify(data),
+                                contentType:"application/json",
+                                success:function (data) {
+//                                    alert(data);
+                                    $(thisLine).empty().remove();
+                                }
+                            });
+                        }
+
+                    }
+
                     $('#move_up_slide_' + my_slide[0].replace(/ /g, '')).on('click', move_slide_up);
                     $('#move_down_slide_' + my_slide[0].replace(/ /g, '')).on('click', move_slide_down);
+                    $('#delete_slide_' + my_slide[0].replace(/ /g, '')).on('click', delete_slide);
+
 
 
                 }
             });
 //            $("#view_deck").attr("href", '/view_prez/' + this_presentation_id);
             $("#view_deck").attr("href", '/view_deck/' + this_presentation_id);
+
             initialize_slide_list();
         }
     });
@@ -327,35 +369,18 @@ function export_as_html() {
     window.location = '/export/' + $('#slide_presentation_id').val();
 }
 
-function delete_slide(slide_id_string) {
-    var conf = confirm("Are you sure?");
-    if (conf == true) {
-        var this_slide_div = "#" + slide_id_string;
-        var slide_id = (slide_id_string).replace(/\D*/g, '').match(/\d*/g).toString().replace(/\D*/g, '');
-        var data = {slide_id:[]};
-        data["slide_id"].push(slide_id);
-
-        $.ajax({
-            url:"del_slide",
-            type:"post",
-            async:false,
-            data:JSON.stringify(data),
-            contentType:"application/json",
-            success:function (data) {
-                $(this_slide_div).empty().remove();
-            }
-        });
-    }
-
-}
 
 // This function creates the live bindings for buttons, links and scrolling
 
 function load_bindings() {
     $('#signed_in').hide();
 
+    $("#new_deck_Modal").on('shown', function() {
+        $(this).find("input[type='text']:first").focus();
+    });
+
 //    This creates the presentation on pressing enter key in new deck modal form
-    $("input").keypress(function (event) {
+    $("#new_deck_Modal").find("input[type='text']:first").keypress(function (event) {
         if (event.which == 13) {
             event.preventDefault();
             $('#new_deck_Modal_create_btn').click();

@@ -53,9 +53,8 @@
     <div id="active_presentation">
       <input type="hidden" id="presentation">
       <a id="view_deck"  href="" class="btn ad_btn">View the Deck</a>
-      <!--http://localhost:3000/slides/19/imagecube/default/default-->
       <a href="#" id="export_html_btn" class="btn ad_btn">Export as HTML</a>
-      <a href="#" class="btn ad_btn">Export as SCORM</a>
+      <a href="#" id="export_scorm_btn" class="btn ad_btn">Export as SCORM</a>
       <a href="#" id="del_deck_btn" class="btn ad_btn">Delete the Deck</a>
       <a href="#" class="btn ad_btn btn-inverse" onclick="transitOut()">Close the Deck</a>
     </div>
@@ -131,7 +130,7 @@
     </div>
     <form accept-charset="UTF-8" class="form-horizontal" id="new_presentation" style="margin:0">
       <div class="modal-body">
-        <input id="presentation_name" name="presentation[name]" placeholder="Type Presentation Name Here ..." size="30" maxlength="25" type="text"/>
+        <input id="presentation_name" name="presentation[name]" data-toggle="focus" placeholder="Type Presentation Name Here ..." size="30" maxlength="25" type="text"/>
         <% if user_signed_in? %>
             <input id="presentation_user_id" name="presentation[user_id]" type="hidden" value="<%= current_user.id %>"/>
         <%end %>

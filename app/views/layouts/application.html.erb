@@ -20,21 +20,13 @@
   <!-- The Menu for cycling through the plugins, changing theme and font -->
   <% unless @export %>
       <ul class="nav nav-stacked nav-pills pull-right menu_select" style="margin-top: 0px">
-        <li class="btn-warning" id="ad-menu-toggle">
-          <a href="#" onclick="$('.ad-menu-item').slideToggle();"><i class="icon-tasks"></i></a></li>
-        <li class="active ad-menu-item"><a href="/console"><i class="icon-home"></i></a></li>
-        <li class="active ad-menu-item"><a href="/console/<%= @slide.id rescue "" %>"><i class="icon-edit"></i></a></li>
-
-
-
-        <li class="active ad-menu-item">
-          <a href="#plugin_modal" data-toggle="modal" onclick=""><i class="icon-retweet"></i></a></li>
-
-        <li class="active ad-menu-item"><a onclick="save_slide();"><i class="icon-download"></i></a></li>
-        <li class="active ad-menu-item">
-          <a href="#font_Modal" data-toggle="modal" onclick=""><i class="icon-text-width"></i></a></li>
-        <li class="active ad-menu-item">
-          <a href="#theme_Modal" data-toggle="modal" onclick=""><i class="icon-th"></i></a></li>
+        <li class="btn-warning" id="ad-menu-toggle"><a href="#" onclick="$('.ad-menu-item').slideToggle();"><i class="icon-tasks"></i></a></li>
+        <li class="active ad-menu-item"><a title="Home" href="/console"> <i class="icon-home"></i></a></li>
+        <li class="active ad-menu-item"><a title="Edit Slide" href="/console/<%= @slide.id rescue "" %>"><i class="icon-edit"></i></a></li>
+        <li class="active ad-menu-item"><a title="Next Widget" href="#plugin_modal" data-toggle="modal" onclick=""><i class="icon-retweet"></i></a></li>
+        <li class="active ad-menu-item"><a title="Save Slide" onclick="save_slide();"><i class="icon-download"></i></a></li>
+        <li class="active ad-menu-item"><a title="Change Font" href="#font_Modal" data-toggle="modal" onclick=""><i class="icon-text-width"></i></a></li>
+        <li class="active ad-menu-item"><a title="Change Theme" href="#theme_Modal" data-toggle="modal" onclick=""><i class="icon-th"></i></a></li>
       </ul>
   <% end %>
 

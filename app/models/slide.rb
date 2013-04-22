@@ -150,6 +150,7 @@ class Slide < ActiveRecord::Base
       when "PPT"
         self.main=""
     end
+
     if self.nosub == false
       self.titlepic.destroy
     else

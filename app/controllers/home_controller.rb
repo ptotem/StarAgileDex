@@ -57,7 +57,7 @@ class HomeController < ApplicationController
     @slide.save
     @prev_slide.save
 
-    render :text => @new_slide_sequence
+    render :text => "Slide moved to up"
     return
   end
 
@@ -76,7 +76,28 @@ class HomeController < ApplicationController
     @slide.save
     @next_slide.save
 
-    render :text => @new_slide_sequence
+    render :text => "Slide moved to down"
+    return
+  end
+
+  def delete_slide
+    @presentation = Presentation.find(params[:presentation_id][0])
+    @slide = Slide.find(params[:slide_id][0])
+
+    #@prev_slides = Slide.where("id < ?", @slide.id).order("id DESC")
+    #This finds all the records below the current record
+    @next_slides = Slide.where("id > ?", @slide.id).order("id ASC")
+
+    @slide.destroy
+
+    @returning_data = Array.new
+    @next_slides.each do |i|
+      i.sequence = i.sequence - 1
+      i.save
+      @returning_data<<"#{i.id}"
+    end
+
+    render :text => @returning_data
     return
   end
 
@@ -87,12 +108,6 @@ class HomeController < ApplicationController
     redirect_to console_path
   end
 
-  def del_slide
-    @slide = Slide.find(params[:slide_id][0])
-    @slide.destroy
-    render :text => "Slide deletion successful."
-    return
-  end
 
   def create_new_presentation
     @presentation = Presentation.new
