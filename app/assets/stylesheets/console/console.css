@@ -342,12 +342,8 @@ hr {
 
 .overlap_file_field {
     color: gray;
+    position: absolute;
+    top: 7px;
+    left: 70px;
+    text-align: left;
 }
-
-/*.existing_cb_imgs{*/
-/*left: -55px;*/
-/*line-height: 3em;*/
-/*margin-top: 10px;*/
-/*position: relative;*/
-/*top: 208px;*/
-/*}*/

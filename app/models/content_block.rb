@@ -7,7 +7,6 @@ class ContentBlock < ActiveRecord::Base
 
   attr_accessor :delete_image
   attr_accessible :delete_image
-  before_validation { image.clear if delete_image == '1' }
 
   # These constants are used for specifying quality of PPT import
   QUALITY = 30

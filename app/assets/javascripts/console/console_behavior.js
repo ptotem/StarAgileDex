@@ -207,18 +207,17 @@ function show_presentation(this_presentation_id, this_presentation_name) {
             $('.active_presentation_panel').append('<ul id="presentations_slides_list"></ul>');
 
             $.each(data.split(','), function (d, ele) {
-                        if(data!="[]")
-                        {
-                            $('#export_html_btn').show();
-                            $('#export_scorm_btn').show();
-                            $('#view_deck').show();
-                        }
-                        else{
-                            $('#export_html_btn').hide();
-                            $('#export_scorm_btn').hide();
-                            $('#view_deck').hide();
+                if (data != "[]") {
+                    $('#export_html_btn').show();
+                    $('#export_scorm_btn').show();
+                    $('#view_deck').show();
+                }
+                else {
+                    $('#export_html_btn').hide();
+                    $('#export_scorm_btn').hide();
+                    $('#view_deck').hide();
 
-                        }
+                }
                 ele = ele.toString().replace('[', '').replace(']', '').replace(/"/g, '');
                 if (ele != '') {
                     my_slide = ele.split('|');
@@ -332,7 +331,6 @@ function show_presentation(this_presentation_id, this_presentation_name) {
                     $('#delete_slide_' + my_slide[0].replace(/ /g, '')).on('click', delete_slide);
 
 
-
                 }
             });
 //            $("#view_deck").attr("href", '/view_prez/' + this_presentation_id);
@@ -375,11 +373,12 @@ function export_as_html() {
 function load_bindings() {
     $('#signed_in').hide();
 
-    $("#new_deck_Modal").on('shown', function() {
+    //This sets the focus to the presentation name text-field on modal load
+    $("#new_deck_Modal").on('shown', function () {
         $(this).find("input[type='text']:first").focus();
     });
 
-//    This creates the presentation on pressing enter key in new deck modal form
+    //This creates the presentation on pressing enter key in new deck modal form
     $("#new_deck_Modal").find("input[type='text']:first").keypress(function (event) {
         if (event.which == 13) {
             event.preventDefault();
@@ -387,26 +386,31 @@ function load_bindings() {
         }
     });
 
-// This function handles the creation of a new deck
+    // This function handles the creation of a new deck
     $('#new_deck_Modal_create_btn').on('click', create_new_deck);
 
-// This function handles the deletion of a deck
+    //This clears the text-field value after the modal is hidden, so next time when u load modal text-field gets cleared
+    $('#new_deck_Modal').on('hidden', function () {
+        $(this).find("input[type='text']:first").val('');
+    });
+
+    // This function handles the deletion of a deck
     $('#del_deck_btn').on('click', delete_presentation);
 
-// This function handles the presentation slides index
+    // This function handles the presentation slides index
     $('.show_this_presentation').on('click', function () {
         show_presentation($(this).find(':input').attr("id"), $(this).text());
     });
 
-// This function handles the export as html of a deck
+    // This function handles the export as html of a deck
     $('#export_html_btn').on('click', export_as_html);
 
 
-// These functions manage the scroll bindings for the panels
-//    $(".main_panel").niceScroll({cursorcolor:"#232836", cursorborder:"none", cursorwidth:"5px", autohidemode:false, horizrailenabled:false});
+    // These functions manage the scroll bindings for the panels
+    //    $(".main_panel").niceScroll({cursorcolor:"#232836", cursorborder:"none", cursorwidth:"5px", autohidemode:false, horizrailenabled:false});
     $("#presentation_slides_index").niceScroll({cursorcolor:"#232836", cursorborder:"none", cursorwidth:"5px", autohidemode:true, horizrailenabled:false});
 
-// This function activates the Waterwheel
+    // This function activates the Waterwheel
     $('#waterwheel').roundabout({
         shape:"waterWheel",
         autoPlay:true,
@@ -419,22 +423,25 @@ function load_bindings() {
 
 function form_bindings() {
 
-//    These functions validates Title presence
+    //This validates Title presence
     $('#slide_title').focusout(function () {
         if ($('#slide_title').val() == "")
             $('#slide_title').attr("placeholder", "Title cannot be blank");
     });
 
+    $('#slide_title').focusin(function () {
+        if ($('#slide_title').val() == "")
+            $('#slide_title').attr("placeholder", "Title");
+    });
+
+    //This validates Content Blocks caption word length
     $('.content_block_caption_txt').focusout(function () {
         if ($(this).val().split(/ /).length - 1 > 20) {
             $(this).val('');
             $(this).attr("placeholder", "Only twenty words are allowed as title");
         }
     });
-    $('#slide_title').focusin(function () {
-        if ($('#slide_title').val() == "")
-            $('#slide_title').attr("placeholder", "Title");
-    });
+
     $('#show_titlepic').click(switch_to_titlepic);
     $('#clear_titlepic').click(switch_to_subtitle);
 
@@ -449,6 +456,18 @@ function form_bindings() {
             $this.parent().find(':checkbox').attr("checked", false);
         }
     });
+
+    //This scrolls the contents blocks to the end on adding new field (new content block)
+    $('.custom_scroll').on("click", function () {
+        $('.main_form_body').animate({scrollTop:$('.main_form_body').prop("scrollHeight")}, 500);
+    });
+
+    // Form validation
+    // Resource : http://docs.jquery.com/Plugins/validation#Validate_forms_like_you.27ve_never_been_validating_before.21
+    // Resource : http://jzaefferer.github.com/jquery-validation/jquery.validate.js
+    // js source included in console
+    var slide_form_id = $('form').attr('id'); //This is the form id
+    $("#" + slide_form_id).validate();
 
 }
 

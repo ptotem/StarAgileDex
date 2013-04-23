@@ -13,13 +13,10 @@ class Slide < ActiveRecord::Base
                     :convert_options=>{
                         :all=>"-quality 60"
                     }
+
   attr_accessor :delete_titlepic
   attr_accessible :delete_titlepic
   before_validation { titlepic.clear if delete_titlepic == '1' }
-
-  attr_accessor :delete_image
-  attr_accessible :delete_image
-  #before_validation { image.clear if delete_image == '1' }
 
   # This is the code for importing of a PPT
   # ------------------------------------------------------------------------------------------
