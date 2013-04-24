@@ -1,39 +1,48 @@
 <%= include_gon %>
 <%= nested_form_for(@slide, :html => {:multipart => true, :class => "cmxform"}) do |f| %>
 
-    <div id="slide_form_panel_header" xmlns="http://www.w3.org/1999/html">Enter Slide Content</div>
-    <a href="#" class="btn btn-inverse" onclick="transitOut()">Cancel</a>
-    <%= f.submit "Save the slide", :class => "btn btn-info" %>
-
-    <hr>
-    <div class="main_form_body" style="height: 390px;overflow-y: auto;">
+    <div id="main_form_body">
 
       <%= f.hidden_field :presentation_id, :value => @presentation.id %>
       <%= f.hidden_field :mode, :value => @slide.mode %>
       <%= f.hidden_field :nosub, :value => @slide.nosub %>
-      <%= f.text_field :title, :class => "slide_field required", :placeholder => "Title" %>
-      <%= f.text_field :subtitle, :class => "slide_field", :placeholder => "Subtitle" %>
 
-      <!-- In slide edit mode, display selected image name for the titlepic in the image file field, and provide option to delete the image -->
-      <div id="titlepic_block" class="file_block">
-        <% unless @slide.titlepic.blank? %>
-            <div id="existing_titlepic" class="overlap_file_field hidden-tablet">
-              <a href="#" onclick='$("#slide_delete_titlepic").attr("checked", true);$(this).parent().hide();'>&times; </a><%= @slide.titlepic_file_name.truncate(22) rescue nil %>
-            </div>
-        <% end %>
-        <%= f.file_field :titlepic, :placeholder => "Add Image", :style => "display:none;" %>
-        <%= f.check_box(:delete_titlepic, :style => "display:none") %>
+      <%= f.text_field :title, :class => "slide_field required", :placeholder => "Title" %>
+
+      <div id="subtitle_block">
+        <%= f.text_area :subtitle, :class => "slide_field", :placeholder => "Subtitle" %>
+        <a href="#" class="btn btn-info" id="titlepic_Modal_btn">
+          <div id="title_picture">
+            <% if @slide.titlepic.blank? %>
+                <!--TODO: do we need remove img here  -->
+                <%= f.file_field :titlepic, :placeholder => "Add Image", :style => "display:none;" %>
+                <%= image_tag "upload.png", :onclick=>"$('#slide_titlepic').click();" %>
+                <div id="titlepic_name" onclick="$('#slide_titlepic').click();"></div>
+                <span onclick="$('#slide_titlepic').click();">Click to change</span>
+            <% else %>
+                <%= f.file_field :titlepic, :placeholder => "Add Image", :style => "display:none;" %>
+                <%= f.check_box(:delete_titlepic, :style => "display:none") %>
+                <%= image_tag @slide.titlepic.url, :onclick=>"$('#slide_titlepic').click();" %>
+                <div id="titlepic_name" onclick="$('#slide_titlepic').click();"><%= @slide.titlepic_file_name %></div>
+                <span onclick="$('#slide_titlepic').click();">Click to change</span> <br>
+                <span onclick='$("#slide_delete_titlepic").attr("checked", true);$(this).hide();$(this).prev().prev().prev().hide();$(this).prev().prev().prev().prev().attr("src","/assets/upload.png");'>&times;</span>
+            <% end %>
+          </div>
+        </a>
+
+        <!-- In slide edit mode, display selected image name for the titlepic in the image file field, and provide option to delete the image -->
+
+        <div id="titlepic_block" class="file_block">
+
+        </div>
+
+        <%= link_to "Use an image instead", "#", :id => "show_titlepic", :class => 'btn' %>
+
+        <%= link_to "Use a subtitle instead", "#", :id => "clear_titlepic", :style => "display:none;", :class => 'btn' %>
       </div>
 
-      <br>
-      <%= link_to "Use an image instead of a subtitle", "#", :id => "show_titlepic" %>
-      <%= link_to "Use a subtitle instead of an image", "#", :id => "clear_titlepic", :style => "display:none;" %>
-      <br>
-      <br>
-      <br>
-
-      <div id="text_block_section" style="padding: 0px 30px 0px 50px;">
-        <%= f.cktext_area :main, :id => "subtitle_editor", :ckeditor => {:toolbar => "Custom", :width => 300, :height => 100} %>
+      <div id="text_block_section" style="overflow-y: auto;" class="form_subpanel">
+        <%= f.cktext_area :main, :id => "subtitle_editor", :ckeditor => {:toolbar => "Custom", :width => 320, :height => 150} %>
       </div>
 
       <!----- Nested form for content_block
@@ -43,37 +52,56 @@
       --------->
 
       <!-- In slide edit mode, display selected image name for the content block in the respective image file field -->
-      <div id="content_block_section" style="display: none; position: relative;">
-        <div class="slide_contents_block" style="margin-top: -20px;">
+      <div id="content_block_section" style="display: none; position: relative; overflow-y: auto;" class="form_subpanel">
+        <div class="slide_contents_block">
           <%= f.fields_for :content_blocks do |widget_form| %>
-              <%= widget_form.link_to_remove "x", :class => "pull-right", :style => "margin-right:35px;" %>
-              <div class="file_block">
-                <% if widget_form.object.image.blank? %>
-                    <%= widget_form.file_field :image, :placeholder => "Add Image", :class => "required pull-right", :style=>"margin-right:15px" %>
-                <% else %>
-                    <div class="overlap_file_field hidden-tablet">
-                      <%= widget_form.object.image_file_name.truncate(22) rescue nil %>
-                    </div>
-                    <%= widget_form.file_field :image, :placeholder => "Add Image", :class => "pull-right", :style=>"margin-right:15px" %>
-                <% end %>
+              <div class="a_content_block">
+                <%= widget_form.link_to_remove image_tag("delete.gif", :style => "width:20px"), :class => "pull-right", :style => "margin-top:15px;margin-right:5px;font-size:24px;" %>
+                <div class="file_block">
+                  <% if widget_form.object.image.blank? %>
+                      <%= widget_form.file_field :image, :placeholder => "Add Image", :class => "required pull-right", :style => "margin-right:15px" %>
+                  <% else %>
+                      <div class="overlap_file_field hidden-tablet">
+                        <%= widget_form.object.image_file_name.truncate(22) rescue nil %>
+                      </div>
+                      <%= widget_form.file_field :image, :placeholder => "Add Image", :class => "pull-right", :style => "margin-right:15px" %>
+                  <% end %>
+                </div>
+                <%= widget_form.text_field :caption, :placeholder => "Caption for this image", :class => "caption" %>
               </div>
-              <%= widget_form.text_area :caption, :placeholder => "Enter Caption", :class => "content_block_caption_txt slide_field", :rows => 2, :cols => 30 %>
-              <hr style="margin-top: 7px;"/>
           <% end %>
-          <%= f.link_to_add "Add another content block", :content_blocks, :class => "btn custom_scroll" %> <br>
+          <%= link_to "Upload Powerpoint Presentation", "#", :class => "btn", :onclick => "$('#import_ppt_block').show();$('.fields').hide();" %>
+          <%= link_to "Import from Dropbox", "#", :class => "btn disabled" %>
+          <%= f.link_to_add "Upload Images", :content_blocks, :class => "btn custom_scroll", :onclick => "$('#import_ppt_block').hide();" %>
         </div>
+
+        <div id="import_ppt_block" style="display: none">
+          <h4>Upload a PPT</h4>
+          <%= f.file_field :ppt, :placeholder => "Add Image" %>
+          <br>
+          <br>
+
+          <p style="width:250px;margin: 0 auto;">Okay...this takes anywhere between 1 to 5 minutes depending upon how
+            large the PPT is. So maybe
+            you want to start this off and go grab a cup of coffee ? </p>
+        </div>
+
       </div>
 
-      <div id="import_ppt_block" style="display: none">
-        <h4>Upload a PPT</h4>
-        <%= f.file_field :ppt, :placeholder => "Add Image" %>
-        <br>
-        <br>
-
-        <p style="width:250px;margin: 0 auto;">Okay...this takes anywhere between 1 to 5 minutes depending upon how
-          large the PPT is. So maybe
-          you want to start this off and go grab a cup of coffee ? </p>
+      <div id="mode_switcher">
+        <%= link_to "Basic Mode", "#", :class => 'btn btn-info', :id => "clear_wysiwyg", :onclick => "open_wysiwyg_mode();$(this).addClass('btn-info');$(this).next().removeClass('btn-info')" %>
+        <%= link_to "Advanced Mode", "#", :class => 'btn', :id => "show_wysiwyg", :onclick => "open_blocks_mode();$(this).addClass('btn-info');$(this).prev().removeClass('btn-info')" %>
+        <%= link_to "Game Mode", "#", :class => 'btn disabled', :id => "game_mode_btn" %>
       </div>
+
+    </div>
+    <div id="buttons_panel">
+      <%= f.submit "Save the Slide", :class => "btn btn-info submit_button" %>
+      <br>
+      <a href="#" class="btn btn-inverse" onclick="">Revert Changes</a>
+      <a href="#" class="btn btn-inverse" onclick="">Clear Form</a>
+      <a href="#" class="btn btn-inverse" onclick="transitOut()">Close without Saving</a>
+
     </div>
 <% end %>
 

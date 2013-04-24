@@ -57,9 +57,8 @@ function transitInNewSlide(slide_id, presentation_id) {
     }).animate({
             'width':"280px"
         }, function () {
-            $('#slide_form_panel').fadeIn();
-            $('#active_presentation').fadeOut(function () {
-                $('#active_slide').fadeIn();
+            $('#right_panel').fadeOut(function () {
+                $('#slide_form_panel').fadeIn();;
             });
         });
     $('.slide_layout').css({
@@ -68,10 +67,11 @@ function transitInNewSlide(slide_id, presentation_id) {
 }
 function transitOut() {
     $('.main_panel').hide();
+    $('#presentation_slides_index').css('width','400px')
     $('#deck_list').show().animate({
         'width':"400px"
     });
-    $('#right_panel').animate({
+    $('#right_panel').show().animate({
         'width':"480px",
         'marginRight':"30px"
     });
@@ -241,23 +241,25 @@ function show_presentation(this_presentation_id, this_presentation_name) {
 
 
                     slide_block = '' + '<li id="slide_' + my_slide[0].replace(/ /g, '') + '">' +
-                        '<a href="#?slide' + my_slide[0].replace(/ /g, '') + '" style="float:left;">' +
-                        '<button class="btn btn-info show_this_slide" onclick="transitInNewSlide(' + my_slide[0].replace(/ /g, '') + ',' + this_presentation_id + ')" type="button">' +
-                        cleaned_slide_title +
-                        '<input id="' + my_slide[0].replace(/ /g, '') + '" type="hidden" name="' + "slide_" + my_slide[0].replace(/ /g, '') + '">' +
-                        '</button>' +
-                        '</a>' +
-                        '<div class="slide_controls" style="float:right; padding-top: 3px;">' +
-                        '<span style="font-weight:normal; cursor: pointer; font-size: 20px; position: relative; left: -15px;" id="delete_slide_' + my_slide[0].replace(/ /g, '') + '">' + "&times;" + '</span>' +
-                        '<span style="font-weight:bold; cursor: pointer; font-size: 22px;" id="move_up_slide_' + my_slide[0].replace(/ /g, '') + '">' + "&uarr;" + '</span>' +
-                        '<span style="font-weight: bold; cursor: pointer; font-size: 22px;" id="move_down_slide_' + my_slide[0].replace(/ /g, '') + '">' + "&darr;" + '</span>' +
-                        '</div>' +
-                        '</li>';
+                                            '<a href="#?slide' + my_slide[0].replace(/ /g, '') + '" style="float:left;">' +
+                                                '<button class="btn btn-info show_this_slide" onclick="transitInNewSlide(' + my_slide[0].replace(/ /g, '') + ',' + this_presentation_id + ')" type="button">' +
+                                                    cleaned_slide_title +
+                                                    '<input id="' + my_slide[0].replace(/ /g, '') + '" type="hidden" name="' + "slide_" + my_slide[0].replace(/ /g, '') + '">' +
+                                                '</button>' +
+                                            '</a>' +
+                                            '<div class="slide_controls" style="float:right; padding-top: 3px;">' +
+                                                '<span style="font-weight:normal; cursor: pointer; font-size: 20px; position: relative; left: -15px;" id="delete_slide_' + my_slide[0].replace(/ /g, '') + '">' + "&times;" + '</span>' +
+                                                '<span style="font-weight:bold; cursor: pointer; font-size: 22px;" id="move_up_slide_' + my_slide[0].replace(/ /g, '') + '">' + "&uarr;" + '</span>' +
+                                                '<span style="font-weight: bold; cursor: pointer; font-size: 22px;" id="move_down_slide_' + my_slide[0].replace(/ /g, '') + '">' + "&darr;" + '</span>' +
+                                            '</div>' +
+                                        '</li>';
+
 
 
                     $('.active_presentation_panel').attr("id", "#pres_" + this_presentation_id);
 //                    $('#presentations_slides_table tbody').append(slide_block);
                     $('#presentations_slides_list').append(slide_block);
+
 
                     function move_slide_up() {
                         var slide_id = $(this).parent().prev().find('input').attr('id');
@@ -444,9 +446,15 @@ function form_bindings() {
 
     $('#show_titlepic').click(switch_to_titlepic);
     $('#clear_titlepic').click(switch_to_subtitle);
+    $('#slide_titlepic').change(function()
+    {
+        $('#title_picture img').attr('src','/assets/upload.png');
+        $('#titlepic_name').html($(this).val());
+        return false;
+    });
 
-    $('#show_wysiwyg').click(open_blocks_mode);
-    $('#clear_wysiwyg').click(open_wysiwyg_mode);
+    $('#show_wysiwyg').on('click',open_blocks_mode);
+    $('#clear_wysiwyg').on('click',open_wysiwyg_mode);
     $('#upload_ppt').click(open_ppt_mode);
 
     $(':file').on("change", function () {
@@ -459,7 +467,7 @@ function form_bindings() {
 
     //This scrolls the contents blocks to the end on adding new field (new content block)
     $('.custom_scroll').on("click", function () {
-        $('.main_form_body').animate({scrollTop:$('.main_form_body').prop("scrollHeight")}, 500);
+        $('#content_block_section').animate({scrollTop:$('#content_block_section').prop("scrollHeight")}, 500);
     });
 
     // Form validation
@@ -511,9 +519,11 @@ function open_ppt_mode() {
 function switch_to_titlepic() {
     $('#show_titlepic').hide();
     $('#clear_titlepic').show();
+    $('#titlepic_Modal_btn').show();
     $('#titlepic_block').show();
+    $('#title_picture').show();
     $('#existing_titlepic').show();
-    $('#slide_titlepic').show();
+    $('#slide_titlepic').hide();
     $('#change_titlepic').hide();
     $('#slide_subtitle').hide();
     $('#slide_nosub').val(true);
@@ -521,8 +531,10 @@ function switch_to_titlepic() {
 
 // This function toggles from titlepic to subtitle
 function switch_to_subtitle() {
+    $('#subtitle_block').css('backgroundImage','url("")');
     $('#show_titlepic').show();
     $('#clear_titlepic').hide();
+    $('#titlepic_Modal_btn').hide();
     $('#titlepic_block').hide();
     $('#slide_titlepic').show();
     $('#slide_subtitle').show();

@@ -1,0 +1,108 @@
+#main_form_body {
+    margin: 10px;
+    height: 400px;
+    text-align: center;
+    border: 2px solid black;
+    border-radius: 10px;
+    background: #d3d3d3;
+
+    /*overflow: hidden;*/
+}
+
+/* Do we really need this*/
+.slide_field {
+    /*width: 256px;*/
+}
+
+input[type="text"]#slide_title {
+    font-size: 24px;
+    height: 40px;
+    width: 560px;
+    margin-top: 20px;
+    text-align: center;
+}
+
+#subtitle_block {
+    height: 280px;
+    width: 200px;
+    margin-top: 10px;
+    text-align: center;
+    float: left;
+    margin-left: 25px;
+    vertical-align: middle;
+    margin-right: 20px;;
+
+}
+
+textarea#slide_subtitle {
+    font-size: 18px;
+    height: 240px;
+    width: 200px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+#title_picture {
+    height: 240px;
+    width: 200px;
+    text-align: center;
+    vertical-align: middle;
+    display: none;
+}
+
+#title_picture img {
+    height: 180px;
+}
+
+#titlepic_name {
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+.form_subpanel {
+    height: 225px;
+    margin-top: 10px;
+    float: left;
+    width: 325px;
+    overflow: hidden;
+    background: #a9a9a9;
+    border: 2px solid black;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+#mode_switcher {
+    float: left;
+    width: 345px;
+    overflow: hidden;
+    margin-top: 10px;
+    text-align: center;
+}
+
+.buttons_subpanel {
+    margin: 0 auto;
+}
+
+.btn.submit_button {
+    width: 560px;
+    font-size: 36px;
+    height: 60px;
+    text-align: center;
+    font-weight: bolder;
+}
+
+.a_content_block {
+    padding: 5px;
+    background: white;
+    border: 2px solid black;
+    border-radius: 5px;
+    margin-bottom: 5px;
+
+}
+
+.caption {
+    width: 255px;
+    margin-top: 5px;
+    margin-right: 5px;
+}
+

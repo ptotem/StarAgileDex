@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="/assets/bootstrap.min.css">
   <link rel="stylesheet" href="/assets/console/roundabout-shapes2.css">
   <link rel="stylesheet" href="/assets/console/console.css">
+  <link rel="stylesheet" href="/assets/console/slide_form.css">
   <script type="text/javascript" src="/assets/jquery-1.8.3.min.js"></script>
   <%= javascript_include_tag :application %>
   <%= include_gon %>
@@ -74,9 +75,16 @@
 
   <div id="deck_list" class="main_panel" style="display: block;">
     <h3>Decks</h3>
-    <a href="#new_deck_Modal" data-toggle="modal" class="btn btn-info" id="new_deck_btn" title="Click here to create a Deck">Create
-      a Deck <i class="icon-plus icon-white pull-right"></i></a>
-    <hr>
+
+    <% if user_signed_in? %>
+        <a href="#new_deck_Modal" data-toggle="modal" class="btn btn-info" id="new_deck_btn" title="Click here to create a Deck">Create
+          a Deck <i class="icon-plus icon-white pull-right"></i></a>
+        <hr>
+    <% else %>
+        <a href="/users/auth/facebook" class="btn btn-info" id="new_deck_btn" title="Click here to create a Deck">Create
+          a Deck <i class="icon-plus icon-white pull-right"></i></a>
+        <hr>
+    <% end %>
 
     <table id="presentations_table">
       <thead>

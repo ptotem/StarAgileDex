@@ -110,6 +110,12 @@ body {
     overflow: hidden;
 }
 
+#slide_form_panel {
+    width: 640px;
+    margin-right: 10px;
+    background: none;;
+}
+
 #deck_list {
     float: left;
     margin-left: 20px;
@@ -198,19 +204,8 @@ body {
     padding-bottom: 20px;
 }
 
-.content_block_caption_txt {
-    resize: vertical;
-    min-height: 42px;
-    max-height: 200px;
-    margin-top: 5px;
-}
-
 .remove_nested_fields {
     font-size: 14px;
-}
-
-.slide_field {
-    width: 256px;
 }
 
 .active_presentation_panel {
