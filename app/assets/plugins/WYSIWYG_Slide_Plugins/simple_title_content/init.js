@@ -13,4 +13,6 @@ function init_widget() {
       $('#title_wrap').fadeIn();
 
   });
+    layout1();
+
 }

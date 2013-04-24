@@ -26,6 +26,7 @@ function layout1(){
         $('#wrapper').fadeIn(function () {
             $title.boxfit({multiline: true, maximum_font_size: 36});
             $subtitle.boxfit({multiline: true, maximum_font_size: 36});
+            $widget.boxfit({multiline:true, maximum_font_size:36});
             $('.elements').fade1by1();
         });
     }, 500);
@@ -63,18 +64,11 @@ function layout2(){
 
 }
 
-function layout3() {
-    setTimeout(function () {
-        $('#wrapper').fadeIn(function () {
-            $('.elements').fade1by1();
-        });
-    }, 500);
-}
 
-function layout4() {
-    setTimeout(function () {
-        $('#wrapper').fadeIn(function () {
-            $('.elements').fade1by1();
-        });
-    }, 500);
+function layout6(){
+    if (subtitle) {
+        $subtitle.css({left:"300px"});
+        $('#subtitle_back').css({left:"300px"});
+    }
+
 }

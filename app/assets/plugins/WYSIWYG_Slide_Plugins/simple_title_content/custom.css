@@ -8,24 +8,23 @@ h1 {
 
 #subtitle_back {
     position: absolute;
-    left: 40px;
+    left: 90px;
     top: 120px;
     width: 400px;
-    height: 350px;
+    height: 400px;
     display: none;
-    border-radius: 10px;
+    /*border-radius: 10px;*/
 }
 #subtitle {
     position: absolute;
-    left: 60px;
-    top: 100px;
-    height: 360px;
-    width: 400px;
+    left: 80px;
+    top: 120px;
+    height: 400px;
+    width: 350px;
     text-align: left;
     padding: 30px;
-    padding-top: 40px;
+    padding-top: 0px;
     display: none;
-    color:black;
 }
 
 li{
@@ -61,10 +60,24 @@ li{
 
 #widget_wrap{
     position: absolute;
+    height: 360px;
     width: 350px;
     right:  80px;
     top: 120px;
     color: white;
     padding: 20px;
     background-color: rgba(0,0,0,0.7);
+}
+
+#titlepic {
+    bottom: 103px;
+    display: none;
+    left: 126px;
+    padding-bottom: 30px;
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-top: 30px;
+    position: absolute;
+    text-align: center;
+    width: 270px;
 }
