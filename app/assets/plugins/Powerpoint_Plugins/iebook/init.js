@@ -77,5 +77,6 @@ function init_widget() {
             $('.bb-item p').hide();
         }
     }, 1000);
+    layout4();
 
 }

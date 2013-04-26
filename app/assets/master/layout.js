@@ -26,7 +26,7 @@ function layout1(){
         $('#wrapper').fadeIn(function () {
             $title.boxfit({multiline: true, maximum_font_size: 36});
             $subtitle.boxfit({multiline: true, maximum_font_size: 36});
-            $widget.boxfit({multiline:true, maximum_font_size:36});
+
             $('.elements').fade1by1();
         });
     }, 500);
@@ -36,7 +36,6 @@ function layout1(){
     $caption.boxfit({multiline: true, maximum_font_size: 36});
 
 }
-
 function layout2(){
 
     setTimeout(function () {
@@ -63,12 +62,31 @@ function layout2(){
     }, 500);
 
 }
+function layout3() {
+    setTimeout(function () {
+        $('#wrapper').fadeIn(function () {
+            $('.elements').fade1by1();
+        });
+    }, 500);
+}
 
+function layout4() {
+    setTimeout(function () {
+        $('#wrapper').fadeIn(function () {
+            $('.elements').fade1by1();
+        });
+    }, 500);
+}
 
-function layout6(){
+function title_plugin_slide(){
     if (subtitle) {
         $subtitle.css({left:"300px"});
         $('#subtitle_back').css({left:"300px"});
+    }
+    else if(gon.no_subtitle){
+        (titlepic).css({left:"300px"});
+        $('#subtitle_back').css({left:"300px",top:"10px"});
+
     }
 
 }

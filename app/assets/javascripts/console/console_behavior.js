@@ -446,6 +446,7 @@ function form_bindings() {
 
     $('#show_titlepic').click(switch_to_titlepic);
     $('#clear_titlepic').click(switch_to_subtitle);
+
     $('#slide_titlepic').change(function()
     {
         $('#title_picture img').attr('src','/assets/upload.png');
@@ -471,8 +472,8 @@ function form_bindings() {
     });
 
     // Form validation
-    // Resource : http://docs.jquery.com/Plugins/validation#Validate_forms_like_you.27ve_never_been_validating_before.21
-    // Resource : http://jzaefferer.github.com/jquery-validation/jquery.validate.js
+    // Source : http://docs.jquery.com/Plugins/validation#Validate_forms_like_you.27ve_never_been_validating_before.21
+    // Source : http://jzaefferer.github.com/jquery-validation/jquery.validate.js
     // js source included in console
     var slide_form_id = $('form').attr('id'); //This is the form id
     $("#" + slide_form_id).validate();
@@ -501,17 +502,22 @@ function open_blocks_mode() {
     $('#import_ppt_block').hide();
     $('.extra').hide();
     $('#slide_mode').val("Blocks");
+
 }
 
 // This function switches the form to Upload PPT
-function open_ppt_mode() {
+function open_ppt_mode(this_obj) {
+
+    $(this_obj).hide();
+    $('.fields').hide();
+
     $('#import_ppt_block').show();
-    $('#upload_ppt').hide();
-    $('#show_wysiwyg').show();
-    $('#clear_wysiwyg').show();
-    $('#content_block_section').hide();
-    $('#text_block_section').hide();
-    $('.extra').show();
+//    $('#upload_ppt').hide();
+//    $('#show_wysiwyg').show();
+//    $('#clear_wysiwyg').show();
+//    $('#content_block_section').hide();
+//    $('#text_block_section').hide();
+//    $('.extra').show();
     $('#slide_mode').val("PPT");
 }
 

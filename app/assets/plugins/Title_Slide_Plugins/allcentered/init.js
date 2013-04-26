@@ -11,5 +11,5 @@ function init_widget() {
         $('#title_wrap').fadeIn();
 
     });
-    layout6();
+    title_plugin_slide();
 }

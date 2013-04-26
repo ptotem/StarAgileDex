@@ -31,13 +31,9 @@
         </a>
 
         <!-- In slide edit mode, display selected image name for the titlepic in the image file field, and provide option to delete the image -->
-
         <div id="titlepic_block" class="file_block">
-
         </div>
-
         <%= link_to "Use an image instead", "#", :id => "show_titlepic", :class => 'btn' %>
-
         <%= link_to "Use a subtitle instead", "#", :id => "clear_titlepic", :style => "display:none;", :class => 'btn' %>
       </div>
 
@@ -54,25 +50,40 @@
       <!-- In slide edit mode, display selected image name for the content block in the respective image file field -->
       <div id="content_block_section" style="display: none; position: relative; overflow-y: auto;" class="form_subpanel">
         <div class="slide_contents_block">
+          <%= link_to "Upload Powerpoint Presentation", "#", :class => "btn", :id=>"upload_ppt_btn", :onclick => "open_ppt_mode($(this));" %>
+          <%= link_to "Import from Dropbox", "#", :class => "btn disabled", :id=>"dropbox_import_btn" %>
           <%= f.fields_for :content_blocks do |widget_form| %>
               <div class="a_content_block">
-                <%= widget_form.link_to_remove image_tag("delete.gif", :style => "width:20px"), :class => "pull-right", :style => "margin-top:15px;margin-right:5px;font-size:24px;" %>
-                <div class="file_block">
+                <%#= widget_form.link_to_remove image_tag("delete.gif", :style => "width:20px"), :class => "pull-right", :style => "margin-top:15px;margin-right:5px;font-size:24px;" %>
+                <div class="file_block" style="text-align: left;">
+                  <%= widget_form.link_to_remove image_tag("delete.gif", :style => "height:20px"), :class => "pull-right", :style => "margin-top:15px;margin-right:5px;font-size:24px;" %>
                   <% if widget_form.object.image.blank? %>
-                      <%= widget_form.file_field :image, :placeholder => "Add Image", :class => "required pull-right", :style => "margin-right:15px" %>
+                      <a href="#" class="btn btn-info" style="margin-bottom: 1px;">
+                          <%= widget_form.file_field :image, :placeholder => "Add Image", :class => "required", :style => "margin-right:15px; visibility:hidden;", :onchange=>"$(this).next().next().next().html($(this).val().substr(0, $(this).val().lastIndexOf('.')));" %> <!--javascript to remove file extensions-->
+                          <%= image_tag "upload.png", :onclick=>"$(this).prev().click();" %> <br>
+                          <div></div>
+                          <span onclick="">Click to change</span> <br>
+                      </a>
+                      <%= widget_form.text_area :caption, :rows=>"2", :placeholder => "Caption for this image", :class => "caption", :style=>"width:95%; resize:vertical; max-height:300px; min-height:80px;" %>
                   <% else %>
-                      <div class="overlap_file_field hidden-tablet">
-                        <%= widget_form.object.image_file_name.truncate(22) rescue nil %>
+                      <div class="existing-cb-images" style="text-align: left;">
+                        <a href="#" class="btn btn-info" style="margin-bottom: 1px; text-align: center;">
+                            <%= widget_form.file_field :image, :placeholder => "Add Image", :style => "margin-right:15px; display:none;", :onchange=>"$(this).next().next().text($(this).val());$(this).next().attr('src','/assets/upload.png');" %>
+                            <% pubsys_path = widget_form.object.image.url %> <%# this is public/system path (paperclip) %>
+                            <% userdata_path = pubsys_path.gsub(pubsys_path, "/userdata/"+@slide.presentation.user.name.downcase.gsub(" ", "_")+"/"+@slide.presentation.name.downcase.gsub(" ", "_")+"/"+@slide.id.to_s+"/content_blocks/"+widget_form.object.image_file_name) if widget_form.object.image? %>
+                            <%= image_tag userdata_path, :onclick=>"$(this).prev().click();" %>
+                            <div class="content_block_img_name"><%= widget_form.object.image_file_name.truncate(22) rescue nil %></div>
+                            <span onclick="">Click to change</span> <br>
+                            <!--<div class="content_block_img_caption"><%= widget_form.object.caption %></div>-->
+                        </a>
+                      <%= widget_form.text_area :caption, :rows=>"2", :placeholder => "Caption for this image", :class => "caption", :style=>"width:95%; resize:vertical; max-height:300px; min-height:80px;" %>
                       </div>
-                      <%= widget_form.file_field :image, :placeholder => "Add Image", :class => "pull-right", :style => "margin-right:15px" %>
                   <% end %>
                 </div>
-                <%= widget_form.text_field :caption, :placeholder => "Caption for this image", :class => "caption" %>
               </div>
           <% end %>
-          <%= link_to "Upload Powerpoint Presentation", "#", :class => "btn", :onclick => "$('#import_ppt_block').show();$('.fields').hide();" %>
-          <%= link_to "Import from Dropbox", "#", :class => "btn disabled" %>
-          <%= f.link_to_add "Upload Images", :content_blocks, :class => "btn custom_scroll", :onclick => "$('#import_ppt_block').hide();" %>
+
+          <%= f.link_to_add "Upload Images", :content_blocks, :class => "btn custom_scroll", :onclick => "$('#import_ppt_block').hide();$('#upload_ppt_btn').show();" %>
         </div>
 
         <div id="import_ppt_block" style="display: none">

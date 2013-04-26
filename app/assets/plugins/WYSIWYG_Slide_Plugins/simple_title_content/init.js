@@ -11,6 +11,7 @@ function init_widget() {
     $('#subtitle_back').fadeIn(2000,function(){
       $('#subtitle').fadeIn();
       $('#title_wrap').fadeIn();
+        $widget.boxfit({multiline:true, maximum_font_size:36})
 
   });
     layout1();
