@@ -5,10 +5,11 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="/assets/bootstrap.min.css">
-  <link rel="stylesheet" href="/assets/console/roundabout-shapes2.css">
   <link rel="stylesheet" href="/assets/console/console.css">
   <link rel="stylesheet" href="/assets/console/slide_form.css">
+  <link rel="stylesheet" href="/assets/console/jimpress/jimpress.css">
   <script type="text/javascript" src="/assets/jquery-1.8.3.min.js"></script>
+  <script type="text/javascript" src="/assets/console/jimpress/jmpress.min.js"></script>
   <%= javascript_include_tag :application %>
   <%= include_gon %>
   <%= feedback_includes %>
@@ -19,41 +20,53 @@
 <body>
 <div id="wrapper">
 
-  <% if user_signed_in?%>
-      <script type="text/javascript">$(document).ready(function() { $(".feedback_link").feedback({tabPosition: "top"}); });</script>
+  <% if user_signed_in? %>
+      <script type="text/javascript">$(document).ready(function () {
+          $(".feedback_link").feedback({tabPosition: "top"});
+      });</script>
   <% end %>
   <!-----------------------------------------------------------
   The Right Panel
   ---------------------------------------------------------------->
   <div id="right_panel">
 
-    <ul id="waterwheel">
-      <li><%= image_tag "Ad/export_1.jpg" %></li>
-      <li><%= image_tag "Ad/free_1.jpg" %></li>
-      <li><%= image_tag "Ad/intuitive_1.jpg" %></li>
-      <li><%= image_tag "Ad/cool_1.jpg" %></li>
-    </ul>
+    <h1 id="headline">
+      A presentation and e-learning authoring tool
+      <br style="margin-bottom: 10px;">
+      <a href="#" onClick="window.open ('/demo', 'newwindow', config='height=660,width=1054, toolbar=no, menubar=no, scrollbars=no, resizable=no, location=no, directories=no, status=no');" class="btn btn-info ad_btn">Take
+        a Tour</a>
+    </h1>
 
     <div id="logo">
       <img src="/assets/adlogo.png"/>
 
-      <h2><span style="color: #fff;">agileDex</span></h2>
-
+      <h2><span style="color: #583a13;">agile</span>Dex</h2>
     </div>
 
     <div id="writeup">
-      Welcome to agileDex
-      <!--TODO: Put in a better phrase here-->
-      <br/>
-      <br/>
-      <a href="#" onClick="window.open ('/demo', 'newwindow', config='height=660,width=1054, toolbar=no, menubar=no, scrollbars=no, resizable=no, location=no, directories=no, status=no');" class="btn ad_btn">Demo</a>
-
+      <section id="jms-slideshow" class="jms-slideshow">
+        <div class="step" data-color="color-2" data-y="800" data-scale="0.4" data-rotate-x="30">
+          <div class="jms-content">
+            <%= image_tag "console/what.png" %>
+          </div>
+        </div>
+        <div class="step" data-color="color-2" data-y="800" data-scale="0.4" data-rotate-x="90">
+          <div class="jms-content">
+            <%= image_tag "console/why.png" %>
+          </div>
+        </div>
+        <div class="step" data-color="color-1" data-rotate-x="60">
+          <div class="jms-content">
+            <%= image_tag "console/how.png" %>
+          </div>
+        </div>
+      </section>
     </div>
 
 
     <div id="active_presentation">
       <input type="hidden" id="presentation">
-      <a id="view_deck"  href="" class="btn ad_btn">View the Deck</a>
+      <a id="view_deck" href="" class="btn ad_btn">View the Deck</a>
       <a href="#" id="export_html_btn" class="btn ad_btn">Export as HTML</a>
       <a href="#" id="export_scorm_btn" class="btn ad_btn">Export as SCORM</a>
       <a href="#" id="del_deck_btn" class="btn ad_btn">Delete the Deck</a>
@@ -74,18 +87,16 @@
   ---------------------------------------------------------------->
 
   <div id="deck_list" class="main_panel" style="display: block;">
-    <h3>Decks</h3>
+    <h3>Slide Decks</h3>
 
     <% if user_signed_in? %>
         <a href="#new_deck_Modal" data-toggle="modal" class="btn btn-info" id="new_deck_btn" title="Click here to create a Deck">Create
           a Deck <i class="icon-plus icon-white pull-right"></i></a>
-        <hr>
     <% else %>
         <a href="/users/auth/facebook" class="btn btn-info" id="new_deck_btn" title="Click here to create a Deck">Create
           a Deck <i class="icon-plus icon-white pull-right"></i></a>
-        <hr>
     <% end %>
-
+    <hr>
     <table id="presentations_table">
       <thead>
       <tr>
@@ -104,7 +115,7 @@
                 </td>
               </tr>
           <% end %>
-      <%end%>
+      <% end %>
       </tbody>
     </table>
   </div>
@@ -141,7 +152,7 @@
         <input id="presentation_name" name="presentation[name]" data-toggle="focus" placeholder="Type Presentation Name Here ..." size="30" maxlength="25" type="text"/>
         <% if user_signed_in? %>
             <input id="presentation_user_id" name="presentation[user_id]" type="hidden" value="<%= current_user.id %>"/>
-        <%end %>
+        <% end %>
       </div>
       <div class="modal-footer">
         <button class="btn btn-danger pull-left" data-dismiss="modal" aria-hidden="true">Close</button>
@@ -157,7 +168,7 @@
     <ul class="nav pull-left">
       <% if !user_signed_in? %>
           <li></li>
-      <%else %>
+      <% else %>
           <li id="this_sig" class="brand">
             <% if current_user.email.include?("guest") %>
                 Welcome, Guest
@@ -181,7 +192,7 @@
             </ul>
           </li>
         </ul>
-    <%else%>
+    <% else %>
         <ul class="nav pull-right">
           <li class="brand">
             <a href="/users/sign_out" id="sign_out_btn"><img src="/assets/logout2.png"/>Logout</a>
@@ -193,30 +204,27 @@
 
 <!--TODO: Keep this, dont' delete this block, for now Proceed as guest is removed, so, guest bar is getting displayed, and js for this is written in console_behavior -->
 <!--<div id="signed_in" class="navbar navbar-inverse">-->
-  <!--<div class="navbar-inner">-->
-    <!--<ul class="nav pull-left">-->
-          <!--<li  class="brand">-->
-                <!--Welcome, Guest-->
-          <!--</li>-->
-    <!--</ul>-->
-    <!--<ul class="nav pull-right">-->
-      <!--<li class="dropdown bottom-up">-->
-        <!--<a class="dropdown-toggle brand"-->
-           <!--data-toggle="dropdown"-->
-           <!--href="#">-->
-          <!--Sign in &#9650;-->
-        <!--</a>-->
-        <!--<ul class="dropdown-menu bottom-up" id="sign_in_blok">-->
-          <!--<li><a href="/users/auth/facebook"><img src="/assets/Facebook.png" style="width: 200px;"/></a></li>-->
-          <!--<li><a href="/users/auth/twitter"><img src="/assets/Twitter.png" style="width: 200px;"/></a></li>-->
-        <!--</ul>-->
-      <!--</li>-->
-    <!--</ul>-->
-  <!--</div>-->
+<!--<div class="navbar-inner">-->
+<!--<ul class="nav pull-left">-->
+<!--<li  class="brand">-->
+<!--Welcome, Guest-->
+<!--</li>-->
+<!--</ul>-->
+<!--<ul class="nav pull-right">-->
+<!--<li class="dropdown bottom-up">-->
+<!--<a class="dropdown-toggle brand"-->
+<!--data-toggle="dropdown"-->
+<!--href="#">-->
+<!--Sign in &#9650;-->
+<!--</a>-->
+<!--<ul class="dropdown-menu bottom-up" id="sign_in_blok">-->
+<!--<li><a href="/users/auth/facebook"><img src="/assets/Facebook.png" style="width: 200px;"/></a></li>-->
+<!--<li><a href="/users/auth/twitter"><img src="/assets/Twitter.png" style="width: 200px;"/></a></li>-->
+<!--</ul>-->
+<!--</li>-->
+<!--</ul>-->
 <!--</div>-->
-
-
-
+<!--</div>-->
 
 
 <script type="text/javascript" src="/assets/jquery.easing.js"></script>
@@ -230,16 +238,14 @@
 <%= javascript_include_tag "jquery.powertip" %>
 <%= javascript_include_tag "jquery.nicescroll.min" %>
 <%= javascript_include_tag "jquery.easing" %>
-<%= javascript_include_tag "console/jquery.roundabout.min" %>
-<%= javascript_include_tag "console/jquery.roundabout-shapes.min" %>
 <%= javascript_include_tag "console/console_behavior" %>
 <%= javascript_include_tag "jquery_nested_form" %>
+<%= javascript_include_tag "console/jimpress/jquery.jmslideshow" %>
+<%= javascript_include_tag "console/jimpress/modernizr" %>
 
 <!--This is used for form validation-->
 <!--Source : http://jzaefferer.github.com/jquery-validation/jquery.validate.js-->
 <script type="text/javascript" src="/assets/jquery.validate.js"></script>
-
-
 
 
 </body>

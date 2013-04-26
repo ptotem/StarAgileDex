@@ -1,0 +1,166 @@
+.jms-slideshow {
+    position: relative;
+    width: 80%;
+    max-width: 1400px;
+    min-width: 700px;
+    height: 460px;
+    margin-top: -180px;
+    margin-left: 40px;
+}
+.jms-wrapper {
+	width: auto;
+	min-width: 800px;
+	height: 500px;
+	background-clip: padding-box;
+	outline: none;
+}
+.step {	
+    width: auto;
+    min-width: 600px;
+    height: 500px;
+    background-clip: padding-box;
+    outline: none;
+    display: block;
+    -webkit-transition: opacity 1s;
+    -moz-transition: opacity 1s;
+    -ms-transition: opacity 1s;
+    -o-transition: opacity 1s;
+    transition: opacity 1s;
+}
+.step:not(.active) {
+    opacity: 0;
+    filter: alpha(opacity=0); /* internet explorer */
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(opacity=0)"; /*IE8*/
+}
+.jms-content{
+    margin: 64px 370px 0px 20px;
+    position: relative;
+    clear: both;
+}
+.step h1{
+    color: #000;
+    line-height: 36px;
+    font-size: 28px;
+    text-shadow: 1px 1px 1px rgba(0,0,0,0.1);
+    margin: 0;
+}
+.step p {
+    color: #fff;
+    text-shadow: 1px 1px 1px rgba(0,0,0,0.1);
+    font-size: 34px;
+    font-weight: normal;
+    position: relative;
+    margin: 0;
+}
+.step img{
+    position: absolute;
+    right: 0px;
+    top: 30px;
+    width:600px;
+    max-width:600px;
+}
+.jms-dots{
+    display: none;
+    width: 100%;
+    position: absolute;
+    text-align: center;
+    left: 0px;
+    bottom: 20px;
+    z-index: 2000;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+}
+.jms-dots span{
+    display: inline-block;
+    position: relative;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #777;
+    margin: 3px;
+    cursor: pointer;
+    box-shadow:
+        1px 1px 1px rgba(0,0,0,0.1) inset,
+        1px 1px 1px rgba(255,255,255,0.3);
+}
+.jms-dots span.jms-dots-current:after{
+    content: '';
+    width: 8px;
+    height: 8px;
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    border-radius: 50%;
+    background: #ffffff; /* Old browsers */
+    background: -moz-linear-gradient(top, #ffffff 0%, #f6f6f6 47%, #ededed 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(47%,#f6f6f6), color-stop(100%,#ededed)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, #ffffff 0%,#f6f6f6 47%,#ededed 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top, #ffffff 0%,#f6f6f6 47%,#ededed 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top, #ffffff 0%,#f6f6f6 47%,#ededed 100%); /* IE10+ */
+    background: linear-gradient(top, #ffffff 0%,#f6f6f6 47%,#ededed 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#ededed',GradientType=0 ); /* IE6-9 */
+}
+.jms-arrows{
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+}
+.jms-arrows span{
+	position: absolute;
+	top: 50%;
+	margin-top: -40px;
+	height: 32px;
+	width: 30px;
+	cursor: pointer;
+	z-index: 2000;
+	box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.1);
+	border-radius: 3px;
+}
+.jms-arrows span.jms-arrows-prev{
+	background: #fff url(arrow_left.png) no-repeat 50% 50%;
+	left: -10px;
+    background-size:100%;
+}
+
+.jms-arrows span.jms-arrows-prev{
+    background: #fff url(arrow_left.png) no-repeat 50% 50%;
+    left: -10px;
+    background-size:100%;
+}
+.jms-arrows span.jms-arrows-next{
+    background: #fff url(arrow_right.png) no-repeat 50% 50%;
+    right: -23px;
+
+    background-size:100%;
+}
+/* Not supported style */
+.jms-wrapper.not-supported{
+    background-color: #E3D8FF;
+    background-color: rgba(227, 216, 268, 1);
+}
+.jms-wrapper.not-supported:after{
+    content: 'The slideshow functionality is not supported on your device.';
+    padding: 0px 0px 30px 0px;
+    text-align: center;
+    display: block;
+}
+.jms-wrapper.not-supported .step{
+    display: none;
+    position: relative;
+    opacity: 1;
+    filter: alpha(opacity=99); /* internet explorer */
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(opacity=99)"; /*IE8*/
+    margin: 20px auto;
+}
+.jms-wrapper.not-supported .step:first-of-type{
+    display: block;
+}
+.jms-wrapper.not-supported .step:not(.active) a.jms-link{
+    opacity: 1;
+    margin-top: 40px;
+}

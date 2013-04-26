@@ -16,14 +16,17 @@ $(function () {
 // These functions manage the transitions between the Deck view, Slides view and New Slide View
 
 function transitInDeck(name) {
-    $('#writeup').hide();
-    $('#waterwheel').fadeOut(function () {
+    $('#headline').hide();
+    $('#logo').animate({
+        'marginLeft': "+=15px"
+    });
+    $('#writeup').fadeOut(function () {
         $('#right_panel').animate({
-            'width':"240px",
-            'marginRight':"0"
+            'width': "240px",
+            'marginRight': "0"
         });
         $('#deck_list').animate({
-            'width':"280px"
+            'width': "280px"
         }, function () {
             $('#presentation_slides_index').fadeIn();
             $('#active_presentation').fadeIn();
@@ -47,38 +50,43 @@ function transitInNewSlide(slide_id, presentation_id) {
             form_bindings();
         });
     }
-    $(".main_form_body").niceScroll({cursorcolor:"#232836", cursorborder:"none", cursorwidth:"5px", autohidemode:false, horizrailenabled:false});
+    $(".main_form_body").niceScroll({cursorcolor: "#232836", cursorborder: "none", cursorwidth: "5px", autohidemode: false, horizrailenabled: false});
 
     // Remove the presentations panel and move the slide panel to the left
     $('#deck_list').hide();
     $('#presentation_slides_index').css({
-        'float':'left',
-        'marginLeft':'20px'
+        'float': 'left',
+        'marginLeft': '20px'
     }).animate({
-            'width':"280px"
+            'width': "280px"
         }, function () {
             $('#right_panel').fadeOut(function () {
-                $('#slide_form_panel').fadeIn();;
+                $('#slide_form_panel').fadeIn();
+                ;
             });
         });
     $('.slide_layout').css({
-        'marginLeft':'20px'
+        'marginLeft': '20px'
     });
 }
 function transitOut() {
     $('.main_panel').hide();
-    $('#presentation_slides_index').css('width','400px')
+    $('#presentation_slides_index').css('width', '400px')
     $('#deck_list').show().animate({
-        'width':"400px"
+        'width': "400px"
     });
     $('#right_panel').show().animate({
-        'width':"480px",
-        'marginRight':"30px"
+        'width': "480px",
+        'marginRight': "30px"
+    });
+    $('#logo').css({
+        'marginLeft': "20px"
     });
     $('#active_slide').fadeOut();
     $('#active_presentation').fadeOut(function () {
-        $('#writeup').show();
-        $('#waterwheel').fadeIn();
+        $('#writeup').fadeIn(function () {
+            $('#headline').fadeIn();
+        });
     });
 }
 
@@ -86,16 +94,16 @@ function transitOut() {
 
 function create_new_deck() {
     var prez_name = $('#presentation_name').val();
-    var data = {presentation_name:[]};
+    var data = {presentation_name: []};
     data["presentation_name"].push(prez_name);
 
     $.ajax({
-        url:"/presentations/new",
-        type:"post",
-        async:false,
-        data:JSON.stringify(data),
-        contentType:"application/json",
-        success:function (returning_data) {
+        url: "/presentations/new",
+        type: "post",
+        async: false,
+        data: JSON.stringify(data),
+        contentType: "application/json",
+        success: function (returning_data) {
             guest = returning_data.split('|')[1] == 'guest' ? true : false;
             returning_data = returning_data.split('|')[0];
             $('#presentations_table').dataTable().fnAddData([
@@ -119,25 +127,25 @@ function create_new_deck() {
 
 function initialize_deck_list() {
     $('#presentations_table').dataTable({
-            "iDisplayLength":10,
-            "aaSorting":[
+            "iDisplayLength": 10,
+            "aaSorting": [
                 [ 0, "desc" ]
             ],
-            "sScrollX":"100%",
-            "sScrollY":"350",
-            "aoColumns":[
-                { "sClass":"center", "bSortable":false, "sWidth":"220px"}
+            "sScrollX": "100%",
+            "sScrollY": "350",
+            "aoColumns": [
+                { "sClass": "center", "bSortable": false, "sWidth": "220px"}
             ],
-            "bPaginate":false,
-            "sPaginationType":"false",
-            "bLengthChange":true,
-            "bFilter":true,
-            "bSort":true,
-            "bInfo":false,
-            "oSearch":{"sSearch":""},
-            "oLanguage":{ "sSearch":"" },
-            "sDom":'C<"clear">lfrtip',
-            "bAutoWidth":false }
+            "bPaginate": false,
+            "sPaginationType": "false",
+            "bLengthChange": true,
+            "bFilter": true,
+            "bSort": true,
+            "bInfo": false,
+            "oSearch": {"sSearch": ""},
+            "oLanguage": { "sSearch": "" },
+            "sDom": 'C<"clear">lfrtip',
+            "bAutoWidth": false }
     );
     $('#presentations_table_filter').children().children().addClass('presentation_filter');
     $('.presentation_filter').attr("placeholder", "Search Decks");
@@ -147,18 +155,18 @@ function initialize_deck_list() {
 // This function sets up dataTables for the slide list
 function initialize_slide_list() {
     $('#presentations_slides_table').dataTable({
-            "iDisplayLength":10,
-            "bPaginate":false,
-            "sPaginationType":"false",
-            "bLengthChange":true,
-            "bFilter":true,
-            "bSort":false,
-            "bInfo":false,
-            "bRetrieve":true,
-            "oSearch":{"sSearch":""},
-            "oLanguage":{ "sSearch":"" },
-            "sDom":'C<"clear">lfrtip',
-            "bAutoWidth":false }
+            "iDisplayLength": 10,
+            "bPaginate": false,
+            "sPaginationType": "false",
+            "bLengthChange": true,
+            "bFilter": true,
+            "bSort": false,
+            "bInfo": false,
+            "bRetrieve": true,
+            "oSearch": {"sSearch": ""},
+            "oLanguage": { "sSearch": "" },
+            "sDom": 'C<"clear">lfrtip',
+            "bAutoWidth": false }
     );
     $('#presentations_slides_table_filter').children().children().addClass('slide_filter');
 
@@ -191,16 +199,16 @@ function show_presentation(this_presentation_id, this_presentation_name) {
 
     // ----------------------------------------
 
-    var data = {this_presentation_id:[]};
+    var data = {this_presentation_id: []};
     data["this_presentation_id"].push(this_presentation_id);
 
     $.ajax({ // This function gets the set of slides in the current presentation and populates them in the active presentation panel
-        url:"/get_slides",
-        type:"post",
-        async:false,
-        data:JSON.stringify(data),
-        contentType:"application/json",
-        success:function (data) {
+        url: "/get_slides",
+        type: "post",
+        async: false,
+        data: JSON.stringify(data),
+        contentType: "application/json",
+        success: function (data) {
             var slide_block, my_slide, this_id, cleaned_slide_title;
 
 //            $('.active_presentation_panel').append('<table id="presentations_slides_table">' + '<thead> <tr> <th></th> </tr> </thead>' + '<tbody></tbody>');
@@ -241,19 +249,18 @@ function show_presentation(this_presentation_id, this_presentation_name) {
 
 
                     slide_block = '' + '<li id="slide_' + my_slide[0].replace(/ /g, '') + '">' +
-                                            '<a href="#?slide' + my_slide[0].replace(/ /g, '') + '" style="float:left;">' +
-                                                '<button class="btn btn-info show_this_slide" onclick="transitInNewSlide(' + my_slide[0].replace(/ /g, '') + ',' + this_presentation_id + ')" type="button">' +
-                                                    cleaned_slide_title +
-                                                    '<input id="' + my_slide[0].replace(/ /g, '') + '" type="hidden" name="' + "slide_" + my_slide[0].replace(/ /g, '') + '">' +
-                                                '</button>' +
-                                            '</a>' +
-                                            '<div class="slide_controls" style="float:right; padding-top: 3px;">' +
-                                                '<span style="font-weight:normal; cursor: pointer; font-size: 20px; position: relative; left: -15px;" id="delete_slide_' + my_slide[0].replace(/ /g, '') + '">' + "&times;" + '</span>' +
-                                                '<span style="font-weight:bold; cursor: pointer; font-size: 22px;" id="move_up_slide_' + my_slide[0].replace(/ /g, '') + '">' + "&uarr;" + '</span>' +
-                                                '<span style="font-weight: bold; cursor: pointer; font-size: 22px;" id="move_down_slide_' + my_slide[0].replace(/ /g, '') + '">' + "&darr;" + '</span>' +
-                                            '</div>' +
-                                        '</li>';
-
+                        '<a href="#?slide' + my_slide[0].replace(/ /g, '') + '" style="float:left;">' +
+                        '<button class="btn btn-info show_this_slide" onclick="transitInNewSlide(' + my_slide[0].replace(/ /g, '') + ',' + this_presentation_id + ')" type="button">' +
+                        cleaned_slide_title +
+                        '<input id="' + my_slide[0].replace(/ /g, '') + '" type="hidden" name="' + "slide_" + my_slide[0].replace(/ /g, '') + '">' +
+                        '</button>' +
+                        '</a>' +
+                        '<div class="slide_controls" style="float:right; padding-top: 3px;">' +
+                        '<span style="font-weight:normal; cursor: pointer; font-size: 20px; position: relative; left: -15px;" id="delete_slide_' + my_slide[0].replace(/ /g, '') + '">' + "&times;" + '</span>' +
+                        '<span style="font-weight:bold; cursor: pointer; font-size: 22px;" id="move_up_slide_' + my_slide[0].replace(/ /g, '') + '">' + "&uarr;" + '</span>' +
+                        '<span style="font-weight: bold; cursor: pointer; font-size: 22px;" id="move_down_slide_' + my_slide[0].replace(/ /g, '') + '">' + "&darr;" + '</span>' +
+                        '</div>' +
+                        '</li>';
 
 
                     $('.active_presentation_panel').attr("id", "#pres_" + this_presentation_id);
@@ -265,15 +272,15 @@ function show_presentation(this_presentation_id, this_presentation_name) {
                         var slide_id = $(this).parent().prev().find('input').attr('id');
                         var thisLine = $(this).parent().parent();
 
-                        var data = {slide_id:[]};
+                        var data = {slide_id: []};
                         data["slide_id"].push(slide_id);
                         $.ajax({
-                            url:"move_slide_up",
-                            type:"post",
-                            async:false,
-                            data:JSON.stringify(data),
-                            contentType:"application/json",
-                            success:function (data) {
+                            url: "move_slide_up",
+                            type: "post",
+                            async: false,
+                            data: JSON.stringify(data),
+                            contentType: "application/json",
+                            success: function (data) {
                                 //var thisLine = $(this).parent().parent();
                                 var prevLine = thisLine.prev();
                                 prevLine.before(thisLine);
@@ -286,15 +293,15 @@ function show_presentation(this_presentation_id, this_presentation_name) {
                         var slide_id = $(this).parent().prev().find('input').attr('id');
                         var thisLine = $(this).parent().parent();
 
-                        var data = {slide_id:[]};
+                        var data = {slide_id: []};
                         data["slide_id"].push(slide_id);
                         $.ajax({
-                            url:"move_slide_down",
-                            type:"post",
-                            async:false,
-                            data:JSON.stringify(data),
-                            contentType:"application/json",
-                            success:function (data) {
+                            url: "move_slide_down",
+                            type: "post",
+                            async: false,
+                            data: JSON.stringify(data),
+                            contentType: "application/json",
+                            success: function (data) {
                                 //var thisLine = $(this).parent().parent();
                                 var prevLine = thisLine.next();
                                 prevLine.after(thisLine);
@@ -310,16 +317,16 @@ function show_presentation(this_presentation_id, this_presentation_name) {
                             var presentation_id = this_presentation_id;
                             var thisLine = $(this).parent().parent();
 
-                            var data = {slide_id:[], presentation_id:[]};
+                            var data = {slide_id: [], presentation_id: []};
                             data["slide_id"].push(slide_id);
                             data["presentation_id"].push(presentation_id);
                             $.ajax({
-                                url:"delete_slide",
-                                type:"post",
-                                async:false,
-                                data:JSON.stringify(data),
-                                contentType:"application/json",
-                                success:function (data) {
+                                url: "delete_slide",
+                                type: "post",
+                                async: false,
+                                data: JSON.stringify(data),
+                                contentType: "application/json",
+                                success: function (data) {
 //                                    alert(data);
                                     $(thisLine).empty().remove();
                                 }
@@ -348,16 +355,16 @@ function show_presentation(this_presentation_id, this_presentation_name) {
 
 function delete_presentation() {
 
-    var data = {this_presentation_id:[]};
+    var data = {this_presentation_id: []};
     data["this_presentation_id"].push($('#slide_presentation_id').val());
 
     $.ajax({
-        url:"delete_presentation",
-        type:"post",
-        async:false,
-        data:JSON.stringify(data),
-        contentType:"application/json",
-        success:function (data) {
+        url: "delete_presentation",
+        type: "post",
+        async: false,
+        data: JSON.stringify(data),
+        contentType: "application/json",
+        success: function (data) {
             var $pres_row_id = $('.show_this_presentation').find('input[id=' + $('#slide_presentation_id').val() + ']');
             $pres_row_id.parent().parent().parent().parent().empty().remove();
             transitOut();
@@ -410,15 +417,10 @@ function load_bindings() {
 
     // These functions manage the scroll bindings for the panels
     //    $(".main_panel").niceScroll({cursorcolor:"#232836", cursorborder:"none", cursorwidth:"5px", autohidemode:false, horizrailenabled:false});
-    $("#presentation_slides_index").niceScroll({cursorcolor:"#232836", cursorborder:"none", cursorwidth:"5px", autohidemode:true, horizrailenabled:false});
+    $("#presentation_slides_index").niceScroll({cursorcolor: "#232836", cursorborder: "none", cursorwidth: "5px", autohidemode: true, horizrailenabled: false});
 
     // This function activates the Waterwheel
-    $('#waterwheel').roundabout({
-        shape:"waterWheel",
-        autoPlay:true,
-        autoplayDuration:500
-    }).fadeIn("slow");
-
+    init_widget();
 
 }
 
@@ -447,15 +449,14 @@ function form_bindings() {
     $('#show_titlepic').click(switch_to_titlepic);
     $('#clear_titlepic').click(switch_to_subtitle);
 
-    $('#slide_titlepic').change(function()
-    {
-        $('#title_picture img').attr('src','/assets/upload.png');
+    $('#slide_titlepic').change(function () {
+        $('#title_picture img').attr('src', '/assets/upload.png');
         $('#titlepic_name').html($(this).val());
         return false;
     });
 
-    $('#show_wysiwyg').on('click',open_blocks_mode);
-    $('#clear_wysiwyg').on('click',open_wysiwyg_mode);
+    $('#show_wysiwyg').on('click', open_blocks_mode);
+    $('#clear_wysiwyg').on('click', open_wysiwyg_mode);
     $('#upload_ppt').click(open_ppt_mode);
 
     $(':file').on("change", function () {
@@ -468,7 +469,7 @@ function form_bindings() {
 
     //This scrolls the contents blocks to the end on adding new field (new content block)
     $('.custom_scroll').on("click", function () {
-        $('#content_block_section').animate({scrollTop:$('#content_block_section').prop("scrollHeight")}, 500);
+        $('#content_block_section').animate({scrollTop: $('#content_block_section').prop("scrollHeight")}, 500);
     });
 
     // Form validation
@@ -537,7 +538,7 @@ function switch_to_titlepic() {
 
 // This function toggles from titlepic to subtitle
 function switch_to_subtitle() {
-    $('#subtitle_block').css('backgroundImage','url("")');
+    $('#subtitle_block').css('backgroundImage', 'url("")');
     $('#show_titlepic').show();
     $('#clear_titlepic').hide();
     $('#titlepic_Modal_btn').hide();
@@ -547,4 +548,21 @@ function switch_to_subtitle() {
     $('#slide_nosub').val(false);
 }
 
+function init_widget() {
+    var jmpressOpts = {
+        viewPort: {
+            height: 400,
+            width: 1300,
+            maxScale: 1
+        },
+        animation: { transitionDuration: '0.8s' }
+    };
+
+    $('#jms-slideshow').jmslideshow($.extend(true, { jmpressOpts: jmpressOpts }, {
+        autoplay: true,
+        bgColorSpeed: '0.8s',
+        arrows: false,
+        interval: 6000
+    }));
+}
 
