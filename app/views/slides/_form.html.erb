@@ -72,7 +72,7 @@
                             <% pubsys_path = widget_form.object.image.url %> <%# this is public/system path (paperclip) %>
                             <% userdata_path = pubsys_path.gsub(pubsys_path, "/userdata/"+@slide.presentation.user.name.downcase.gsub(" ", "_")+"/"+@slide.presentation.name.downcase.gsub(" ", "_")+"/"+@slide.id.to_s+"/content_blocks/"+widget_form.object.image_file_name) if widget_form.object.image? %>
                             <%= image_tag userdata_path, :onclick=>"$(this).prev().click();" %>
-                            <div class="content_block_img_name"><%= widget_form.object.image_file_name.truncate(22) rescue nil %></div>
+                            <div class="content_block_img_name"><%= widget_form.object.image_file_name.truncate(15) rescue nil %></div>
                             <span onclick="">Click to change</span> <br>
                             <!--<div class="content_block_img_caption"><%= widget_form.object.caption %></div>-->
                         </a>
