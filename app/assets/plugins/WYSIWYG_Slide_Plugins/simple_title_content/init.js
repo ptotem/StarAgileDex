@@ -15,5 +15,4 @@ function init_widget() {
 
   });
     layout1();
-
 }

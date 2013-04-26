@@ -6,6 +6,7 @@
     height: 300px;
     margin-top: 280px;
     display: none;
+    margin-left:-30px;
 }
 
 #title_wrap {
@@ -28,7 +29,7 @@
     font-size: 1.2em;
     display: none;
     top: 18px;
-    left: 530px;
+    left: 500px;
     position: absolute;
     padding: 30px;
 }
@@ -41,7 +42,7 @@
     font-size: 1.2em;
     display: none;
     top: 18px;
-    left: 530px;
+    left: 500px;
     position: absolute;
     padding: 30px;
 }
@@ -52,7 +53,7 @@
     font-size: 1.2em;
     display: none;
     top: 18px;
-    left: 530px;
+    left: 500px;
     position: absolute;
     padding: 30px;
 }
