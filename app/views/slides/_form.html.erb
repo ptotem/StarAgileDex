@@ -58,8 +58,8 @@
                 <div class="file_block" style="text-align: left;">
                   <%= widget_form.link_to_remove image_tag("delete.gif", :style => "height:20px"), :class => "pull-right", :style => "margin-top:15px;margin-right:5px;font-size:24px;" %>
                   <% if widget_form.object.image.blank? %>
-                      <a href="#" class="btn btn-info" style="margin-bottom: 1px;">
-                          <%= widget_form.file_field :image, :placeholder => "Add Image", :class => "required", :style => "margin-right:15px; visibility:hidden;", :onchange=>"$(this).next().next().next().html($(this).val().substr(0, $(this).val().lastIndexOf('.')));" %> <!--javascript to remove file extensions-->
+                      <a href="#" class="btn btn-info" style="margin-bottom: 1px; text-align: center; ">
+                          <%= widget_form.file_field :image, :placeholder => "Add Image", :class => "required", :style => "margin-right:15px; display:none;", :onchange=>"$(this).next().next().next().html($(this).val().substr(0, $(this).val().lastIndexOf('.')).substring(0,12));" %> <!--javascript to remove file extensions-->
                           <%= image_tag "upload.png", :onclick=>"$(this).prev().click();" %> <br>
                           <div></div>
                           <span onclick="">Click to change</span> <br>
@@ -67,12 +67,12 @@
                       <%= widget_form.text_area :caption, :rows=>"2", :placeholder => "Caption for this image", :class => "caption", :style=>"width:95%; resize:vertical; max-height:300px; min-height:80px;" %>
                   <% else %>
                       <div class="existing-cb-images" style="text-align: left;">
-                        <a href="#" class="btn btn-info" style="margin-bottom: 1px; text-align: center;">
-                            <%= widget_form.file_field :image, :placeholder => "Add Image", :style => "margin-right:15px; display:none;", :onchange=>"$(this).next().next().text($(this).val());$(this).next().attr('src','/assets/upload.png');" %>
+                        <a href="#" class="btn btn-info" style="margin-bottom: 1px; text-align: center; ">
+                            <%= widget_form.file_field :image, :placeholder => "Add Image", :style => "margin-right:15px; display:none;", :onchange=>"$(this).next().next().text($(this).val().substr(0, $(this).val().lastIndexOf('.')).substring(0,12));$(this).next().attr('src','/assets/upload.png');" %>
                             <% pubsys_path = widget_form.object.image.url %> <%# this is public/system path (paperclip) %>
                             <% userdata_path = pubsys_path.gsub(pubsys_path, "/userdata/"+@slide.presentation.user.name.downcase.gsub(" ", "_")+"/"+@slide.presentation.name.downcase.gsub(" ", "_")+"/"+@slide.id.to_s+"/content_blocks/"+widget_form.object.image_file_name) if widget_form.object.image? %>
                             <%= image_tag userdata_path, :onclick=>"$(this).prev().click();" %>
-                            <div class="content_block_img_name"><%= widget_form.object.image_file_name.truncate(22) rescue nil %></div>
+                            <div class="content_block_img_name"><%= widget_form.object.image_file_name.truncate(15) rescue nil %></div>
                             <span onclick="">Click to change</span> <br>
                             <!--<div class="content_block_img_caption"><%= widget_form.object.caption %></div>-->
                         </a>

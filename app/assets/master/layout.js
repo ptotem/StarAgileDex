@@ -41,7 +41,7 @@ function layout2(){
     setTimeout(function () {
 //in subtitle no subtitle and no subtitle pic
         if (gon.no_subtitle && gon.no_titlepic) {
-            $title.css({width:"776px"});
+            $title.css({width:"780px",left:"46px",padding:"20px"});
             $('#subtitle_back').removeClass('elements');
         }
         // if only subtitle is not mention

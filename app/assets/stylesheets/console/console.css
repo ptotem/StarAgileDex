@@ -193,15 +193,19 @@ body {
 
 #presentations_slides_list {
     width: 215px;
+    height: 350px;
     overflow: auto;
     padding-right: 5px;
     text-align: center;
     margin: 65px auto 0;
     list-style: none;
+
 }
 
 #presentations_slides_list li{
     padding: 2px 0 0px 0;
+    /*margin: 0 0 5px;*/
+    /*padding: 5px;*/
 }
 
 /* ------------------------------------------ */

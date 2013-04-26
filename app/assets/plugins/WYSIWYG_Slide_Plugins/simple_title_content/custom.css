@@ -8,7 +8,7 @@ h1 {
 
 #subtitle_back {
     position: absolute;
-    left: 90px;
+    left: 55px;
     top: 120px;
     width: 400px;
     height: 400px;
@@ -17,7 +17,7 @@ h1 {
 }
 #subtitle {
     position: absolute;
-    left: 80px;
+    left: 53px;
     top: 120px;
     height: 400px;
     width: 350px;
@@ -53,7 +53,7 @@ li{
 
 #title_wrap {
     position: absolute;
-    left: 40px;
+    left: 8px;
     top: 0px;
     display: none;
 }
@@ -62,7 +62,7 @@ li{
     position: absolute;
     height: 360px;
     width: 350px;
-    right:  80px;
+    right:  110px;
     top: 120px;
     color: white;
     padding: 20px;
@@ -72,7 +72,7 @@ li{
 #titlepic {
     bottom: 103px;
     display: none;
-    left: 126px;
+    left: 84px;
     padding-bottom: 30px;
     padding-left: 30px;
     padding-right: 30px;
