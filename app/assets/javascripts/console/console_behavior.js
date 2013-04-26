@@ -410,7 +410,7 @@ function load_bindings() {
 
     // These functions manage the scroll bindings for the panels
     //    $(".main_panel").niceScroll({cursorcolor:"#232836", cursorborder:"none", cursorwidth:"5px", autohidemode:false, horizrailenabled:false});
-    $("#presentation_slides_index").niceScroll({cursorcolor:"#232836", cursorborder:"none", cursorwidth:"5px", autohidemode:true, horizrailenabled:false});
+//    $("#presentation_slides_index").niceScroll({cursorcolor:"#232836", cursorborder:"none", cursorwidth:"5px", autohidemode:true, horizrailenabled:false});
 
     // This function activates the Waterwheel
     $('#waterwheel').roundabout({
@@ -450,7 +450,18 @@ function form_bindings() {
     $('#slide_titlepic').change(function()
     {
         $('#title_picture img').attr('src','/assets/upload.png');
-        $('#titlepic_name').html($(this).val());
+//        $('#titlepic_name').html($(this).val());
+        var full_name = $(this).val();
+        var rem_ext_from_file_name = full_name.substr(0, full_name.lastIndexOf('.'));
+        var display_first_12_char = rem_ext_from_file_name.substring(0,12);
+        if (display_first_12_char.length >= 12){
+            var add_dots = display_first_12_char+"...";
+            $('#titlepic_name').html(add_dots);
+        }
+        else{
+            $('#titlepic_name').html(display_first_12_char);
+        }
+        //$('#titlepic_name').html($(this).val().substr(0, $(this).val().lastIndexOf('.'))).substring(0,15)+"...";
         return false;
     });
 
