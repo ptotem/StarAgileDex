@@ -53,7 +53,7 @@ body {
 }
 
 #logo img {
-    width: 150px;
+    width: 140px;
 }
 
 #right_panel h2 {
@@ -65,20 +65,24 @@ body {
     margin-top: 10px;
     margin-right: 40px;
     float: right;
-    width:260px;
-    font-size: 36px;
+    width:240px;
+    font-size: 32px;
+    line-height: 32px;
+    opacity: 0.7;
+    z-index:9999999999;
+    position: relative;
 }
 
 #writeup {
     width: 420px;
     background: black;
-    margin: 0 0 5px 5px;
+    margin: 30px 0 5px 5px;
     color: #ffae41;
     font-size: 20px;
     line-height: 1.35em;
-    height: 288px;
+    height: 28px;
     border-radius: 10px;
-    opacity: 0.8;
+    opacity: 0.7;
     padding: 20px;
 }
 
@@ -113,13 +117,13 @@ body {
     width: 400px;
     float: right;
     height: 545px;
-    background: #f5f5f5;
+    background: #f5f5cc;
     border-radius: 10px;
     display: none;
     text-align: center;
     overflow: hidden;
     border:2px solid #96641e;
-    opacity: 0.8;
+    opacity: 0.75;
 
 }
 
@@ -361,3 +365,6 @@ hr {
     text-align: left;
 }
 
+#instruction_block{
+    padding: 40px;
+}

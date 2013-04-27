@@ -20,20 +20,15 @@
 <body>
 <div id="wrapper">
 
-  <% if user_signed_in? %>
-      <script type="text/javascript">$(document).ready(function () {
-          $(".feedback_link").feedback({tabPosition: "top"});
-      });</script>
-  <% end %>
   <!-----------------------------------------------------------
   The Right Panel
   ---------------------------------------------------------------->
   <div id="right_panel">
 
     <h1 id="headline">
-      A presentation and e-learning authoring tool
-      <br style="margin-bottom: 10px;">
-      <a href="#" onClick="window.open ('/demo', 'newwindow', config='height=660,width=1054, toolbar=no, menubar=no, scrollbars=no, resizable=no, location=no, directories=no, status=no');" class="btn btn-info ad_btn">Take
+      A presentation and elearning authoring tool
+      <br style="margin-bottom: 15px;">
+      <a href="#" onClick="window.open ('/demo', 'newwindow', config='height=660,width=1054, toolbar=no, menubar=no, scrollbars=no, resizable=no, location=no, directories=no, status=no');" class="btn btn-inverse ad_btn">Take
         a Tour</a>
     </h1>
 
@@ -60,7 +55,13 @@
             <%= image_tag "console/how.png" %>
           </div>
         </div>
+        <div class="step" data-color="color-1" data-y="2000" data-scale="0.2" data-rotate-x="90">
+          <div class="jms-content">
+            <%= image_tag "console/where.png" %>
+          </div>
+        </div>
       </section>
+      <hr style="background: black">
     </div>
 
 
@@ -90,34 +91,46 @@
     <h3>Slide Decks</h3>
 
     <% if user_signed_in? %>
-        <a href="#new_deck_Modal" data-toggle="modal" class="btn btn-info" id="new_deck_btn" title="Click here to create a Deck">Create
-          a Deck <i class="icon-plus icon-white pull-right"></i></a>
-    <% else %>
-        <a href="/users/auth/facebook" class="btn btn-info" id="new_deck_btn" title="Click here to create a Deck">Create
-          a Deck <i class="icon-plus icon-white pull-right"></i></a>
-    <% end %>
-    <hr>
-    <table id="presentations_table">
-      <thead>
-      <tr>
-        <th class="presentation_tools"></th>
-      </tr>
-      </thead>
-      <tbody>
 
-      <% if user_signed_in? %>
+        <script type="text/javascript">
+            $(function () {
+                $(".feedback_link").feedback({tabPosition: "top"});
+            });
+        </script>
+
+        <a href="#new_deck_Modal" data-toggle="modal" class="btn btn-inverse" id="new_deck_btn" title="Click here to create a Deck">Create
+          a Deck <i class="icon-plus icon-white pull-right"></i></a>
+        <hr>
+
+        <table id="presentations_table">
+          <thead>
+          <tr>
+            <th class="presentation_tools"></th>
+          </tr>
+          </thead>
+          <tbody>
           <% @presentations.each_with_index do |presentation| %>
               <tr class="presentation_row">
                 <td class="presentation_contents">
                   <a href="#?presentation<%= presentation.id %>" onclick="transitInDeck('<%= presentation.name %>')" class="datatable_button">
-                    <button class="btn btn-info show_this_presentation" type="button"><%= hidden_field_tag presentation.id %><%= presentation.name.titlecase %></button>
+                    <button class="btn btn-inverse show_this_presentation" type="button"><%= hidden_field_tag presentation.id %><%= presentation.name.titlecase %></button>
                   </a>
                 </td>
               </tr>
           <% end %>
-      <% end %>
-      </tbody>
-    </table>
+          </tbody>
+        </table>
+    <% else %>
+        <a href="/users/auth/facebook" class="btn btn-inverse" id="new_deck_btn" title="Click here to create a Deck">Create
+          a Deck <i class="icon-plus icon-white pull-right"></i></a>
+        <hr>
+        <div id="instruction_block">
+          <%= image_tag "console/wordart.png" %>
+        </div>
+
+
+    <% end %>
+
   </div>
 
   <!-----------------------------------------------------------
@@ -244,7 +257,7 @@
 <%= javascript_include_tag "console/jimpress/modernizr" %>
 
 <!--This is used for form validation-->
-<script type="text/javascript" src="http://jzaefferer.github.com/jquery-validation/jquery.validate.js"></script>
+<!--<script type="text/javascript" src="http://jzaefferer.github.com/jquery-validation/jquery.validate.js"></script>-->
 <!--Source : http://jzaefferer.github.com/jquery-validation/jquery.validate.js-->
 <script type="text/javascript" src="/assets/jquery.validate.js"></script>
 
