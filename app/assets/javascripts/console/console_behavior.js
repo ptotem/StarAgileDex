@@ -62,7 +62,6 @@ function transitInNewSlide(slide_id, presentation_id) {
         }, function () {
             $('#right_panel').fadeOut(function () {
                 $('#slide_form_panel').fadeIn();
-                ;
             });
         });
     $('.slide_layout').css({
@@ -71,7 +70,10 @@ function transitInNewSlide(slide_id, presentation_id) {
 }
 function transitOut() {
     $('.main_panel').hide();
-    $('#presentation_slides_index').css('width', '400px')
+    $('#presentation_slides_index').css({
+        'width': '400px',
+        'marginLeft': '0px'
+    });
     $('#deck_list').show().animate({
         'width': "400px"
     });
@@ -189,7 +191,7 @@ function show_presentation(this_presentation_id, this_presentation_name) {
     // ----------------------------------------
     var slide_panel = '' +
         '<h3>' + this_presentation_name + '</h3>' +
-        '<a href="#" class="btn btn-info" id="new_slide_btn" onclick="transitInNewSlide(0,' + this_presentation_id + ')">' +
+        '<a href="#" class="btn btn-inverse" id="new_slide_btn" onclick="transitInNewSlide(0,' + this_presentation_id + ')">' +
         'Create a Slide <i class="icon-plus icon-white pull-right"></i>' +
         '</a> ' +
         '<hr>' +
@@ -239,7 +241,7 @@ function show_presentation(this_presentation_id, this_presentation_name) {
 //                    slide_block = '' + '<tr class="slide_row">' +
 //                        '<td>' +
 //                        '<a href="#?slide' + my_slide[0].replace(/ /g, '') + '">' +
-//                        '<button class="btn btn-info show_this_slide" onclick="transitInNewSlide(' + my_slide[0].replace(/ /g, '') + ',' + this_presentation_id + ')" type="button">' +
+//                        '<button class="btn btn-inverse show_this_slide" onclick="transitInNewSlide(' + my_slide[0].replace(/ /g, '') + ',' + this_presentation_id + ')" type="button">' +
 //                        cleaned_slide_title +
 //                        '<input id="' + my_slide[0].replace(/ /g, '') + '" type="hidden" name="' + "slide_" + my_slide[0].replace(/ /g, '') + '">' +
 //                        '</button>' +
@@ -250,7 +252,7 @@ function show_presentation(this_presentation_id, this_presentation_name) {
 
                     slide_block = '' + '<li id="slide_' + my_slide[0].replace(/ /g, '') + '">' +
                         '<a href="#?slide' + my_slide[0].replace(/ /g, '') + '" style="float:left;">' +
-                        '<button class="btn btn-info show_this_slide" onclick="transitInNewSlide(' + my_slide[0].replace(/ /g, '') + ',' + this_presentation_id + ')" type="button">' +
+                        '<button class="btn btn-inverse show_this_slide" onclick="transitInNewSlide(' + my_slide[0].replace(/ /g, '') + ',' + this_presentation_id + ')" type="button">' +
                         cleaned_slide_title +
                         '<input id="' + my_slide[0].replace(/ /g, '') + '" type="hidden" name="' + "slide_" + my_slide[0].replace(/ /g, '') + '">' +
                         '</button>' +
@@ -449,18 +451,17 @@ function form_bindings() {
     $('#show_titlepic').click(switch_to_titlepic);
     $('#clear_titlepic').click(switch_to_subtitle);
 
-    $('#slide_titlepic').change(function()
-    {
-        $('#title_picture img').attr('src','/assets/upload.png');
+    $('#slide_titlepic').change(function () {
+        $('#title_picture img').attr('src', '/assets/upload.png');
 //        $('#titlepic_name').html($(this).val());
         var full_name = $(this).val();
         var rem_ext_from_file_name = full_name.substr(0, full_name.lastIndexOf('.'));
-        var display_first_12_char = rem_ext_from_file_name.substring(0,12);
-        if (display_first_12_char.length >= 12){
-            var add_dots = display_first_12_char+"...";
+        var display_first_12_char = rem_ext_from_file_name.substring(0, 12);
+        if (display_first_12_char.length >= 12) {
+            var add_dots = display_first_12_char + "...";
             $('#titlepic_name').html(add_dots);
         }
-        else{
+        else {
             $('#titlepic_name').html(display_first_12_char);
         }
         //$('#titlepic_name').html($(this).val().substr(0, $(this).val().lastIndexOf('.'))).substring(0,15)+"...";

@@ -115,7 +115,7 @@ body {
 
 .main_panel {
     width: 400px;
-    float: right;
+    float: left;
     height: 545px;
     background: #f5f5cc;
     border-radius: 10px;
@@ -130,7 +130,6 @@ body {
 #slide_form_panel {
     width: 640px;
     margin-right: 10px;
-    background: none;;
 }
 
 #deck_list {
@@ -230,7 +229,6 @@ body {
 }
 
 .active_presentation_panel {
-    margin: 10px;
     min-height: 418px;
 }
 
