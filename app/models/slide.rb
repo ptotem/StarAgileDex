@@ -37,19 +37,6 @@ class Slide < ActiveRecord::Base
   # and remove the content blocks that were there earlier
   before_ppt_post_process :create_papertemp
 
-
-
-  private
-  def normalize_file_name
-    #self.instance_variable_get(ppt).keys.each do |attachment|
-     # attachment_file_name = ppt_file_name.to_sym
-     # if self.send(attachment_file_name)
-       # self.send(ppt).instance_write(:ppt_file_name, self.send(attachment_file_name).gsub(/ /,'_'))
-    #  end
-    #end
-    #File.rename(Pathname(ppt),Pathname(ppt).to_s.gsub(/ /,''))
-  end
-
   def create_papertemp
     require 'find'
     require 'fileutils'
@@ -118,7 +105,11 @@ class Slide < ActiveRecord::Base
     end
   end
 
+  #TODO: set next_slide on slide create
   def set_next_slide
+    #self.next_slide=self.id+1
+    #self.presentation.slides.find_by_sequence(self.sequence-1).next_slide=self.id
+    #self.presentation.slides.find_by_sequence(self.sequence-1).save
     if self.sequence-1>=1
       @slide=Slide.find_by_sequence_and_presentation_id(self.sequence-1,self.presentation_id)
       @slide.next_slide=self.id
