@@ -92,6 +92,18 @@ class PresentationsController < ApplicationController
         @wysiwyg=FALSE
       end
 
+      # If the WYSIWYG editor was used, show Main Block else show the Plugins
+      if @wysiwyg
+        gon.main=slide.main
+      else
+        gon.image_list=slide.content_blocks.map { |t|
+          if !t.image.blank?
+            t.image.path.gsub("#{Rails.root}/public", "")
+          end
+        }
+        gon.caption=slide.content_blocks.map { |t| t.caption }
+      end
+
       gon.titlepic=slide.titlepic
       gon.subtitle=slide.subtitle
       gon.font = slide.font

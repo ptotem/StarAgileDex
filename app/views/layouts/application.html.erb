@@ -20,26 +20,37 @@
   <!-- The Menu for cycling through the plugins, changing theme and font -->
   <% unless @export %>
       <ul class="nav nav-stacked nav-pills pull-right menu_select" style="margin-top: 0px; font-size: 14px;">
-        <li class="btn-warning" id="ad-menu-toggle"><a href="#" onclick="$('.ad-menu-item').slideToggle();"><i class="icon-tasks"></i></a></li>
+        <li class="btn-warning" id="ad-menu-toggle">
+          <a href="#" onclick="$('.ad-menu-item').slideToggle();"><i class="icon-tasks"></i></a></li>
         <li class="active ad-menu-item"><a title="Home" href="/console"> <i class="icon-home"></i>Home</a></li>
-        <li class="active ad-menu-item"><a title="Edit Slide" href="/console/<%= @slide.id rescue "" %>"><i class="icon-edit"></i>Edit</a></li>
-        <li class="active ad-menu-item"><a title="Next Widget" href="#plugin_modal" data-toggle="modal" onclick=""><i class="icon-retweet"></i>Next</a></li>
-        <li class="active ad-menu-item"><a title="Save Slide" onclick="save_slide();"><i class="icon-download"></i>Save</a></li>
-        <li class="active ad-menu-item"><a title="Change Font" href="#font_Modal" data-toggle="modal" onclick=""><i class="icon-text-width"></i>Font</a></li>
-        <li class="active ad-menu-item"><a title="Change Theme" href="#theme_Modal" data-toggle="modal" onclick=""><i class="icon-th"></i>Theme</a></li>
+        <li class="active ad-menu-item">
+          <a title="Edit Slide" href="/console/<%= @slide.id rescue "" %>"><i class="icon-edit"></i>Edit</a></li>
+        <li class="active ad-menu-item">
+          <a title="Next Widget" href="#plugin_modal" data-toggle="modal" onclick=""><i class="icon-retweet"></i>Change</a>
+        </li>
+        <li class="active ad-menu-item">
+          <a title="Save Slide" onclick="save_slide();"><i class="icon-download"></i>Save</a></li>
+        <li class="active ad-menu-item">
+          <a title="Change Font" href="#font_Modal" data-toggle="modal" onclick=""><i class="icon-text-width"></i>Font</a>
+        </li>
+        <li class="active ad-menu-item">
+          <a title="Change Theme" href="#theme_Modal" data-toggle="modal" onclick=""><i class="icon-th"></i>Theme</a>
+        </li>
       </ul>
   <% end %>
 
   <% if @view_deck %>
       <ul class="nav nav-stacked nav-pills pull-right menu_select" style="margin-top: 0px; text-align: center;">
-        <li class="btn-warning" id="ad-menu-toggle_view_deck"><a href="#" onclick="$('.ad-menu-item').slideToggle();"><i class="icon-tasks"></i></a></li>
+        <li class="btn-warning" id="ad-menu-toggle_view_deck">
+          <a href="#" onclick="$('.ad-menu-item').slideToggle();"><i class="icon-tasks"></i></a></li>
         <li class="active ad-menu-item"><a href="/console"><i class=""></i>Home</a></li>
         <li class="active ad-menu-item"><a id="slide_prev" href=""><i class=""></i>Prev</a></li>
         <li class="active ad-menu-item"><a id="slide_next" href=""><i class=""></i>Next</a></li>
       </ul>
   <% elsif @export %>
       <ul class="nav nav-stacked nav-pills pull-right menu_select" style="margin-top: 0px; text-align: center;">
-        <li class="btn-warning" id="ad-menu-toggle_view_deck"><a href="#" onclick="$('.ad-menu-item').slideToggle();"><i class="icon-tasks"></i></a></li>
+        <li class="btn-warning" id="ad-menu-toggle_view_deck">
+          <a href="#" onclick="$('.ad-menu-item').slideToggle();"><i class="icon-tasks"></i></a></li>
         <li class="active ad-menu-item"><a id="slide_prev" href=""><i class=""></i>Prev</a></li>
         <li class="active ad-menu-item"><a id="slide_next" href=""><i class=""></i>Next</a></li>
       </ul>
@@ -171,10 +182,10 @@
             <th>Opera</th>
           </tr>
 
-          <% @widget_list.each_with_index do |widget,index| %>
+          <% @widget_list.each_with_index do |widget, index| %>
               <tr>
 
-                <td><input class="select_plugin" type="radio" name="plugin" value=<%=index%>></td>
+                <td><input class="select_plugin" type="radio" name="plugin" value=<%= index %>></td>
                 <td><%= widget %></td>
                 <td>
                   <% if @ie_support[index]!="6+" %>
@@ -243,35 +254,36 @@
 <script type="text/javascript" src="/assets/noty.default.js"></script>
 
 <%= yield :scripts %>
+<% unless @export %>
+    <script type="text/javascript">
 
-<script type="text/javascript">
+        /*function to save slide with a single widget font and background image*/
+        function save_slide() {
+            var data = {id:[], plugin:[], font:[], background:[]};
+            data["id"].push(gon.slide_id);
+            data["plugin"].push(gon.widget_list[gon.plugin]);
+            data["font"].push(gon.font);
+            data["background"].push(gon.background);
+            $.ajax({
+                url:"<%= save_slide_path %>",
+                type:"post",
+                data:JSON.stringify(data),
+                contentType:"application/json",
+                success:function (data) {
+                    display_noty();
+                }
+            });
+        }
 
-    /*function to save slide with a single widget font and background image*/
-    function save_slide() {
-        var data = {id:[], plugin:[], font:[], background:[]};
-        data["id"].push(gon.slide_id);
-        data["plugin"].push(gon.widget_list[gon.plugin]);
-        data["font"].push(gon.font);
-        data["background"].push(gon.background);
-        $.ajax({
-            url:"<%= save_slide_path %>",
-            type:"post",
-            data:JSON.stringify(data),
-            contentType:"application/json",
-            success:function (data) {
-                display_noty();
-            }
-        });
-    }
+        // This function displays notification on successful slide save
+        // Resuorce : http://needim.github.io/noty/
+        // javascripts for noty are in assets/master/noty.* (js names starting with noty)
+        var noty;
+        function display_noty() {
+            noty = noty({ text:'Slide saved successfully!', layout:'bottomCenter'});
+        }
 
-    // This function displays notification on successful slide save
-    // Resuorce : http://needim.github.io/noty/
-    // javascripts for noty are in assets/master/noty.* (js names starting with noty)
-    var noty;
-    function display_noty() {
-        noty = noty({ text:'Slide saved successfully!', layout:'bottomCenter'});
-    }
-
-</script>
+    </script>
+<% end %>
 </body>
 </html>

@@ -182,7 +182,7 @@ px;-webkit-border-radius:3px;border-radius:3px; margin:0 10px 10px 0; }
 /* =Box clone
 -------------------------------------------------------------- */
 .box_skitter .box_clone {position:absolute;top:0;left:0;width:100px;overflow:hidden;display:none;z-index:20;}
-.box_skitter .box_clone img {position:absolute;top:0;left:0;z-index:20;}
+.box_skitter .box_clone img {position:absolute;top:0;left:0;z-index:20;width: 835px;height: 300px;}
 
 /* =Navigation
 -------------------------------------------------------------- */
