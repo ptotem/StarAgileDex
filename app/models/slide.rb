@@ -107,9 +107,6 @@ class Slide < ActiveRecord::Base
 
   #TODO: set next_slide on slide create
   def set_next_slide
-    #self.next_slide=self.id+1
-    #self.presentation.slides.find_by_sequence(self.sequence-1).next_slide=self.id
-    #self.presentation.slides.find_by_sequence(self.sequence-1).save
     if self.sequence-1>=1
       @slide=Slide.find_by_sequence_and_presentation_id(self.sequence-1,self.presentation_id)
       @slide.next_slide=self.id
