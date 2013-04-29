@@ -25,7 +25,7 @@
                 <%= image_tag @slide.titlepic.url, :onclick=>"$('#slide_titlepic').click();" %>
                 <div id="titlepic_name" onclick="$('#slide_titlepic').click();"><%= @slide.titlepic_file_name.split('.').first.truncate(15) %></div>
                 <span onclick="$('#slide_titlepic').click();">Click to change</span> <br>
-                <span onclick='$("#slide_delete_titlepic").attr("checked", true);$(this).hide();$(this).prev().prev().prev().hide();$(this).prev().prev().prev().prev().attr("src","/assets/upload.png");'>&times;</span>
+                <span style="left: 530px; position: absolute; top: 306px;" onclick='$("#slide_delete_titlepic").attr("checked", true);$(this).hide();$(this).prev().prev().prev().hide();$(this).prev().prev().prev().prev().attr("src","/assets/upload.png");'>&times;</span>
             <% end %>
           </div>
         </a>
@@ -75,7 +75,7 @@
                             <span onclick="">Click to change</span> <br>
                             <!--<div class="content_block_img_caption"><%= widget_form.object.caption %></div>-->
                         </a>
-                      <%= widget_form.text_area :caption, :rows=>"2", :placeholder => "Caption for this image", :class => "caption", :style=>"margin-left:8px; width:45%; resize:vertical; max-height:300px; min-height:80px;" %>
+                      <%= widget_form.text_area :caption, :rows=>"2", :placeholder => "Caption for this image", :class => "caption", :style=>"margin-left:8px; width:45%; resize:vertical; max-height:300px; min-height:80px; font-size:12px;" %>
                       </div>
                   <% end %>
                 </div>

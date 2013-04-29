@@ -452,6 +452,7 @@ function form_bindings() {
     $('#clear_titlepic').click(switch_to_subtitle);
 
     $('#slide_titlepic').change(function () {
+        $('#titlepic_name').css('display','block');
         $('#title_picture img').attr('src', '/assets/upload.png');
 //        $('#titlepic_name').html($(this).val());
         var full_name = $(this).val();
