@@ -14,7 +14,7 @@ function init_widget() {
         }
 
         this_caption='#'+this_caption;
-        $(this_caption).boxfit({multiline: true, maximum_font_size: 36});
+        $(this_caption).boxfit({multiline: true, maximum_font_size: 18});
     });
 
     $('#widget_wrap').show();

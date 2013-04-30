@@ -52,7 +52,7 @@ en:
         chrome: "false"
         safari: "false"
         opera: "false"
-        working: "false"
+        working: "true"
       elegantaccordion:
         layout: "layout2"
         ie: "6+"
@@ -100,7 +100,7 @@ en:
         chrome: "false"
         safari: "false"
         opera: "false"
-        working: "false"
+        working: "true"
       triplepanelimageslider:
         ie: "6+"
         firefox: "TRUE"
