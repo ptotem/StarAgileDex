@@ -123,6 +123,30 @@ en:
         safari: "false"
         opera: "false"
         working: "false"
+      movingbox:
+        layout: "layout1"
+        ie: "6+"
+        firefox: "true"
+        chrome: "false"
+        safari: "false"
+        opera: "false"
+        working: "true"
+      featurecarousel:
+        layout: "layout2"
+        ie: "6+"
+        firefox: "true"
+        chrome: "false"
+        safari: "false"
+        opera: "false"
+        working: "true"
+      slickslideshow:
+        layout: "layout2"
+        ie: "6+"
+        firefox: "true"
+        chrome: "false"
+        safari: "false"
+        opera: "false"
+        working: "true"
     ppt_plugin:
       iebook:
         layout: "layout4"

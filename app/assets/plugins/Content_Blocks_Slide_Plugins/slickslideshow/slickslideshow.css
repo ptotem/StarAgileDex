@@ -1,0 +1,76 @@
+#slideshow {
+    margin: 0 auto;
+    /*top:100px;*/
+    width: 640px;
+    height: 315px;
+    background: transparent url(bg_slideshow.jpg) no-repeat 0 0;
+    background-size: 100% 100%;
+    position: relative;
+}
+
+#slideshow #slidesContainer {
+    margin: 0 auto;
+    width: 560px;
+    height: 300px;
+    overflow: auto; /* allow scrollbar */
+    position: relative;
+}
+
+#slideshow #slidesContainer .slide {
+    margin: 0 auto;
+    width: 540px; /* reduce by 20 pixels of #slidesContainer to avoid horizontal scroll */
+    height: 263px;
+}
+
+/**
+ * Slideshow controls style rules.
+ */
+.control {
+    display: block;
+    width: 39px;
+    height: 263px;
+    text-indent: -10000px;
+    position: absolute;
+    cursor: pointer;
+}
+
+#leftControl {
+    top: 0;
+    left: 0;
+    background: transparent url(control_left.jpg) no-repeat 0 0;
+    background-size: 100% 100%;
+    height: 315px;
+}
+
+#rightControl {
+    top: 0;
+    right: 0;
+    background: transparent url(control_right.jpg) no-repeat 0 0;
+    background-size: 100% 100%;
+    height: 315px;
+}
+
+/**
+ * Style rules for Demo page
+ */
+* {
+    margin: 0;
+    padding: 0;
+    color: #ccc;
+}
+
+.slide img {
+    float: right;
+    margin: 0 15px;
+    min-height: 300px;
+    max-height: 300px;
+    min-width: 300px;
+    max-width: 300px;
+}
+
+.slide p{
+    padding: 2px 0 0 8px;
+}
+
+
+
