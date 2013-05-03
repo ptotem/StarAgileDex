@@ -1,20 +1,17 @@
 function init_widget() {
     $.each(images, function (index, elm) {
 
-        var this_caption='caption'+index;
+        var this_caption = 'caption' + index;
 
         if (elm != null) {
-
-            $('#bb-bookblock').append('<div class="bb-item"><a><img src="' + elm + '" title="' + captions[index] + '"/></a><div id='+this_caption+' class="xyz">' + captions[index] + '</div></div>');
+            $('#bb-bookblock').append('<div class="bb-item"><a><img src="' + elm + '" title="' + captions[index] + '"/></a><div id=' + this_caption + ' class="xyz">' + captions[index] + '</div></div>');
         } else {
-
-            $('#bb-bookblock').append('<div class="bb-item"><a></a><div id='+this_caption+' class="xyz">' + captions[index] + '</div></div>');
-
-
+            $('#bb-bookblock').append('<div class="bb-item"><a></a><div id=' + this_caption + ' class="xyz">' + captions[index] + '</div></div>');
         }
 
-        this_caption='#'+this_caption;
-        $(this_caption).boxfit({multiline: true, maximum_font_size: 18});
+        this_caption = '#' + this_caption;
+        $(this_caption).boxfit({multiline:true, maximum_font_size:18});
+
     });
 
     $('#widget_wrap').show();
@@ -87,7 +84,6 @@ function init_widget() {
         return { init:init };
 
 
-
     })();
 
     Page.init();
@@ -95,7 +91,7 @@ function init_widget() {
 
     setTimeout(function () {
 
-        if (captions.length==1 && captions[0]=='') {
+        if (captions.length == 1 && captions[0] == '') {
             $('.bb-item p').hide();
         }
     }, 1000);

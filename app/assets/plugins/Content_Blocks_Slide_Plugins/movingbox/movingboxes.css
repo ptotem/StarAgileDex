@@ -132,5 +132,8 @@ a.mb-scrollButtons.disabled {
 
 .caption_txt{
     height: 200px;
-    width: 200px;
+    width: 96%;
+    padding: 10px 5px 0 5px;
+    margin-top: 2px;
+    background: rgba(0,0,0,0.7) repeat scroll 0 0;
 }

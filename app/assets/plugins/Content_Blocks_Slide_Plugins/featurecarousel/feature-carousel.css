@@ -11,11 +11,11 @@
 #carousel {
   height:295px;
   width:960px;
-  background-color:#CCC;
+  /*background-color:#CCC;*/
   position:relative;
   margin-bottom:0.5em;
   font-size:12px;
-  font-family: Arial;
+  /*font-family: Arial;*/
 }
 .carousel-image {
   border:0;
@@ -34,12 +34,12 @@
   position:absolute;
   bottom:0;
   width:92%;
-  background-color:#000;
+  background-color:rgba(0, 0, 0, 0.7);
 }
 .carousel-feature .carousel-caption p {
   margin:0;
   padding:5px;
-  font-weight:bold;
+  /*font-weight:bold;*/
   font-size:12px;
   color:white;
 }
@@ -68,7 +68,7 @@
   padding:0 3px;
   color:white;
   text-align:center;
-  background-color:#DDD;
+  /*background-color:#DDD;*/
 }
 .tracker-individual-container .tracker-individual-blip-selected {
   color:white;

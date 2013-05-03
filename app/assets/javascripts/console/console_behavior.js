@@ -61,7 +61,23 @@ function transitInNewSlide(slide_id, presentation_id) {
             'width': "280px"
         }, function () {
             $('#right_panel').fadeOut(function () {
-                $('#slide_form_panel').fadeIn();
+                $('#slide_form_panel').fadeIn(function (){
+                    if ($('#slide_mode').val()=="Blocks"){
+                        $('form').find('#show_wysiwyg').addClass('btn-inverse');
+                        $('#show_wysiwyg').on('click', open_blocks_mode);
+                    }
+                    else if ($('#slide_mode').val()=="HTML"){
+                        $('form').find('#show_wysiwyg').removeClass('btn-inverse');
+                        $('form').find('#clear_wysiwyg').addClass('btn-inverse');
+                        $('#clear_wysiwyg').on('click', open_wysiwyg_mode);
+                    }
+                    else if ($('#slide_mode').val()=="PPT"){
+                        $('form').find('#show_wysiwyg').addClass('btn-inverse');
+                        $('form').find('#show_wysiwyg').click();
+                        $('form').find('#import_ppt_block').show();
+                    }
+
+                });
             });
         });
     $('.slide_layout').css({
@@ -368,7 +384,9 @@ function delete_presentation() {
         contentType: "application/json",
         success: function (data) {
             var $pres_row_id = $('.show_this_presentation').find('input[id=' + $('#slide_presentation_id').val() + ']');
-            $pres_row_id.parent().parent().parent().parent().empty().remove();
+//            $pres_row_id.parent().parent().parent().parent().empty().remove();
+            var row = $pres_row_id.closest("tr").get(0);
+            $('#presentations_table').dataTable().fnDeleteRow($('#presentations_table').dataTable().fnGetPosition(row));
             transitOut();
         }
     });
@@ -469,6 +487,7 @@ function form_bindings() {
         return false;
     });
 
+
     $('#show_wysiwyg').on('click', open_blocks_mode);
     $('#clear_wysiwyg').on('click', open_wysiwyg_mode);
     $('#upload_ppt').click(open_ppt_mode);
@@ -493,6 +512,7 @@ function form_bindings() {
     var slide_form_id = $('form').attr('id'); //This is the form id
     $("#" + slide_form_id).validate();
 
+
 }
 
 // This function switches the form to WYSIWYG editor
@@ -509,6 +529,7 @@ function open_wysiwyg_mode() {
 
 // This function switches the form to Content blocks
 function open_blocks_mode() {
+
     $('#show_wysiwyg').hide();
     $('#clear_wysiwyg').show();
     $('#upload_ppt').show();

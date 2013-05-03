@@ -6,6 +6,7 @@
     text-align:center;
     background: rgba(0,0,0,0.5) repeat scroll 0 0;
     padding: 10px;
+    max-width: 95%;
 }
 
 /*** Overall FancyMoves Slider Styles ***/

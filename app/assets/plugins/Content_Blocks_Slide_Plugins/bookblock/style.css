@@ -27,6 +27,11 @@
 	transform-origin: left center;
 }
 
+.bb-page a img{
+    height: 300px;
+    width: 400px;
+}
+
 .bb-page > div,
 .bb-outer,
 .bb-content {
@@ -228,14 +233,12 @@ a, a:hover, a:active, a:focus{
 }
 .xyz{
     margin-left: 0;
-    /*margin-left:-6px;*/
-    height:100px;
+    height: 120px;
     width: 400px;
-    /*width:409px;*/
     background-color: #000000;
     margin-top: 33px;
-    /*margin-top:96px;*/
     display: block;
+    position: absolute;
 }
 
 

@@ -99,7 +99,7 @@
       </div>
 
       <div id="mode_switcher">
-        <%= link_to "Basic Mode", "#", :class => 'btn btn-inverse', :id => "clear_wysiwyg", :onclick => "open_wysiwyg_mode();$(this).addClass('btn-inverse');$(this).next().removeClass('btn-inverse')" %>
+        <%= link_to "Basic Mode", "#", :class => 'btn', :id => "clear_wysiwyg", :onclick => "open_wysiwyg_mode();$(this).addClass('btn-inverse');$(this).next().removeClass('btn-inverse')" %>
         <%= link_to "Advanced Mode", "#", :class => 'btn', :id => "show_wysiwyg", :onclick => "open_blocks_mode();$(this).addClass('btn-inverse');$(this).prev().removeClass('btn-inverse')" %>
         <%= link_to "Game Mode", "#", :class => 'btn disabled', :id => "game_mode_btn" %>
       </div>

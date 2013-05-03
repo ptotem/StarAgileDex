@@ -38,6 +38,7 @@ class AuthenticationsController < ApplicationController
     end
 
     sign_in(:user, @user)
+
     redirect_to console_path
   end
 
