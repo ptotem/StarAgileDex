@@ -1,0 +1,17 @@
+<%= content_for :scripts do %>
+    <script type="text/javascript" src="/assets/<%= @plugin %>/init.js"></script>
+    <script type="text/javascript" src="/assets/<%= @plugin %>/presentationCycle.js"></script>
+    <script type="text/javascript" src="/assets/<%= @plugin %>/jquery.cycle.all.min.js"></script>
+<% end %>
+
+<%= content_for :styles do %>
+    <link href="/assets/<%= @plugin %>/presentationCycle.css" rel="stylesheet" media="screen">
+    <link href="/assets/layout2.css" rel="stylesheet" media="screen">
+<% end %>
+
+
+<%= content_for :widget_wrap do %>
+    <div id="presentation_container" class="pc_container"></div>
+<% end %>
+
+

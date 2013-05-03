@@ -147,6 +147,22 @@ en:
         safari: "false"
         opera: "false"
         working: "true"
+      fancymovesslider:
+        layout: "layout2"
+        ie: "6+"
+        firefox: "true"
+        chrome: "false"
+        safari: "false"
+        opera: "false"
+        working: "true"
+      presentationcycle:
+        layout: "layout2"
+        ie: "6+"
+        firefox: "true"
+        chrome: "false"
+        safari: "false"
+        opera: "false"
+        working: "true"
     ppt_plugin:
       iebook:
         layout: "layout4"

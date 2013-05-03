@@ -1,0 +1,85 @@
+
+
+.container {
+
+    width: 602px;
+    margin-top: 100px;
+}
+
+
+
+.pc_container {
+    width: 600px;
+    height: 245px;
+    padding: 15px 1px 47px 1px;
+    background-image: url('pc_bg.png');
+    background-size: 100% 100%;
+    margin: 0 auto;
+    top: 10px;
+}
+
+.pc_container .pc_item {
+    margin-top: 15px;
+    margin-left: 1px;
+    width: 600px;
+    height: 200px;
+}
+
+.pc_container .pc_bar_container {
+    position: absolute;
+    top: 270px;
+    color: white;
+    padding: 0px 10px 0px 10px;
+    width: 100%;
+    overflow:visible;
+}
+
+.pc_bar_container_underflow {
+    width: 90000px;
+    overflow: visible;
+}
+
+.pc_bar_container_overflow {
+    overflow: hidden;
+    position: absolute;
+    top: 270px;
+    color: white;
+    margin: 0px 10px 0px 10px;
+    padding: 0px;
+}
+
+.left, .center, .right {
+    background-position: left;
+    background-repeat: no-repeat;
+    overflow: hidden;
+    font-size: 1px;
+    float: left;
+}
+
+.bar {
+    background-position: left;
+    overflow: hidden;
+    font-size: 1px;
+    float: left;
+}
+
+.pc_item .desc {
+    position: absolute;
+    width: 250px;
+    padding: 10px;
+    height: 225px;
+    line-height: 1.4em;
+    right: 0px;
+    background-image: url('slide_fade.png');
+    font-size: 14px;
+}
+
+.pc_item .desc h1 {
+    color: #DE8F26;    
+}
+
+.pc_item img {
+    height: 245px;
+    width: 318px;
+    margin-left: 12px;
+}
