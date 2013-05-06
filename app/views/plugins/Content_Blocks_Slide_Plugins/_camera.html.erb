@@ -1,0 +1,21 @@
+<%= content_for :scripts do %>
+    <script type="text/javascript" src="/assets/<%= @plugin %>/init.js"></script>
+    <script type="text/javascript" src="/assets/<%= @plugin %>/camera.min.js"></script>
+    <script type="text/javascript" src="/assets/<%= @plugin %>/jquery.mobile.customized.min.js"></script>
+<% end %>
+
+<%= content_for :styles do %>
+    <link href="/assets/<%= @plugin %>/camera.css" rel="stylesheet" media="screen">
+    <link href="/assets/layout2.css" rel="stylesheet" media="screen">
+<% end %>
+
+
+<%= content_for :widget_wrap do %>
+    <div class="fluid_container">
+      <div class="camera_wrap camera_azure_skin" id="camera_wrap_1">
+
+      </div>
+    </div>
+<% end %>
+
+

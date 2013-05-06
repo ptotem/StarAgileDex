@@ -1,0 +1,26 @@
+<%= content_for :scripts do %>
+    <script type="text/javascript" src="/assets/<%= @plugin %>/init.js"></script>
+    <script type="text/javascript" src="/assets/<%= @plugin %>/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="/assets/<%= @plugin %>/jquery.booklet.latest.js"></script>
+<% end %>
+
+<%= content_for :styles do %>
+    <link href="/assets/<%= @plugin %>/jquery.booklet.latest.css" rel="stylesheet" media="screen">
+    <link href="/assets/layout2.css" rel="stylesheet" media="screen">
+<% end %>
+
+
+<%= content_for :widget_wrap do %>
+    <!--<header> <h1>Booklet</h1> </header>-->
+    <!--<section>-->
+      <div id="mybook">
+        <!--<div title="first page">-->
+          <!--<img src="../booklet/images/1.jpg" style="width:280px; height:160px;" />-->
+          <!--<p>Sir Donald Bradman, considered by many as the greatest batsman of all time, considered Tendulkar to have a batting style similar to his</p>-->
+        <!--</div>-->
+      </div>
+    <!--</section>-->
+    <!--<footer></footer>-->
+<% end %>
+
+

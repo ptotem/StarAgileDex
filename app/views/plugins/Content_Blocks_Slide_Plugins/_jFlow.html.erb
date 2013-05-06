@@ -1,0 +1,25 @@
+<%= content_for :scripts do %>
+    <script type="text/javascript" src="/assets/<%= @plugin %>/init.js"></script>
+    <script type="text/javascript" src="/assets/<%= @plugin %>/jquery.flow.1.1.min.js"></script>
+<% end %>
+
+<%= content_for :styles do %>
+    <link href="/assets/<%= @plugin %>/default.css" rel="stylesheet" media="screen">
+    <link href="/assets/layout2.css" rel="stylesheet" media="screen">
+<% end %>
+
+
+<%= content_for :widget_wrap do %>
+    <div id="controller" class="hidden">
+    </div>
+
+    <div id="prevNext">
+      <img src="/assets/<%= @plugin %>/prev.png" alt="Previous Tab" class="jFlowPrev" />
+      <img src="/assets/<%= @plugin %>/next.png" alt="Next Tab" class="jFlowNext" />
+    </div>
+
+    <div id="slides">
+    </div>
+<% end %>
+
+
