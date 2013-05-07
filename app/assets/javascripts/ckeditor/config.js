@@ -1,4 +1,4 @@
-﻿﻿/*
+﻿/*
  Copyright (c) 2003-2011, CKSource - Frederico Knabben. All rights reserved.
  For licensing, see LICENSE.html or http://ckeditor.com/license
  */
@@ -8,7 +8,7 @@ CKEDITOR.editorConfig = function (config) {
     config.toolbar_Custom =
         [
             { name: 'basicstyles', items: [ 'Bold', 'Italic', 'Underline'] },
-            { name: 'paragraph', items: [ 'BulletedList','Table', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight','-', 'Maximize' ] }
+            { name: 'paragraph', items: [ 'NumberedList', 'BulletedList', '-','Outdent','Indent','-', 'Table', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight','-', 'Maximize' ] }
         ];
     config.toolbar_Basic =
         [

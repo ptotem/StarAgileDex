@@ -50,7 +50,7 @@ function init_widget() {
         $caption_back.width('452px');
     }
 
-    $caption.boxfit({multiline: true, maximum_font_size: 36});
+    $caption.boxfit({multiline: true, maximum_font_size: 36, align_center: false});
     $caption.show();
     setTimeout(function () {
         if (captions.length == 1 && captions[0] == "") {
@@ -71,7 +71,7 @@ function set_caption(current, next) {
     //Show caption if after rotate the face has both image and caption.
     if (($(next).attr('title') != '') && ($(next).attr('src') != null)) {
         $caption.html($(next).attr('title'));
-        $caption.boxfit({multiline: true, maximum_font_size: 36});
+        $caption.boxfit({multiline: true, maximum_font_size: 36, align_center: false});
         $caption_back.fadeIn();
         $caption.fadeIn();
     }
