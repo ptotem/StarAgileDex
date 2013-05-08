@@ -211,6 +211,22 @@ en:
         safari: "false"
         opera: "false"
         working: "true"
+      coin-slider:
+        layout: "layout2"
+        ie: "6+"
+        firefox: "true"
+        chrome: "false"
+        safari: "false"
+        opera: "false"
+        working: "true"
+      pfold:
+        layout: "layout1"
+        ie: "6+"
+        firefox: "true"
+        chrome: "false"
+        safari: "false"
+        opera: "false"
+        working: "true"
     ppt_plugin:
       iebook:
         layout: "layout4"
@@ -236,6 +252,7 @@ en:
         safari: "false"
         opera: "false"
         working: "true"
+
     advanced_plugin:
   themes:
     blackboard: "Blackboard"
