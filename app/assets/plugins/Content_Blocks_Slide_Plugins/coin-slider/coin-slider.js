@@ -517,7 +517,7 @@
 		sDelay: 30, // delay beetwen squares in ms
 		opacity: 0.7, // opacity of title and navigation
 		titleSpeed: 2000, // speed of title appereance in ms
-		effect: '', // random, swirl, rain, straight
+		effect: 'rain', // random, swirl, rain, straight
 		links : true, // show images as links
 		hoverPause: true, // pause on hover
 		prevText: 'prev',

@@ -63,6 +63,14 @@ function init_widget() {
 
         });
 
+        $("#grid").mCustomScrollbar({
+            horizontalScroll:false,
+            scrollButtons:{
+                enable:true
+            }
+        });
+
+
     });
 
 }
