@@ -18,6 +18,35 @@ class PresentationsController < ApplicationController
     end
   end
 
+  def wiki_prez
+    @wiki_snippets=Array.new
+    @wiki_tables=Array.new
+    @images=Array.new
+    @heading=Array.new
+    @search_string=params[:name]
+    # Wiki Extraction
+    doc=Nokogiri::XML(open("http://en.wikipedia.org/w/api.php?action=query&prop=revisions&rvprop=content&format=xml&titles=#{@search_string.gsub(" ", "%20")}").read)
+    wiki_entry = doc.xpath("//revisions//rev").text
+    check=wiki_entry.scan(/(?<=\#REDIRECT \[\[).+?(?=\]\])/m)[0]
+    unless check.blank?
+      doc=Nokogiri::XML(open("http://en.wikipedia.org/w/api.php?action=query&prop=revisions&rvprop=content&format=xml&titles=#{check.gsub(" ", "%20")}").read)
+      wiki_entry = doc.xpath("//revisions//rev").text
+    end
+
+    @wikied=WikiParser.new({:data => "#{wiki_entry}"})
+    @wiki_snippets, @wiki_tables, @images,@heading = scrap_it(@wikied.to_html)
+    @presentation=Presentation.create!(:user_id=>current_user.id,:name=>@search_string)
+    @slide=Slide.create!(:presentation_id=>@presentation.id,:title=>@presentation.name,:subtitle=>@wiki_snippets[0].summarize,:mode=>"Blocks",:layout=>'imagecube',:sequence=>1)
+    @images.each_with_index do |image,index|
+      if !image.blank?
+        ContentBlock.create!(:slide_id=>@slide.id,:image=>URI.parse(image),:caption=>@wiki_snippets[index+1].summarize.unpack('U*').pack('U*'))
+      end
+    end
+    @slide2=Slide.create!(:presentation_id=>@presentation.id,:title=>@heading[0],:subtitle=>@wiki_snippets[1].summarize.unpack('U*').pack('U*'),:main=>@wiki_snippets[1].unpack('U*').pack('U*'),:mode=>"HTML",:layout=>'simple_title_content',:sequence=>2)
+    @slide3=Slide.create!(:presentation_id=>@presentation.id,:title=>@heading[1],:titlepic=>URI.parse(@images[0]),:main=>@wiki_snippets[2].unpack('U*').pack('U*'),:mode=>"HTML",:layout=>'simple_title_content',:sequence=>2)
+    redirect_to view_deck_path(@presentation.id)
+  end
+
   #function to export the file as html
   #TODO: Export needs to be build for guest
   def export

@@ -33,7 +33,7 @@ module Paperclip
       begin
 
       # This is a command which takes a PDF file and breaks it into images
-      Paperclip.run('convert', "-quality #{ContentBlock::QUALITY} -density #{ContentBlock::DENSITY} #{File.expand_path(src.path)} #{Slide::TEMPATH}/#{@presentation}/#{@basename}%d.jpg")
+      Paperclip.run('convert', "-quality #{ContentBlock::QUALITY} -density #{ContentBlock::DENSITY} '#{File.expand_path(src.path)}' '#{Slide::TEMPATH}/#{@presentation}/#{@basename}%d.jpg'")
 
       rescue PaperclipCommandLineError => e
         raise PaperclipError, "There was an error processing the thumbnail for #{@basename}" if @whiny

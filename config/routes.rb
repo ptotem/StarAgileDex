@@ -9,6 +9,8 @@ AgileDex::Application.routes.draw do
   # Authentication Routes
   mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'
   devise_for :users
+
+  match '/wiki_prez/:name'=>'presentations#wiki_prez'
   match '/users/auth/:provider/callback' => 'authentications#create'
   match 'get_slides'=>'home#get_slides',:as=>'get_slides'
   match 'move_slide_up'=>'home#move_slide_up',:as=>'move_slide_up'

@@ -188,7 +188,7 @@ class HomeController < ApplicationController
 
     gon.presentation_id=@slide.presentation.id
     gon.slide_id=@slide.id
-    gon.next_slide = @slide.next_slide
+    gon.next_slide = @slide.next_slide rescue nil
     @prev_slide = Slide.find_by_next_slide(@slide.id) rescue nil
     gon.prev_slide = @prev_slide.id rescue nil
 
