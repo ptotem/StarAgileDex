@@ -22,6 +22,10 @@ gem 'gritter'
 gem 'gon'
 gem 'paperclip'
 gem 'docsplit'
+gem 'summarize'
+gem 'nokogiri', :require => "nokogiri"
+gem 'mechanize'
+gem 'wikicloth'
 
 #For ruby-filemagic error open terminal and run following commands
 #sudo apt-get install libmagic1 libmagic-dev

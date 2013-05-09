@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="/assets/console/console.css">
   <link rel="stylesheet" href="/assets/console/slide_form.css">
   <link rel="stylesheet" href="/assets/console/jimpress/jimpress.css">
+  <link rel="stylesheet" href="/assets/console/jquery.mCustomScrollbar.css">
   <script type="text/javascript" src="/assets/jquery-1.8.3.min.js"></script>
   <script type="text/javascript" src="/assets/console/jimpress/jmpress.min.js"></script>
   <%= javascript_include_tag :application %>
@@ -169,7 +170,8 @@
       </div>
       <div class="modal-footer">
         <button class="btn btn-danger pull-left" data-dismiss="modal" aria-hidden="true">Close</button>
-        <input class="btn btn-primary pull-right" id="new_deck_Modal_create_btn" name="commit" value="Create"/>
+        <input class="btn btn-primary" style="" id="new_deck_Modal_create_btn" name="commit" value="Create"/>
+        <a href="#" class="btn btn-inverse pull-right" id="new_deck_Modal_search_from_wiki">Create using Wiki</a>
       </div>
     </form>
   </div>
@@ -252,6 +254,7 @@
 <%= javascript_include_tag "jquery.nicescroll.min" %>
 <%= javascript_include_tag "jquery.easing" %>
 <%= javascript_include_tag "console/console_behavior" %>
+<%= javascript_include_tag "console/jquery.mCustomScrollbar.concat.min" %>
 <%= javascript_include_tag "jquery_nested_form" %>
 <%= javascript_include_tag "console/jimpress/jquery.jmslideshow" %>
 <%= javascript_include_tag "console/jimpress/modernizr" %>

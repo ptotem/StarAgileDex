@@ -50,7 +50,7 @@ function transitInNewSlide(slide_id, presentation_id) {
             form_bindings();
         });
     }
-    $(".main_form_body").niceScroll({cursorcolor: "#232836", cursorborder: "none", cursorwidth: "5px", autohidemode: false, horizrailenabled: false});
+//    $(".main_form_body").niceScroll({cursorcolor: "#232836", cursorborder: "none", cursorwidth: "5px", autohidemode: false, horizrailenabled: false});
 
     // Remove the presentations panel and move the slide panel to the left
     $('#deck_list').hide();
@@ -414,6 +414,11 @@ function load_bindings() {
             $('#new_deck_Modal_create_btn').click();
         }
     });
+
+    $('#new_deck_Modal_search_from_wiki').on('click', function(){
+        $(this).attr('href','/wiki_prez/'+$('#presentation_name').val());
+    });
+
 
     // This function handles the creation of a new deck
     $('#new_deck_Modal_create_btn').on('click', create_new_deck);

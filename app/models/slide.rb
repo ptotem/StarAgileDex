@@ -42,6 +42,9 @@ class Slide < ActiveRecord::Base
     require 'fileutils'
     require 'pathname'
     system "mkdir #{Rails.root}/public/papertemp/#{presentation_id}"
+    self.instance_variable_get(:@_paperclip_attachments).keys.each do |attachment|
+    end
+
     content_blocks.each do |block|
       block.destroy
     end
