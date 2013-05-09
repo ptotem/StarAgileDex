@@ -58,10 +58,14 @@ change .current class name using plugin option, currentPanel : 'current' */
 .mb-inside {
 	padding: 10px;
 	border: 1px solid #999;
+    text-align: center;
 }
 
 .mb-inside img{
-    max-height: 280px;
+    max-height: 160px;
+    min-height: 180px;
+    max-width: 160px;
+    min-width: 160px;
 }
 
 .mb-inside * {
@@ -132,7 +136,7 @@ a.mb-scrollButtons.disabled {
 
 .caption_txt{
     height: 200px;
-    width: 96%;
+    width: 220px;
     padding: 10px 5px 0 5px;
     margin-top: 2px;
     background: rgba(0,0,0,0.7) repeat scroll 0 0;

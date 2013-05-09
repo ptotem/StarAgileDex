@@ -145,6 +145,7 @@
 			appInterval[el.id] = setInterval(function() { appereance(el,order[el.id][squarePos[el.id]]);  },params[el.id].sDelay);
 
 			$(el).css({ 'background-image': 'url(' + images[el.id][imagePos[el.id]] + ')' });
+			$(el).css({ 'background-size': '100% 100%' });
 
 			if (typeof(direction) == "undefined") {
 				imagePos[el.id]++;
@@ -483,7 +484,8 @@
 				'width': params[el.id].width,
 				'height': params[el.id].height,
 				'position': 'relative',
-				'background-position': 'top left'
+				'background-position': 'top left',
+                'background-size': '100% 100%'
 			}).wrap("<div class='coin-slider' id='coin-slider-" + el.id + "' />");
 
 			// create title bar
@@ -509,7 +511,7 @@
 
 	// default values
 	$.fn.coinslider.defaults = {
-		width: 565, // width of slider panel
+		width: '76%', // width of slider panel
 		height: 290, // height of slider panel
 		spw: 7, // squares per width
 		sph: 5, // squares per height

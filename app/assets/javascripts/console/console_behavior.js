@@ -52,6 +52,7 @@ function transitInNewSlide(slide_id, presentation_id) {
     }
 //    $(".main_form_body").niceScroll({cursorcolor: "#232836", cursorborder: "none", cursorwidth: "5px", autohidemode: false, horizrailenabled: false});
 
+
     // Remove the presentations panel and move the slide panel to the left
     $('#deck_list').hide();
     $('#presentation_slides_index').css({
@@ -167,6 +168,14 @@ function initialize_deck_list() {
     );
     $('#presentations_table_filter').children().children().addClass('presentation_filter');
     $('.presentation_filter').attr("placeholder", "Search Decks");
+
+//    $(".dataTables_scrollBody").mCustomScrollbar({
+//        horizontalScroll:false,
+//        scrollButtons:{
+//            enable:true
+//        },
+//        theme:"dark"
+//    });
 
 }
 
@@ -284,6 +293,14 @@ function show_presentation(this_presentation_id, this_presentation_name) {
                     $('.active_presentation_panel').attr("id", "#pres_" + this_presentation_id);
 //                    $('#presentations_slides_table tbody').append(slide_block);
                     $('#presentations_slides_list').append(slide_block);
+
+//                    $("#presentations_slides_list").mCustomScrollbar({
+//                        horizontalScroll:false,
+//                        scrollButtons:{
+//                            enable:true
+//                        },
+//                        theme:"dark"
+//                    });
 
 
                     function move_slide_up() {

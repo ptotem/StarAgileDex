@@ -33,10 +33,8 @@
 .st-wrapper .st-title,
 .st-wrapper nav {
     position: absolute;
-    width: 320px;
-    max-height: 300px;
     right: 110px;
-    bottom: 65px;
+    bottom: 10px;
     text-align: center;
     -webkit-touch-callout: none;
     -webkit-user-select: none;
@@ -44,6 +42,11 @@
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+
+    max-width: 320px;
+    min-width: 320px;
+    max-height: 300px;
+    min-height: 300px;
 }
 
 .st-wrapper .st-title {
@@ -181,7 +184,9 @@
 .st-wrapper .st-item img {
     border: none;
     max-width: 300px;
+    min-width: 300px;
     max-height: 300px;
+    min-height: 300px;
     display: block;
     margin-top: 10px;
 }
