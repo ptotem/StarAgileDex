@@ -15,7 +15,7 @@ AgileDex::Application.routes.draw do
 
   match '/users/auth/:provider/callback' => 'authentications#create'
   match '/users/sign_in' => 'home#console'
-  devise_for :users
+  #devise_for :users
   match 'get_slides'=>'home#get_slides',:as=>'get_slides'
   match 'move_slide_up'=>'home#move_slide_up',:as=>'move_slide_up'
   match 'move_slide_down'=>'home#move_slide_down',:as=>'move_slide_down'
