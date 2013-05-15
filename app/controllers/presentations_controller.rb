@@ -23,6 +23,8 @@ class PresentationsController < ApplicationController
     @wiki_tables=Array.new
     @images=Array.new
     @heading=Array.new
+    @external_link=Array.new
+    @external_text=Array.new
     @search_string=params[:name]
     # Wiki Extraction
     doc=Nokogiri::XML(open("http://en.wikipedia.org/w/api.php?action=query&prop=revisions&rvprop=content&format=xml&titles=#{@search_string.gsub(" ", "%20")}").read)
@@ -34,7 +36,8 @@ class PresentationsController < ApplicationController
     end
 
     @wikied=WikiParser.new({:data => "#{wiki_entry}"})
-    @wiki_snippets, @wiki_tables, @images,@heading = scrap_it(@wikied.to_html)
+    @wiki_snippets, @wiki_tables, @images, @heading, @external_link,@external_text = scrap_it(@wikied.to_html)
+
     @presentation=Presentation.create!(:user_id=>current_user.id,:name=>@search_string)
     @slide=Slide.create!(:presentation_id=>@presentation.id,:title=>@presentation.name,:subtitle=>@wiki_snippets[0].summarize,:mode=>"Blocks",:layout=>'imagecube',:sequence=>1)
     @images.each_with_index do |image,index|
@@ -43,7 +46,26 @@ class PresentationsController < ApplicationController
       end
     end
     @slide2=Slide.create!(:presentation_id=>@presentation.id,:title=>@heading[0],:subtitle=>@wiki_snippets[1].summarize.unpack('U*').pack('U*'),:main=>@wiki_snippets[1].unpack('U*').pack('U*'),:mode=>"HTML",:layout=>'simple_title_content',:sequence=>2)
-    @slide3=Slide.create!(:presentation_id=>@presentation.id,:title=>@heading[1],:titlepic=>URI.parse(@images[0]),:main=>@wiki_snippets[2].unpack('U*').pack('U*'),:mode=>"HTML",:layout=>'simple_title_content',:sequence=>2)
+    @slide3=Slide.create!(:presentation_id=>@presentation.id,:title=>@heading[1],:subtitle=>@wiki_snippets[2].unpack('U*').pack('U*'),:mode=>"HTML",:layout=>'allcentered',:sequence=>3)
+    #render :text=>@external_link
+    #return
+
+
+    @wiki_external_snipets=Array.new
+    @external_link.each_with_index do |link,index|
+      if @wiki_snippets[0].summarize.include?(@external_text[index])
+        doc1=Nokogiri::XML(open("http://en.wikipedia.org/w/api.php?action=query&prop=revisions&rvprop=content&format=xml&titles=#{link.gsub(" ", "%20")}").read)
+        wiki_entry1 = doc1.xpath("//revisions//rev").text
+        check1=wiki_entry1.scan(/(?<=\#REDIRECT \[\[).+?(?=\]\])/m)[0]
+        unless check1.blank?
+          doc1=Nokogiri::XML(open("http://en.wikipedia.org/w/api.php?action=query&prop=revisions&rvprop=content&format=xml&titles=#{check1.gsub(" ", "%20")}").read)
+          wiki_entry1 = doc1.xpath("//revisions//rev").text
+        end
+        @wikied1=WikiParser.new({:data => "#{wiki_entry1}"})
+        Slide.create!(:presentation_id=>@presentation.id,:title=>@external_text[index],:subtitle=>scrap_external(@wikied1.to_html),:mode=>"HTML",:layout=>'allcentered',:sequence=>(index+4))
+      end
+    end
+
     redirect_to view_deck_path(@presentation.id)
   end
 
@@ -78,7 +100,7 @@ class PresentationsController < ApplicationController
       #Make directory with slide.id name in public/slides/assets/img and copying the slides images in to that directory
       system "mkdir #{Rails.root}/public/slides/assets/img/#{slide.id}"
       if !slide.content_blocks.blank?
-        FileUtils.cp_r("#{Rails.root}/public/userdata/#{@presentation.user.name.downcase.gsub(" ", "_")}/#{@presentation.name.downcase.gsub(" ", "_")}/#{slide.id}/content_blocks/","#{Rails.root}/public/slides/assets/img/#{slide.id}/" )
+        FileUtils.cp_r("#{Rails.root}/public/userdata/#{@presentation.user.name.downcase.gsub(" ", "_")}/#{@presentation.name.downcase.gsub(" ", "_")}/#{slide.id}/content_blocks/", "#{Rails.root}/public/slides/assets/img/#{slide.id}/")
       end
 
 
@@ -139,9 +161,9 @@ class PresentationsController < ApplicationController
       gon.background = slide.background
       gon.plugin=0
 
-      gon.image_list=slide.content_blocks.map{|t| t.image.path.gsub("#{Rails.root}/public/userdata/#{@presentation.user.name.downcase.gsub(" ", "_")}/#{@presentation.name.downcase.gsub(" ", "_")}/#{slide.id}","assets/img/#{slide.id}")}
+      gon.image_list=slide.content_blocks.map { |t| t.image.path.gsub("#{Rails.root}/public/userdata/#{@presentation.user.name.downcase.gsub(" ", "_")}/#{@presentation.name.downcase.gsub(" ", "_")}/#{slide.id}", "assets/img/#{slide.id}") }
 
-      gon.caption=slide.content_blocks.map{|t| t.caption}
+      gon.caption=slide.content_blocks.map { |t| t.caption }
       gon.fontarray = @fontarray
       gon.fontadjustment = @fontadjustment
       gon.widget_list=[slide.layout]
@@ -153,11 +175,11 @@ class PresentationsController < ApplicationController
       @plugin_layout=t(:plugins)[s][:"#{slide.layout}"][:layout]
       gon.plugin_layout="#{@plugin_layout}()"
 
-      FileUtils.cp_r("#{Rails.root}/app/assets/plugins/#{@plugin_category}/#{slide.layout}/","#{Rails.root}/public/slides/assets/" )
+      FileUtils.cp_r("#{Rails.root}/app/assets/plugins/#{@plugin_category}/#{slide.layout}/", "#{Rails.root}/public/slides/assets/")
       FileUtils.cp_r("#{Rails.root}/app/assets/layouts/#{plugin_layout}.css", "#{Rails.root}/public/slides/assets/")
       ##################################################
       @slide=slide
-      File.open("#{Rails.root}/public/slides/#{slide.id}.html", 'w') {|f| f.write(render_to_string(:file => 'home/view_deck').gsub('/assets','assets').gsub('themes.css','theme.css').gsub("#{@plugin_category}/",'').gsub("/userdata/#{@presentation.user.name.downcase.gsub(" ", "_")}/#{@presentation.name.downcase.gsub(" ", "_")}/images/title_pic/","assets/img/")) }
+      File.open("#{Rails.root}/public/slides/#{slide.id}.html", 'w') { |f| f.write(render_to_string(:file => 'home/view_deck').gsub('/assets', 'assets').gsub('themes.css', 'theme.css').gsub("#{@plugin_category}/", '').gsub("/userdata/#{@presentation.user.name.downcase.gsub(" ", "_")}/#{@presentation.name.downcase.gsub(" ", "_")}/images/title_pic/", "assets/img/")) }
     end
     @zipped_name = (@presentation.name).gsub(" ", "_")
     Dir.chdir("#{Rails.root}/public/slides/")
@@ -170,6 +192,6 @@ class PresentationsController < ApplicationController
 
   def view_prez
     @presentation=Presentation.find(params[:id])
-    redirect_to builder_path(@presentation.slides.first.id,@presentation.slides.first.layout,@presentation.slides.first.font,@presentation.slides.first.background,TRUE)
+    redirect_to builder_path(@presentation.slides.first.id, @presentation.slides.first.layout, @presentation.slides.first.font, @presentation.slides.first.background, TRUE)
   end
 end
