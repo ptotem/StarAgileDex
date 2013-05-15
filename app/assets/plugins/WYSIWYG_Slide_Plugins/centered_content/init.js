@@ -42,9 +42,6 @@ function init_widget() {
 
         $widget.boxfit({multiline:true, maximum_font_size:36});
 
-        var content_len = $('#widget_wrap').find('p').val().length;
-        alert(content_len);
-
     });
     layout5();
 }
