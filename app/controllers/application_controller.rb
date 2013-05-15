@@ -16,6 +16,8 @@ class ApplicationController < ActionController::Base
     snippets=Array.new
     image_list=Array.new
     headings=Array.new
+    extra_link_text=Array.new
+    extra_link=Array.new
 
     html_doc=Nokogiri::HTML(html)
 
@@ -28,10 +30,19 @@ class ApplicationController < ActionController::Base
       tables<<table.to_html.gsub!(/\n/, "")
       table.remove
     end
-
-    html_doc.xpath('//p').each do |el|
+    @s
+    html_doc.xpath('//p').each_with_index do |el,index|
       snippets<<el.text.to_s.gsub(/\n/,'')
+      if index < 1
+        @s=el
+        el.xpath('//p[1]//a/@href').each do |li|
+          extra_link<<li.text
+          end
+        el.xpath('//p[1]//a').each do |li|
+          extra_link_text<<li.text
+        end
       end
+    end
 
     html_doc.xpath('//h2/span').each do |el|
       headings<<el.text.to_s.gsub(/\n/,'')
@@ -56,9 +67,28 @@ class ApplicationController < ActionController::Base
       tables<<"Could not find relevant data, try a different search?"
     end
 
-    return snippets, tables, image_list, headings
+    return snippets, tables, image_list, headings, extra_link,extra_link_text
 
   end
 
+  #Function to extract in formation from link of the first paragraph of wiki documents
+  def scrap_external(html)
+    html_doc=Nokogiri::HTML(html)
+
+    html_doc.css('.reference').remove
+    html_doc.css('.editsection').remove
+    html_doc.css('#toc').remove
+
+    html_doc.xpath('//p[not(text())]').remove
+
+    snippets=html_doc.xpath('//p[1]').text.to_s.gsub(/\n/,'')
+
+    if snippets.blank?
+      snippets="Could not find relevant data, try a different search?"
+    end
+
+    return snippets
+
+  end
 
 end
