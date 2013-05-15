@@ -78,6 +78,16 @@ function layout4() {
     }, 500);
 }
 
+function layout5() {
+    setTimeout(function () {
+        $('#wrapper').fadeIn(function () {
+            $('.elements').fade1by1();
+        });
+    }, 500);
+    $title.boxfit({multiline: true, maximum_font_size: 36});
+    $subtitle.boxfit({multiline: true, maximum_font_size: 36});
+}
+
 function title_plugin_slide(){
     if (subtitle) {
         $subtitle.css({left:"300px"});

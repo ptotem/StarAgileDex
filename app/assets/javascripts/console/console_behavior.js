@@ -425,6 +425,8 @@ function load_bindings() {
     });
 
     //This creates the presentation on pressing enter key in new deck modal form
+
+
     $("#new_deck_Modal").find("input[type='text']:first").keypress(function (event) {
         if (event.which == 13) {
             event.preventDefault();

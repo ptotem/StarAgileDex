@@ -16,7 +16,7 @@ class AuthenticationsController < ApplicationController
     require 'pathname'
     auth=request.env["omniauth.auth"]
     if auth.provider=='facebook' # Checking if request comes from facebook or twitter
-      #if User.find_by_email(auth.info.email).nil?
+                                 #if User.find_by_email(auth.info.email).nil?
       if User.find_by_uid(auth['uid']).nil?
         users_email = auth.extra.raw_info.email
         if users_email.nil?
