@@ -24,20 +24,31 @@ function init_widget() {
 
             var $item = $(this), direction;
 
-            switch (i) {
-                case 0 :
+                if (i%2 == 0){
                     direction = ['right', 'bottom'];
-                    break;
-                case 1 :
+                }
+                else{
                     direction = ['left', 'bottom'];
-                    break;
-                case 2 :
-                    direction = ['right', 'top'];
-                    break;
-                case 3 :
-                    direction = ['left', 'top'];
-                    break;
-            }
+                }
+
+
+//            switch (i) {
+//                case 0 :
+//                    direction = ['right', 'bottom'];
+//                    break;
+//                case 1 :
+//                    direction = ['left', 'bottom'];
+//                    break;
+//                case 2 :
+//                    direction = ['right', 'top'];
+//                    break;
+//                case 3 :
+//                    direction = ['left', 'top'];
+//                    break;
+//                default :
+//                    direction = ['left', 'top'];
+//                    break;
+//            }
 
             var pfold = $item.pfold({
                 folddirection:direction,

@@ -166,6 +166,7 @@
 		// adds wrappers to the uc-initial-content and uc-final-content divs
 		_layout : function() {
 
+
 			var $initialContentEl = this.$el.children( 'div.uc-initial-content' ),
 				finalDim = this._getFinalDim(),
 				$finalContentEl = this.$el.children( 'div.uc-final-content' ).css( {

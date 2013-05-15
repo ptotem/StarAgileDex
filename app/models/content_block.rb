@@ -5,6 +5,8 @@ class ContentBlock < ActiveRecord::Base
   belongs_to :slide
   has_attached_file :image, :path=> :get_path
 
+  #validates_attachment_content_type :image, :content_type => ["image/jpg", "image/jpeg", "image/gif", "image/png", "image/pjpeg", "image/x-png"], :message => "Accepted files include: jpg, gif, png"
+
   attr_accessor :delete_image
   attr_accessible :delete_image
 

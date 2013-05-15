@@ -21,6 +21,14 @@ en:
         opera: "false"
         safari: "false"
         working: "true"
+      centered_content:
+        layout: "layout5"
+        ie: "6+"
+        firefox: "true"
+        chrome: "false"
+        opera: "false"
+        safari: "false"
+        working: "true"
     content_plugin:
       imagecube:
         layout: "layout1"
