@@ -112,7 +112,10 @@ a.jms-link{
     position: absolute;
     right: 0px;
     top: 30px;
-    width:350px;
+    min-width: 350px;
+    max-width: 350px;
+    min-height: 350px;
+    max-height: 350px;
 }
 .jms-dots{
     display: none;

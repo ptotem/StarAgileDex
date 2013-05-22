@@ -45,10 +45,17 @@ class PresentationsController < ApplicationController
         ContentBlock.create!(:slide_id=>@slide.id,:image=>URI.parse(image),:caption=>@wiki_snippets[index+1].summarize.unpack('U*').pack('U*'))
       end
     end
-    @slide2=Slide.create!(:presentation_id=>@presentation.id,:title=>@heading[0],:subtitle=>@wiki_snippets[1].summarize.unpack('U*').pack('U*'),:main=>@wiki_snippets[1].unpack('U*').pack('U*'),:mode=>"HTML",:layout=>'simple_title_content',:sequence=>2)
-    @slide3=Slide.create!(:presentation_id=>@presentation.id,:title=>@heading[1],:subtitle=>@wiki_snippets[2].unpack('U*').pack('U*'),:mode=>"HTML",:layout=>'allcentered',:sequence=>3)
-    #render :text=>@external_link
-    #return
+
+    if !@wiki_snippets[1].nil? or !@wiki_snippets[2].nil?
+      @slide2=Slide.create!(:presentation_id=>@presentation.id,:title=>@heading[0],:subtitle=>@wiki_snippets[1].summarize.unpack('U*').pack('U*'),:main=>@wiki_snippets[1].unpack('U*').pack('U*'),:mode=>"HTML",:layout=>'simple_title_content',:sequence=>2)
+      @slide3=Slide.create!(:presentation_id=>@presentation.id,:title=>@heading[1],:subtitle=>@wiki_snippets[2].unpack('U*').pack('U*'),:mode=>"HTML",:layout=>'allcentered',:sequence=>3)
+      #render :text=>@external_link
+      #return
+    else
+      @slide2=Slide.create!(:presentation_id=>@presentation.id,:title=>"",:subtitle=>"",:main=>"",:mode=>"HTML",:layout=>'simple_title_content',:sequence=>2)
+      @slide3=Slide.create!(:presentation_id=>@presentation.id,:title=>"",:subtitle=>"",:mode=>"HTML",:layout=>'allcentered',:sequence=>3)
+    end
+
 
 
     @wiki_external_snipets=Array.new

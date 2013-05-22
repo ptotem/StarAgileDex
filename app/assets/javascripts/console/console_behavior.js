@@ -418,6 +418,8 @@ function export_as_html() {
 
 function load_bindings() {
     $('#signed_in').hide();
+    $('#new_deck_btn').click();
+
 
     //This sets the focus to the presentation name text-field on modal load
     $("#new_deck_Modal").on('shown', function () {

@@ -22,6 +22,10 @@ class ApplicationController < ActionController::Base
     response.headers["Expires"] = "Fri, 01 Jan 1990 00:00:00 GMT"
   end
 
+  rescue_from CanCan::AccessDenied do |exception|
+    #  redirect_to root_url, :alert => exception.message
+    render file: "#{Rails.root}/public/422", formats: [:html], status: 422, layout: false
+  end
 
   def scrap_it(html)
     tables=Array.new

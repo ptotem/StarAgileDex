@@ -70,7 +70,7 @@
       <input type="hidden" id="presentation">
       <a id="view_deck" href="" class="btn ad_btn">View the Deck</a>
       <a href="#" id="export_html_btn" class="btn ad_btn">Export as HTML</a>
-      <a href="#" id="export_scorm_btn" class="btn ad_btn">Export as SCORM</a>
+      <a href="#" id="export_scorm_btn" class="btn ad_btn btn disabled">Export as SCORM</a>
       <a href="#" id="del_deck_btn" class="btn ad_btn">Delete the Deck</a>
       <a href="#" class="btn ad_btn btn-inverse" onclick="transitOut()">Close the Deck</a>
     </div>
@@ -159,19 +159,21 @@
 
   <div id="new_deck_Modal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="newModalLabel" aria-hidden="true">
     <div class="modal-header">
-      <h3 id="new_deckModalLabel">New Deck</h3>
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+      <h3 id="new_deckModalLabel">Welcome to agileDex</h3>
     </div>
-    <form accept-charset="UTF-8" class="form-horizontal" id="new_presentation" style="margin:0">
+    <form accept-charset="UTF-8" class="form-horizontal" id="new_presentation">
       <div class="modal-body">
-        <input id="presentation_name" name="presentation[name]" data-toggle="focus" placeholder="Type Presentation Name Here ..." size="30" maxlength="25" type="text"/>
+        <input id="presentation_name" name="presentation[name]" data-toggle="focus" placeholder="Type Presentation Name Here ..." size="30" type="text"/>
         <% if user_signed_in? %>
             <input id="presentation_user_id" name="presentation[user_id]" type="hidden" value="<%= current_user.id %>"/>
         <% end %>
       </div>
       <div class="modal-footer">
-        <button class="btn btn-danger pull-left" data-dismiss="modal" aria-hidden="true">Close</button>
-        <input class="btn btn-primary" style="" id="new_deck_Modal_create_btn" name="commit" value="Create"/>
-        <a href="#" class="btn btn-inverse pull-right" id="new_deck_Modal_search_from_wiki">Create using Wiki</a>
+        <!--<button class="btn btn-danger pull-left" data-dismiss="modal" aria-hidden="true">Close</button>-->
+        <!--<input class="btn btn-primary" id="new_deck_Modal_create_btn" name="commit" value="Create"/>-->
+        <a href="#" class="btn btn-primary pull-right" id="new_deck_Modal_search_from_wiki">Create Automatically</a> <br><br>
+        <a href="#" class="btn btn-primary" id="new_deck_Modal_create_btn">Create Manually</a>
       </div>
     </form>
   </div>
@@ -251,7 +253,6 @@
 <%= javascript_include_tag "jquery.ui.sortable" %>
 <%= javascript_include_tag "jquery.dataTables.min" %>
 <%= javascript_include_tag "jquery.powertip" %>
-<%#= javascript_include_tag "jquery.nicescroll.min" %>
 <%= javascript_include_tag "jquery.easing" %>
 <%= javascript_include_tag "console/console_behavior" %>
 <%#= javascript_include_tag "console/jquery.mCustomScrollbar.concat.min" %>
