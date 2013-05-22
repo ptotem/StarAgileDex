@@ -19,10 +19,10 @@ class PresentationsController < ApplicationController
   end
 
   def wiki_prez
+    #Todo add layout we have to create separate pluins list for wiki because we are mensioning the layout in en.yml file, to apply it here just change :layout=><cHANGE> in each create
+    #of this function.
+    #Todo we also have to add condition in builder action so that it can pick from wiki plug in list.
     @wiki_snippets=Array.new
-    @wiki_tables=Array.new
-    @images=Array.new
-    @heading=Array.new
     @external_link=Array.new
     @external_text=Array.new
     @search_string=params[:name]
@@ -36,37 +36,42 @@ class PresentationsController < ApplicationController
     end
 
     @wikied=WikiParser.new({:data => "#{wiki_entry}"})
-    @wiki_snippets, @wiki_tables, @images, @heading, @external_link,@external_text = scrap_it(@wikied.to_html)
-
-    @presentation=Presentation.create!(:user_id=>current_user.id,:name=>@search_string)
-    @slide=Slide.create!(:presentation_id=>@presentation.id,:title=>@presentation.name,:subtitle=>@wiki_snippets[0].summarize,:mode=>"Blocks",:layout=>'imagecube',:sequence=>1)
-    @images.each_with_index do |image,index|
-      if !image.blank?
-        ContentBlock.create!(:slide_id=>@slide.id,:image=>URI.parse(image),:caption=>@wiki_snippets[index+1].summarize.unpack('U*').pack('U*'))
+    @slides,@external_link,@external_text = scrap_it(@wikied.to_html,@search_string)
+    @presentation=Presentation.create!(:user_id => current_user.id, :name => @search_string)
+    @slides.each do |i|
+      if i["main"]==[] or i["main"]=='null'
+        @slides.delete(i)
       end
     end
-    @slide2=Slide.create!(:presentation_id=>@presentation.id,:title=>@heading[0],:subtitle=>@wiki_snippets[1].summarize.unpack('U*').pack('U*'),:main=>@wiki_snippets[1].unpack('U*').pack('U*'),:mode=>"HTML",:layout=>'simple_title_content',:sequence=>2)
-    @slide3=Slide.create!(:presentation_id=>@presentation.id,:title=>@heading[1],:subtitle=>@wiki_snippets[2].unpack('U*').pack('U*'),:mode=>"HTML",:layout=>'allcentered',:sequence=>3)
-    #render :text=>@external_link
-    #return
+    @slides.each_with_index do |i, index|
+      @count=1
+      if index<1
+        @slide=Slide.create!(:presentation_id => @presentation.id, :title => i["title"], :subtitle => i["main"].summarize, :mode => "Blocks", :layout => 'imagecube', :sequence => (@count))
+        ContentBlock.create!(:slide_id => @slide.id, :image => URI.parse(i["content_block"]), :caption => "")
+        @wiki_external_snipets=Array.new
 
-
-    @wiki_external_snipets=Array.new
-    @external_link.each_with_index do |link,index|
-      if @wiki_snippets[0].summarize.include?(@external_text[index])
-        doc1=Nokogiri::XML(open("http://en.wikipedia.org/w/api.php?action=query&prop=revisions&rvprop=content&format=xml&titles=#{link.gsub(" ", "%20")}").read)
-        wiki_entry1 = doc1.xpath("//revisions//rev").text
-        check1=wiki_entry1.scan(/(?<=\#REDIRECT \[\[).+?(?=\]\])/m)[0]
-        unless check1.blank?
-          doc1=Nokogiri::XML(open("http://en.wikipedia.org/w/api.php?action=query&prop=revisions&rvprop=content&format=xml&titles=#{check1.gsub(" ", "%20")}").read)
-          wiki_entry1 = doc1.xpath("//revisions//rev").text
+        @external_link.each_with_index do |link,index1|
+          if @slides[0]["main"].summarize.summarize.include?(@external_text[index])
+            doc1=Nokogiri::XML(open("http://en.wikipedia.org/w/api.php?action=query&prop=revisions&rvprop=content&format=xml&titles=#{link.gsub(" ", "%20")}").read)
+            wiki_entry1 = doc1.xpath("//revisions//rev").text
+            check1=wiki_entry1.scan(/(?<=\#REDIRECT \[\[).+?(?=\]\])/m)[0]
+            unless check1.blank?
+              doc1=Nokogiri::XML(open("http://en.wikipedia.org/w/api.php?action=query&prop=revisions&rvprop=content&format=xml&titles=#{check1.gsub(" ", "%20")}").read)
+              wiki_entry1 = doc1.xpath("//revisions//rev").text
+            end
+            @wikied1=WikiParser.new({:data => "#{wiki_entry1}"})
+            @count=@count+1
+            Slide.create!(:presentation_id=>@presentation.id,:title=>@external_text[index1],:subtitle=>scrap_external(@wikied1.to_html),:mode=>"HTML",:layout=>'allcentered',:sequence=>(@count))
+          end
         end
-        @wikied1=WikiParser.new({:data => "#{wiki_entry1}"})
-        Slide.create!(:presentation_id=>@presentation.id,:title=>@external_text[index],:subtitle=>scrap_external(@wikied1.to_html),:mode=>"HTML",:layout=>'allcentered',:sequence=>(index+4))
+      else
+        @count=@count+1
+        @slide=Slide.create!(:presentation_id => @presentation.id, :title => i["title"], :subtitle => (i["main"].summarize rescue i["main"]), :mode => "Blocks", :layout => 'imagecube', :sequence => (@count))
+        ContentBlock.create!(:slide_id => @slide.id, :image => URI.parse(i["content_block"]), :caption => "")
       end
     end
-
     redirect_to view_deck_path(@presentation.id)
+    return
   end
 
   #function to export the file as html
@@ -177,6 +182,8 @@ class PresentationsController < ApplicationController
     system("rm -rf #{Rails.root}/public/slides/*.html")
     #render :text=>'success'
   end
+
+
 
   def view_prez
     @presentation=Presentation.find(params[:id])
