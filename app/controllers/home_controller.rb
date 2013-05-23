@@ -29,6 +29,8 @@ class HomeController < ApplicationController
       gon.nosub=@slide.nosub
     end
     gon.titlepic=(@slide.titlepic.nil? ? false:true)
+
+
     render :layout => false
   end
 

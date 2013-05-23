@@ -23,7 +23,8 @@
 .sb-slider li > a img {
 	border: none;
 }
-sb-description{
+
+.sb-description{
     height:200px;
     width:200px;
     background-color: red;

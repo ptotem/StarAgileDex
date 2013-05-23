@@ -16,7 +16,7 @@
             step_size: 1,
             step_limit: 200,
             align_middle: true,
-            align_center: true,
+            align_center: false,
             multiline: false,
             minimum_font_size: 5,
             maximum_font_size: null

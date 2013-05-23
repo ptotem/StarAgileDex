@@ -23,9 +23,9 @@
                 <%= f.file_field :titlepic, :placeholder => "Add Image", :style => "display:none;" %>
                 <%= f.check_box(:delete_titlepic, :style => "display:none") %>
                 <%= image_tag @slide.titlepic.url, :onclick=>"$('#slide_titlepic').click();" %>
-                <div id="titlepic_name" onclick="$('#slide_titlepic').click();"><%= @slide.titlepic_file_name %></div>
+                <div id="titlepic_name" onclick="$('#slide_titlepic').click();"><%= @slide.titlepic_file_name.split('.').first.truncate(15) %></div>
                 <span onclick="$('#slide_titlepic').click();">Click to change</span> <br>
-                <span onclick='$("#slide_delete_titlepic").attr("checked", true);$(this).hide();$(this).prev().prev().prev().hide();$(this).prev().prev().prev().prev().attr("src","/assets/upload.png");'>&times;</span>
+                <span style="left: 530px; position: absolute; top: 306px;" onclick='$("#slide_delete_titlepic").attr("checked", true);$(this).hide();$(this).prev().prev().prev().hide();$(this).prev().prev().prev().prev().attr("src","/assets/upload.png");'>&times;</span>
             <% end %>
           </div>
         </a>
@@ -54,29 +54,28 @@
           <%= link_to "Import from Dropbox", "#", :class => "btn disabled", :id=>"dropbox_import_btn" %>
           <%= f.fields_for :content_blocks do |widget_form| %>
               <div class="a_content_block">
-                <%#= widget_form.link_to_remove image_tag("delete.gif", :style => "width:20px"), :class => "pull-right", :style => "margin-top:15px;margin-right:5px;font-size:24px;" %>
                 <div class="file_block" style="text-align: left;">
-                  <%= widget_form.link_to_remove image_tag("delete.gif", :style => "height:20px"), :class => "pull-right", :style => "margin-top:15px;margin-right:5px;font-size:24px;" %>
+                  <%= widget_form.link_to_remove image_tag("delete.gif", :style => "height:20px"), :class => "pull-right", :style => "margin-right:5px;font-size:24px;" %>
                   <% if widget_form.object.image.blank? %>
-                      <a href="#" class="btn btn-inverse" style="margin-bottom: 1px; text-align: center; ">
+                      <a href="#" class="btn btn-inverse" style="margin-bottom: 1px; text-align: center; float: left; width: 98px; font-size: 12px;">
                           <%= widget_form.file_field :image, :placeholder => "Add Image", :class => "required", :style => "margin-right:15px; display:none;", :onchange=>"$(this).next().next().next().html($(this).val().substr(0, $(this).val().lastIndexOf('.')).substring(0,12));" %> <!--javascript to remove file extensions-->
                           <%= image_tag "upload.png", :onclick=>"$(this).prev().click();" %> <br>
-                          <div></div>
+                          <div style="height: 15px; margin: 0 0 5px 0;"></div>
                           <span onclick="">Click to change</span> <br>
                       </a>
-                      <%= widget_form.text_area :caption, :rows=>"2", :placeholder => "Caption for this image", :class => "caption", :style=>"width:95%; resize:vertical; max-height:300px; min-height:80px;" %>
+                      <%= widget_form.text_area :caption, :rows=>"2", :placeholder => "Caption for this image", :class => "caption", :style=>" margin-top:0px; margin-left:8px; width:45%; resize:vertical; max-height:300px; min-height:80px;" %>
                   <% else %>
                       <div class="existing-cb-images" style="text-align: left;">
-                        <a href="#" class="btn btn-inverse" style="margin-bottom: 1px; text-align: center; ">
+                        <a href="#" class="btn btn-inverse" style="margin-bottom: 1px; text-align: center; float: left; width: 98px; font-size: 12px;">
                             <%= widget_form.file_field :image, :placeholder => "Add Image", :style => "margin-right:15px; display:none;", :onchange=>"$(this).next().next().text($(this).val().substr(0, $(this).val().lastIndexOf('.')).substring(0,12));$(this).next().attr('src','/assets/upload.png');" %>
                             <% pubsys_path = widget_form.object.image.url %> <%# this is public/system path (paperclip) %>
                             <% userdata_path = pubsys_path.gsub(pubsys_path, "/userdata/"+@slide.presentation.user.name.downcase.gsub(" ", "_")+"/"+@slide.presentation.name.downcase.gsub(" ", "_")+"/"+@slide.id.to_s+"/content_blocks/"+widget_form.object.image_file_name) if widget_form.object.image? %>
                             <%= image_tag userdata_path, :onclick=>"$(this).prev().click();" %>
-                            <div class="content_block_img_name"><%= widget_form.object.image_file_name.truncate(15) rescue nil %></div>
+                            <div class="content_block_img_name"><%= widget_form.object.image_file_name.split('.').first.truncate(15) rescue nil %></div>
                             <span onclick="">Click to change</span> <br>
                             <!--<div class="content_block_img_caption"><%= widget_form.object.caption %></div>-->
                         </a>
-                      <%= widget_form.text_area :caption, :rows=>"2", :placeholder => "Caption for this image", :class => "caption", :style=>"width:95%; resize:vertical; max-height:300px; min-height:80px;" %>
+                      <%= widget_form.text_area :caption, :rows=>"2", :placeholder => "Caption for this image", :class => "caption", :style=>"margin-left:8px; width:45%; resize:vertical; max-height:300px; min-height:80px; font-size:12px;" %>
                       </div>
                   <% end %>
                 </div>
@@ -91,8 +90,8 @@
           <%= f.file_field :ppt, :placeholder => "Add Image" %>
           <br>
           <br>
-
-          <p style="width:250px;margin: 0 auto;">Okay...this takes anywhere between 1 to 5 minutes depending upon how
+          <div id="ppt_instruction" style="font-size: 14px; font-weight: bold;" >Make sure that pdf or ppt file name doesn't contain blank/white spaces.</div><br>
+          <p style="width:250px;margin: 0 auto; font-size: 14px;">Okay...this takes anywhere between 1 to 5 minutes depending upon how
             large the PPT is. So maybe
             you want to start this off and go grab a cup of coffee ? </p>
         </div>
@@ -100,7 +99,7 @@
       </div>
 
       <div id="mode_switcher">
-        <%= link_to "Basic Mode", "#", :class => 'btn btn-inverse', :id => "clear_wysiwyg", :onclick => "open_wysiwyg_mode();$(this).addClass('btn-inverse');$(this).next().removeClass('btn-inverse')" %>
+        <%= link_to "Basic Mode", "#", :class => 'btn', :id => "clear_wysiwyg", :onclick => "open_wysiwyg_mode();$(this).addClass('btn-inverse');$(this).next().removeClass('btn-inverse')" %>
         <%= link_to "Advanced Mode", "#", :class => 'btn', :id => "show_wysiwyg", :onclick => "open_blocks_mode();$(this).addClass('btn-inverse');$(this).prev().removeClass('btn-inverse')" %>
         <%= link_to "Game Mode", "#", :class => 'btn disabled', :id => "game_mode_btn" %>
       </div>

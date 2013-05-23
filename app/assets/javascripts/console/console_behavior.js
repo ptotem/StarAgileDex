@@ -50,7 +50,8 @@ function transitInNewSlide(slide_id, presentation_id) {
             form_bindings();
         });
     }
-    $(".main_form_body").niceScroll({cursorcolor: "#232836", cursorborder: "none", cursorwidth: "5px", autohidemode: false, horizrailenabled: false});
+//    $(".main_form_body").niceScroll({cursorcolor: "#232836", cursorborder: "none", cursorwidth: "5px", autohidemode: false, horizrailenabled: false});
+
 
     // Remove the presentations panel and move the slide panel to the left
     $('#deck_list').hide();
@@ -61,7 +62,23 @@ function transitInNewSlide(slide_id, presentation_id) {
             'width': "280px"
         }, function () {
             $('#right_panel').fadeOut(function () {
-                $('#slide_form_panel').fadeIn();
+                $('#slide_form_panel').fadeIn(function (){
+                    if ($('#slide_mode').val()=="Blocks"){
+                        $('form').find('#show_wysiwyg').addClass('btn-inverse');
+                        $('#show_wysiwyg').on('click', open_blocks_mode);
+                    }
+                    else if ($('#slide_mode').val()=="HTML"){
+                        $('form').find('#show_wysiwyg').removeClass('btn-inverse');
+                        $('form').find('#clear_wysiwyg').addClass('btn-inverse');
+                        $('#clear_wysiwyg').on('click', open_wysiwyg_mode);
+                    }
+                    else if ($('#slide_mode').val()=="PPT"){
+                        $('form').find('#show_wysiwyg').addClass('btn-inverse');
+                        $('form').find('#show_wysiwyg').click();
+                        $('form').find('#import_ppt_block').show();
+                    }
+
+                });
             });
         });
     $('.slide_layout').css({
@@ -151,6 +168,14 @@ function initialize_deck_list() {
     );
     $('#presentations_table_filter').children().children().addClass('presentation_filter');
     $('.presentation_filter').attr("placeholder", "Search Decks");
+
+//    $(".dataTables_scrollBody").mCustomScrollbar({
+//        horizontalScroll:false,
+//        scrollButtons:{
+//            enable:true
+//        },
+//        theme:"dark"
+//    });
 
 }
 
@@ -269,6 +294,14 @@ function show_presentation(this_presentation_id, this_presentation_name) {
 //                    $('#presentations_slides_table tbody').append(slide_block);
                     $('#presentations_slides_list').append(slide_block);
 
+//                    $("#presentations_slides_list").mCustomScrollbar({
+//                        horizontalScroll:false,
+//                        scrollButtons:{
+//                            enable:true
+//                        },
+//                        theme:"dark"
+//                    });
+
 
                     function move_slide_up() {
                         var slide_id = $(this).parent().prev().find('input').attr('id');
@@ -368,7 +401,9 @@ function delete_presentation() {
         contentType: "application/json",
         success: function (data) {
             var $pres_row_id = $('.show_this_presentation').find('input[id=' + $('#slide_presentation_id').val() + ']');
-            $pres_row_id.parent().parent().parent().parent().empty().remove();
+//            $pres_row_id.parent().parent().parent().parent().empty().remove();
+            var row = $pres_row_id.closest("tr").get(0);
+            $('#presentations_table').dataTable().fnDeleteRow($('#presentations_table').dataTable().fnGetPosition(row));
             transitOut();
         }
     });
@@ -390,12 +425,19 @@ function load_bindings() {
     });
 
     //This creates the presentation on pressing enter key in new deck modal form
+
+
     $("#new_deck_Modal").find("input[type='text']:first").keypress(function (event) {
         if (event.which == 13) {
             event.preventDefault();
             $('#new_deck_Modal_create_btn').click();
         }
     });
+
+    $('#new_deck_Modal_search_from_wiki').on('click', function(){
+        $(this).attr('href','/wiki_prez/'+$('#presentation_name').val());
+    });
+
 
     // This function handles the creation of a new deck
     $('#new_deck_Modal_create_btn').on('click', create_new_deck);
@@ -452,6 +494,7 @@ function form_bindings() {
     $('#clear_titlepic').click(switch_to_subtitle);
 
     $('#slide_titlepic').change(function () {
+        $('#titlepic_name').css('display','block');
         $('#title_picture img').attr('src', '/assets/upload.png');
 //        $('#titlepic_name').html($(this).val());
         var full_name = $(this).val();
@@ -467,6 +510,7 @@ function form_bindings() {
         //$('#titlepic_name').html($(this).val().substr(0, $(this).val().lastIndexOf('.'))).substring(0,15)+"...";
         return false;
     });
+
 
     $('#show_wysiwyg').on('click', open_blocks_mode);
     $('#clear_wysiwyg').on('click', open_wysiwyg_mode);
@@ -492,6 +536,7 @@ function form_bindings() {
     var slide_form_id = $('form').attr('id'); //This is the form id
     $("#" + slide_form_id).validate();
 
+
 }
 
 // This function switches the form to WYSIWYG editor
@@ -508,6 +553,7 @@ function open_wysiwyg_mode() {
 
 // This function switches the form to Content blocks
 function open_blocks_mode() {
+
     $('#show_wysiwyg').hide();
     $('#clear_wysiwyg').show();
     $('#upload_ppt').show();
