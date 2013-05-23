@@ -112,34 +112,38 @@ function transitOut() {
 // This function creates a new deck
 
 function create_new_deck() {
-    var prez_name = $('#presentation_name').val();
-    var data = {presentation_name: []};
-    data["presentation_name"].push(prez_name);
+    if ($('#presentation_name').val()=="") {
+        $('#presentation_name').attr("placeholder", "Please, enter deck name.");
+        $('#presentation_name').focus();
+    }
+    else {
+        var prez_name = $('#presentation_name').val();
+        var data = {presentation_name: []};
+        data["presentation_name"].push(prez_name);
 
-    $.ajax({
-        url: "/presentations/new",
-        type: "post",
-        async: false,
-        data: JSON.stringify(data),
-        contentType: "application/json",
-        success: function (returning_data) {
-            guest = returning_data.split('|')[1] == 'guest' ? true : false;
-            returning_data = returning_data.split('|')[0];
-            $('#presentations_table').dataTable().fnAddData([
-                '<a id="activate_presentation_' + returning_data + '" onclick="transitInDeck(\'' + prez_name + '\')" href="#?presentation' + returning_data + '"><button class="btn btn-inverse show_this_presentation" type="button"><input id="' + returning_data + '" type="hidden" name="' + returning_data + '">' + prez_name + '</button></a>', ""]
-            );
-            $('#presentations_table tbody tr:first').addClass('presentation_row');
-            $('#new_deck_Modal').modal('hide');
-            show_presentation(returning_data, prez_name);
-            transitInDeck(prez_name);
-            if (guest) {
-                $('#not_signed_in').hide();
-                $('#signed_in').show();
+        $.ajax({
+            url: "/presentations/new",
+            type: "post",
+            async: false,
+            data: JSON.stringify(data),
+            contentType: "application/json",
+            success: function (returning_data) {
+                guest = returning_data.split('|')[1] == 'guest' ? true : false;
+                returning_data = returning_data.split('|')[0];
+                $('#presentations_table').dataTable().fnAddData([
+                    '<a id="activate_presentation_' + returning_data + '" onclick="transitInDeck(\'' + prez_name + '\')" href="#?presentation' + returning_data + '"><button class="btn btn-inverse show_this_presentation" type="button"><input id="' + returning_data + '" type="hidden" name="' + returning_data + '">' + prez_name + '</button></a>', ""]
+                );
+                $('#presentations_table tbody tr:first').addClass('presentation_row');
+                $('#new_deck_Modal').modal('hide');
+                show_presentation(returning_data, prez_name);
+                transitInDeck(prez_name);
+                if (guest) {
+                    $('#not_signed_in').hide();
+                    $('#signed_in').show();
+                }
             }
-
-
-        }
-    });
+        });
+    }
 }
 
 // This function sets up dataTables for the deck list
@@ -159,7 +163,7 @@ function initialize_deck_list() {
             "sPaginationType": "false",
             "bLengthChange": true,
             "bFilter": true,
-            "bSort": true,
+            "bSort": false,
             "bInfo": false,
             "oSearch": {"sSearch": ""},
             "oLanguage": { "sSearch": "" },
@@ -427,8 +431,6 @@ function load_bindings() {
     });
 
     //This creates the presentation on pressing enter key in new deck modal form
-
-
     $("#new_deck_Modal").find("input[type='text']:first").keypress(function (event) {
         if (event.which == 13) {
             event.preventDefault();
@@ -437,7 +439,15 @@ function load_bindings() {
     });
 
     $('#new_deck_Modal_search_from_wiki').on('click', function(){
-        $(this).attr('href','/wiki_prez/'+$('#presentation_name').val());
+        if ($('#presentation_name').val()=="") {
+            $('#presentation_name').attr("placeholder", "Please, enter deck name.");
+            $('#presentation_name').focus();
+        }
+        else{
+            $(this).attr('href','/wiki_prez/'+$('#presentation_name').val());
+            $('#new_deck_Modal_search_from_wiki_img').css('visibility','visible');
+        }
+
     });
 
 
@@ -536,7 +546,33 @@ function form_bindings() {
     // Source : http://jzaefferer.github.com/jquery-validation/jquery.validate.js
     // js source included in console
     var slide_form_id = $('form').attr('id'); //This is the form id
-    $("#" + slide_form_id).validate();
+//    $("#" + slide_form_id).validate();
+
+    $("#" + slide_form_id).validate({
+        rules: { image: { required: true }},
+        messages: { image: "File must be JPG, GIF or PNG, less than 1MB" }
+    });
+
+    $('#fileupload').fileupload({
+        dataType: 'json',
+        add: function (e, data) {
+            data.context = $('<p/>').text('Uploading...').appendTo(document.body);
+            data.submit();
+        },
+        done: function (e, data) {
+            $.each(data.result.files, function (index, file) {
+                $('<p/>').text(file.name).appendTo(document.body);
+            });
+            data.context.text('Upload finished.');
+        },
+        progressall: function (e, data) {
+            var progress = parseInt(data.loaded / data.total * 100, 10);
+            $('#progress .bar').css(
+                'width',
+                progress + '%'
+            );
+        }
+    });
 
 
 }

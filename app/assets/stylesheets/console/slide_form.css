@@ -59,8 +59,13 @@ textarea#slide_subtitle {
     font-weight: bold;
 }
 
-.file_block img{
+.file_block img {
     height: 48px;
+}
+
+#ppt_instruction {
+    font-size: 14px;
+    font-weight: bold;
 }
 
 .form_subpanel {
@@ -108,5 +113,21 @@ textarea#slide_subtitle {
     width: 255px;
     margin-top: 5px;
     margin-right: 5px;
+}
+
+.error {
+    font-weight: bold;
+    color: red;
+}
+
+.bar {
+    background-color: #FAA732;
+    background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+    background-repeat: repeat-x;
+    border-radius: 4px 4px 4px 4px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1) inset;
+    height: 20px;
+    margin-bottom: 20px;
+    overflow: hidden;
 }
 
