@@ -10,12 +10,18 @@ AgileDex::Application.routes.draw do
   mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'
 
   devise_for :users
+  #devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
 
   match '/wiki_prez/:name'=>'presentations#wiki_prez'
+  match '/wiki_create'=>'presentations#wiki_create',:as=>'wiki_create'
+  match '/wiki_convert'=>'presentations#wiki_convert',:as=>'wiki_convert'
+  match '/image_search'=>'presentations#image_search',:as=>'image_search'
+  match '/wiki_combine'=>'presentations#wiki_combine',:as=>'wiki_combine'
+  match '/wiki_make'=>'presentations#wiki_make',:as=>'wiki_make'
 
   match '/users/auth/:provider/callback' => 'authentications#create'
   match '/users/sign_in' => 'home#console'
-  #devise_for :users
+
   match 'get_slides'=>'home#get_slides',:as=>'get_slides'
   match 'move_slide_up'=>'home#move_slide_up',:as=>'move_slide_up'
   match 'move_slide_down'=>'home#move_slide_down',:as=>'move_slide_down'

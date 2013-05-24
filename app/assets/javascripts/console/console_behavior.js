@@ -422,7 +422,7 @@ function export_as_html() {
 
 function load_bindings() {
     $('#signed_in').hide();
-    $('#new_deck_btn').click();
+//    $('#new_deck_btn').click();
 
 
     //This sets the focus to the presentation name text-field on modal load
@@ -537,14 +537,41 @@ function form_bindings() {
     });
 
     $('.caption').live("focus", function () {
-        if ($(this).parent().find('input:file').val()==""){
-//            $(this).parent().find('input:file').click();
-            $(this).attr("placeholder", "Please, select image");
-            $('.submit_button').addClass('disabled');
+        var caption = $(this);
+        var file_field = caption.parent().find('input:file');
+        var slide_form_id = $('form').attr('id'); //This is the form id
+        var img_src = caption.parent().find('img').last().attr('src');
+//        alert(img_src);
+        var timeoutID;
+
+        function delayedAlert() {
+            timeoutID = window.setTimeout(slowAlert, 2000);
+        }
+
+        function slowAlert() {
+            $(file_field).click();
+            if ((file_field.val()!="") || (img_src!="/assets/upload.png")) {
+                clearAlert();
+            }
+        }
+
+        function clearAlert() {
+            window.clearTimeout(timeoutID);
+        }
+
+        if ((slide_form_id.split('_')[0]!="edit") && (file_field.val()=="")) {
+            caption.attr("placeholder", "Please, select image. You cannot have only caption.");
+            delayedAlert();
+        }
+//        else if ((slide_form_id.split('_')[0]=="edit") && ( (img_src.split('/')[1]=="assets") || ((img_src.split('/')[1]=="userdata")) ) ) {
+        else if ((slide_form_id.split('_')[0]=="edit") && (img_src=="/assets/upload.png") ) {
+            caption.attr("placeholder", "Please, select image. You cannot have only caption.");
+//            delayedAlert();
         }
         else{
-            $('.submit_button').removeClass('disabled');
+            caption.attr("placeholder", "Enter caption here...");
         }
+
     });
 
     //This scrolls the contents blocks to the end on adding new field (new content block)
@@ -552,17 +579,19 @@ function form_bindings() {
         $('#content_block_section').animate({scrollTop: $('#content_block_section').prop("scrollHeight")}, 500);
     });
 
+
+    $('#slide_form_submit_btn').on("click", function () {
+
+        var slide_form_id = $('form').attr('id'); //This is the form id
+        $("#" + slide_form_id).submit();
+    });
     // Form validation
     // Source : http://docs.jquery.com/Plugins/validation#Validate_forms_like_you.27ve_never_been_validating_before.21
     // Source : http://jzaefferer.github.com/jquery-validation/jquery.validate.js
     // js source included in console
     var slide_form_id = $('form').attr('id'); //This is the form id
-//    $("#" + slide_form_id).validate();
+    $("#" + slide_form_id).validate();
 
-    $("#" + slide_form_id).validate({
-        rules: { image: { required: true }},
-        messages: { image: "File must be JPG, GIF or PNG, less than 1MB" }
-    });
 
     $('#fileupload').fileupload({
         dataType: 'json',
