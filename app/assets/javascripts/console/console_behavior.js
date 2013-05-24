@@ -526,6 +526,17 @@ function form_bindings() {
         }
     });
 
+    $('.caption').live("focus", function () {
+        if ($(this).parent().find('input:file').val()==""){
+//            $(this).parent().find('input:file').click();
+            $(this).attr("placeholder", "Please, select image");
+            $('.submit_button').addClass('disabled');
+        }
+        else{
+            $('.submit_button').removeClass('disabled');
+        }
+    });
+
     //This scrolls the contents blocks to the end on adding new field (new content block)
     $('.custom_scroll').on("click", function () {
         $('#content_block_section').animate({scrollTop: $('#content_block_section').prop("scrollHeight")}, 500);
