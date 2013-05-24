@@ -89,15 +89,19 @@
   ---------------------------------------------------------------->
 
   <div id="deck_list" class="main_panel" style="display: block;">
-    <h3>Slide Decks</h3>
+
 
     <% if user_signed_in? %>
+
 
         <script type="text/javascript">
             $(function () {
                 $(".feedback_link").feedback({tabPosition: "top"});
+                $("#new_deck_Modal").modal("show");
             });
         </script>
+
+        <h3>Slide Decks</h3>
 
         <a href="#new_deck_Modal" data-toggle="modal" class="btn btn-inverse" id="new_deck_btn" title="Click here to create a Deck">Create
           a Deck <i class="icon-plus icon-white pull-right"></i></a>
@@ -122,14 +126,15 @@
           </tbody>
         </table>
     <% else %>
-        <a href="/users/auth/facebook" class="btn btn-inverse" id="new_deck_btn" title="Click here to create a Deck">Create
-          a Deck <i class="icon-plus icon-white pull-right"></i></a>
-        <hr>
+        <br>
+
         <div id="instruction_block">
           <%= image_tag "console/wordart.png" %>
         </div>
-
-
+        <br>
+        <a href="/users/auth/facebook" class="btn btn-inverse btn-landing" id="new_deck_btn" title="Start">
+          <h1>Start</h1>
+        </a>
     <% end %>
 
   </div>
@@ -157,24 +162,58 @@
 
   </div>
 
-  <div id="new_deck_Modal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="newModalLabel" aria-hidden="true">
-    <div class="modal-header">
-      <h3 id="new_deckModalLabel">New Deck</h3>
-    </div>
+  <!-----------------------------------------------------------
+  New Deck Modal
+  ---------------------------------------------------------------->
+
+
+  <div id="new_deck_Modal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="newModalLabel">
     <form accept-charset="UTF-8" class="form-horizontal" id="new_presentation" style="margin:0">
+      <div class="modal-header" style="text-align: center; background: url('/assets/console_background.jpg') repeat;border-top-left-radius: 5px;border-top-right-radius: 5px;">
+        <h2>Quick Start Wizard</h2>
+      </div>
       <div class="modal-body">
-        <input id="presentation_name" name="presentation[name]" data-toggle="focus" placeholder="Type Presentation Name Here ..." size="30" maxlength="25" type="text"/>
         <% if user_signed_in? %>
             <input id="presentation_user_id" name="presentation[user_id]" type="hidden" value="<%= current_user.id %>"/>
         <% end %>
+        <div class="tabbable tabs-left">
+          <ul class="nav nav-tabs">
+            <li class="active wizard"><a data-toggle="tab" class="wizard" href="#lB">AutoPresenter Method</a></li>
+            <li class="wizard"><a data-toggle="tab" class="wizard" href="#lC">PowerPPT Method</a></li>
+            <li class="wizard"><a data-toggle="tab" class="wizard" href="#lD">Manual Method</a></li>
+          </ul>
+          <div class="tab-content">
+            <div id="lB" class="tab-pane active">
+              <h3 style="margin-top: 0;">Autocreate a deck on:</h3>
+              <input id="presentation_name" name="presentation[name]" data-toggle="focus" placeholder="A topic of your choice..." type="text" style="width:90%;"/>
+              <br>
+              <br>
+              <a href="#" class="btn btn-inverse pull-right" id="new_deck_Modal_search_from_wiki" style="margin-right: 20px;">Try
+                your luck</a>
+            </div>
+            <div id="lC" class="tab-pane">
+              <h3 style="margin-top: 0;">New Presentation:</h3>
+              <input id="presentation_name" name="presentation[name]" data-toggle="focus" placeholder="Name the presentation" type="text" style="width:90%"/>
+              <br>
+              <br>
+              <input class="btn btn-primary" style="" id="new_deck_Modal_create_btn" name="commit" value="Create"/>
+            </div>
+            <div id="lD" class="tab-pane">
+              <h3 style="margin-top: 0;">New Deck:</h3>
+              <input id="presentation_name" name="presentation[name]" data-toggle="focus" placeholder="Name the presentation" type="text" style="width:90%"/>
+              <br>
+              <br>
+              <input class="btn btn-primary" style="" id="new_deck_Modal_create_btn" name="commit" value="Create"/>
+            </div>
+          </div>
+        </div>
       </div>
       <div class="modal-footer">
-        <button class="btn btn-danger pull-left" data-dismiss="modal" aria-hidden="true">Close</button>
-        <input class="btn btn-primary" style="" id="new_deck_Modal_create_btn" name="commit" value="Create"/>
-        <a href="#" class="btn btn-inverse pull-right" id="new_deck_Modal_search_from_wiki">Create using Wiki</a>
+        <a href="#" class="close" data-dismiss="modal">Close</a>
       </div>
     </form>
   </div>
+</div>
 
 </div>
 
