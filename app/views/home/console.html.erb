@@ -168,6 +168,7 @@
         <% if user_signed_in? %>
             <input id="presentation_user_id" name="presentation[user_id]" type="hidden" value="<%= current_user.id %>"/>
         <% end %>
+        <img src="/assets/wait.gif" id="new_deck_Modal_search_from_wiki_img" style="height: 38px; margin-left: 10px; visibility: hidden;">
       </div>
       <div class="modal-footer">
         <!--<button class="btn btn-danger pull-left" data-dismiss="modal" aria-hidden="true">Close</button>-->
@@ -264,6 +265,11 @@
 <!--<script type="text/javascript" src="http://jzaefferer.github.com/jquery-validation/jquery.validate.js"></script>-->
 <!--Source : http://jzaefferer.github.com/jquery-validation/jquery.validate.js-->
 <script type="text/javascript" src="/assets/jquery.validate.js"></script>
+
+<!--<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>-->
+<script src="/assets/jquery.ui.widget.js"></script>
+<script src="/assets/jquery.iframe-transport.js"></script>
+<script src="/assets/jquery.fileupload.js"></script>
 
 
 </body>
