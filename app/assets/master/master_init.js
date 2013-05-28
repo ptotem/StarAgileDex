@@ -12,7 +12,8 @@ var $widget = $('#widget_wrap');
 $(function () {
 
     // Set up the Title and the Subtitle
-    $title.html(gon.title);
+    $title.html((gon.title).charAt(0).toUpperCase() + (gon.title).substr(1).toLowerCase());
+
     if (gon.no_subtitle && !gon.no_titlepic) {
         $subtitle=$('#titlepic');
         $subtitle.html('<img src=' + gon.titlepic + '>');

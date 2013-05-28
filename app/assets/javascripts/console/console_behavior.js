@@ -112,34 +112,38 @@ function transitOut() {
 // This function creates a new deck
 
 function create_new_deck() {
-    var prez_name = $('#presentation_name').val();
-    var data = {presentation_name: []};
-    data["presentation_name"].push(prez_name);
+    if ($('#presentation_name').val()=="") {
+        $('#presentation_name').attr("placeholder", "Please, enter deck name.");
+        $('#presentation_name').focus();
+    }
+    else {
+        var prez_name = $('#presentation_name').val();
+        var data = {presentation_name: []};
+        data["presentation_name"].push(prez_name);
 
-    $.ajax({
-        url: "/presentations/new",
-        type: "post",
-        async: false,
-        data: JSON.stringify(data),
-        contentType: "application/json",
-        success: function (returning_data) {
-            guest = returning_data.split('|')[1] == 'guest' ? true : false;
-            returning_data = returning_data.split('|')[0];
-            $('#presentations_table').dataTable().fnAddData([
-                '<a id="activate_presentation_' + returning_data + '" onclick="transitInDeck(\'' + prez_name + '\')" href="#?presentation' + returning_data + '"><button class="btn btn-inverse show_this_presentation" type="button"><input id="' + returning_data + '" type="hidden" name="' + returning_data + '">' + prez_name + '</button></a>', ""]
-            );
-            $('#presentations_table tbody tr:first').addClass('presentation_row');
-            $('#new_deck_Modal').modal('hide');
-            show_presentation(returning_data, prez_name);
-            transitInDeck(prez_name);
-            if (guest) {
-                $('#not_signed_in').hide();
-                $('#signed_in').show();
+        $.ajax({
+            url: "/presentations/new",
+            type: "post",
+            async: false,
+            data: JSON.stringify(data),
+            contentType: "application/json",
+            success: function (returning_data) {
+                guest = returning_data.split('|')[1] == 'guest' ? true : false;
+                returning_data = returning_data.split('|')[0];
+                $('#presentations_table').dataTable().fnAddData([
+                    '<a id="activate_presentation_' + returning_data + '" onclick="transitInDeck(\'' + prez_name + '\')" href="#?presentation' + returning_data + '"><button class="btn btn-inverse show_this_presentation" type="button"><input id="' + returning_data + '" type="hidden" name="' + returning_data + '">' + prez_name + '</button></a>', ""]
+                );
+                $('#presentations_table tbody tr:first').addClass('presentation_row');
+                $('#new_deck_Modal').modal('hide');
+                show_presentation(returning_data, prez_name);
+                transitInDeck(prez_name);
+                if (guest) {
+                    $('#not_signed_in').hide();
+                    $('#signed_in').show();
+                }
             }
-
-
-        }
-    });
+        });
+    }
 }
 
 // This function sets up dataTables for the deck list
@@ -159,7 +163,7 @@ function initialize_deck_list() {
             "sPaginationType": "false",
             "bLengthChange": true,
             "bFilter": true,
-            "bSort": true,
+            "bSort": false,
             "bInfo": false,
             "oSearch": {"sSearch": ""},
             "oLanguage": { "sSearch": "" },
@@ -418,6 +422,8 @@ function export_as_html() {
 
 function load_bindings() {
     $('#signed_in').hide();
+//    $('#new_deck_btn').click();
+
 
     //This sets the focus to the presentation name text-field on modal load
     $("#new_deck_Modal").on('shown', function () {
@@ -425,8 +431,6 @@ function load_bindings() {
     });
 
     //This creates the presentation on pressing enter key in new deck modal form
-
-
     $("#new_deck_Modal").find("input[type='text']:first").keypress(function (event) {
         if (event.which == 13) {
             event.preventDefault();
@@ -435,7 +439,15 @@ function load_bindings() {
     });
 
     $('#new_deck_Modal_search_from_wiki').on('click', function(){
-        $(this).attr('href','/wiki_prez/'+$('#presentation_name').val());
+        if ($('#presentation_name').val()=="") {
+            $('#presentation_name').attr("placeholder", "Please, enter deck name.");
+            $('#presentation_name').focus();
+        }
+        else{
+            $(this).attr('href','/wiki_prez/'+$('#presentation_name').val());
+            $('#new_deck_Modal_search_from_wiki_img').css('visibility','visible');
+        }
+
     });
 
 
@@ -524,17 +536,83 @@ function form_bindings() {
         }
     });
 
+    $('.caption').live("focus", function () {
+        var caption = $(this);
+        var file_field = caption.parent().find('input:file');
+        var slide_form_id = $('form').attr('id'); //This is the form id
+        var img_src = caption.parent().find('img').last().attr('src');
+//        alert(img_src);
+        var timeoutID;
+
+        function delayedAlert() {
+            timeoutID = window.setTimeout(slowAlert, 2000);
+        }
+
+        function slowAlert() {
+            $(file_field).click();
+            if ((file_field.val()!="") || (img_src!="/assets/upload.png")) {
+                clearAlert();
+            }
+        }
+
+        function clearAlert() {
+            window.clearTimeout(timeoutID);
+        }
+
+        if ((slide_form_id.split('_')[0]!="edit") && (file_field.val()=="")) {
+            caption.attr("placeholder", "Please, select image. You cannot have only caption.");
+            delayedAlert();
+        }
+//        else if ((slide_form_id.split('_')[0]=="edit") && ( (img_src.split('/')[1]=="assets") || ((img_src.split('/')[1]=="userdata")) ) ) {
+        else if ((slide_form_id.split('_')[0]=="edit") && (img_src=="/assets/upload.png") ) {
+            caption.attr("placeholder", "Please, select image. You cannot have only caption.");
+//            delayedAlert();
+        }
+        else{
+            caption.attr("placeholder", "Enter caption here...");
+        }
+
+    });
+
     //This scrolls the contents blocks to the end on adding new field (new content block)
     $('.custom_scroll').on("click", function () {
         $('#content_block_section').animate({scrollTop: $('#content_block_section').prop("scrollHeight")}, 500);
     });
 
+
+    $('#slide_form_submit_btn').on("click", function () {
+
+        var slide_form_id = $('form').attr('id'); //This is the form id
+        $("#" + slide_form_id).submit();
+    });
     // Form validation
     // Source : http://docs.jquery.com/Plugins/validation#Validate_forms_like_you.27ve_never_been_validating_before.21
     // Source : http://jzaefferer.github.com/jquery-validation/jquery.validate.js
     // js source included in console
     var slide_form_id = $('form').attr('id'); //This is the form id
     $("#" + slide_form_id).validate();
+
+
+    $('#fileupload').fileupload({
+        dataType: 'json',
+        add: function (e, data) {
+            data.context = $('<p/>').text('Uploading...').appendTo(document.body);
+            data.submit();
+        },
+        done: function (e, data) {
+            $.each(data.result.files, function (index, file) {
+                $('<p/>').text(file.name).appendTo(document.body);
+            });
+            data.context.text('Upload finished.');
+        },
+        progressall: function (e, data) {
+            var progress = parseInt(data.loaded / data.total * 100, 10);
+            $('#progress .bar').css(
+                'width',
+                progress + '%'
+            );
+        }
+    });
 
 
 }

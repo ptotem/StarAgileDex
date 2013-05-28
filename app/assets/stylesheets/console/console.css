@@ -4,15 +4,14 @@ html {
 }
 
 body {
-    background-image: url('/assets/console_background.jpg');
-    background-repeat: repeat;
+    background: url('/assets/console_background.jpg') repeat;
     height: 600px;
     width: 960px;
     margin: 0 auto;
     overflow: hidden;
     padding: 20px 10px 25px;
     font-family: Arial;
-    border:1px solid #96641e;
+    border: 1px solid #96641e;
 }
 
 #wrapper {
@@ -29,6 +28,12 @@ body {
     padding: 5px;
 }
 
+.btn-landing {
+    height: 60px;
+    padding: 20px;
+    font-size: 36px;
+}
+
 .ad_btn {
     width: 90%;
     padding: 10px;
@@ -36,13 +41,13 @@ body {
     font-size: 16px;
 }
 
-.modal-footer #new_deck_Modal_create_btn{
+
+.modal-footer #new_deck_Modal_create_btn {
     position: absolute;
-    right: 255px;
+    right: 265px;
 }
 
-
-#new_presentation .modal-footer #new_deck_Modal_search_from_wiki{
+#new_presentation .modal-footer #new_deck_Modal_search_from_wiki {
     width: 128px;
 }
 
@@ -75,11 +80,11 @@ body {
     margin-top: 10px;
     margin-right: 40px;
     float: right;
-    width:240px;
+    width: 240px;
     font-size: 32px;
     line-height: 32px;
     opacity: 0.7;
-    z-index:99;
+    z-index: 99;
     position: relative;
 }
 
@@ -96,12 +101,11 @@ body {
     padding: 20px;
 }
 
-#writeup h3{
-    color:white;
+#writeup h3 {
+    color: white;
     line-height: 28px;
     margin-bottom: 28px;
 }
-
 
 #active_presentation {
     height: 292px;
@@ -132,7 +136,7 @@ body {
     display: none;
     text-align: center;
     overflow: hidden;
-    border:2px solid #96641e;
+    border: 2px solid #96641e;
     opacity: 0.75;
 
 }
@@ -202,6 +206,11 @@ body {
 .datatable_button, .show_this_presentation {
     width: 100%;
     text-align: center;
+    text-transform: capitalize;
+}
+
+#presentation_slides_index h3 {
+    text-transform: capitalize;
 }
 
 #presentations_slides_list {
@@ -215,7 +224,7 @@ body {
 
 }
 
-#presentations_slides_list li{
+#presentations_slides_list li {
     padding: 2px 0 0px 0;
     /*margin: 0 0 5px;*/
     /*padding: 5px;*/
@@ -256,7 +265,7 @@ body {
 }
 
 #new_presentation .modal-footer .btn {
-    width: 60px;
+    /*width: 60px;*/
     text-align: center;
 }
 
@@ -373,6 +382,27 @@ hr {
     text-align: left;
 }
 
-#instruction_block{
+#instruction_block {
     padding: 40px;
 }
+
+#new_deck_Modal .modal-body {
+    /*background: #f5f5cc;*/
+}
+
+.nav > li > a.wizard {
+    color: black;
+}
+
+.nav > li.wizard {
+    background: #e0e0b8;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+.nav > li.active {
+    color: white;
+    background: black;
+    font-weight: bold;
+}
+

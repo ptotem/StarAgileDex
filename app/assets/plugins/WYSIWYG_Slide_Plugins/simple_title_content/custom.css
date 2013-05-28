@@ -25,6 +25,11 @@ h1 {
     padding: 30px;
     padding-top: 0px;
     display: none;
+    white-space: -moz-pre-wrap; /* Firefox */
+    white-space: -pre-wrap; /* ancient Opera */
+    white-space: -o-pre-wrap; /* newer Opera */
+    white-space: pre-wrap; /* Chrome; W3C standard */
+    word-wrap: break-word; /* IE */
 }
 
 li{

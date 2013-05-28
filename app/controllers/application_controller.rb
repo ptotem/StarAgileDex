@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   skip_before_filter :verify_authenticity_token
   before_filter :set_cache_buster
 
+  $data
   def after_sign_in_path_for(resource)
     redirect_to console_path
   end
@@ -22,6 +23,10 @@ class ApplicationController < ActionController::Base
     response.headers["Expires"] = "Fri, 01 Jan 1990 00:00:00 GMT"
   end
 
+  rescue_from CanCan::AccessDenied do |exception|
+    #  redirect_to root_url, :alert => exception.message
+    render file: "#{Rails.root}/public/422", formats: [:html], status: 422, layout: false
+  end
 
   def scrap_it(html,query_string)
     #For image search
@@ -130,6 +135,12 @@ class ApplicationController < ActionController::Base
     data=data.xpath('//*[(preceding-sibling::'+x+') and (following-sibling::'+y+')]')
   end
 
+  def setData(data)
+    $data=data
+  end
 
+  def getData
+    return $data
+  end
 
 end
