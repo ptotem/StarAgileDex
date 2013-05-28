@@ -1,0 +1,23 @@
+<%= content_for :scripts do %>
+    <script type="text/javascript" src="/assets/<%= @plugin %>/init.js"></script>
+    <script type="text/javascript" src="/assets/<%= @plugin %>/jquery.featureCarousel.min.js"></script>
+
+<% end %>
+<%= content_for :styles do %>
+    <link rel="stylesheet" type="text/css" href="/assets/<%= @plugin %>/feature-carousel.css" />
+    <link href="/assets/layout2.css" rel="stylesheet" media="screen">
+<% end %>
+
+
+<%= content_for :widget_wrap do %>
+    <div class="carousel-container">
+      <div id="carousel">
+
+      </div>
+      <div id="carousel-left"><img src="/assets/<%= @plugin %>/arrow-left.png" /></div>
+      <div id="carousel-right"><img src="/assets/<%= @plugin %>/arrow-right.png" /></div>
+    </div>
+
+<% end %>
+
+

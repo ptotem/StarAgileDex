@@ -34,7 +34,7 @@ a:hover, a:active {
     position:absolute;
     top:0;
     left:50px;
-    background:url(images/dev7logo.png) no-repeat;
+    /*background:url(images/dev7logo.png) no-repeat;*/
     width:60px;
     height:67px;
     border:0;
@@ -189,7 +189,7 @@ a:hover, a:active {
 }
 .theme-dark .nivoSlider {
     position:relative;
-    background:#fff url(loading.gif) no-repeat 50% 50%;
+    /*background:#fff url(loading.gif) no-repeat 50% 50%;*/
     margin-bottom:10px;
     overflow: visible;
 }
@@ -281,7 +281,7 @@ a:hover, a:active {
 
 .theme-default .nivoSlider {
     position:relative;
-    background:#fff url(loading.gif) no-repeat 50% 50%;
+    /*background:#fff url(loading.gif) no-repeat 50% 50%;*/
     margin-bottom:10px;
     -webkit-box-shadow: 0px 1px 5px 0px #4a4a4a;
     -moz-box-shadow: 0px 1px 5px 0px #4a4a4a;
@@ -375,7 +375,7 @@ a:hover, a:active {
 }
 .theme-light .nivoSlider {
     position:relative;
-    background:#fff url(loading.gif) no-repeat 50% 50%;
+    /*background:#fff url(loading.gif) no-repeat 50% 50%;*/
     margin-bottom:10px;
     overflow: visible;
 }
@@ -479,6 +479,8 @@ a:hover, a:active {
     max-height: 350px;
 
 }
+
+
 .nivo-main-image {
     display: block !important;
     position: relative !important;

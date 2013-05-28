@@ -1,0 +1,16 @@
+<%= content_for :scripts do %>
+    <script type="text/javascript" src="/assets/<%= @plugin %>/jquery.movingboxes.js"></script>
+    <script type="text/javascript" src="/assets/<%= @plugin %>/init.js"></script>
+    <script type="text/javascript" src="/assets/<%= @plugin %>/jquery.boxfit.js"></script>
+<% end %>
+<%= content_for :styles do %>
+    <link href="/assets/<%= @plugin %>/movingboxes.css" rel="stylesheet" media="screen">
+    <link href="/assets/layout1.css" rel="stylesheet" media="screen">
+<% end %>
+
+
+<%= content_for :widget_wrap do %>
+<ul id="slider"></ul>
+<% end %>
+
+

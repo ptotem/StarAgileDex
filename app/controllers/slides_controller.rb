@@ -44,7 +44,6 @@ class SlidesController < ApplicationController
     end
     @widget_list=@widget_list.map { |i| i.gsub(':', '') }
     # ----------------------------
-
     # Pick the Plugin based on the params in the URL and the category it belongs to
     @plugin="#{@plugin_category}/#{@widget_list[params[:plugin].to_i]}"
     #For including best suited layout for selected plugins and executing it's function

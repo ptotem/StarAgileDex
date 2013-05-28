@@ -1,0 +1,17 @@
+<%= content_for :scripts do %>
+    <script type="text/javascript" src="/assets/<%= @plugin %>/init.js"></script>
+<% end %>
+<%= content_for :styles do %>
+    <link href="/assets/<%= @plugin %>/slickslideshow.css" rel="stylesheet" media="screen">
+    <link href="/assets/layout2.css" rel="stylesheet" media="screen">
+<% end %>
+
+
+<%= content_for :widget_wrap do %>
+    <div id="slideshow">
+      <div id="slidesContainer">
+      </div>
+    </div>
+<% end %>
+
+

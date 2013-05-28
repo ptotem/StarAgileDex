@@ -26,7 +26,7 @@
         <li class="active ad-menu-item">
           <a title="Edit Slide" href="/console/<%= @slide.id rescue "" %>"><i class="icon-edit"></i>Edit</a></li>
         <li class="active ad-menu-item">
-          <a title="Next Widget" href="#plugin_modal" data-toggle="modal" onclick=""><i class="icon-retweet"></i>Next</a>
+          <a title="Next Widget" href="#plugin_modal" data-toggle="modal" onclick=""><i class="icon-retweet"></i>Change</a>
         </li>
         <li class="active ad-menu-item">
           <a title="Save Slide" onclick="save_slide();"><i class="icon-download"></i>Save</a></li>
@@ -254,7 +254,6 @@
 <script type="text/javascript" src="/assets/noty.default.js"></script>
 
 <%= yield :scripts %>
-
 <% unless @export %>
     <script type="text/javascript">
 

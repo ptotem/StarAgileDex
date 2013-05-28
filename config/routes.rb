@@ -8,10 +8,15 @@ AgileDex::Application.routes.draw do
 
   # Authentication Routes
   mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'
+
   devise_for :users
+  #devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
 
   match '/wiki_prez/:name'=>'presentations#wiki_prez'
+
   match '/users/auth/:provider/callback' => 'authentications#create'
+  match '/users/sign_in' => 'home#console'
+
   match 'get_slides'=>'home#get_slides',:as=>'get_slides'
   match 'move_slide_up'=>'home#move_slide_up',:as=>'move_slide_up'
   match 'move_slide_down'=>'home#move_slide_down',:as=>'move_slide_down'

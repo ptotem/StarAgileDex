@@ -38,13 +38,12 @@ function load_menu_bindings(){
 
 
     if (gon.view_deck) {
-
         if (gon.prev_slide!=null){
             $('#slide_prev').attr('href','/view_deck/'+gon.presentation_id+'/'+gon.prev_slide);
         }else{
             $('#slide_prev').attr('href','');
         }
-        if (gon.next_slide!=''){
+        if (gon.next_slide!=null){
             $('#slide_next').attr('href','/view_deck/'+gon.presentation_id+'/'+gon.next_slide);
         }else{
             $('#slide_next').attr('href','');
@@ -54,7 +53,7 @@ function load_menu_bindings(){
         if(gon.prev_slide!=null)  {
             $('#slide_prev').attr('href',gon.prev_slide+'.html');
         }
-        if(gon.next_slide!="0")  {
+        if(gon.next_slide!=null)  {
             $('#slide_next').attr('href',gon.next_slide+'.html');
         }
     }

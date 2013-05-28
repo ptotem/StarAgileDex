@@ -36,6 +36,16 @@ body {
     font-size: 16px;
 }
 
+.modal-footer #new_deck_Modal_create_btn{
+    position: absolute;
+    right: 255px;
+}
+
+
+#new_presentation .modal-footer #new_deck_Modal_search_from_wiki{
+    width: 128px;
+}
+
 /* Right Panel Styles*/
 /* ------------------------------------- */
 
@@ -69,7 +79,7 @@ body {
     font-size: 32px;
     line-height: 32px;
     opacity: 0.7;
-    z-index:9999999999;
+    z-index:99;
     position: relative;
 }
 

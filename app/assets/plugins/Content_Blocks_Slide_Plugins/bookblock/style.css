@@ -27,6 +27,11 @@
 	transform-origin: left center;
 }
 
+.bb-page a img{
+    height: 300px;
+    width: 400px;
+}
+
 .bb-page > div,
 .bb-outer,
 .bb-content {
@@ -118,6 +123,11 @@
 }
 
 /*start of custom.css*/
+
+.bb-item a img{
+    height: 300px;
+    width: 400px;
+}
 
 .bb-custom-wrapper {
     background: #fff;
@@ -222,12 +232,13 @@ a, a:hover, a:active, a:focus{
     margin-left:30px;
 }
 .xyz{
-    margin-left:-6px;
-    height:100px;
-    width:409px;
+    margin-left: 0;
+    height: 120px;
+    width: 400px;
     background-color: #000000;
-    margin-top:96px;
+    margin-top: 33px;
     display: block;
+    position: absolute;
 }
 
 

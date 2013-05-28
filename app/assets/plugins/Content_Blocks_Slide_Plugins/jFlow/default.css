@@ -1,0 +1,49 @@
+﻿.hidden {
+    display: none;
+}
+
+#prevNext {
+    margin-bottom: -2.5em;
+    margin-left: 98px;
+}
+
+#prevNext img {
+    position: relative;
+    z-index: 2;
+    cursor: pointer;
+    height: 48px;
+}
+
+.jFlowSlideContainer img {
+    height: 320px;
+    width: 390px;
+}
+
+p {
+    margin: 0;
+    padding: 0 1em;
+    /*font-size: 1.5em;*/
+    position: relative;
+    /*top: -50px;*/
+    top: -120px;
+    width: 36.5%;
+    /*line-height: 50px;*/
+    height: 113px;
+    background: black;
+    opacity: .7;
+    filter: alpha(opacity = 70);
+}
+
+#jFlowSlide{
+    margin-left: 325px;
+}
+
+.jFlowPrev{
+    left: 148px;
+    top: 10px;
+}
+
+.jFlowNext{
+    left: 598px;
+    top: 10px;
+}
