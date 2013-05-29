@@ -18,15 +18,10 @@
     position: absolute;
     text-align: center;
     width: 270px;
-    white-space: -moz-pre-wrap;  Firefox
-    white-space: -pre-wrap;  ancient Opera
-    white-space: -o-pre-wrap;  newer Opera
-    white-space: pre-wrap;  Chrome; W3C standard
-    word-wrap: break-word;  IE
 }
 
 #titlepic {
-    bottom: 112px;
+    bottom: 14px;
     display: none;
     left: 56px;
     padding: 30px;
@@ -34,12 +29,31 @@
     text-align: center;
     width: 270px;
 }
+/*height: 280px;*/
 
 #titlepic img{
     width:250px;
     margin-bottom: 20px;
 }
 
+#title_wrap{
+    display: none;
+    height: 50px;
+    width: 290px;
+    position: absolute;
+    margin-top: 18px;
+    margin-left: -10px;
+    padding: 20px;
+    border: 2px solid black;
+    border-radius:0px 20px 20px 0px;
+    background-color: pink;
+}
 
 
-
+#widget_wrap {
+    display: none;
+    margin: 0 auto;
+    position: absolute;
+    right: 110px;
+    top: 100px;
+}

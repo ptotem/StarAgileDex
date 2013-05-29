@@ -1,0 +1,13 @@
+#title_wrap{
+    display: none;
+    height: 50px;
+    width: 290px;
+    position: absolute;
+    margin-top: 18px;
+    margin-left: -10px;
+    padding: 20px;
+    border: 2px solid black;
+    border-radius:0px 20px 20px 0px;
+    background-color: pink;
+    opacity: 0.5;
+}

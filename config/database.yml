@@ -3,12 +3,10 @@
 
 
 development:
-  adapter: postgresql
-  encoding: utf8
-  database: agileDex_development_db
+  adapter: sqlite3
+  database: db/development.sqlite3
   pool: 5
-  username: ptotem
-  password: p20o20e13
+  timeout: 5000
 
 
 test:

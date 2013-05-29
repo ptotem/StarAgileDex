@@ -88,6 +88,98 @@ function layout5() {
     $subtitle.boxfit({multiline: true, maximum_font_size: 36});
 }
 
+function layout6(){
+    var $cube = $('#full3DCube');
+    if (gon.no_subtitle && gon.no_titlepic) {
+        $('#subtitle_back').removeClass('elements');
+        $('#titlepic').removeClass('elements');
+        $('#rotator').css({
+            'height': "300px",
+            'fontSize': "36px"
+        }).find('h1').css({
+                'lineHeight': "72px"
+            });
+    }else{
+        if (gon.no_subtitle){
+            $('#subtitle_back').removeClass('elements');
+        }
+    }
+    setTimeout(function () {
+        $('#wrapper').fadeIn(function () {
+            $title.boxfit({multiline: true, maximum_font_size: 36});
+            $subtitle.boxfit({multiline: true, maximum_font_size: 36});
+
+            $('.elements').fade1by1();
+        });
+    }, 500);
+    $caption.hide();
+    $caption_back.hide();
+    $caption.html($cube.find('img:first').attr('title'));
+    $caption.boxfit({multiline: true, maximum_font_size: 36});
+
+}
+
+function layout7() {
+    setTimeout(function () {
+        $('#wrapper').fadeIn(function () {
+            $('.elements').fade1by1();
+        });
+    }, 500);
+    $title.boxfit({multiline: true, maximum_font_size: 48});
+    $subtitle.boxfit({multiline: true, maximum_font_size: 36});
+}
+
+function layout8() {
+    setTimeout(function () {
+        $('#wrapper').fadeIn(function () {
+            $('.elements').fade1by1();
+        });
+    }, 500);
+    $title.boxfit({multiline: true, maximum_font_size: 48});
+    $subtitle.boxfit({multiline: true, maximum_font_size: 36});
+}
+
+function layout9() {
+    setTimeout(function () {
+        $('#wrapper').fadeIn(function () {
+            $('.elements').fade1by1();
+        });
+    }, 500);
+    $title.boxfit({multiline: true, maximum_font_size: 48});
+    $subtitle.boxfit({multiline: true, maximum_font_size: 36});
+}
+
+function layout10() {
+    setTimeout(function () {
+        $('#wrapper').fadeIn(function () {
+            $('.elements').fade1by1();
+        });
+    }, 500);
+    $title.boxfit({multiline: true, maximum_font_size: 48});
+    $subtitle.boxfit({multiline: true, maximum_font_size: 36});
+}
+
+function layout11() {
+    setTimeout(function () {
+        $('#wrapper').fadeIn(function () {
+            $('.elements').fade1by1();
+        });
+    }, 500);
+    $title.boxfit({multiline: true, maximum_font_size: 48});
+    $subtitle.boxfit({multiline: true, maximum_font_size: 36});
+}
+
+function layout12() {
+    setTimeout(function () {
+        $('#wrapper').fadeIn(function () {
+            $('.elements').fade1by1();
+        });
+    }, 500);
+    $title.boxfit({multiline: true, maximum_font_size: 48});
+    $subtitle.boxfit({multiline: true, maximum_font_size: 36});
+}
+
+
 function title_plugin_slide(){
     if (subtitle) {
         $subtitle.css({left:"300px"});

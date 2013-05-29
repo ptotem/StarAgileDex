@@ -48,9 +48,9 @@
     height:50px;
     padding: 20px;
     margin-top: 18px;
-    /*text-transform:capitalize;*/
     display: none;
 }
+
 
 #widget_wrap {
     display: none;

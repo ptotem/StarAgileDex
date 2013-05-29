@@ -289,30 +289,14 @@ class PresentationsController < ApplicationController
     $slides.each_with_index do |i, index|
       @count=1
       if index<1
-        Slide.create!(:presentation_id => @presentation.id, :title => i["title"],:mode => "HTML", :layout => 'allcentered', :sequence => (@count))
+        Slide.create!(:presentation_id => @presentation.id, :title => i["title"],:mode => "HTML", :layout => ['allcentered','left','right','top','bottom'].sample, :sequence => (@count))
         @count=@count+1
-        @slide=Slide.create!(:presentation_id => @presentation.id, :title => i["title"], :subtitle => i["main"].summarize, :mode => "Blocks", :layout => 'imagecube', :sequence => (@count))
-        ContentBlock.create!(:slide_id => @slide.id, :image => URI.parse(i["content_block"]), :caption => "")
-        #@wiki_external_snipets=Array.new
-        #
-        #@external_link.each_with_index do |link,index1|
-        #  if @slides[0]["main"].summarize.summarize.include?(@external_text[index])
-        #    doc1=Nokogiri::XML(open("http://en.wikipedia.org/w/api.php?action=query&prop=revisions&rvprop=content&format=xml&titles=#{link.gsub(" ", "%20")}").read)
-        #    wiki_entry1 = doc1.xpath("//revisions//rev").text
-        #    check1=wiki_entry1.scan(/(?<=\#REDIRECT \[\[).+?(?=\]\])/m)[0]
-        #    unless check1.blank?
-        #      doc1=Nokogiri::XML(open("http://en.wikipedia.org/w/api.php?action=query&prop=revisions&rvprop=content&format=xml&titles=#{check1.gsub(" ", "%20")}").read)
-        #      wiki_entry1 = doc1.xpath("//revisions//rev").text
-        #    end
-        #    @wikied1=WikiParser.new({:data => "#{wiki_entry1}"})
-        #    @count=@count+1
-        #    Slide.create!(:presentation_id=>@presentation.id,:title=>@external_text[index1],:subtitle=>scrap_external(@wikied1.to_html),:mode=>"HTML",:layout=>'allcentered',:sequence=>(@count))
-        #  end
-        #end
+        @slide=Slide.create!(:presentation_id => @presentation.id, :title => i["title"], :main => i["main"].summarize,:mode => "HTML",:titlepic=>URI.parse(i["content_block"]), :layout => ['simple_title_content','fancy_title_content','left_fancy_title_content','centered_content'].sample, :sequence => (@count))
+        #ContentBlock.create!(:slide_id => @slide.id, :image => URI.parse(i["content_block"]), :caption => "")
       else
         @count=@count+1
-        @slide=Slide.create!(:presentation_id => @presentation.id, :title => i["title"], :subtitle => (i["main"].summarize rescue i["main"]), :mode => "Blocks", :layout => 'imagecube', :sequence => (@count))
-        ContentBlock.create!(:slide_id => @slide.id, :image => URI.parse(i["content_block"]), :caption => "")
+        Slide.create!(:presentation_id => @presentation.id, :title => i["title"], :main => (i["main"].summarize rescue i["main"]),:mode => "HTML",:titlepic=>URI.parse(i["content_block"]), :layout => ['fancy_title_content','left_fancy_title_content'].sample, :sequence => (@count))
+        #ContentBlock.create!(:slide_id => @slide.id, :image => URI.parse(i["content_block"]), :caption => "")
       end
     end
     render :text=>"#{@presentation.id}|#{@slide.id}"
