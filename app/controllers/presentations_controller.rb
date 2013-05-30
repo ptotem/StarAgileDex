@@ -295,7 +295,11 @@ class PresentationsController < ApplicationController
         #ContentBlock.create!(:slide_id => @slide.id, :image => URI.parse(i["content_block"]), :caption => "")
       else
         @count=@count+1
-        Slide.create!(:presentation_id => @presentation.id, :title => i["title"], :main => (i["main"].summarize rescue i["main"]),:mode => "HTML",:titlepic=>URI.parse(i["content_block"]), :layout => ['fancy_title_content','left_fancy_title_content'].sample, :sequence => (@count))
+        if i["main"]!=""
+          Slide.create!(:presentation_id => @presentation.id, :title => i["title"], :main => (i["main"].summarize rescue i["main"]),:mode => "HTML",:titlepic=>URI.parse(i["content_block"]), :layout => ['fancy_title_content','left_fancy_title_content'].sample, :sequence => (@count))
+        else
+          Slide.create!(:presentation_id => @presentation.id, :title => i["title"], :main => (i["main"].summarize rescue i["main"]),:mode => "HTML",:titlepic=>URI.parse(i["content_block"]), :layout => ['allcentered'].sample, :sequence => (@count))
+        end
         #ContentBlock.create!(:slide_id => @slide.id, :image => URI.parse(i["content_block"]), :caption => "")
       end
     end
