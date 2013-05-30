@@ -8,7 +8,7 @@
     </ul>
 
     <div id="title_wrap" style="
-            height: 10%;
+    height: 10%;
             width: 30%;
             position: absolute;
             margin-top: 50px;
@@ -23,47 +23,54 @@
     </div>
 <% end %>
 
-<%= content_for :scripts do%>
+<%= content_for :scripts do %>
     <script type="text/javascript">
         $(function () {
             $('.nav').hide();
-            setTimeout(function(){$('#infobox').append('<br>Information is found and geting ready to processed.....')},1000)
-            setTimeout(function(){$('#infobox').append('<br>Searching Images.....')},2000) ;
-            setInterval(function(){$('#infobox').append('.')},1000)
-            $.get('/wiki_convert', function(data) {
-                $('#infobox').append('<br>'+data)
-            });
-            $.get('/image_search', function(data) {
-                $('#infobox').append('<br>'+data)
-                setTimeout(function(){
-                $('#infobox').append('<br>Combining Images and Informations....')
-                    $.get('/wiki_combine', function(data) {
-                        $('#infobox').append('<br>'+data);
-                        $.get('/wiki_make', function(data) {
-                            $('#infobox').append('<br>Finish combining...');
-                            setTimeout(function(){
-                                $('#infobox').hide();
-                            },500);
-                            setTimeout(function(){
+            setTimeout(function () {
+                $('#infobox').append('<br>Information is found and geting ready to processed.....')
+            }, 1000)
+            setTimeout(function () {
+                $('#infobox').append('<br>Searching Images.....')
+            }, 2000);
+            setInterval(function () {
+                $('#infobox').append('.')
+            }, 1000)
+            $.get('/wiki_convert', function (data) {
+                $('#infobox').append('<br>' + data);
+                $.get('/image_search', function (data) {
+                    $('#infobox').append('<br>' + data)
+                    setTimeout(function () {
+                        $('#infobox').append('<br>Combining Images and Informations....')
+                        $.get('/wiki_combine', function (data) {
+                            $('#infobox').append('<br>' + data);
+                            $.get('/wiki_make', function (data) {
+                                $('#infobox').append('<br>Finish combining...');
+                                setTimeout(function () {
+                                    $('#infobox').hide();
+                                }, 500);
+                                setTimeout(function () {
 //                                $('#view_deck').show();
-                                $('.nav').show();
-                                $('.ad-menu-item').slideToggle();
+                                    $('.nav').show();
+                                    $('.ad-menu-item').slideToggle();
 //                                $('#view_deck_btn').attr('href',"/view_deck/"+data.split('|')[0]+"/"+data.split('|')[1]);
-                                $('#slide_next').attr('href',"/view_deck/"+data.split('|')[0]+"/"+data.split('|')[1]);
-                            },500);
+                                    $('#slide_next').attr('href', "/view_deck/" + data.split('|')[0] + "/" + data.split('|')[1]);
+                                }, 500);
+                            });
+                            setTimeout(function () {
+                                $('#infobox').append('<br>Creating Presentation....')
+                            }, 500);
+                            setTimeout(function () {
+                                $('#infobox').append('<br>Creating Slides....')
+                            }, 1000);
+                            setTimeout(function () {
+                                $('#infobox').append('<br>Combining Presentation and slides....')
+                            }, 1500);
                         });
-                        setTimeout(function(){
-                            $('#infobox').append('<br>Creating Presentation....')
-                        },500);
-                        setTimeout(function(){
-                            $('#infobox').append('<br>Creating Slides....')
-                        },1000);
-                        setTimeout(function(){
-                            $('#infobox').append('<br>Combining Presentation and slides....')
-                        },1500);
-                    });
-                },500);
+                    }, 500);
+                });
             });
+
         });
     </script>
 <% end %>
