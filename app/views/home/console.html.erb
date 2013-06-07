@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Agile Dex</title>
+  <title>Welcome to agileDex</title>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="/assets/bootstrap.min.css">
@@ -194,17 +194,21 @@
             </div>
             <div id="lC" class="tab-pane">
               <h3 style="margin-top: 0;">New Presentation:</h3>
-              <input id="presentation_name" name="presentation[name]" data-toggle="focus" placeholder="Name the presentation" type="text" style="width:90%"/>
+              <!--<input id="presentation_name" name="presentation[name]" data-toggle="focus" placeholder="Name the presentation" type="text" style="width:90%"/>-->
+              <input id="presentation_name" type="file" name="presentation[name]" size="25">
+              <div id="new_deck_Modal_ppt_info" style="position: absolute; left:226px; top:73px; font-size: 14px; color: gray;">Please, select ppt/pdf file.</div>
               <br>
               <br>
-              <input class="btn btn-primary" style="" id="new_deck_Modal_create_btn" name="commit" value="Create"/>
+              <!--<input class="btn btn-primary" style="" id="new_deck_Modal_create_btn" name="commit" value="Create"/>-->
+              <a href="#" class="btn btn-inverse pull-right" id="new_deck_Modal_ppt_btn" style="margin-right: 20px;">Create</a>
             </div>
             <div id="lD" class="tab-pane">
               <h3 style="margin-top: 0;">New Deck:</h3>
               <input id="presentation_name" name="presentation[name]" data-toggle="focus" placeholder="Name the presentation" type="text" style="width:90%"/>
               <br>
               <br>
-              <input class="btn btn-primary" style="" id="new_deck_Modal_create_btn" name="commit" value="Create"/>
+              <!--<input class="btn btn-primary" style="" id="new_deck_Modal_create_btn" name="commit" value="Create"/>-->
+              <a href="#" class="btn btn-inverse pull-right" id="new_deck_Modal_create_btn" style="margin-right: 20px;">Create</a>
             </div>
           </div>
         </div>

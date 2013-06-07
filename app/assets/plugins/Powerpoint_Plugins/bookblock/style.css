@@ -117,6 +117,11 @@
 	background: #fff;
 }
 
+.bb-item img{
+    height: 570px;
+    width: 760px;
+}
+
 .bb-item p {
     display: none;
 }

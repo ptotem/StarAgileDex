@@ -87,7 +87,8 @@
         <div id="import_ppt_block" style="display: none;">
           <h4>Upload a PPT</h4>
           <div id="ppt_instruction">Make sure that pdf or ppt file name doesn't contain blank/white spaces.</div><br>
-          <%= f.file_field :ppt, :id=>"fileupload", :name=>"files[]", :placeholder => "Add Image" %>
+          <%= f.file_field :ppt, :placeholder => "Add Image" %>
+          <%#= f.file_field :ppt, :id=>"fileupload", :name=>"files[]", :placeholder => "Add Image" %>
           <br>
           <div id="progress">
             <div class="bar" style="width: 0%;"></div>
@@ -108,8 +109,8 @@
 
     </div>
     <div id="buttons_panel">
-      <%#= f.submit "Save the Slide", :class => "btn btn-inverse submit_button" %>
-      <input type ="button" id="slide_form_submit_btn" name="save" class="btn btn-inverse submit_button" value ="Save the Slide">
+      <%= f.submit "Save the Slide", :class => "btn btn-inverse submit_button" %>
+      <!--<input type ="button" id="slide_form_submit_btn" name="save" class="btn btn-inverse submit_button" value ="Save the Slide">-->
       <br>
       <a href="#" class="btn btn-inverse" onclick="">Revert Changes</a>
       <a href="#" class="btn btn-inverse" onclick="">Clear Form</a>

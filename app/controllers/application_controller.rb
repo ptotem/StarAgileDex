@@ -25,7 +25,7 @@ class ApplicationController < ActionController::Base
 
   rescue_from CanCan::AccessDenied do |exception|
     #  redirect_to root_url, :alert => exception.message
-    render file: "#{Rails.root}/public/422", formats: [:html], status: 422, layout: false
+    render file: "#{Rails.root}/public/not_authorized", formats: [:html], layout: false
   end
 
   def scrap_it(html,query_string)

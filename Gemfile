@@ -8,8 +8,8 @@ gem 'rails', '3.2.12'
 gem 'devise'
 gem 'cancan'
 gem 'sqlite3'
-gem 'pg'
-gem 'taps'
+#gem 'pg'
+#gem 'taps'
 gem 'rails_admin', :git => 'git://github.com/sferik/rails_admin.git'
 gem 'thin'
 gem 'omniauth'
@@ -38,6 +38,11 @@ gem "binding_of_caller"
 
 group :development do
   gem "better_errors"
+end
+
+group :production do
+  #gem 'pg', '0.12.2'
+  gem 'pg'
 end
 
 # Gems used only for assets and not required

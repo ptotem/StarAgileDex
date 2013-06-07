@@ -111,13 +111,10 @@ function transitOut() {
 
 // This function creates a new deck
 
-function create_new_deck() {
-    if ($('#presentation_name').val()=="") {
-        $('#presentation_name').attr("placeholder", "Please, enter deck name.");
-        $('#presentation_name').focus();
-    }
-    else {
-        var prez_name = $('#presentation_name').val();
+function create_new_deck(presentation_name) {
+
+        //var prez_name = $('#presentation_name').val();
+        var prez_name = presentation_name;
         var data = {presentation_name: []};
         data["presentation_name"].push(prez_name);
 
@@ -143,7 +140,7 @@ function create_new_deck() {
                 }
             }
         });
-    }
+
 }
 
 // This function sets up dataTables for the deck list
@@ -427,7 +424,13 @@ function load_bindings() {
 
     //This sets the focus to the presentation name text-field on modal load
     $("#new_deck_Modal").on('shown', function () {
-        $(this).find("input[type='text']:first").focus();
+//        $(this).find("input[type='text']:first").focus();
+        $('.tab-content').find('.active').find("input[type='text']").focus();
+
+        var $ppt_file = $('.tab-content').find('.active').find("input[type='file']");
+        $($ppt_file).on("change", function () {
+            $('#new_deck_Modal_ppt_info').hide();
+        });
     });
 
     //This creates the presentation on pressing enter key in new deck modal form
@@ -439,20 +442,43 @@ function load_bindings() {
     });
 
     $('#new_deck_Modal_search_from_wiki').on('click', function(){
-        if ($('#presentation_name').val()=="") {
-            $('#presentation_name').attr("placeholder", "Please, enter deck name.");
-            $('#presentation_name').focus();
+        var $pres_name_txt_box = $(this).parent().find("input[type=text]");
+        if ($pres_name_txt_box.val()=="") {
+            $pres_name_txt_box.attr("placeholder", "Please, enter deck name.");
+            $pres_name_txt_box.focus();
         }
         else{
-            $(this).attr('href','/wiki_prez/'+$('#presentation_name').val());
-            $('#new_deck_Modal_search_from_wiki_img').css('visibility','visible');
+            $(this).attr('href','/wiki_prez/'+$pres_name_txt_box.val());
         }
+    });
 
+    $('#new_deck_Modal_create_btn').live('click', function(){
+        var $pres_name_txt_box = $(this).parent().find("input[type=text]");
+        if ($pres_name_txt_box.val()=="") {
+            $pres_name_txt_box.attr("placeholder", "Please, enter deck name.");
+            $pres_name_txt_box.focus();
+        }
+        else{
+            create_new_deck($pres_name_txt_box.val());
+        }
+    });
+
+
+    $('#new_deck_Modal_ppt_btn').live('click', function(){
+        var $pres_name_file_box = $(this).parent().find("input[type=file]");
+
+        if ($pres_name_file_box.val()=="") {
+            $('#new_deck_Modal_ppt_info').css('color','red');
+        }
+        else{
+//            create_new_deck($pres_name_txt_box.val());
+            alert($pres_name_file_box.val());
+        }
     });
 
 
     // This function handles the creation of a new deck
-    $('#new_deck_Modal_create_btn').on('click', create_new_deck);
+//    $('#new_deck_Modal_create_btn').on('click', create_new_deck);
 
     //This clears the text-field value after the modal is hidden, so next time when u load modal text-field gets cleared
     $('#new_deck_Modal').on('hidden', function () {
@@ -580,11 +606,12 @@ function form_bindings() {
     });
 
 
-    $('#slide_form_submit_btn').on("click", function () {
+//    $('#slide_form_submit_btn').on("click", function () {
+//
+//        var slide_form_id = $('form').attr('id'); //This is the form id
+//        $("#" + slide_form_id).submit();
+//    });
 
-        var slide_form_id = $('form').attr('id'); //This is the form id
-        $("#" + slide_form_id).submit();
-    });
     // Form validation
     // Source : http://docs.jquery.com/Plugins/validation#Validate_forms_like_you.27ve_never_been_validating_before.21
     // Source : http://jzaefferer.github.com/jquery-validation/jquery.validate.js
@@ -593,26 +620,26 @@ function form_bindings() {
     $("#" + slide_form_id).validate();
 
 
-    $('#fileupload').fileupload({
-        dataType: 'json',
-        add: function (e, data) {
-            data.context = $('<p/>').text('Uploading...').appendTo(document.body);
-            data.submit();
-        },
-        done: function (e, data) {
-            $.each(data.result.files, function (index, file) {
-                $('<p/>').text(file.name).appendTo(document.body);
-            });
-            data.context.text('Upload finished.');
-        },
-        progressall: function (e, data) {
-            var progress = parseInt(data.loaded / data.total * 100, 10);
-            $('#progress .bar').css(
-                'width',
-                progress + '%'
-            );
-        }
-    });
+//    $('#fileupload').fileupload({
+//        dataType: 'json',
+//        add: function (e, data) {
+//            data.context = $('<p/>').text('Uploading...').appendTo(document.body);
+//            data.submit();
+//        },
+//        done: function (e, data) {
+//            $.each(data.result.files, function (index, file) {
+//                $('<p/>').text(file.name).appendTo(document.body);
+//            });
+//            data.context.text('Upload finished.');
+//        },
+//        progressall: function (e, data) {
+//            var progress = parseInt(data.loaded / data.total * 100, 10);
+//            $('#progress .bar').css(
+//                'width',
+//                progress + '%'
+//            );
+//        }
+//    });
 
 
 }

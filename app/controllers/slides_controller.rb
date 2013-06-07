@@ -4,6 +4,8 @@ class SlidesController < ApplicationController
   # GET /slides/1.json
   def builder
     @slide = Slide.find(params[:id])
+    #render :text => @slide.id
+    #return
     @export=FALSE # This is the Screen View
 
     # Create the Widget List from en.yml and the User Inputs
