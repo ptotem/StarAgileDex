@@ -4,6 +4,8 @@ $(function () {
 
     // If the user is coming here on an edit screen, we will get the slide id. We are transiting directly to the slide form
     if (gon.edit) {
+//        $("#new_deck_Modal").modal("hide");
+        $("#new_deck_Modal").hide();
         transitInDeck(gon.presentation);
         show_presentation(gon.presentation_id, gon.presentation);
         setTimeout(function () {
@@ -508,7 +510,7 @@ function load_bindings() {
 
 
 function form_bindings() {
-
+    $("#new_deck_Modal").modal("hide");
     //This validates Title presence
     $('#slide_title').focusout(function () {
         if ($('#slide_title').val() == "")
