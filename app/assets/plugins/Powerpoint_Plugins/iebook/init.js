@@ -1,7 +1,7 @@
 function init_widget() {
     $('#wrapper').addClass('none').css('font-family', gon.font);
 //    $subtitle.find('img').attr('src',$subtitle.find('img').attr('src').replace(".png",".jpg"));
-//    alert($subtitle.find('img').attr('src'));
+
     $.each(images, function (index, elm) {
         $('#bb-bookblock').append('<div class="bb-item"><img src="' + elm + '" /></div>');
     });

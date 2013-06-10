@@ -4,3 +4,15 @@
     left: 100px;
     top: 10px;
 }
+
+#titlepic {
+    max-width: 180px;
+    text-align: center;
+    font-size: 1.2em;
+    display: none;
+    top: 398px;
+    left: 784px;
+    position: absolute;
+    /*padding: 30px;*/
+    z-index: 999;
+}
