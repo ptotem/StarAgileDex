@@ -1,0 +1,76 @@
+<%= content_for :info do %>
+    <ul class="nav nav-stacked nav-pills pull-right menu_select" style="margin-top: 0px; text-align: center;">
+      <li class="btn-warning" id="ad-menu-toggle_view_deck">
+        <a href="#" onclick="$('.ad-menu-item').slideToggle();"><i class="icon-tasks"></i></a></li>
+      <li class="active ad-menu-item"><a href="/console"><i class=""></i>Home</a></li>
+      <li class="active ad-menu-item"><a id="slide_prev"><i class=""></i>Prev</a></li>
+      <li class="active ad-menu-item"><a id="slide_next" href=""><i class=""></i>Next</a></li>
+    </ul>
+
+    <div id="title_wrap" style="
+    height: 10%;
+            width: 30%;
+            position: absolute;
+            margin-top: 50px;
+            border: 2px solid black;
+            border-radius:0px 20px 20px 0px;
+            background-color: pink;margin-left: -5px;"><%= $query_string %></div>
+    <div id="infobox" style="background-color: rgba(0,0,0,0.8);color: green;height: 400px;width: 700px;margin-left: 150px;padding: 20px;margin-top: 150px;">
+      welcome, To agile dex......
+    </div>
+    <div id="view_deck" style="background-color: #ffffff;color: black;height: 100px;width:175px;margin-left: 150px;padding: 20px;display: none;">
+      Click <a id="view_deck_btn" href="">here</a> to View presentation of <%= $query_string %>
+    </div>
+<% end %>
+
+<%= content_for :scripts do %>
+    <script type="text/javascript">
+        $(function () {
+            $('.nav').hide();
+            setTimeout(function () {
+                $('#infobox').append('<br>Information is found and geting ready to processed.....')
+            }, 1000)
+            setTimeout(function () {
+                $('#infobox').append('<br>Searching Images.....')
+            }, 2000);
+            setInterval(function () {
+                $('#infobox').append('.')
+            }, 1000)
+            $.get('/wiki_convert', function (data) {
+                $('#infobox').append('<br>' + data);
+                $.get('/image_search', function (data) {
+                    $('#infobox').append('<br>' + data)
+                    setTimeout(function () {
+                        $('#infobox').append('<br>Combining Images and Informations....')
+                        $.get('/wiki_combine', function (data) {
+                            $('#infobox').append('<br>' + data);
+                            $.get('/wiki_make', function (data) {
+                                $('#infobox').append('<br>Finish combining...');
+                                setTimeout(function () {
+                                    $('#infobox').hide();
+                                }, 500);
+                                setTimeout(function () {
+//                                $('#view_deck').show();
+                                    $('.nav').show();
+                                    $('.ad-menu-item').slideToggle();
+//                                $('#view_deck_btn').attr('href',"/view_deck/"+data.split('|')[0]+"/"+data.split('|')[1]);
+                                    $('#slide_next').attr('href', "/view_deck/" + data.split('|')[0] + "/" + data.split('|')[1]);
+                                }, 500);
+                            });
+                            setTimeout(function () {
+                                $('#infobox').append('<br>Creating Presentation....')
+                            }, 500);
+                            setTimeout(function () {
+                                $('#infobox').append('<br>Creating Slides....')
+                            }, 1000);
+                            setTimeout(function () {
+                                $('#infobox').append('<br>Combining Presentation and slides....')
+                            }, 1500);
+                        });
+                    }, 500);
+                });
+            });
+
+        });
+    </script>
+<% end %>

@@ -28,7 +28,8 @@ gem 'summarize'
 gem 'nokogiri', :require => "nokogiri"
 gem 'mechanize'
 gem 'wikicloth'
-
+gem 'sparql-client'
+gem 'dbpedia'
 #For ruby-filemagic error open terminal and run following commands
 #sudo apt-get install libmagic1 libmagic-dev
 
