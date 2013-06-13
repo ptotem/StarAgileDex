@@ -24,6 +24,7 @@ gem 'gritter'
 gem 'gon'
 gem 'paperclip'
 gem 'docsplit'
+gem 'rmagick', :require => 'RMagick'
 gem 'summarize'
 gem 'nokogiri', :require => "nokogiri"
 gem 'mechanize'
