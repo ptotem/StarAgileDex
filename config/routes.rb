@@ -13,9 +13,11 @@ AgileDex::Application.routes.draw do
   #devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
 
   match '/wiki_prez/:name'=>'presentations#wiki_prez'
-  match '/wiki_create'=>'presentations#wiki_create',:as=>'wiki_create'
+  match '/wiki_theme/:name/:id'=>'presentations#wiki_theme',:as=>'wiki_theme'
+  match '/wiki_extract/:name/:id'=>'presentations#wiki_extract',:as=>'wiki_extract'
+  match '/wiki_create/:name'=>'presentations#wiki_create',:as=>'wiki_create'
   match '/wiki_convert'=>'presentations#wiki_convert',:as=>'wiki_convert'
-  match '/image_search'=>'presentations#image_search',:as=>'image_search'
+  match '/image_search/:name/:id'=>'presentations#image_search',:as=>'image_search'
   match '/wiki_combine'=>'presentations#wiki_combine',:as=>'wiki_combine'
   match '/wiki_make'=>'presentations#wiki_make',:as=>'wiki_make'
 

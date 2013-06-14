@@ -7,63 +7,74 @@
       <li class="active ad-menu-item"><a id="slide_next" href=""><i class=""></i>Next</a></li>
     </ul>
 
-    <div id="title_wrap" style="
-            height: 10%;
-            width: 30%;
-            position: absolute;
-            margin-top: 50px;
-            border: 2px solid black;
-            border-radius:0px 20px 20px 0px;
-            background-color: pink;margin-left: -5px;"><%= $query_string %></div>
-    <div id="infobox" style="background-color: rgba(0,0,0,0.8);color: green;height: 400px;width: 700px;margin-left: 150px;padding: 20px;margin-top: 150px;">
-      welcome, To agile dex......
+    <div id="title_wrap"><%= @search_string %></div>
+    <div id="infobox" style="background-color: rgba(0,0,0,0.8);color: green;height: 400px;width: 700px;margin-left: 150px;padding: 20px;margin-top: 120px;">
+      Trying to autocreate a Presentation on <%= params[:name].gsub("_", " ") %>...
     </div>
-    <div id="view_deck" style="background-color: #ffffff;color: black;height: 100px;width:175px;margin-left: 150px;padding: 20px;display: none;">
-      Click <a id="view_deck_btn" href="">here</a> to View presentation of <%= $query_string %>
+    <div id="view_deck" style="background-color: #ffffff;color: black;width:700px;margin-left: 150px;margin-top:-60px;padding: 20px;display: none;">
+      Click <a id="view_deck_btn" href="">here</a> to View presentation of <%= @search_string %>
     </div>
 <% end %>
 
-<%= content_for :scripts do%>
+<%= content_for :scripts do %>
+
     <script type="text/javascript">
         $(function () {
             $('.nav').hide();
-            setTimeout(function(){$('#infobox').append('<br>Information is found and geting ready to processed.....')},1000)
-            setTimeout(function(){$('#infobox').append('<br>Searching Images.....')},2000) ;
-            setInterval(function(){$('#infobox').append('.')},1000)
-            $.get('/wiki_convert', function(data) {
-                $('#infobox').append('<br>'+data)
-            });
-            $.get('/image_search', function(data) {
-                $('#infobox').append('<br>'+data)
-                setTimeout(function(){
-                $('#infobox').append('<br>Combining Images and Informations....')
-                    $.get('/wiki_combine', function(data) {
-                        $('#infobox').append('<br>'+data);
-                        $.get('/wiki_make', function(data) {
-                            $('#infobox').append('<br>Finish combining...');
-                            setTimeout(function(){
-                                $('#infobox').hide();
-                            },500);
-                            setTimeout(function(){
-//                                $('#view_deck').show();
-                                $('.nav').show();
-                                $('.ad-menu-item').slideToggle();
-//                                $('#view_deck_btn').attr('href',"/view_deck/"+data.split('|')[0]+"/"+data.split('|')[1]);
-                                $('#slide_next').attr('href',"/view_deck/"+data.split('|')[0]+"/"+data.split('|')[1]);
-                            },500);
-                        });
-                        setTimeout(function(){
-                            $('#infobox').append('<br>Creating Presentation....')
-                        },500);
-                        setTimeout(function(){
-                            $('#infobox').append('<br>Creating Slides....')
-                        },1000);
-                        setTimeout(function(){
-                            $('#infobox').append('<br>Combining Presentation and slides....')
-                        },1500);
-                    });
-                },500);
-            });
+            select_theme();
         });
+
+        function select_theme() {
+            $('#infobox').append('<br/>Selecting Theme: <span id="theme_name"></span> ');
+            if (gon.disambiguate) {
+                $('#infobox').append('<br/>We found multiple entries with this name.<br> Which one would you want to create a presentation on:<br>');
+                $.each(gon.disambiguation_options, function (index, elm) {
+                    $('#infobox').append((index + 1) + " : " + elm + "<br/>");
+                });
+                $('body').bind('keypress', function (e) {
+                    var code = (e.keyCode ? e.keyCode : e.which);
+                    if (code > 48 && code < 58) { //Enter keycode
+//                        alert(gon.disambiguation_options[parseInt(String.fromCharCode(code)) - 1]);
+                        $.get('/wiki_theme/' + gon.search_string + '/' + (parseInt(String.fromCharCode(code)) - 1), function (data) {
+                            $('#theme_name').append(data.toString());
+                            $('#infobox').append('<br/>Mining Data: ');
+                            $.get('/wiki_extract/' + gon.disambiguation_options[parseInt(String.fromCharCode(code)) - 1] + '/0', function (data) {
+                                $('#infobox').append("<br>Data collected...<br>");
+                                $('#infobox').append(data.toString().split("|")[0]);
+                                $('#infobox').append("<br>Searching Images....");
+                                $.get('/image_search/'+gon.disambiguation_options[parseInt(String.fromCharCode(code)) - 1]+'/'+data.toString().split('|')[1],function(data){
+                                    $('#infobox').append("<br>Finish Searching images.....");
+                                    $('#infobox').append("<br>Creating Presentation.....");
+                                    $('#infobox').append(data.toString().split("|")[0]);
+                                    setTimeout(function(){
+                                        $("#view_deck_btn").attr('href','/view_deck/'+data.toString().split('|')[1]);
+                                        $("#view_deck").show();
+                                    },2000);
+                                })
+                            });
+                        });
+                    }
+                });
+            } else {
+                $.get('/wiki_theme/' + gon.search_string + '/0', function (data) {
+                    $('#theme_name').append(data.toString());
+                    $('#infobox').append('<br/>Mining Data: ');
+                    $.get('/wiki_extract/' + gon.search_string + '/0', function (data) {
+                        $('#infobox').append("<br>Data collected...<br>");
+                        $('#infobox').append(data.toString().split("|")[0]);
+                        $('#infobox').append("<br>Searching Images....");
+                        $.get('/image_search/'+gon.search_string+'/'+data.toString().split('|')[1],function(data){
+                            $('#infobox').append("<br>Finish Searching images.....");
+                            $('#infobox').append("<br>Creating Presentation.....");
+                            $('#infobox').append(data.toString().split("|")[0]);
+                            setTimeout(function(){
+                                $("#view_deck_btn").attr('href','/view_deck/'+data.toString().split('|')[1]);
+                                $("#view_deck").show();
+                            },2000);
+                        })
+                    });
+                });
+            }
+        }
     </script>
 <% end %>

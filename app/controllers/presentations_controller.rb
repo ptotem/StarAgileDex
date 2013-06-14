@@ -1,4 +1,10 @@
 class PresentationsController < ApplicationController
+  before_filter :query_db, :only => [:wiki_prez,:wiki_theme, :wiki_create, :wiki_extract]
+
+  def query_db
+    require 'sparql/client'
+    @results = Dbpedia.search(params[:name])
+  end
 
   def new
     @presentation=Presentation.new
@@ -19,40 +25,6 @@ class PresentationsController < ApplicationController
     end
   end
 
-  def wiki_prez
-    #Todo add layout we have to create separate pluins list for wiki because we are mensioning the layout in en.yml file, to apply it here just change :layout=><cHANGE> in each create
-    #of this function.
-    #Todo we also have to add condition in builder action so that it can pick from wiki plug in list.
-    @wiki_snippets=Array.new
-    @external_link=Array.new
-    @external_text=Array.new
-    @search_string=params[:name]
-    # Wiki Extraction
-    doc=Nokogiri::XML(open("http://en.wikipedia.org/w/api.php?action=query&prop=revisions&rvprop=content&format=xml&titles=#{@search_string.gsub(" ", "%20")}").read)
-    wiki_entry = doc.xpath("//revisions//rev").text
-    check=wiki_entry.scan(/(?<=\#REDIRECT \[\[).+?(?=\]\])/m)[0]
-    unless check.blank?
-      doc=Nokogiri::XML(open("http://en.wikipedia.org/w/api.php?action=query&prop=revisions&rvprop=content&format=xml&titles=#{check.gsub(" ", "%20")}").read)
-      wiki_entry = doc.xpath("//revisions//rev").text
-    end
-
-    @wikied=WikiParser.new({:data => "#{wiki_entry}"})
-    #render :text=>@wikied.to_html.
-    #return
-
-    if @wikied.to_html.blank?
-      render :text=>"Sorry can not create presentation on this topic"
-      return
-    else
-      setData(@wikied)
-      $query_string=@search_string
-      redirect_to wiki_create_path
-    end
-    #@slides,@external_link,@external_text = scrap_it(@wikied.to_html,@search_string)
-
-    #redirect_to view_deck_path(@presentation.id)
-    #return
-  end
 
   #function to export the file as html
   #TODO: Export needs to be build for guest
@@ -175,30 +147,81 @@ class PresentationsController < ApplicationController
     #render :text=>'success'
   end
 
-
-
   def view_prez
     @presentation=Presentation.find(params[:id])
     redirect_to builder_path(@presentation.slides.first.id, @presentation.slides.first.layout, @presentation.slides.first.font, @presentation.slides.first.background, TRUE)
   end
 
-  def wiki_create
-    @data=getData.to_html
-
-    render :layout => 'layouts/present'
-    return
+  def wiki_prez
+    require 'sparql/client'
+    @results = Dbpedia.search(params[:name])
+    if @results.empty?
+      render :text => "Sorry can not create presentation on this topic"
+    else
+      redirect_to wiki_create_path(params[:name])
+    end
   end
 
-  def wiki_convert
-    #For image search
+  def wiki_create
+    gon.search_string=params[:name]
+    gon.disambiguate=false
+    if @results.count>1 && @results[0].label!=params[:name].gsub("_", " ")
+      gon.disambiguate=true
+      gon.disambiguation_options=@results.first(9).map { |a| a.label }
+    end
+    render :layout => 'layouts/present'
+  end
 
+  def wiki_theme
+    @theme="default"
+    category_string=@results[params[:id].to_i].categories.map { |a| a.label }.join(",")
+    if category_string.include?("artist")
+      @theme="Artist"
+    end
+    if category_string.include?("actor")
+      @theme="Actor"
+    end
+    if category_string.include?("sports") or category_string.include?("athlete")
+      @theme="Sportsperson"
+    end
+    if category_string.include?("book") or category_string.include?("novel")
+      @theme="Novel"
+    end
+    if category_string.include?("film") or category_string.include?("movie")
+      @theme="Film"
+    end
+    if category_string.include?("place")
+      @theme="Place"
+    end
+    if category_string.include?("leader") or category_string.include?("president") or category_string.include?("minister")
+      @theme="Leader"
+    end
+    render :text => @theme
+  end
 
-    #Nokogiri initialisation
-    html_doc=Nokogiri::HTML(getData.to_html)
+  def wiki_extract
+
+    @wiki_snippets=Array.new
+    @external_link=Array.new
+    @external_text=Array.new
+    @search_string=params[:name]
+
+    # Wiki Extraction
+    doc=Nokogiri::XML(open("http://en.wikipedia.org/w/api.php?action=query&prop=revisions&rvprop=content&format=xml&titles=#{@search_string.gsub(" ", "%20")}").read)
+    wiki_entry = doc.xpath("//revisions//rev").text
+    check=wiki_entry.scan(/(?<=\#REDIRECT \[\[).+?(?=\]\])/m)[0]
+    unless check.blank?
+      doc=Nokogiri::XML(open("http://en.wikipedia.org/w/api.php?action=query&prop=revisions&rvprop=content&format=xml&titles=#{check.gsub(" ", "%20")}").read)
+      wiki_entry = doc.xpath("//revisions//rev").text
+    end
+
+    @wikied=WikiParser.new({:data => "#{wiki_entry}"})
+
+    html_doc=Nokogiri::HTML(@wikied.to_html)
     b=Array.new
     extra_link=Array.new
     extra_link_text= Array.new
-    b[0]={"title" => $query_string, "main" => html_doc.xpath('//p')[0].text}
+    b[0]={"title" => params[:name], "main" => html_doc.xpath('//p')[0].text}
     #For each h2 tags
     html_doc.css('h2').each_with_index do |h2, index|
       if index < html_doc.css('h2').count-3
@@ -257,50 +280,46 @@ class PresentationsController < ApplicationController
     html_doc.xpath('//p[1]//a').each do |li|
       extra_link_text<<li.text
     end
-    $slides=b
-    render :text=>'Information extracted and transformed'
-    #return b,extra_link,extra_link_text
-  end
+    @slides=b
 
-  def image_search
-    agent=Mechanize.new
-    agent.get("http://blekko.com/ws/?q=#{$query_string}/image&auth=1e50932d")
-    page_html=agent.page.search(".images").to_html
-    image_doc=Nokogiri::HTML(page_html)
-    $images=image_doc.css("div a").map { |i| i['href'] }
-    render :text=>"Finish Searching Images...."
-  end
-
-  def wiki_combine
-    #To add images at each slide.
-    $slides.each_with_index do |slide,index|
-      slide["content_block"]= $images[index]
-    end
-
-    render :text=>"Finish combining Images and Information"
-  end
-
-  def wiki_make
-    @presentation=Presentation.create!(:user_id => current_user.id, :name => $query_string)
-    $slides.each do |i|
+    @presentation=Presentation.create!(:user_id => current_user.id, :name => @search_string)
+    @slides.each do |i|
       if i["main"]==[] or i["main"]=='null'
-        $slides.delete(i)
+        @slides.delete(i)
       end
     end
-    $slides.each_with_index do |i, index|
+    @slides.each_with_index do |i, index|
       @count=1
       if index<1
         Slide.create!(:presentation_id => @presentation.id, :title => i["title"],:mode => "HTML", :layout => ['allcentered','left','right','top','bottom'].sample, :sequence => (@count))
         @count=@count+1
-        @slide=Slide.create!(:presentation_id => @presentation.id, :title => i["title"], :main => i["main"].summarize,:mode => "HTML",:titlepic=>URI.parse(i["content_block"]), :layout => ['simple_title_content','fancy_title_content','left_fancy_title_content','centered_content'].sample, :sequence => (@count))
-        #ContentBlock.create!(:slide_id => @slide.id, :image => URI.parse(i["content_block"]), :caption => "")
+        @slide=Slide.create!(:presentation_id => @presentation.id, :title => i["title"], :main => i["main"].summarize,:mode => "HTML", :layout => ['simple_title_content','fancy_title_content','left_fancy_title_content','centered_content'].sample, :sequence => (@count))
       else
         @count=@count+1
-        Slide.create!(:presentation_id => @presentation.id, :title => i["title"], :main => (i["main"].summarize rescue i["main"]),:mode => "HTML",:titlepic=>URI.parse(i["content_block"]), :layout => ['fancy_title_content','left_fancy_title_content'].sample, :sequence => (@count))
-        #ContentBlock.create!(:slide_id => @slide.id, :image => URI.parse(i["content_block"]), :caption => "")
+        if i["main"]!=""
+          Slide.create!(:presentation_id => @presentation.id, :title => i["title"], :main => (i["main"].summarize rescue i["main"]),:mode => "HTML", :layout => ['fancy_title_content','left_fancy_title_content'].sample, :sequence => (@count))
+        else
+          Slide.create!(:presentation_id => @presentation.id, :title => i["title"], :main => (i["main"].summarize rescue i["main"]),:mode => "HTML", :layout => ['allcentered'].sample, :sequence => (@count))
+        end
       end
     end
-    render :text=>"#{@presentation.id}|#{@slide.id}"
+    render :text=>"Transforming the data....\n|#{@presentation.id}"
+  end
+
+  def image_search
+    agent=Mechanize.new
+    @presentation=Presentation.find(params[:id])
+    @slides=@presentation.slides
+    agent.get("http://blekko.com/ws/?q=#{params[:name]}/image&auth=1e50932d")
+    page_html=agent.page.search(".images").to_html
+    image_doc=Nokogiri::HTML(page_html)
+    @images=image_doc.css("div a").map { |i| i['href'] }
+    @slides.each_with_index do |slide,index|
+      slide.titlepic=URI.parse(@images[index])
+      slide.save
+    end
+
+    render :text=>"Finish Making Presentation....|#{@presentation.id}"
   end
 
 end
