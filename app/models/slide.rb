@@ -80,6 +80,7 @@ class Slide < ActiveRecord::Base
       "#{Rails.root}/public/guestdata/"+self.presentation.user_id.to_s+"/"+self.presentation.id.to_s+"/images/:filename"
     else
       "#{Rails.root}/public/userdata/"+self.presentation.user.name.downcase.gsub(" ", "_")+"/"+self.presentation.name.downcase.gsub(" ", "_")+"/images/:filename"
+      #"#{Rails.root}/public/userdata/"+self.presentation.user.name.downcase.gsub(" ", "_")+"/"+self.presentation.name.downcase.gsub(" ", "_")+"/images/:attachment/:id_:style.:extension"
     end
   end
 
@@ -88,6 +89,7 @@ class Slide < ActiveRecord::Base
       "/guestdata/"+self.presentation.user_id.to_s+"/"+self.presentation.id.to_s+"/images/:filename"
     else
       "/userdata/"+self.presentation.user.name.downcase.gsub(" ", "_")+"/"+self.presentation.name.downcase.gsub(" ", "_")+"/images/:filename"
+      #"/userdata/"+self.presentation.user.name.downcase.gsub(" ", "_")+"/"+self.presentation.name.downcase.gsub(" ", "_")+"/images/:attachment/:id_:style.:extension"
     end
   end
 

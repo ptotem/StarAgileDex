@@ -17,6 +17,8 @@ class HomeController < ApplicationController
     end
 
     if params[:slide_id].blank?
+      #@presentation=Presentation.new
+      #@presentation.slides.build
       @slide=Slide.new
       gon.edit=false
     else
@@ -59,13 +61,13 @@ class HomeController < ApplicationController
     @slide.save
     @prev_slide.save
 
-    render :text => "Slide moved to up"
+    render :text => "Slide moved up"
     return
   end
 
   def move_slide_down
     @slide = Slide.find(params[:slide_id][0])
-    @next_slide=Slide.find(@slide.next_slide)
+    @next_slide=Slide.find(@slide.next_slide) rescue nil?
 
     s=@slide.sequence
 
@@ -78,7 +80,7 @@ class HomeController < ApplicationController
     @slide.save
     @next_slide.save
 
-    render :text => "Slide moved to down"
+    render :text => "Slide moved down"
     return
   end
 
@@ -251,6 +253,26 @@ class HomeController < ApplicationController
 
     # ---------------------------------------
 
+  end
+
+  def ppt_pdf_prez
+
+    require 'find'
+    require 'fileutils'
+    require 'pathname'
+
+    @file_path = params[:presentation_name][0]
+    @file_name = @file_path.split('/').last
+    @file_name_wo_ext = (@file_name.chomp(File.extname(@file_path))).gsub("_", " ")
+
+    @ppt_pdf_prez = Presentation.create(:name => @file_name_wo_ext, :user_id => current_user.id)
+
+    @ppt_pdf_slide = Slide.create(:presentation_id => @ppt_pdf_prez.id, :title=> @ppt_pdf_prez.name, :ppt=> File.open(@file_path), :mode => "PPT")
+
+    @returning_data = Array.new
+    @returning_data<<"#{@ppt_pdf_prez.id}|#{@ppt_pdf_prez.name}"
+    render :text => @returning_data
+    return
   end
 
 end

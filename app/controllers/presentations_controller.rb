@@ -2,6 +2,7 @@ class PresentationsController < ApplicationController
 
   def new
     @presentation=Presentation.new
+    #@presentation.slides.build
   end
 
   def create

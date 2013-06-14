@@ -45,6 +45,7 @@ AgileDex::Application.routes.draw do
   match '/delete_presentation', :to=>"home#delete_presentation", :as=>"delete_presentation"
   match '/slides/new/(:presentation_id)', :to=>"slides#new"
   match '/slides/:id/edit/(:presentation_id)', :to=>"slides#edit"
+  match '/ppt_pdf_prez',:to=>'home#ppt_pdf_prez',:as=>"ppt_pdf_prez"
 
 
   # CRUD Routes

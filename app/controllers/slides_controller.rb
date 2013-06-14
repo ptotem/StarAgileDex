@@ -148,6 +148,7 @@ class SlidesController < ApplicationController
   # POST /slides.json
   def create
     @slide = Slide.new(params[:slide])
+    #@slide = Slide.create(params[:slide])
     respond_to do |format|
       if @slide.save
         @slide.remove_redundancy
