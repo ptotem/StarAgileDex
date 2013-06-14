@@ -9,8 +9,7 @@ class Ability
     if user.role=="admin"
       can :manage, :all
     else
-      can :manage, :all
-      #cannot :access, :rails_admin
+      cannot :access, :rails_admin
     end
 
     # The first argument to `can` is the action you are giving the user 
