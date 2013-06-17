@@ -145,7 +145,7 @@ class Slide < ActiveRecord::Base
       when "Blocks"
         #TODO: If PPT is present destroy its contents_blocks and save self content_blocks, needs to be discussed, put <attached_file>_delete as attr_accessible
         self.main=""
-        self.ppt.destroy
+        #self.ppt.destroy
       when "PPT"
         self.main=""
     end

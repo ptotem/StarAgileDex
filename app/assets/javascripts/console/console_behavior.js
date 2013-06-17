@@ -342,6 +342,7 @@ function show_presentation(this_presentation_id, this_presentation_name) {
                             contentType: "application/json",
                             success: function (data) {
                                 //var thisLine = $(this).parent().parent();
+//                                alert(data);
                                 var prevLine = thisLine.next();
                                 prevLine.after(thisLine);
                             }
@@ -466,51 +467,27 @@ function load_bindings() {
         }
     });
 
-
     $('#new_deck_Modal_ppt_btn').live('click', function(){
-//        var $pres_name_file_box = $(this).parent().find("input[type=file]");
-        var $pres_name_file_box = $(this).parent().find("input");
-
-        if ($pres_name_file_box.val()=="") {
-            $('#new_deck_Modal_ppt_info').css('color','red');
+        var $pres_name_txt_box = $(this).parent().find("input[type=text]");
+        var $pres_name_file_box = $(this).parent().find("input[type=file]");
+        if ($pres_name_txt_box.val()=="") {
+            $pres_name_txt_box.focus();
+            $pres_name_txt_box.attr('placeholder',"Please, enter deck name.");
         }
-        else{
-//            create_new_deck($pres_name_txt_box.val());
-            var file_name_with_ext = $pres_name_file_box.val();
-//            var file_name_wo_ext = file_name_with_ext.substr(0, file_name_with_ext.lastIndexOf('.')) || file_name_with_ext;
-//            alert(file_name_with_ext);
-
-            var full_file_path = file_name_with_ext;
-            var file_name =  full_file_path.substr(full_file_path.lastIndexOf("/") + 1);
-            var prez_name_from_file = file_name.substr(0, file_name.lastIndexOf('.')) || file_name;
-            var clear_prez_name = prez_name_from_file.replace("_", " ");
-
-            var prez_name = file_name_with_ext;
-            var data = {presentation_name: []};
-            data["presentation_name"].push(prez_name);
-
-            $.ajax({
-                url: "/ppt_pdf_prez",
-                type: "post",
-                async: false,
-                data: JSON.stringify(data),
-                contentType: "application/json",
-                success: function (returning_data) {
-//                    alert(returning_data);
-//                    returning_data = returning_data.split('|')[0];
-//                    alert(returning_data.replace(/\[|\]/gi,'').replace(/"|"/gi,'').split('|')[0]);
-                    returning_data = returning_data.replace(/\[|\]/gi,'').replace(/"|"/gi,'').split('|')[0];
-                    $('#presentations_table').dataTable().fnAddData([
-                        '<a id="activate_presentation_' + returning_data + '" onclick="transitInDeck(\'' + clear_prez_name + '\')" href="#?presentation' + returning_data + '"><button class="btn btn-inverse show_this_presentation" type="button"><input id="' + returning_data + '" type="hidden" name="' + returning_data + '">' + clear_prez_name + '</button></a>', ""]
-                    );
-                    $('#presentations_table tbody tr:first').addClass('presentation_row');
-                    $('#new_deck_Modal').modal('hide');
-                    show_presentation(returning_data, clear_prez_name);
-                    transitInDeck(clear_prez_name);
-                }
+        else if($pres_name_file_box.val()==""){
+            $('#new_deck_Modal_ppt_info').css('color', 'red');
+        }
+        else if ($pres_name_txt_box.val()!="" && $pres_name_file_box.val()!=""){
+            $('#new_deck_Modal_ppt_info').hide();
+            $('#new_presentation').attr({
+                action: 'ppt_pdf_prez',
+                method: 'post',
+                enctype: 'multipart/form-data'
             });
-
+            $('#new_presentation').submit();
+            $('#new_deck_Modal').modal('hide');
         }
+
     });
 
 

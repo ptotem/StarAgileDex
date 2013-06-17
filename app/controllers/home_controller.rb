@@ -256,21 +256,36 @@ class HomeController < ApplicationController
   end
 
   def ppt_pdf_prez
+    #render :text => params
+    #return
 
-    require 'find'
-    require 'fileutils'
-    require 'pathname'
 
-    @file_path = params[:presentation_name][0]
-    @file_name = @file_path.split('/').last
-    @file_name_wo_ext = (@file_name.chomp(File.extname(@file_path))).gsub("_", " ")
+    # <--- First option starts --->
+    @file_name = params[:slide][:ppt].original_filename
+    @file_name_wo_ext = @file_name.chomp(File.extname(@file_name))
+    @slide_title = @file_name_wo_ext.gsub("_", " ")
 
-    @ppt_pdf_prez = Presentation.create(:name => @file_name_wo_ext, :user_id => current_user.id)
+    @ppt_prez = Presentation.create(:name => params[:name], :user_id => current_user.id)
+    @ppt_prez.save
+    @ppt_prez_slide = Slide.create(:presentation_id => @ppt_prez.id, :title => @slide_title, :ppt => params[:slide][:ppt], :mode => "PPT", :layout => "iebook")
+    @ppt_prez_slide.save
 
-    @ppt_pdf_slide = Slide.create(:presentation_id => @ppt_pdf_prez.id, :title=> @ppt_pdf_prez.name, :ppt=> File.open(@file_path), :mode => "PPT")
+    #redirect_to get_ppt_prez_path(@ppt_prez.id)
+    #redirect_to view_deck_path(@ppt_prez)
+    respond_to do |format|
+      format.html { redirect_to builder_path(@ppt_prez_slide.id, @ppt_prez_slide.layout, @ppt_prez_slide.font, @ppt_prez_slide.background), notice: 'Slide was successfully created.' }
+    end
+    #render :text => "Presentation created using PowerPPT Method"
+    #return
+    # <--- First option ends --->
+  end
 
+  def get_ppt_prez
+    #render :text => params[:format]
+    #return
+    @last_prez = Presentation.find(params[:format])
     @returning_data = Array.new
-    @returning_data<<"#{@ppt_pdf_prez.id}|#{@ppt_pdf_prez.name}"
+    @returning_data<<"#{@last_prez.id}|#{@last_prez.name}"
     render :text => @returning_data
     return
   end
