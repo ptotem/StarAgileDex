@@ -49,6 +49,7 @@ AgileDex::Application.routes.draw do
   match '/slides/:id/edit/(:presentation_id)', :to=>"slides#edit"
   match '/ppt_pdf_prez',:to=>'home#ppt_pdf_prez',:as=>"ppt_pdf_prez"
   match '/get_ppt_prez',:to=>'home#get_ppt_prez',:as=>"get_ppt_prez"
+  match '/control_new_deck_modal',:to=>'home#control_new_deck_modal',:as=>"control_new_deck_modal"
 
 
   # CRUD Routes

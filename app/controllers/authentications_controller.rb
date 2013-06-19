@@ -46,7 +46,8 @@ class AuthenticationsController < ApplicationController
     end
 
     sign_in(:user, @user)
-
+    @user.display_modal = true
+    @user.save
     redirect_to console_path
   end
 

@@ -4,8 +4,6 @@ $(function () {
 
     // If the user is coming here on an edit screen, we will get the slide id. We are transiting directly to the slide form
     if (gon.edit) {
-//        $("#new_deck_Modal").modal("hide");
-        $("#new_deck_Modal").hide();
         transitInDeck(gon.presentation);
         show_presentation(gon.presentation_id, gon.presentation);
         setTimeout(function () {
@@ -129,9 +127,7 @@ function create_new_deck(presentation_name) {
             success: function (returning_data) {
                 guest = returning_data.split('|')[1] == 'guest' ? true : false;
                 returning_data = returning_data.split('|')[0];
-                $('#presentations_table').dataTable().fnAddData([
-                    '<a id="activate_presentation_' + returning_data + '" onclick="transitInDeck(\'' + prez_name + '\')" href="#?presentation' + returning_data + '"><button class="btn btn-inverse show_this_presentation" type="button"><input id="' + returning_data + '" type="hidden" name="' + returning_data + '">' + prez_name + '</button></a>', ""]
-                );
+                $('#presentations_table').dataTable().fnAddData(['<a id="activate_presentation_' + returning_data + '" onclick="transitInDeck(\'' + prez_name + '\')" href="#?presentation' + returning_data + '"><button class="btn btn-inverse show_this_presentation" type="button"><input id="' + returning_data + '" type="hidden" name="' + returning_data + '">' + prez_name + '</button></a>', ""]);
                 $('#presentations_table tbody tr:first').addClass('presentation_row');
                 $('#new_deck_Modal').modal('hide');
                 show_presentation(returning_data, prez_name);
@@ -162,12 +158,14 @@ function initialize_deck_list() {
             "sPaginationType": "false",
             "bLengthChange": true,
             "bFilter": true,
-            "bSort": false,
+//            "bSort": false,
             "bInfo": false,
             "oSearch": {"sSearch": ""},
             "oLanguage": { "sSearch": "" },
             "sDom": 'C<"clear">lfrtip',
-            "bAutoWidth": false }
+            "bAutoWidth": false,
+            "bRetrieve": true
+        }
     );
     $('#presentations_table_filter').children().children().addClass('presentation_filter');
     $('.presentation_filter').attr("placeholder", "Search Decks");
@@ -181,6 +179,20 @@ function initialize_deck_list() {
 //    });
 
 }
+
+//var oTable = $('#presentations_table').dataTable();
+//function MoveRowDown(presentations_table, index)
+//{
+//    var rows = oTable.$("tr");
+//    rows.eq(index).insertAfter(rows.eq(index + 1));
+//}
+//
+//function MoveRowUp(presentations_table, index)
+//{
+//    alert("hello");
+////    var rows = oTable.$("tr");
+////    rows.eq(index).insertBefore(rows.eq(index - 1));
+//}
 
 // This function sets up dataTables for the slide list
 function initialize_slide_list() {
@@ -422,6 +434,27 @@ function export_as_html() {
 // This function creates the live bindings for buttons, links and scrolling
 
 function load_bindings() {
+
+    if (gon.display_modal == true) {
+        $("#new_deck_Modal").modal("show");
+
+//        alert($('#presentation_user_id').val());
+        var current_user_id = $('#presentation_user_id').val();
+        var data = {current_user_id: []};
+        data["current_user_id"].push(current_user_id);
+
+        $.ajax({
+            url: "/control_new_deck_modal",
+            type: "post",
+            async: false,
+            data: JSON.stringify(data),
+            contentType: "application/json",
+            success: function (data) {
+
+            }
+        });
+    }
+
     $('#signed_in').hide();
 //    $('#new_deck_btn').click();
 
@@ -485,7 +518,8 @@ function load_bindings() {
                 enctype: 'multipart/form-data'
             });
             $('#new_presentation').submit();
-            $('#new_deck_Modal').modal('hide');
+//            $('#new_deck_Modal').modal('hide');
+
         }
 
     });
@@ -520,9 +554,9 @@ function load_bindings() {
 
 }
 
-
 function form_bindings() {
     $("#new_deck_Modal").modal("hide");
+
     //This validates Title presence
     $('#slide_title').focusout(function () {
         if ($('#slide_title').val() == "")
@@ -532,14 +566,6 @@ function form_bindings() {
     $('#slide_title').focusin(function () {
         if ($('#slide_title').val() == "")
             $('#slide_title').attr("placeholder", "Title");
-    });
-
-    //This validates Content Blocks caption word length
-    $('.content_block_caption_txt').focusout(function () {
-        if ($(this).val().split(/ /).length - 1 > 20) {
-            $(this).val('');
-            $(this).attr("placeholder", "Only twenty words are allowed as title");
-        }
     });
 
     $('#show_titlepic').click(switch_to_titlepic);
@@ -568,6 +594,20 @@ function form_bindings() {
     $('#clear_wysiwyg').on('click', open_wysiwyg_mode);
     $('#upload_ppt').click(open_ppt_mode);
 
+    //This resets the form (clears the contents of the form and deletes images if any)
+    $('#form_reset_btn').on('click', function(){
+        $(this).closest('form').find('input[type="text"], textarea').val('');
+        CKupdate();
+        function CKupdate(){
+            for ( instance in CKEDITOR.instances )
+                CKEDITOR.instances[instance].updateElement();
+            CKEDITOR.instances[instance].setData('');
+        }
+
+        //This removes the titlepic
+        $('#clear_title_pic').click();
+    });
+
     $(':file').on("change", function () {
         $this = $(this);
         if ($this.val() != "") {
@@ -575,6 +615,15 @@ function form_bindings() {
             $this.parent().find(':checkbox').attr("checked", false);
         }
     });
+
+    //This validates Content Blocks caption word length
+//    $('.caption').live("focusout", function () {
+//        if ($(this).val().split(/ /).length - 1 > 20) {
+//            $(this).val('');
+//            $(this).attr("placeholder", "Only twenty words are allowed as caption");
+//        }
+//    });
+
 
     $('.caption').live("focus", function () {
         var caption = $(this);
@@ -589,7 +638,7 @@ function form_bindings() {
         }
 
         function slowAlert() {
-            $(file_field).click();
+//            $(file_field).click();
             if ((file_field.val()!="") || (img_src!="/assets/upload.png")) {
                 clearAlert();
             }

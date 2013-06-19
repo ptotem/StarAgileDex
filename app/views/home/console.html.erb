@@ -97,11 +97,12 @@
         <script type="text/javascript">
             $(function () {
                 $(".feedback_link").feedback({tabPosition: "top"});
-                $("#new_deck_Modal").modal("show");
+//                $("#new_deck_Modal").modal("show");
             });
         </script>
 
         <h3>Slide Decks</h3>
+
 
         <a href="#new_deck_Modal" data-toggle="modal" class="btn btn-inverse" id="new_deck_btn" title="Click here to create a Deck">Create
           a Deck <i class="icon-plus icon-white pull-right"></i></a>
@@ -118,7 +119,7 @@
               <tr class="presentation_row">
                 <td class="presentation_contents">
                   <a href="#?presentation<%= presentation.id %>" onclick="transitInDeck('<%= presentation.name %>')" class="datatable_button">
-                    <button class="btn btn-inverse show_this_presentation" type="button"><%= hidden_field_tag presentation.id %><%= presentation.name.titlecase %></button>
+                    <button class="btn btn-inverse show_this_presentation" type="button"><%= hidden_field_tag presentation.id %><%= presentation.name %></button>
                   </a>
                 </td>
               </tr>
@@ -221,7 +222,7 @@
   </div>
 </div>
 
-</div>
+<!--</div>-->
 
 <div id="not_signed_in" class="navbar navbar-inverse">
   <div class="navbar-inner">
@@ -312,6 +313,7 @@
 <script src="/assets/jquery.ui.widget.js"></script>
 <script src="/assets/jquery.iframe-transport.js"></script>
 <script src="/assets/jquery.fileupload.js"></script>
+
 
 
 </body>

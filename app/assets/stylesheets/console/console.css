@@ -206,11 +206,11 @@ body {
 .datatable_button, .show_this_presentation {
     width: 100%;
     text-align: center;
-    text-transform: capitalize;
+    /*text-transform: capitalize;*/
 }
 
 #presentation_slides_index h3 {
-    text-transform: capitalize;
+    /*text-transform: capitalize;*/
 }
 
 #presentations_slides_list {

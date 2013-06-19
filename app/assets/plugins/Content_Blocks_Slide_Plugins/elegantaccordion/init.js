@@ -1,6 +1,6 @@
 function init_widget() {
     $.each(images, function (index, elm) {
-        $('.accordion').append('<li class="jj bg1" style="background-image:url('+elm+') ;"><div class="heading"></div><div class="bgDescription"></div><div class="description"><h2></h2><p>'+captions[index]+'</p></div></li>');
+        $('.accordion').append('<li class="jj bg1" style="background-image:url('+elm+') ; background-size:80% 80%;"><div class="heading"></div><div class="bgDescription"></div><div class="description"><h2></h2><p>'+captions[index]+'</p></div></li>');
     });
 
 

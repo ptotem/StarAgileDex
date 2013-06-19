@@ -13,7 +13,10 @@ class HomeController < ApplicationController
     #todo:Guest logout delete
     #todo:Counter on how many user logged in.(Analytics)
     if user_signed_in?
+      @user = current_user
+      gon.display_modal = @user.display_modal
       @presentations = Presentation.order('created_at DESC').find_all_by_user_id(current_user.id)
+      #@presentations = Presentation.find_all_by_user_id(current_user.id).flatten.last(50).reverse
     end
 
     if params[:slide_id].blank?
@@ -32,8 +35,16 @@ class HomeController < ApplicationController
     end
     gon.titlepic=(@slide.titlepic.nil? ? false:true)
 
-
     render :layout => false
+  end
+
+  #This controls the new_deck_modal behavoiur, i.e. this displays new_deck_modal when user signs_in, refer authentication_controller's sign in
+  def control_new_deck_modal
+    @user = User.find(params[:current_user_id][0])
+    @user.display_modal = false
+    @user.save
+    render :text => "display_modal set to false"
+    return
   end
 
   def get_slides
@@ -41,7 +52,7 @@ class HomeController < ApplicationController
     @slides = @presentation.slides.order(:sequence)
     @returning_data =Array.new
     @slides.each do |i|
-      @returning_data<<"#{i.id}|#{i.title.titlecase}"
+      @returning_data<<"#{i.id}|#{i.title}"
     end
     render :text => @returning_data
     return

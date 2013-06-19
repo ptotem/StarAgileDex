@@ -85,7 +85,7 @@ en:
         chrome: "false"
         safari: "false"
         opera: "false"
-        working: "true"
+        working: "false"
       jimpress:
         layout: "layout2"
         ie: "6+"
@@ -299,7 +299,7 @@ en:
         chrome: "false"
         safari: "false"
         opera: "false"
-        working: "true"
+        working: "false"
       bookblock:
         layout: "layout3"
         ie: "6+"
@@ -307,7 +307,7 @@ en:
         chrome: "false"
         safari: "false"
         opera: "false"
-        working: "true"
+        working: "false"
 
     advanced_plugin:
   themes:

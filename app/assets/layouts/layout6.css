@@ -18,6 +18,8 @@
     position: absolute;
     text-align: center;
     width: 270px;
+    white-space: pre-line;
+    /*word-wrap: break-word;*/
 }
 
 #titlepic {
@@ -29,7 +31,6 @@
     text-align: center;
     width: 270px;
 }
-/*height: 280px;*/
 
 #titlepic img{
     width:250px;
@@ -46,7 +47,9 @@
     padding: 20px;
     border: 2px solid black;
     border-radius:0px 20px 20px 0px;
-    background-color: pink;
+    background-color: #000000;
+    opacity: 0.7;
+    color: white;
 }
 
 
