@@ -503,6 +503,8 @@ function load_bindings() {
     $('#new_deck_Modal_ppt_btn').live('click', function(){
         var $pres_name_txt_box = $(this).parent().find("input[type=text]");
         var $pres_name_file_box = $(this).parent().find("input[type=file]");
+        var ext = $pres_name_file_box.val().split('.').pop().toLowerCase();
+
         if ($pres_name_txt_box.val()=="") {
             $pres_name_txt_box.focus();
             $pres_name_txt_box.attr('placeholder',"Please, enter deck name.");
@@ -511,14 +513,23 @@ function load_bindings() {
             $('#new_deck_Modal_ppt_info').css('color', 'red');
         }
         else if ($pres_name_txt_box.val()!="" && $pres_name_file_box.val()!=""){
-            $('#new_deck_Modal_ppt_info').hide();
-            $('#new_presentation').attr({
-                action: 'ppt_pdf_prez',
-                method: 'post',
-                enctype: 'multipart/form-data'
-            });
-            $('#new_presentation').submit();
+            if($.inArray(ext, ['ppt','pptx']) == -1) {
+                //if($.inArray(ext, ['gif','png','jpg','jpeg']) == -1) {
+//                alert('invalid extension!');
+                $pres_name_file_box.val("");
+                $('#new_deck_Modal_ppt_info').show();
+                $('#new_deck_Modal_ppt_info').text("invalid extension!");
+            }
+            else{
+                $('#new_deck_Modal_ppt_info').hide();
+                $('#new_presentation').attr({
+                    action: 'ppt_pdf_prez',
+                    method: 'post',
+                    enctype: 'multipart/form-data'
+                });
+                $('#new_presentation').submit();
 //            $('#new_deck_Modal').modal('hide');
+            }
 
         }
 
