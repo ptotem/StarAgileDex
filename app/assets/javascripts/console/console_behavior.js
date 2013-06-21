@@ -566,15 +566,15 @@ function load_bindings() {
             $('#new_deck_Modal_ppt_info').css('color', 'red');
         }
         else if ($pres_name_txt_box.val()!="" && $pres_name_file_box.val()!=""){
-//            if($.inArray(ext, ['ppt','pptx']) == -1) {
-//                //if($.inArray(ext, ['gif','png','jpg','jpeg']) == -1) {
-////                alert('invalid extension!');
-//                $pres_name_file_box.val("");
-//                $('#new_deck_Modal_ppt_info').show();
-//                $('#new_deck_Modal_ppt_info').text("Invalid file type...!");
-//                $('#new_deck_Modal_ppt_info').css('color', 'red');
-//            }
-//            else{
+            if($.inArray(ext, ['ppt','pptx']) == -1) {
+                //if($.inArray(ext, ['gif','png','jpg','jpeg']) == -1) {
+//                alert('invalid extension!');
+                $pres_name_file_box.val("");
+                $('#new_deck_Modal_ppt_info').show();
+                $('#new_deck_Modal_ppt_info').text("Invalid file type...!");
+                $('#new_deck_Modal_ppt_info').css('color', 'red');
+            }
+            else{
                 $('#new_deck_Modal_ppt_info').hide();
                 $('#new_presentation').attr({
                     action: 'ppt_pdf_prez',
@@ -583,7 +583,7 @@ function load_bindings() {
                 });
                 $('#new_presentation').submit();
 //            $('#new_deck_Modal').modal('hide');
-//            }
+            }
 
         }
 
