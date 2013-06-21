@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+  <meta content="utf-8" http-equiv="encoding">
+  <title>Welcome to agileDex</title>
+  <link rel="stylesheet" href="/assets/bootstrap.min.css">
+  <link rel="stylesheet" href="/assets/normalize.css">
+  <link rel="stylesheet" href="/assets/master.css">
+  <link rel="stylesheet" href="/assets/themes.css">
+  <link rel="stylesheet" href="/assets/home.css">
+  <%= include_gon(:watch => true) %>
+</head>
+
+<body>
+<!-- The Theme and Layout of the slide will be dependent on the classes on the wrapper. Specified in layout.css and theme.css-->
+<div id="wrapper" class="theme_home">
+
+  <!-- The Menu for cycling through the plugins, changing theme and font -->
+  <ul class="nav nav-stacked nav-pills pull-right menu_select" style="margin-right: -1%;">
+    <li class="btn-warning" id="ad-menu-toggle">
+      <a href="#" onclick="$('.ad-menu-item').slideToggle()" style="text-decoration: none; color: #000000;"><i class="icon-tasks"></i>
+        Menu </a></li>
+    <li class="active ad-menu-item">
+      <a href="#" onclick="load_widget(current_widget-1)"><i class="icon-backward"></i> Back </a></li>
+    <li class="active ad-menu-item">
+      <a href="#" onclick="load_widget(current_widget+1)"><i class="icon-forward"></i> Next </a></li>
+    <li class="active ad-menu-item">
+      <a href="#theme_Modal" data-toggle="modal" onclick=""><i class="icon-th"></i> Theme </a></li>
+    <li class="active ad-menu-item">
+      <a href="#font_Modal" data-toggle="modal" onclick=""><i class="icon-font"></i> Font </a></li>
+  </ul>
+
+
+  <!-- Standard Body Structure -->
+  <div id="title_wrap" class="text_block"></div>
+  <div id="text_wrap_back"></div>
+  <div id="text_wrap" class="text_block"></div>
+  <div id="widget_wrap"></div>
+  <div id="caption_wrap_back"></div>
+  <div id="caption_wrap" class="text_block"><h1></h1></div>
+
+</div>
+
+
+<!--------------------------------------------------------
+Modals
+------------------------------------------------------------>
+
+<div id="theme_Modal" class="modal hide fade home_modal_style" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="themeModalLabel" class="modalLabel">Theme Selection</h3>
+  </div>
+  <div class="modal-body">
+    <div class="control-group">
+      <div id="current_theme_name"> Current Theme :</div> <br>
+      Change Theme : <select name="theme_selection" id="ts" style="width: 140px;">
+      <% @themelist.each do |theme| %>
+          <option value="<%= theme.downcase.gsub(" ", "_") %>"><%= theme %></option>
+      <% end %>
+    </select>
+    </div>
+  </div>
+  <div class="modal-footer" style="text-align: center;">
+    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+  </div>
+</div>
+
+<div id="font_Modal" class="modal hide fade home_modal_style" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="fontModalLabel" class="modalLabel">Font Selection</h3>
+  </div>
+  <div class="modal-body">
+    <div class="control-group">
+      <div id="current_font_name"> Current Font :</div> <br>
+      Change Font : <select name="theme_selection" id="fs" style="width: 160px;">
+      <% @fontarray.each_with_index do |f, index| %>
+          <option value="<%= index %>"><%= f %></option>
+      <% end %>
+    </select>
+    </div>
+  </div>
+  <div class="modal-footer" style="text-align: center;">
+    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+  </div>
+</div>
+
+<!-----------------------------------------------------------------
+Modals End
+----------------------------------------------------------------------->
+
+<script type="text/javascript" src="/assets/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="/assets/jquery.easing.js"></script>
+<script type="text/javascript" src="/assets/home/master.js"></script>
+<script type="text/javascript" src="/assets/home/slide_data.js"></script>
+<script type="text/javascript" src="/assets/bootstrap.min.js"></script>
+<script type="text/javascript" src="/assets/home/init.js"></script>
+
+</body>
+</html>

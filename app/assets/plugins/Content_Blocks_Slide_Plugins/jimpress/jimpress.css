@@ -182,18 +182,18 @@ a.jms-link{
 	border-radius: 3px;
 }
 .jms-arrows span.jms-arrows-prev{
-	background: #fff url(arrow_left.png) no-repeat 50% 50%;
+	background:url(arrow_left.png) no-repeat 50% 50%;
 	left: -10px;
     background-size:100%;
 }
 
 .jms-arrows span.jms-arrows-prev{
-    background: #fff url(arrow_left.png) no-repeat 50% 50%;
+    background: url(arrow_left.png) no-repeat 50% 50%;
     left: -10px;
     background-size:100%;
 }
 .jms-arrows span.jms-arrows-next{
-    background: #fff url(arrow_right.png) no-repeat 50% 50%;
+    background: url(arrow_right.png) no-repeat 50% 50%;
     right: -23px;
 
     background-size:100%;
