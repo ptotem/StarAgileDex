@@ -4,6 +4,7 @@ class SlidesController < ApplicationController
   # GET /slides/1.json
   def builder
     @slide = Slide.find(params[:id])
+
     #render :text => @slide.id
     #return
     @export=FALSE # This is the Screen View
@@ -51,6 +52,8 @@ class SlidesController < ApplicationController
     #For including best suited layout for selected plugins and executing it's function
     #TODO: Check for plugins
     @plugin_layout=t(:plugins)[s][:"#{@widget_list[params[:plugin].to_i]}"][:layout]
+    #render :text => params[:layout]
+    #return
     gon.plugin_layout="#{@plugin_layout}()"
     # Put the contents into JS variables to be processed by master_init.js
     # ----------------------------------------
@@ -106,8 +109,16 @@ class SlidesController < ApplicationController
     gon.themelist = @themelist
 
     # Currently active
-    gon.font = params[:font]
-    gon.background = params[:background]
+    #render :text => @slide.font
+    #return
+    #gon.font = params[:font]
+    gon.font = @slide.font
+
+    #render :text => @slide.background
+    #return
+    #gon.background = params[:background]
+    gon.background = @slide.background
+
     gon.plugin=params[:plugin].to_i
 
     # ---------------------------------------
@@ -148,7 +159,8 @@ class SlidesController < ApplicationController
   # POST /slides.json
   def create
     @slide = Slide.new(params[:slide])
-    #@slide = Slide.create(params[:slide])
+    #render :text => @slide.mode
+    #return
     respond_to do |format|
       if @slide.save
         @slide.remove_redundancy

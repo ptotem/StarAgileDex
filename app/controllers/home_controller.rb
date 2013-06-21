@@ -59,8 +59,12 @@ class HomeController < ApplicationController
   end
 
   def move_slide_up
+
     @slide = Slide.find(params[:slide_id][0])
-    @prev_slide=Slide.find_by_next_slide(@slide.id)
+    #@next_slide=Slide.find(@slide.next_slide) rescue nil?
+
+    @prev_slide=Slide.find_by_next_slide(@slide.id) rescue nil
+    @prev_prev_slide=Slide.find_by_next_slide(@prev_slide.id) rescue nil
 
     s=@slide.sequence
     @slide.sequence=@prev_slide.sequence
@@ -68,19 +72,21 @@ class HomeController < ApplicationController
 
     @prev_slide.next_slide=@slide.next_slide
     @slide.next_slide=@prev_slide.id
-
+    @prev_prev_slide.next_slide=@slide.id unless @prev_prev_slide.nil?
     @slide.save
     @prev_slide.save
-
+    @prev_prev_slide.save unless @prev_prev_slide.nil?
     render :text => "Slide moved up"
     return
   end
 
   def move_slide_down
+    @prev_slide=Slide.find_by_next_slide(params[:slide_id][0]) rescue nil
     @slide = Slide.find(params[:slide_id][0])
     @next_slide=Slide.find(@slide.next_slide) rescue nil?
 
     s=@slide.sequence
+    @prev_slide.next_slide=@next_slide.id unless @prev_slide.nil?
 
     @slide.sequence=@next_slide.sequence
     @slide.next_slide=@next_slide.next_slide
@@ -88,6 +94,7 @@ class HomeController < ApplicationController
     @next_slide.sequence=s
     @next_slide.next_slide=@slide.id
 
+    @prev_slide.save unless @prev_slide.nil?
     @slide.save
     @next_slide.save
 

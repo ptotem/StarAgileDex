@@ -55,11 +55,11 @@
     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(opacity=0)"; /*IE8*/
 }
 .jms-content{
-    /*margin: 64px 370px 0px 20px;*/
-    margin: 271px 370px 0px 20px;
-    position: relative;
     clear: both;
     font-size: 24px;
+    margin: 220px 370px 0 20px;
+    position: relative;
+    word-wrap: break-word;
 }
 .step h3{
     color: #000;

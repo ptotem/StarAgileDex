@@ -830,6 +830,7 @@ a, a img {
     display: none;
     opacity: 0.8;
     background: #000;
+    word-wrap: break-word;
 }
 
 .box_skitter .label_skitter p {

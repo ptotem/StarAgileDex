@@ -23,8 +23,10 @@ $(function () {
         $subtitle.html(gon.subtitle);
     }
     // Initialize Widget
-    $('#wrapper').addClass(gon.background).css('font-family', gon.font);
+    $('#wrapper').addClass(gon.background);
+    $('#wrapper > div:not(.nav)').css('font-family', gon.font);
     init_widget();
+//    alert(gon.font);
     load_menu_bindings();
 });
 
@@ -81,17 +83,16 @@ function load_menu_bindings(){
     //change font of each block i.e. wrapper, title_wrap, text_wrap, caption_wrap block and display currently selected font in font modal
     $("#fs").live("change", function () {
         var $font = $('#fs option:selected').text();
-        var font_style = $('#fs').val();
-        $('#wrapper').css('font-family', font_style);
+        $('#wrapper > div:not(.nav)').css('font-family', $font);
         $("#current_font_name").html("Current Font " + ': ' + $font);
-        var fontsize, h1fontsize;
-        $.each($('.text_block'), function (index, elm) {
-            fontsize = (parseInt($(elm).css("font-size").replace("px", "")) - gon.fontadjustment[index]) + "px";
-            h1fontsize = (parseInt($(elm).children(elm).css("font-size").replace("px", "")) - gon.fontadjustment[index]) + "px";
-            $(elm).css("font-family", gon.fontarray[font_style]);
-            $(elm).css("font-size", fontsize);
-            $(elm).find('h1').css("font-size", h1fontsize);
-        });
+//        var fontsize, h1fontsize;
+//        $.each($('.text_block'), function (index, elm) {
+//            fontsize = (parseInt($(elm).css("font-size").replace("px", "")) - gon.fontadjustment[index]) + "px";
+//            h1fontsize = (parseInt($(elm).children(elm).css("font-size").replace("px", "")) - gon.fontadjustment[index]) + "px";
+//            $(elm).css("font-family", gon.fontarray[font_style]);
+//            $(elm).css("font-size", fontsize);
+//            $(elm).find('h1').css("font-size", h1fontsize);
+//        });
         gon.font = $font;
     });
 

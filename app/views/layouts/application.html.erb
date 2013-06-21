@@ -131,7 +131,7 @@
       </div>
       <div class="modal-body">
         <div class="control-group">
-          <div id="current_theme_name"> Current Theme :<%= @background %></div>
+          <div id="current_theme_name"> Current Theme :<%= @slide.background %></div>
           <br>
           Change Theme : <select name="theme_selection" id="ts" style="width: 140px;">
           <% @themelist.each do |theme| %>
@@ -152,7 +152,7 @@
       </div>
       <div class="modal-body">
         <div class="control-group">
-          <div id="current_font_name"> Current Font : <%= @font %></div>
+          <div id="current_font_name"> Current Font : <%= @slide.font %></div>
           <br>
           Change Font : <select name="theme_selection" id="fs" style="width: 160px;">
           <% @fontarray.each_with_index do |f, index| %>

@@ -38,12 +38,11 @@ function transitInDeck(name) {
 }
 
 function setActiveSlide() {
-//    $('.btn').removeClass('btn-warning').addClass('btn-inverse');
-//    $(this).removeClass('btn-inverse').addClass('btn-warning');
-    alert($(this).attr('class'));
+
 }
 
 function transitInNewSlide(slide_id, presentation_id) {
+
     if (slide_id == 0) {
         $.get("/slides/new/" + presentation_id, function (data) {
             $("#slide_form_panel").html("");
@@ -56,6 +55,7 @@ function transitInNewSlide(slide_id, presentation_id) {
             form_bindings();
         });
     }
+
 //    $(".main_form_body").niceScroll({cursorcolor: "#232836", cursorborder: "none", cursorwidth: "5px", autohidemode: false, horizrailenabled: false});
 
 
@@ -134,7 +134,7 @@ function create_new_deck(presentation_name) {
             success: function (returning_data) {
                 guest = returning_data.split('|')[1] == 'guest' ? true : false;
                 returning_data = returning_data.split('|')[0];
-                $('#presentations_table').dataTable().fnAddData(['<a id="activate_presentation_' + returning_data + '" onclick="transitInDeck(\'' + prez_name + '\')" href="#?presentation' + returning_data + '"><button class="btn btn-warning show_this_presentation" type="button" style="color: #000000;"><input id="' + returning_data + '" type="hidden" name="' + returning_data + '">' + prez_name + '</button></a>', ""]);
+                $('#presentations_table').dataTable().fnAddData(['<a class="datatable_button" id="activate_presentation_' + returning_data + '" onclick="transitInDeck(\'' + prez_name + '\')" href="#?presentation' + returning_data + '"><button class="btn btn-warning show_this_presentation" type="button" style="color: #000000;"><input id="' + returning_data + '" type="hidden" name="' + returning_data + '">' + prez_name + '</button></a>', ""]);
                 $('#presentations_table tbody tr:first').addClass('presentation_row');
                 $('#new_deck_Modal').modal('hide');
                 $('.dataTables_scrollBody').animate({scrollTop: $('.dataTables_scrollBody').prop("scrollHeight")}, 500);
@@ -602,19 +602,30 @@ function load_bindings() {
     $('#del_deck_btn').on('click', delete_presentation);
 
     // This function handles the presentation slides index
-    $('.show_this_presentation').on('click', function () {
+    $('.show_this_presentation').live('click', function () {
 
-//        $('a.menu').removeClass("active");
-//        $(this).addClass("active");
-
-        $('.btn').removeClass("btn-warning").addClass("btn-inverse");
-        $('.btn').css("color","white");
-        $(this).removeClass("btn-inverse").addClass("btn-warning");
+//        btn btn-warning show_this_presentation
+        $('#presentations_table').find('button').removeClass("btn btn-warning show_this_presentation").addClass("btn btn-inverse show_this_presentation");
+        $('#presentations_table').find('button').css("color","white");
+        $(this).removeClass("btn btn-inverse show_this_presentation").addClass("btn btn-warning show_this_presentation");
         $(this).css("color","black");
-//        alert("test active deck");
-
+//        alert($(this).find(':input').attr("id"));
+//        alert($(this).text());
         show_presentation($(this).find(':input').attr("id"), $(this).text());
     });
+
+
+//    $('.show_this_slide').on('click', function () {
+//        alert($('#presentations_slides_list').find('button').attr('class'));
+////        alert($(this).parent().parent().attr('id'));
+////    $('#presentations_slides_list').find('button').removeClass("btn-warning").addClass("btn-inverse");
+////    $('#presentations_slides_list').find('button').css("color","white");
+//        //$(this).removeClass("btn-inverse").addClass("btn-warning");
+//        //$(this).css("color","black");
+//    });
+
+
+
 
     // This function handles the export as html of a deck
     $('#export_html_btn').on('click', export_as_html);
@@ -640,7 +651,7 @@ function form_bindings() {
 
     $('#slide_title').focusin(function () {
         if ($('#slide_title').val() == "")
-            $('#slide_title').attr("placeholder", "Title");
+            $('#slide_title').attr("placeholder", "Title (Maximum 25 characters)");
     });
 
     $('#show_titlepic').click(switch_to_titlepic);
@@ -681,6 +692,15 @@ function form_bindings() {
 
         //This removes the titlepic
         $('#clear_title_pic').click();
+        $('.remove_nested_fields').click();
+        $('#slide_ppt').val("");
+    });
+
+
+    $('#revert_changes_btn').on('click', function(){
+        var slide_id_from_form = $(this).closest('form').attr('id').split("_")[2];
+        var pres_id = $('#slide_presentation_id').val();
+        transitInNewSlide(slide_id_from_form, pres_id);
     });
 
     $(':file').on("change", function () {
@@ -699,8 +719,20 @@ function form_bindings() {
 //        }
 //    });
 
+//    $('.caption').live("focus", function (e) {
+//        var caption = $(this);
+//        var file_field = caption.parent().find('input:file');
+//
+//        var ext = file_field.val().split('.').pop().toLowerCase();
+//
+//        if($.inArray(ext, ['gif','png','jpg','jpeg']) == -1) {
+//            alert('invalid extension!');
+//        }
+//        else{
+//
+//        }
+//    });
 
-    //$('.caption').live("focus", function () {
     $('.caption').live("keypress", function (e) {
         var caption = $(this);
         var file_field = caption.parent().find('input:file');
@@ -711,33 +743,14 @@ function form_bindings() {
         //var img_name = caption.parent().find('img').last().next().text();
             // OR
         var img_name = caption.parent().find('#change_img_btn').prev().text();
-//        alert(img_name);
 
-        //var timeoutID;
-
-//        function delayedAlert() {
-//            timeoutID = window.setTimeout(slowAlert, 2000);
-//        }
-
-//        function slowAlert() {
-//            //$(file_field).click();
-//            if ((file_field.val()!="") || (img_src!="/assets/upload.png")) {
-//                clearAlert();
-//            }
-//        }
-
-//        function clearAlert() {
-//            window.clearTimeout(timeoutID);
-//        }
 
         if ((slide_form_id.split('_')[0]!="edit") && (file_field.val()=="")) {
             caption.attr("placeholder", "Please, select image. You cannot have only caption.");
             caption.css('color','red');
             e.preventDefault();
-            //delayedAlert();
         }
         //else if ((slide_form_id.split('_')[0]=="edit") && ( (img_src.split('/')[1]=="assets") || ((img_src.split('/')[1]=="userdata")) ) ) {
-
         //else if ((slide_form_id.split('_')[0]=="edit") && ((img_src=="/assets/upload.png") || (img_src!=""))  ) {
         else if ((slide_form_id.split('_')[0]=="edit") && (img_name=="")  ) {
             caption.attr("placeholder", "Please, select image. You cannot have only caption.");

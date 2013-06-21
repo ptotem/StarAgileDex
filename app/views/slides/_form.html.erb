@@ -6,10 +6,10 @@
       <%= f.hidden_field :mode, :value => @slide.mode %>
       <%= f.hidden_field :nosub, :value => @slide.nosub %>
 
-      <%= f.text_field :title, :class => "slide_field required", :placeholder => "Title", :maxlength=>"25" %>
+      <%= f.text_field :title, :class => "slide_field required", :placeholder => "Title (Maximum 25 characters)", :maxlength=>"25" %>
 
       <div id="subtitle_block">
-        <%= f.text_area :subtitle, :class => "slide_field", :placeholder => "Subtitle", :maxlength=>"40" %>
+        <%= f.text_area :subtitle, :class => "slide_field", :placeholder => "Subtitle (Maximum 25 characters)", :maxlength=>"40" %>
         <a href="#" class="btn btn-inverse" id="titlepic_Modal_btn">
           <div id="title_picture">
             <% if @slide.titlepic.blank? %>
@@ -62,7 +62,7 @@
                           <div style="height: 15px; margin: 0 0 5px 0;"></div>
                           <span id="change_img_btn" onclick="">Click to change</span> <br>
                       </a>
-                      <%= widget_form.text_area :caption, :rows=>"2", :placeholder => "Caption for this image", :class => "caption", :style=>"margin-top:1px; margin-bottom: 1px; margin-left:8px; width:44%; resize:vertical; height:89px; min-height:89px; max-height:300px; font-size:12px;" %>
+                      <%= widget_form.text_area :caption, :rows=>"2", :placeholder => "Caption for this image", :maxlength=>"150", :class => "caption", :style=>"margin-top:1px; margin-bottom: 1px; margin-left:8px; width:44%; resize:vertical; height:89px; min-height:89px; max-height:300px; font-size:12px;" %>
                   <% else %>
                       <div class="existing-cb-images" style="text-align: left;">
                         <a href="#" class="btn btn-inverse" style="margin-bottom: 1px; text-align: center; float: left; width: 98px; height: 88px; font-size: 12px;">
@@ -74,7 +74,7 @@
                             <span id="change_img_btn" onclick="">Click to change</span> <br>
                             <!--<div class="content_block_img_caption"><%= widget_form.object.caption %></div>-->
                         </a>
-                      <%= widget_form.text_area :caption, :rows=>"2", :placeholder => "Caption for this image", :class => "caption", :style=>"margin-top:1px; margin-bottom: 1px; margin-left:8px; width:44%; resize:vertical; height:89px; min-height:89px; max-height:300px; font-size:12px;" %>
+                      <%= widget_form.text_area :caption, :rows=>"2", :placeholder => "Caption for this image", :maxlength=>"150", :class => "caption", :style=>"margin-top:1px; margin-bottom: 1px; margin-left:8px; width:44%; resize:vertical; height:89px; min-height:89px; max-height:300px; font-size:12px;" %>
                       </div>
                   <% end %>
                 </div>
@@ -112,7 +112,7 @@
       <%= f.submit "Save the Slide", :class => "btn btn-inverse submit_button" %>
       <!--<input type ="button" id="slide_form_submit_btn" name="save" class="btn btn-inverse submit_button" value ="Save the Slide">-->
       <br>
-      <a href="#" class="btn btn-inverse" onclick="">Revert Changes</a>
+      <a href="#" id="revert_changes_btn" class="btn btn-inverse">Revert Changes</a>
       <a href="#" id="form_reset_btn" class="btn btn-inverse">Clear Form</a>
       <a href="#" class="btn btn-inverse" onclick="transitOut()">Close without Saving</a>
 

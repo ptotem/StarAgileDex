@@ -9,8 +9,8 @@ function init_widget() {
             $('#bb-bookblock').append('<div class="bb-item"><a></a><div id=' + this_caption + ' class="xyz">' + captions[index] + '</div></div>');
         }
 
-        this_caption = '#' + this_caption;
-        $(this_caption).boxfit({multiline:true, maximum_font_size:16});
+//        this_caption = '#' + this_caption;
+//        $(this_caption).boxfit({multiline:true, maximum_font_size:16});
 
     });
 
