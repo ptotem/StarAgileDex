@@ -32,7 +32,7 @@
         targetSize = Math.floor(Math.min(Math.max(targetSize, parseFloat(settings.minSize)), parseFloat(settings.maxSize)));
 
 //        $this.css('white-space', 'nowrap');
-        $this.css('padding', '5px');
+        $this.css('padding', '10px 5px 5px 15px');
         $this.css('font-size', targetSize);
 
         // Remove the wrapper span

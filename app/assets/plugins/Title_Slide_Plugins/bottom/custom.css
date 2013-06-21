@@ -1,18 +1,25 @@
 #subtitle_back {
-    top: 0px;
+    bottom: 0px;
     height: 380px;
     right: 120px;
-    opacity: 0.7;
+    opacity: 0.5;
     position: absolute;
     width: 560px;
     display: none;
     background: black;
     border: 2px solid black;
-    border-radius:0px 0px 20px 20px;
+    border-radius:20px 20px 0px 0px;
+}
+
+#titlepic{
+    position: absolute;
+    left: 450px;
+    top:330px;
+    max-height:250px;
 }
 
 #subtitle {
-    top: 0px;
+    bottom: 0px;
     display: none;
     height: 300px;
     right:120px;
@@ -34,12 +41,12 @@
     width: 290px;
     position: absolute;
     left: 50px;
-    bottom:0px;
+    top:0px;
     margin-top: -10px;
     padding: 20px;
-    border: 2px solid black;
-    border-radius:20px 20px 0px 0px;
-    background-color: black;
+    /*border: 2px solid black;*/
+    border-radius:0px 0px 20px 20px;
+    background-color: rgba(0, 0, 0);
     /*opacity: 0.5;*/
 }
 

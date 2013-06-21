@@ -291,7 +291,8 @@ class PresentationsController < ApplicationController
     @slides.each_with_index do |i, index|
       @count=1
       if index<1
-        Slide.create!(:presentation_id => @presentation.id, :title => i["title"],:mode => "HTML", :layout => ['allcentered','left','right','top','bottom'].sample, :sequence => (@count))
+        #Slide.create!(:presentation_id => @presentation.id, :title => i["title"],:mode => "HTML", :layout => ['allcentered','left','right','top','bottom'].sample, :sequence => (@count))
+        Slide.create!(:presentation_id => @presentation.id, :title => i["title"],:mode => "HTML", :layout => "top", :sequence => (@count))
         @count=@count+1
         @slide=Slide.create!(:presentation_id => @presentation.id, :title => i["title"], :main => i["main"].summarize,:mode => "HTML", :layout => ['simple_title_content','fancy_title_content','left_fancy_title_content','centered_content'].sample, :sequence => (@count))
       else
@@ -303,7 +304,7 @@ class PresentationsController < ApplicationController
         end
       end
     end
-    render :text=>"Transforming the data....\n|#{@presentation.id}"
+    render :text=>"Transforming the data...\n|#{@presentation.id}"
   end
 
   def image_search
@@ -319,7 +320,7 @@ class PresentationsController < ApplicationController
       slide.save
     end
 
-    render :text=>"Finish Making Presentation....|#{@presentation.id}"
+    render :text=>"Done.|#{@presentation.id}"
   end
 
 end

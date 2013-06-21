@@ -14,6 +14,10 @@ class Slide < ActiveRecord::Base
                         :all=>"-quality 60"
                     }
 
+  #validates_attachment_content_type :ppt, :content_type => ["file/ppt", "file/pptx"], :message => "Accepted files include: ppt, pptx"
+
+  #validates_attachment_size :ppt, :less_than => 10.megabytes
+
   attr_accessor :delete_titlepic
   attr_accessible :delete_titlepic
   before_validation { titlepic.clear if delete_titlepic == '1' }

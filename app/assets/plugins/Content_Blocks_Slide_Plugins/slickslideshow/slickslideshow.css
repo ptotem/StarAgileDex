@@ -1,7 +1,8 @@
 #slideshow {
-    margin: 0 auto;
+    /*margin: 0 auto;*/
+    margin-left: 110px;
     /*top:100px;*/
-    width: 640px;
+    width: 730px;
     height: 315px;
     background: transparent url(bg_slideshow.jpg) no-repeat 0 0;
     background-size: 100% 100%;
@@ -69,8 +70,11 @@
 }
 
 .slide p{
-    padding: 2px 0 0 8px;
+    bottom: 50px;
     line-height: 1.4em;
+    padding: 2px 0 0 8px;
+    position: absolute;
+    width: 210px;
 }
 
 

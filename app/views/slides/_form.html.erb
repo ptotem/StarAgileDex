@@ -6,10 +6,10 @@
       <%= f.hidden_field :mode, :value => @slide.mode %>
       <%= f.hidden_field :nosub, :value => @slide.nosub %>
 
-      <%= f.text_field :title, :class => "slide_field required", :placeholder => "Title" %>
+      <%= f.text_field :title, :class => "slide_field required", :placeholder => "Title", :maxlength=>"25" %>
 
       <div id="subtitle_block">
-        <%= f.text_area :subtitle, :class => "slide_field", :placeholder => "Subtitle" %>
+        <%= f.text_area :subtitle, :class => "slide_field", :placeholder => "Subtitle", :maxlength=>"40" %>
         <a href="#" class="btn btn-inverse" id="titlepic_Modal_btn">
           <div id="title_picture">
             <% if @slide.titlepic.blank? %>
@@ -60,7 +60,7 @@
                           <%= widget_form.file_field :image, :placeholder => "Add Image", :class => "required", :style => "margin-right:15px; display:none;", :onchange=>"$(this).next().next().next().html($(this).val().substr(0, $(this).val().lastIndexOf('.')).substring(0,12));" %> <!--javascript to remove file extensions-->
                           <%= image_tag "upload.png", :onclick=>"$(this).prev().click();" %> <br>
                           <div style="height: 15px; margin: 0 0 5px 0;"></div>
-                          <span onclick="">Click to change</span> <br>
+                          <span id="change_img_btn" onclick="">Click to change</span> <br>
                       </a>
                       <%= widget_form.text_area :caption, :rows=>"2", :placeholder => "Caption for this image", :class => "caption", :style=>"margin-top:1px; margin-bottom: 1px; margin-left:8px; width:44%; resize:vertical; height:89px; min-height:89px; max-height:300px; font-size:12px;" %>
                   <% else %>
@@ -71,7 +71,7 @@
                             <% userdata_path = pubsys_path.gsub(pubsys_path, "/userdata/"+@slide.presentation.user.name.downcase.gsub(" ", "_")+"/"+@slide.presentation.name.downcase.gsub(" ", "_")+"/"+@slide.id.to_s+"/content_blocks/"+widget_form.object.image_file_name) if widget_form.object.image? %>
                             <%= image_tag userdata_path, :onclick=>"$(this).prev().click();" %>
                             <div class="content_block_img_name"><%= widget_form.object.image_file_name.split('.').first.truncate(15) rescue nil %></div>
-                            <span onclick="">Click to change</span> <br>
+                            <span id="change_img_btn" onclick="">Click to change</span> <br>
                             <!--<div class="content_block_img_caption"><%= widget_form.object.caption %></div>-->
                         </a>
                       <%= widget_form.text_area :caption, :rows=>"2", :placeholder => "Caption for this image", :class => "caption", :style=>"margin-top:1px; margin-bottom: 1px; margin-left:8px; width:44%; resize:vertical; height:89px; min-height:89px; max-height:300px; font-size:12px;" %>

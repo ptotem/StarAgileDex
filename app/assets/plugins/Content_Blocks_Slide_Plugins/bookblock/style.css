@@ -1,7 +1,7 @@
 /* Content Flip Style */
 .bb-bookblock {
 	width: 400px;
-	height: 300px;
+	height: 340px;
 	position: relative;
 	background: #fff;
 	z-index: 100;
@@ -28,7 +28,7 @@
 }
 
 .bb-page a img{
-    height: 300px;
+    height: 340px;
     width: 400px;
 }
 
@@ -125,7 +125,7 @@
 /*start of custom.css*/
 
 .bb-item a img{
-    height: 300px;
+    height: 340px;
     width: 400px;
 }
 
@@ -227,20 +227,22 @@ a, a:hover, a:active, a:focus{
 
 
 #buttonss{
-    height:20px;
-    width:330px;
-    margin-left:30px;
+    bottom: 15px;
+    height: 20px;
+    margin-left: 30px;
+    position: absolute;
+    width: 330px;
+    z-index: 999;
 }
 .xyz{
-    margin-left: 0;
-    height: 120px;
-    width: 400px;
     background-color: #000000;
-    margin-top: 33px;
-    display: block;
+    height: 100px;
+    margin-left: 0;
+    margin-top: 5px;
+    padding: 5px;
     position: absolute;
-    padding: 8px;
     text-align: center;
+    width: 386px;
 }
 
 

@@ -6,6 +6,13 @@ h1 {
     line-height: 48px;
 }
 
+#title_wrap {
+    position: absolute;
+    left: 8px;
+    top: 0px;
+    display: none;
+}
+
 .text_wrap_span {
     height: 320px;
     width: 790px;

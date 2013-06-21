@@ -5,6 +5,17 @@
     top: 10px;
 }
 
+#title_wrap{
+    position: absolute;
+    top:288px;
+    right:8px;
+    font-size: 28px;
+    height: auto;
+    width: 180px;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
 #subtitle {
     position: absolute;
     top: 280px;

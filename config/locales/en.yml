@@ -19,7 +19,7 @@ en:
         chrome: "false"
         safari: "false"
         opera: "false"
-        working: "true"
+        working: "false"
       right:
         layout: "layout9"
         ie: "6+"
@@ -27,7 +27,7 @@ en:
         chrome: "false"
         safari: "false"
         opera: "false"
-        working: "true"
+        working: "false"
       top:
         layout: "layout9"
         ie: "6+"
@@ -68,7 +68,7 @@ en:
         chrome: "false"
         opera: "false"
         safari: "false"
-        working: "true"
+        working: "false"
       centered_content:
         layout: "layout5"
         ie: "6+"
@@ -116,7 +116,7 @@ en:
         chrome: "false"
         safari: "false"
         opera: "false"
-        working: "true"
+        working: "false"
       littleboxesmenu:
         layout: "layout1"
         ie: "6+"
@@ -132,7 +132,7 @@ en:
         chrome: "false"
         safari: "false"
         opera: "false"
-        working: "true"
+        working: "false"
       slicebox:
         layout: "layout1"
         ie: "6+"
@@ -156,7 +156,7 @@ en:
         chrome: "false"
         safari: "false"
         opera: "false"
-        working: "true"
+        working: "false"
       triplepanelimageslider:
         ie: "6+"
         firefox: "TRUE"
@@ -186,7 +186,7 @@ en:
         chrome: "false"
         safari: "false"
         opera: "false"
-        working: "true"
+        working: "false"
       featurecarousel:
         layout: "layout2"
         ie: "6+"
@@ -210,7 +210,7 @@ en:
         chrome: "false"
         safari: "false"
         opera: "false"
-        working: "true"
+        working: "false"
       presentationcycle:
         layout: "layout2"
         ie: "6+"
@@ -226,7 +226,7 @@ en:
         chrome: "false"
         safari: "false"
         opera: "false"
-        working: "true"
+        working: "false"
       jFlow:
         layout: "layout2"
         ie: "6+"
@@ -234,7 +234,7 @@ en:
         chrome: "false"
         safari: "false"
         opera: "false"
-        working: "true"
+        working: "false"
       startstopslider:
         layout: "layout2"
         ie: "6+"
@@ -250,7 +250,7 @@ en:
         chrome: "false"
         safari: "false"
         opera: "false"
-        working: "true"
+        working: "false"
       contentglider:
         layout: "layout2"
         ie: "6+"
@@ -274,7 +274,7 @@ en:
         chrome: "false"
         safari: "false"
         opera: "false"
-        working: "true"
+        working: "false"
       pfold:
         layout: "layout1"
         ie: "6+"
@@ -282,7 +282,7 @@ en:
         chrome: "false"
         safari: "false"
         opera: "false"
-        working: "true"
+        working: "false"
     ppt_plugin:
       iebook:
         layout: "layout4"

@@ -17,9 +17,10 @@ $(function () {
 
 function transitInDeck(name) {
     $('#headline').hide();
-    $('#logo').animate({
-        'marginLeft': "+=15px"
-    });
+//    $('#logo').animate({
+//        'marginLeft': "+=15px"
+//    });
+
     $('#writeup').fadeOut(function () {
         $('#right_panel').animate({
             'width': "240px",
@@ -36,8 +37,13 @@ function transitInDeck(name) {
 
 }
 
-function transitInNewSlide(slide_id, presentation_id) {
+function setActiveSlide() {
+//    $('.btn').removeClass('btn-warning').addClass('btn-inverse');
+//    $(this).removeClass('btn-inverse').addClass('btn-warning');
+    alert($(this).attr('class'));
+}
 
+function transitInNewSlide(slide_id, presentation_id) {
     if (slide_id == 0) {
         $.get("/slides/new/" + presentation_id, function (data) {
             $("#slide_form_panel").html("");
@@ -84,6 +90,7 @@ function transitInNewSlide(slide_id, presentation_id) {
     $('.slide_layout').css({
         'marginLeft': '20px'
     });
+
 }
 function transitOut() {
     $('.main_panel').hide();
@@ -127,9 +134,10 @@ function create_new_deck(presentation_name) {
             success: function (returning_data) {
                 guest = returning_data.split('|')[1] == 'guest' ? true : false;
                 returning_data = returning_data.split('|')[0];
-                $('#presentations_table').dataTable().fnAddData(['<a id="activate_presentation_' + returning_data + '" onclick="transitInDeck(\'' + prez_name + '\')" href="#?presentation' + returning_data + '"><button class="btn btn-inverse show_this_presentation" type="button"><input id="' + returning_data + '" type="hidden" name="' + returning_data + '">' + prez_name + '</button></a>', ""]);
+                $('#presentations_table').dataTable().fnAddData(['<a id="activate_presentation_' + returning_data + '" onclick="transitInDeck(\'' + prez_name + '\')" href="#?presentation' + returning_data + '"><button class="btn btn-warning show_this_presentation" type="button" style="color: #000000;"><input id="' + returning_data + '" type="hidden" name="' + returning_data + '">' + prez_name + '</button></a>', ""]);
                 $('#presentations_table tbody tr:first').addClass('presentation_row');
                 $('#new_deck_Modal').modal('hide');
+                $('.dataTables_scrollBody').animate({scrollTop: $('.dataTables_scrollBody').prop("scrollHeight")}, 500);
                 show_presentation(returning_data, prez_name);
                 transitInDeck(prez_name);
                 if (guest) {
@@ -149,16 +157,21 @@ function initialize_deck_list() {
             "aaSorting": [
                 [ 0, "desc" ]
             ],
+//            "asSorting": [  ],
             "sScrollX": "100%",
             "sScrollY": "350",
-            "aoColumns": [
-                { "sClass": "center", "bSortable": false, "sWidth": "220px"}
-            ],
+//            "aoColumns": [
+//                { "sClass": "center", "bSortable": true, "sWidth": "220px"}
+//            ],
+//            "aoColumnDefs": [
+//                { 'bSortable': true, 'aTargets': [ "sort" ] }
+//            ],
             "bPaginate": false,
             "sPaginationType": "false",
             "bLengthChange": true,
             "bFilter": true,
-//            "bSort": false,
+            "bSort": false,
+//            "bSortClasses": false,
             "bInfo": false,
             "oSearch": {"sSearch": ""},
             "oLanguage": { "sSearch": "" },
@@ -225,7 +238,6 @@ function show_presentation(this_presentation_id, this_presentation_name) {
         $('#slide_presentation_id').val(this_presentation_id); // Set the current presentation as active till replaced
     });
 
-
     // This creates the basic presentation panel for the middle panel and adds the new slide button
 
     // ----------------------------------------
@@ -255,24 +267,46 @@ function show_presentation(this_presentation_id, this_presentation_name) {
 
 //            $('.active_presentation_panel').append('<table id="presentations_slides_table">' + '<thead> <tr> <th></th> </tr> </thead>' + '<tbody></tbody>');
             $('.active_presentation_panel').append('<ul id="presentations_slides_list"></ul>');
-
             $.each(data.split(','), function (d, ele) {
-                if (data != "[]") {
-                    $('#export_html_btn').show();
-                    $('#export_scorm_btn').show();
-                    $('#view_deck').show();
+//                alert(data.split('|')[2].replace('"]',""));
+                if ( (data!="[]") ) {
+                        $('#export_html_btn').show();
+                        $('#export_scorm_btn').show();
+                        $('#view_deck').show();
                 }
                 else {
                     $('#export_html_btn').hide();
                     $('#export_scorm_btn').hide();
                     $('#view_deck').hide();
-
                 }
                 ele = ele.toString().replace('[', '').replace(']', '').replace(/"/g, '');
+//                alert(ele.split('|')[2]);
                 if (ele != '') {
                     my_slide = ele.split('|');
                     this_id = 'slide' + my_slide[0];
                     this_id = this_id.replace(/ /g, '');
+
+                    if (ele.split('|')[2]==0){
+                        $('#export_html_btn').addClass('disabled');
+                        $('#export_html_btn').text("This Presentation can't be exported. Please, Save the slide from right menu");
+                        $('#export_html_btn').css('font-size',"12px");
+
+//                        $('#export_scorm_btn').addClass('disabled');
+//                        $('#export_scorm_btn').text("Please, Save the slide from right menu");
+
+                        $('#view_deck').addClass('disabled');
+                        $('#view_deck').text("This Presentation can't be viewed. Please, Save the slide from right menu");
+                        $('#view_deck').css('font-size',"12px");
+                    }
+                    else{
+                        $('#export_html_btn').removeClass('disabled');
+                        $('#export_html_btn').text("Export as HTML");
+                        $('#export_html_btn').css('font-size',"16px");
+
+                        $('#view_deck').removeClass('disabled');
+                        $('#view_deck').text("View the Deck");
+                        $('#view_deck').css('font-size',"16px");
+                    }
 
                     // Regex to clean slide title, i.e. to clear if slide title contains/formatted with html tags, then remove html tags
                     // \ Escapes character, \r matches carriage return, \n matches linefeed, \t matches horizontal tab,
@@ -292,7 +326,7 @@ function show_presentation(this_presentation_id, this_presentation_name) {
 
                     slide_block = '' + '<li id="slide_' + my_slide[0].replace(/ /g, '') + '">' +
                         '<a href="#?slide' + my_slide[0].replace(/ /g, '') + '" style="float:left;">' +
-                        '<button class="btn btn-inverse show_this_slide" onclick="transitInNewSlide(' + my_slide[0].replace(/ /g, '') + ',' + this_presentation_id + ')" type="button">' +
+                        '<button class="btn btn-inverse show_this_slide" onclick="transitInNewSlide(' + my_slide[0].replace(/ /g, '') + ',' + this_presentation_id + ');" type="button">' +
                         cleaned_slide_title +
                         '<input id="' + my_slide[0].replace(/ /g, '') + '" type="hidden" name="' + "slide_" + my_slide[0].replace(/ /g, '') + '">' +
                         '</button>' +
@@ -394,8 +428,19 @@ function show_presentation(this_presentation_id, this_presentation_name) {
 
                 }
             });
+
 //            $("#view_deck").attr("href", '/view_prez/' + this_presentation_id);
-            $("#view_deck").attr("href", '/view_deck/' + this_presentation_id);
+//            $("#view_deck").attr("href", '/view_deck/' + this_presentation_id);
+
+                $('#view_deck').on('click', function(){
+                    if ($(this).hasClass('disabled')){
+                        $(this).attr("href", "#");
+                    }
+                    else{
+//                        $("#view_deck").attr("href", '/view_deck/' + this_presentation_id);
+                        $(this).attr("href", '/view_deck/' + this_presentation_id);
+                    }
+                });
 
             initialize_slide_list();
         }
@@ -427,7 +472,14 @@ function delete_presentation() {
 
 }
 function export_as_html() {
-    window.location = '/export/' + $('#slide_presentation_id').val();
+//    alert($(this).hasClass('disabled'));
+//    if ($(this).attr('class').split(" ")[2]=="disabled"){
+    if ($(this).hasClass('disabled')){
+
+    }
+    else{
+        window.location = '/export/' + $('#slide_presentation_id').val();
+    }
 }
 
 
@@ -510,17 +562,19 @@ function load_bindings() {
             $pres_name_txt_box.attr('placeholder',"Please, enter deck name.");
         }
         else if($pres_name_file_box.val()==""){
+            $('#new_deck_Modal_ppt_info').text("Please, select file.");
             $('#new_deck_Modal_ppt_info').css('color', 'red');
         }
         else if ($pres_name_txt_box.val()!="" && $pres_name_file_box.val()!=""){
-            if($.inArray(ext, ['ppt','pptx']) == -1) {
-                //if($.inArray(ext, ['gif','png','jpg','jpeg']) == -1) {
-//                alert('invalid extension!');
-                $pres_name_file_box.val("");
-                $('#new_deck_Modal_ppt_info').show();
-                $('#new_deck_Modal_ppt_info').text("invalid extension!");
-            }
-            else{
+//            if($.inArray(ext, ['ppt','pptx']) == -1) {
+//                //if($.inArray(ext, ['gif','png','jpg','jpeg']) == -1) {
+////                alert('invalid extension!');
+//                $pres_name_file_box.val("");
+//                $('#new_deck_Modal_ppt_info').show();
+//                $('#new_deck_Modal_ppt_info').text("Invalid file type...!");
+//                $('#new_deck_Modal_ppt_info').css('color', 'red');
+//            }
+//            else{
                 $('#new_deck_Modal_ppt_info').hide();
                 $('#new_presentation').attr({
                     action: 'ppt_pdf_prez',
@@ -529,7 +583,7 @@ function load_bindings() {
                 });
                 $('#new_presentation').submit();
 //            $('#new_deck_Modal').modal('hide');
-            }
+//            }
 
         }
 
@@ -549,6 +603,16 @@ function load_bindings() {
 
     // This function handles the presentation slides index
     $('.show_this_presentation').on('click', function () {
+
+//        $('a.menu').removeClass("active");
+//        $(this).addClass("active");
+
+        $('.btn').removeClass("btn-warning").addClass("btn-inverse");
+        $('.btn').css("color","white");
+        $(this).removeClass("btn-inverse").addClass("btn-warning");
+        $(this).css("color","black");
+//        alert("test active deck");
+
         show_presentation($(this).find(':input').attr("id"), $(this).text());
     });
 
@@ -636,40 +700,54 @@ function form_bindings() {
 //    });
 
 
-    $('.caption').live("focus", function () {
+    //$('.caption').live("focus", function () {
+    $('.caption').live("keypress", function (e) {
         var caption = $(this);
         var file_field = caption.parent().find('input:file');
         var slide_form_id = $('form').attr('id'); //This is the form id
         var img_src = caption.parent().find('img').last().attr('src');
-//        alert(img_src);
-        var timeoutID;
+        var img_src_dir = img_src.split("/")[1];
+        //alert(img_src_dir);
+        //var img_name = caption.parent().find('img').last().next().text();
+            // OR
+        var img_name = caption.parent().find('#change_img_btn').prev().text();
+//        alert(img_name);
 
-        function delayedAlert() {
-            timeoutID = window.setTimeout(slowAlert, 2000);
-        }
+        //var timeoutID;
 
-        function slowAlert() {
-//            $(file_field).click();
-            if ((file_field.val()!="") || (img_src!="/assets/upload.png")) {
-                clearAlert();
-            }
-        }
+//        function delayedAlert() {
+//            timeoutID = window.setTimeout(slowAlert, 2000);
+//        }
 
-        function clearAlert() {
-            window.clearTimeout(timeoutID);
-        }
+//        function slowAlert() {
+//            //$(file_field).click();
+//            if ((file_field.val()!="") || (img_src!="/assets/upload.png")) {
+//                clearAlert();
+//            }
+//        }
+
+//        function clearAlert() {
+//            window.clearTimeout(timeoutID);
+//        }
 
         if ((slide_form_id.split('_')[0]!="edit") && (file_field.val()=="")) {
             caption.attr("placeholder", "Please, select image. You cannot have only caption.");
-            delayedAlert();
+            caption.css('color','red');
+            e.preventDefault();
+            //delayedAlert();
         }
-//        else if ((slide_form_id.split('_')[0]=="edit") && ( (img_src.split('/')[1]=="assets") || ((img_src.split('/')[1]=="userdata")) ) ) {
-        else if ((slide_form_id.split('_')[0]=="edit") && (img_src=="/assets/upload.png") ) {
+        //else if ((slide_form_id.split('_')[0]=="edit") && ( (img_src.split('/')[1]=="assets") || ((img_src.split('/')[1]=="userdata")) ) ) {
+
+        //else if ((slide_form_id.split('_')[0]=="edit") && ((img_src=="/assets/upload.png") || (img_src!=""))  ) {
+        else if ((slide_form_id.split('_')[0]=="edit") && (img_name=="")  ) {
             caption.attr("placeholder", "Please, select image. You cannot have only caption.");
-//            delayedAlert();
+            caption.css('color','red');
+            e.preventDefault();
+            //delayedAlert();
         }
         else{
             caption.attr("placeholder", "Enter caption here...");
+            caption.css('color','#555555');
         }
 
     });

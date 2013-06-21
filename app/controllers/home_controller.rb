@@ -52,7 +52,7 @@ class HomeController < ApplicationController
     @slides = @presentation.slides.order(:sequence)
     @returning_data =Array.new
     @slides.each do |i|
-      @returning_data<<"#{i.id}|#{i.title}"
+      @returning_data<<"#{i.id}|#{i.title}|#{i.layout}"
     end
     render :text => @returning_data
     return
@@ -279,15 +279,22 @@ class HomeController < ApplicationController
     @ppt_prez = Presentation.create(:name => params[:name], :user_id => current_user.id)
     @ppt_prez.save
     @ppt_prez_slide = Slide.create(:presentation_id => @ppt_prez.id, :title => @slide_title, :ppt => params[:slide][:ppt], :mode => "PPT", :layout => "iebook")
-    @ppt_prez_slide.save
+    #@ppt_prez_slide.save
 
     #redirect_to get_ppt_prez_path(@ppt_prez.id)
     #redirect_to view_deck_path(@ppt_prez)
     respond_to do |format|
-      format.html { redirect_to builder_path(@ppt_prez_slide.id, @ppt_prez_slide.layout, @ppt_prez_slide.font, @ppt_prez_slide.background), notice: 'Slide was successfully created.' }
+      if @ppt_prez_slide.save
+        format.html { redirect_to builder_path(@ppt_prez_slide.id, @ppt_prez_slide.layout, @ppt_prez_slide.font, @ppt_prez_slide.background), notice: 'Slide was successfully created.' }
+      else
+        #format.html { redirect_to "/console", notice: 'There was an error in creating slide.' }
+        render :text => "There was an error in creating slide."
+        return
+      end
     end
     #render :text => "Presentation created using PowerPPT Method"
     #return
+
     # <--- First option ends --->
   end
 

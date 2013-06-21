@@ -26,9 +26,9 @@
 }
 
 #titlepic {
-    bottom: 112px;
+    top: 150px;
     display: none;
-    left: 56px;
+    right: 70px;
     padding: 30px;
     position: absolute;
     text-align: center;
@@ -36,47 +36,51 @@
 }
 
 #titlepic img{
-    width:250px;
     margin-bottom: 20px;
+    max-height: 500px;
+    min-height: auto;
+    width: 280px;
 }
 
 #title_wrap{
-    display: none;
-    height: 150px;
-    width: 290px;
-    position: absolute;
-    right: 150px;
-    top:0px;
-    margin-top: -10px;
-    padding: 20px;
+    background: none repeat scroll 0 0 black;
     border: 2px solid black;
-    border-radius:0px 0px 20px 20px;
-    background-color: pink;
-    opacity: 0.5;
+    border-radius: 10px 10px 10px 10px;
+    display: none;
+    /*height: 150px;*/
+    margin-left: 50px;
+    min-height: 100px;
+    opacity: 0.7;
+    padding: 10px;
+    position: relative;
+    text-align: right;
+    top: 150px;
+    width: 500px;
+    z-index: 999;
 }
 
 #subtitle_back {
-    top: 200px;
-    height: 380px;
-    left: 0px;
+    background: none repeat scroll 0 0 white;
+    border-radius: 0 20px 20px 0;
+    color: black;
+    height: 290px;
+    left: 0;
     opacity: 0.7;
     position: absolute;
-    width: 560px;
-    display: none;
-    background: black;
-    border: 2px solid black;
-    border-radius:0px 20px 20px 0px;
+    top: 270px;
+    width: 500px;
 }
 
 #subtitle {
-    top: 220px;
+    color: black;
     display: none;
     height: 300px;
-    left: 0px;
+    left: 0;
     padding: 30px;
     position: absolute;
     text-align: center;
-    width: 500px;
+    top: 220px;
+    width: 400px;
     white-space: -moz-pre-wrap;  Firefox
     white-space: -pre-wrap;  ancient Opera
     white-space: -o-pre-wrap;  newer Opera

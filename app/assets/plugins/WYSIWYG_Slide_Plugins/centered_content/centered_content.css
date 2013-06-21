@@ -23,10 +23,17 @@ h1 {
     text-align: left;
     top: 18px;
     width: 364px;
+    /*white-space: pre-wrap;*/
+    /*word-wrap: break-word;*/
 }
 
-li{
-    /*line-height:24px ;*/
+.elements ol, ul {
+    margin: 5px 5px 5px 28px;
+}
+
+.elements  li{
+    line-height:25px;
+    margin-bottom: 10px;
 }
 
 .text_wrap_span {
@@ -71,9 +78,9 @@ li{
 }
 
 #titlepic {
-    bottom: 103px;
+    top: 0px;
     display: none;
-    left: 84px;
+    left: 486px;
     padding-bottom: 30px;
     padding-left: 30px;
     padding-right: 30px;

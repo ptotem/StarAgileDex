@@ -184,6 +184,8 @@ body {
     /*width: 100%;*/
     width: 145px;
     text-align: center;
+    word-wrap: break-word;
+    padding: 5px;
 }
 
 /* Presentations DataTable*/

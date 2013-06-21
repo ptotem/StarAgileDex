@@ -370,9 +370,9 @@ body {
 }
 
 #mybook>div img {
-    width: 150px;
-    height: 120px;
-    margin-left: 65px;
+    width: 190px;
+    height: 200px;
+    margin-left: 90px;
 }
 
 #mybook {
@@ -380,6 +380,7 @@ body {
     width: 280px;
     color: #000;
     border: 1px solid #000000;
+    margin-left:95px;
 }
 
 #mybook>div p {

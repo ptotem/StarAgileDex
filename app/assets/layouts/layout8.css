@@ -1,12 +1,12 @@
 #subtitle_back {
-    height: 10%;
-    width: 88%;
-    position: absolute;
-    margin-top: 8%;
-    margin-left: -10px;
+    background-color: #000000;
     border: 2px solid black;
-    background-color: pink;
+    height: 70px;
+    margin-left: -10px;
+    margin-top: 75px;
     opacity: 0.5;
+    position: absolute;
+    width: 850px;
 }
 
 #subtitle {
@@ -33,18 +33,19 @@
 
 #titlepic img{
     max-width: 270px;
+    border: 8px solid white;
 }
 
 #title_wrap{
     display: none;
     height: 50px;
-    width: 290px;
-    position: absolute;
+    margin-left: 13px;
     margin-top: 18px;
-    margin-left: -10px;
     padding: 20px;
-    right: 150px;
-    top: 300px;
+    position: absolute;
+    right: 110px;
+    top: 350px;
+    width: 290px;
 }
 
 .nav{
@@ -54,7 +55,7 @@
 #widget_wrap{
     position: absolute;
     height: 360px;
-    width: 350px;
+    width: 455px;
     left:  30px;
     top: 180px;
     color: white;

@@ -2063,8 +2063,8 @@
     // define default options
     $.fn.booklet.defaults = {
         name:                 null,                            // name of the booklet to display in the document title bar
-        width:                600,                             // container width
-        height:               290,                             // container height
+        width:                770,                             // container width
+        height:               330,                             // container height
         speed:                1000,                            // speed of the transition between pages
         direction:            'LTR',                           // direction of the overall content organization, default LTR, left to right, can be RTL for languages which read right to left
         startingPage:         0,                               // index of the first page to be displayed
