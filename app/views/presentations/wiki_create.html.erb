@@ -18,6 +18,15 @@
 
 <%= content_for :scripts do %>
 
+    <style>
+        #infobox a {
+            color: green;
+            text-decoration: underline;
+        }
+        #infobox a:hover{
+            color: green;
+        }
+    </style>
     <script type="text/javascript">
         $(function () {
             $('.nav').hide();
@@ -27,7 +36,7 @@
         function select_theme() {
             $('#infobox').append('<br/><span id="theme_name"></span> ');
             if (gon.disambiguate) {
-                $('#infobox').append('<br/>We found multiple results for your search query<br><br> Which one do you want to create a presentation on <br>(Select a number on your keyboard):<br><br>');
+                $('#infobox').append('<br/>We found multiple results for your search query<br><br> Which one do you want to create a presentation on <br>(Select a number on your keyboard), or click <a href="/">Here</a> to go back.<br><br>');
                 $.each(gon.disambiguation_options, function (index, elm) {
 //                    $('#infobox').append((index + 1) + " : " + elm + "<br/>");
                     $('#infobox').append('<div id='+(index + 1)+' style="line-height: 1.5em;">' + (index + 1) + ": " + elm + '</div>');
