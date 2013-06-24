@@ -1,7 +1,9 @@
 function init_widget() {
-    var cleaned_main = gon.main.replace(/\[(.*?)\]/g,"");
+    var main = gon.main;
+//    var cleaned_main = gon.main.replace(/\[(.*?)\]/g,"");
 //    alert(cleaned_main);
-    $('#widget_wrap').html(cleaned_main);
+    $('#widget_wrap').html(main);
+//    $('#widget_wrap').html(cleaned_main);
     $('#widget_wrap').show();
 //    TODO: Needs to be checked
 //    if ($('#subtitle ul').length==0 && $('#subtitle ol').length==0){

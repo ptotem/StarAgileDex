@@ -221,7 +221,7 @@ class PresentationsController < ApplicationController
     b=Array.new
     extra_link=Array.new
     extra_link_text= Array.new
-    b[0]={"title" => params[:name], "main" => html_doc.xpath('//p')[0].text}
+    b[0]={"title" => params[:name], "main" => html_doc.xpath('//p')[0].text} rescue ""
     #For each h2 tags
     html_doc.css('h2').each_with_index do |h2, index|
       if index < html_doc.css('h2').count-3

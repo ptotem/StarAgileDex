@@ -643,6 +643,14 @@ function load_bindings() {
 function form_bindings() {
     $("#new_deck_Modal").modal("hide");
 
+//    alert($('#title_picture').find('img').attr('src'));
+    if( $('#title_picture').find('img').attr('src')!="" ){
+        switch_to_titlepic();
+    }
+    else{
+        switch_to_subtitle();
+    }
+
     //This validates Title presence
     $('#slide_title').focusout(function () {
         if ($('#slide_title').val() == "")
