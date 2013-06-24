@@ -451,25 +451,26 @@ function show_presentation(this_presentation_id, this_presentation_name) {
 // These functions manage the deletion of a presentation or a slide and all its dependencies
 
 function delete_presentation() {
+    var conf = confirm("Are you sure?");
+    if (conf == true) {
+        var data = {this_presentation_id: []};
+        data["this_presentation_id"].push($('#slide_presentation_id').val());
 
-    var data = {this_presentation_id: []};
-    data["this_presentation_id"].push($('#slide_presentation_id').val());
-
-    $.ajax({
-        url: "delete_presentation",
-        type: "post",
-        async: false,
-        data: JSON.stringify(data),
-        contentType: "application/json",
-        success: function (data) {
-            var $pres_row_id = $('.show_this_presentation').find('input[id=' + $('#slide_presentation_id').val() + ']');
-//            $pres_row_id.parent().parent().parent().parent().empty().remove();
-            var row = $pres_row_id.closest("tr").get(0);
-            $('#presentations_table').dataTable().fnDeleteRow($('#presentations_table').dataTable().fnGetPosition(row));
-            transitOut();
-        }
-    });
-
+        $.ajax({
+            url: "delete_presentation",
+            type: "post",
+            async: false,
+            data: JSON.stringify(data),
+            contentType: "application/json",
+            success: function (data) {
+                var $pres_row_id = $('.show_this_presentation').find('input[id=' + $('#slide_presentation_id').val() + ']');
+    //            $pres_row_id.parent().parent().parent().parent().empty().remove();
+                var row = $pres_row_id.closest("tr").get(0);
+                $('#presentations_table').dataTable().fnDeleteRow($('#presentations_table').dataTable().fnGetPosition(row));
+                transitOut();
+            }
+        });
+    }
 }
 function export_as_html() {
 //    alert($(this).hasClass('disabled'));
