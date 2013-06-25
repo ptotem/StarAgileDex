@@ -11,7 +11,7 @@ class ContentBlock < ActiveRecord::Base
   attr_accessible :delete_image
 
   # These constants are used for specifying quality of PPT import
-  QUALITY = 30
+  QUALITY = 100
   DENSITY = '80x80'
 
   def get_path

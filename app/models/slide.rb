@@ -11,7 +11,7 @@ class Slide < ActiveRecord::Base
                         :ie=>["256x256>",:jpg]
                     },
                     :convert_options=>{
-                        :all=>"-quality 60"
+                        :all=>"-quality 100"
                     }
 
   #validates_attachment_content_type :ppt, :content_type => ["file/ppt", "file/pptx"], :message => "Accepted files include: ppt, pptx"
