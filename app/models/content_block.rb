@@ -12,7 +12,7 @@ class ContentBlock < ActiveRecord::Base
 
   # These constants are used for specifying quality of PPT import
   QUALITY = 100
-  DENSITY = '80x80'
+  DENSITY = '150x150'
 
   def get_path
     if self.slide.presentation.user.role=="guest"

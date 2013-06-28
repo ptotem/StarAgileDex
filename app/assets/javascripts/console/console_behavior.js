@@ -671,6 +671,7 @@ function form_bindings() {
         $('#title_picture img').attr('src', '/assets/upload.png');
 //        $('#titlepic_name').html($(this).val());
         var full_name = $(this).val();
+//        alert(full_name);
         var rem_ext_from_file_name = full_name.substr(0, full_name.lastIndexOf('.'));
         var display_first_12_char = rem_ext_from_file_name.substring(0, 12);
         if (display_first_12_char.length >= 12) {

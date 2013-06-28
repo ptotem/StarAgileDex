@@ -294,13 +294,13 @@ class PresentationsController < ApplicationController
         #Slide.create!(:presentation_id => @presentation.id, :title => i["title"],:mode => "HTML", :layout => ['allcentered','left','right','top','bottom'].sample, :sequence => (@count))
         Slide.create!(:presentation_id => @presentation.id, :title => i["title"],:mode => "HTML", :layout => "top", :sequence => (@count))
         @count=@count+1
-        @slide=Slide.create!(:presentation_id => @presentation.id, :title => i["title"], :main => i["main"].to_s.summarize,:mode => "HTML", :layout => ['simple_title_content','fancy_title_content','left_fancy_title_content','centered_content'].sample, :sequence => (@count))
+        @slide=Slide.create!(:presentation_id => @presentation.id, :title => i["title"], :main => i["main"],:mode => "HTML", :layout => ['simple_title_content','fancy_title_content','left_fancy_title_content','centered_content'].sample, :sequence => (@count))
       else
         @count=@count+1
         if i["main"]!=""
-          Slide.create!(:presentation_id => @presentation.id, :title => i["title"], :main => (i["main"].to_s.summarize rescue i["main"]),:mode => "HTML", :layout => ['fancy_title_content','left_fancy_title_content'].sample, :sequence => (@count))
+          Slide.create!(:presentation_id => @presentation.id, :title => i["title"], :main => (i["main"] rescue i["main"]),:mode => "HTML", :layout => ['fancy_title_content','left_fancy_title_content'].sample, :sequence => (@count))
         else
-          Slide.create!(:presentation_id => @presentation.id, :title => i["title"], :main => (i["main"].to_s.summarize rescue i["main"]),:mode => "HTML", :layout => ['allcentered'].sample, :sequence => (@count))
+          Slide.create!(:presentation_id => @presentation.id, :title => i["title"], :main => (i["main"] rescue i["main"]),:mode => "HTML", :layout => ['allcentered'].sample, :sequence => (@count))
         end
       end
     end
