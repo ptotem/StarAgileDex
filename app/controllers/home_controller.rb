@@ -41,16 +41,21 @@ class HomeController < ApplicationController
 
   def users_trial_signup_submit
     #@user = User.where(:email=>params[:user][:email]).first
-
+    #render :json => params
+    #return
     user = User.find_by_email(params[:user][:email])
-    #render :json => user
+    #render :json => user.nil?
     #render :json => user.valid_password?(params[:user][:password])
     #return
-    if user.valid_password?(params[:user][:password]) == true
-      sign_in(:user, user)
-      redirect_to console_path
+    if !user.nil?
+      if user.valid_password?(params[:user][:password]) == true
+        sign_in(:user, user)
+        redirect_to console_path
+      else
+        redirect_to "/"
+      end
     else
-      redirect_to "/"
+      redirect_to "/", notice: 'Invalid email id or password'
     end
 
   end

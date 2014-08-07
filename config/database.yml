@@ -2,28 +2,32 @@
 #   gem 'pg'
 
 development:
-  adapter: postgresql
+  adapter: mysql2
   encoding: utf8
   database: agileDex_development_db
   pool: 5
-  username: nilesh
+  username: root
   password: p20o20e13
   host: localhost
+  socket: /var/run/mysqld/mysqld.sock
 
 test:
-  adapter: postgresql
+  adapter: mysql2
   encoding: utf8
   database: agileDex_test_db
   pool: 5
-  username: nilesh
+  username: root
   password: p20o20e13
   host: localhost
+  socket: /var/run/mysqld/mysqld.sock
 
 
 production:
-  adapter: postgresql
+  adapter: mysql2
   encoding: utf8
   database: agileDex_production_db
   pool: 5
-  username: nilesh
+  username: root
   password: p20o20e13
+  host: localhost
+  socket: /var/run/mysqld/mysqld.sock
