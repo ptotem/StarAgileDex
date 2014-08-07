@@ -1,21 +1,23 @@
 #   Ensure the PostgreSQL gem is defined in your Gemfile
 #   gem 'pg'
 
-
 development:
-  adapter: sqlite3
-  database: db/development.sqlite3
+  adapter: postgresql
+  encoding: utf8
+  database: agileDex_development_db
   pool: 5
-  timeout: 5000
-
+  username: nilesh
+  password: p20o20e13
+  host: localhost
 
 test:
   adapter: postgresql
   encoding: utf8
   database: agileDex_test_db
   pool: 5
-  username: ptotem
+  username: nilesh
   password: p20o20e13
+  host: localhost
 
 
 production:
@@ -23,6 +25,5 @@ production:
   encoding: utf8
   database: agileDex_production_db
   pool: 5
-  username: ptotem
+  username: nilesh
   password: p20o20e13
-

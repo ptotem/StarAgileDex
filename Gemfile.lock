@@ -240,7 +240,6 @@ GEM
       multi_json (~> 1.0)
       rack (~> 1.0)
       tilt (~> 1.1, != 1.3.0)
-    sqlite3 (1.3.7)
     summarize (1.0.3)
       rake-compiler
     therubyracer (0.11.4)
@@ -301,7 +300,6 @@ DEPENDENCIES
   sass-rails (~> 3.2.3)
   sparql-client
   spreadsheet
-  sqlite3
   summarize
   therubyracer
   thin

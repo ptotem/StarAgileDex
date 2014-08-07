@@ -12,6 +12,7 @@ class HomeController < ApplicationController
   def console
     #todo:Guest logout delete
     #todo:Counter on how many user logged in.(Analytics)
+    @user = User.new
     if user_signed_in?
       @user = current_user
       gon.display_modal = @user.display_modal
@@ -36,6 +37,22 @@ class HomeController < ApplicationController
     gon.titlepic=(@slide.titlepic.nil? ? false:true)
 
     render :layout => false
+  end
+
+  def users_trial_signup_submit
+    #@user = User.where(:email=>params[:user][:email]).first
+
+    user = User.find_by_email(params[:user][:email])
+    #render :json => user
+    #render :json => user.valid_password?(params[:user][:password])
+    #return
+    if user.valid_password?(params[:user][:password]) == true
+      sign_in(:user, user)
+      redirect_to console_path
+    else
+      redirect_to "/"
+    end
+
   end
 
   #This controls the new_deck_modal behavoiur, i.e. this displays new_deck_modal when user signs_in, refer authentication_controller's sign in
@@ -203,6 +220,8 @@ class HomeController < ApplicationController
     #For including best suited layout for selected plugins and executing it's function
     #TODO: Check for plugins
     @plugin_layout=t(:plugins)[s][:"#{@slide.layout}"][:layout]
+    #render :json => @slide.layout
+    #return
     gon.plugin_layout="#{@plugin_layout}()"
     # Put the contents into JS variables to be processed by master_init.js
     # ----------------------------------------

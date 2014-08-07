@@ -7,6 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="/assets/bootstrap.min.css">
   <link rel="stylesheet" href="/assets/console/console.css">
+  <link rel="stylesheet" href="/assets/console/newChanges.css">
   <link rel="stylesheet" href="/assets/console/slide_form.css">
   <link rel="stylesheet" href="/assets/console/jimpress/jimpress.css">
   <!--<link rel="stylesheet" href="/assets/console/jquery.mCustomScrollbar.css">-->
@@ -73,7 +74,7 @@
       <input type="hidden" id="presentation">
       <a id="view_deck" href="" class="btn ad_btn">View the Deck</a>
       <a href="#" id="export_html_btn" class="btn ad_btn">Export as HTML</a>
-      <a href="#" id="export_scorm_btn" class="btn ad_btn btn disabled">Export as SCORM</a>
+      <a href="#" id="export_scorm_btn" class="btn ad_btn btn">Export as SCORM</a>
       <a href="#" id="del_deck_btn" class="btn ad_btn">Delete the Deck</a>
       <a href="#" class="btn ad_btn btn-inverse" onclick="transitOut()">Close the Deck</a>
     </div>
@@ -136,9 +137,16 @@
           <%= image_tag "console/wordart.png" %>
         </div>
         <br>
-        <a href="/users/auth/facebook" class="btn btn-inverse btn-landing" id="new_deck_btn" title="Start">
-          <h1>Start</h1>
-        </a>
+        <!--<a href="/users/auth/facebook" class="btn btn-inverse btn-landing" id="new_deck_btn" title="Start">-->
+            <!--<h1>Start</h1>-->
+        <!--</a>-->
+        <% if user_signed_in? %>
+            Direct Login
+        <% else %>
+            <a href="#sign_in_modal" data-toggle="modal" class="btn btn-inverse btn-landing" id="new_deck_btn" title="Click here to Sign In.">
+              <h1>Start</h1>
+            </a>
+        <% end %>
     <% end %>
 
   </div>
@@ -183,27 +191,27 @@
         <% end %>
         <div class="tabbable tabs-left">
           <ul class="nav nav-tabs">
-            <li class="active wizard"><a data-toggle="tab" class="wizard" href="#lB">AutoPresenter Method</a></li>
-            <li class="wizard"><a data-toggle="tab" class="wizard" href="#lC">PowerPPT Method</a></li>
+            <!--<li class="active wizard"><a data-toggle="tab" class="wizard" href="#lB">AutoPresenter Method</a></li>-->
+            <li class="wizard active"><a data-toggle="tab" class="wizard" href="#lC">PowerPPT Method</a></li>
             <li class="wizard"><a data-toggle="tab" class="wizard" href="#lD">Manual Method</a></li>
           </ul>
           <div class="tab-content">
-            <div id="lB" class="tab-pane active">
-              <h3 style="margin-top: 0;">Autocreate a deck on:</h3>
-              <input id="presentation_name" name="presentation[name]" data-toggle="focus" placeholder="A topic of your choice..." type="text" maxlength="25" style="width:90%;"/>
-              <span style="font-size: 12px;">Maximum 25 characters.</span>
-              <br>
-              <br>
-              <a href="#" class="btn btn-inverse pull-right" id="new_deck_Modal_search_from_wiki" style="margin-right: 20px;">Try
-                your luck</a>
-            </div>
-            <div id="lC" class="tab-pane">
+            <!--<div id="lB" class="tab-pane active">-->
+              <!--<h3 style="margin-top: 0;">Autocreate a deck on:</h3>-->
+              <!--<input id="presentation_name" name="presentation[name]" data-toggle="focus" placeholder="A topic of your choice..." type="text" maxlength="25" style="width:90%;"/>-->
+              <!--<span style="font-size: 12px;">Maximum 25 characters.</span>-->
+              <!--<br>-->
+              <!--<br>-->
+              <!--<a href="#" class="btn btn-inverse pull-right" id="new_deck_Modal_search_from_wiki" style="margin-right: 20px;">Try-->
+                <!--your luck</a>-->
+            <!--</div>-->
+            <div id="lC" class="tab-pane active">
               <h3 style="margin-top: 0;">New Presentation:</h3>
               <!--<form id="new_slide" method="post" enctype="multipart/form-data" action="/ppt_pdf_prez">-->
                 <input id="presentation_name" name="name" data-toggle="focus" placeholder="Name the presentation" type="text" maxlength="25" style="width:90%"/>
                 <span style="font-size: 12px;">Maximum 25 characters.</span>
                 <input id="slide_ppt" type="file" placeholder="Add Image" name="slide[ppt]">
-                <div id="new_deck_Modal_ppt_info" style="position: absolute; left:226px; top:121px; font-size: 14px; color: gray;">Please, select ppt/pptx file.</div>
+                <div id="new_deck_Modal_ppt_info" style="left:226px; top:121px; font-size: 14px; color: gray;">Please, select ppt/pptx file.</div>
               <!--</form>-->
               <br>
               <br>
@@ -226,6 +234,33 @@
       </div>
     </form>
   </div>
+
+  <div id="sign_in_modal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="newModalLabel">
+      <div class="modal-header" style="text-align: center; border-top-left-radius: 5px;border-top-right-radius: 5px;">
+        <h2>Sign In</h2>
+      </div>
+      <div class="modal-body">
+        <%= form_for(@user, :url => users_trial_signup_submit_path(@user)) do |f| %>
+            <div class="sign-in-field">
+              <%= f.label :email, :class=>"sign-in-field-label" %>
+              <%= f.email_field :email, :autofocus => true %>
+            </div>
+
+            <div class="sign-in-field">
+              <%= f.label :password, :class=>"sign-in-field-label" %>
+              <%= f.password_field :password %>
+            </div>
+
+            <div>
+              <%= f.submit "Sign in" %>
+            </div>
+        <% end %>
+      </div>
+      <div class="modal-footer">
+        <a href="#" class="close" data-dismiss="modal">Close</a>
+      </div>
+  </div>
+
 </div>
 
 <!--</div>-->
@@ -246,19 +281,37 @@
       <% end %>
     </ul>
     <% if !user_signed_in? or current_user.email.include?("guest") %>
-        <ul class="nav pull-right">
-          <li class="dropdown bottom-up">
-            <a class="dropdown-toggle brand"
-               data-toggle="dropdown"
-               href="#">
-              Sign in &#9650;
-            </a>
-            <ul class="dropdown-menu bottom-up" id="sign_in_block">
-              <li><a href="/users/auth/facebook"><img src="/assets/Facebook.png" style="width: 200px;"/></a></li>
-              <li><a href="/users/auth/twitter"><img src="/assets/Twitter.png" style="width: 200px;"/></a></li>
-            </ul>
-          </li>
-        </ul>
+        <!--<ul class="nav pull-right">-->
+          <!--<li class="dropdown bottom-up">-->
+            <!--<a class="dropdown-toggle brand"-->
+               <!--data-toggle="dropdown"-->
+               <!--href="#">-->
+              <!--Sign in &#9650;-->
+            <!--</a>-->
+            <!--<ul class="dropdown-menu bottom-up" id="sign_in_block">-->
+              <!--&lt;!&ndash;<li><a href="/users/auth/facebook"><img src="/assets/Facebook.png" style="width: 200px;"/></a></li>&ndash;&gt;-->
+              <!--&lt;!&ndash;<li><a href="/users/auth/twitter"><img src="/assets/Twitter.png" style="width: 200px;"/></a></li>&ndash;&gt;-->
+              <!--<li>-->
+                <!--<%#= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>-->
+                <!--<%#= form_for(@user, :url => users_trial_signup_submit_path(@user)) do |f| %>-->
+                    <!--<div>-->
+                      <!--<%#= f.label :email %>-->
+                      <!--<%#= f.email_field :email, :autofocus => true %>-->
+                    <!--</div>-->
+
+                    <!--<div>-->
+                      <!--<%#= f.label :password %>-->
+                      <!--<%#= f.password_field :password %>-->
+                    <!--</div>-->
+
+                    <!--<div>-->
+                      <!--<%#= f.submit "Sign in" %>-->
+                    <!--</div>-->
+                <!--<%# end %>-->
+              <!--</li>-->
+            <!--</ul>-->
+          <!--</li>-->
+        <!--</ul>-->
     <% else %>
         <ul class="nav pull-right">
           <li class="brand">

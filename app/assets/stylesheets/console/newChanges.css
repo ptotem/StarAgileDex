@@ -1,0 +1,10 @@
+#sign_in_modal{
+    text-align: center;
+    width: 25%;
+    left: 58%;
+}
+
+#sign_in_modal .new_user .sign-in-field .sign-in-field-label{
+    padding-left: 15%;
+    text-align: left;
+}

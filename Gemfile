@@ -7,8 +7,8 @@ gem 'rails', '3.2.12'
 
 gem 'devise'
 gem 'cancan'
-gem 'sqlite3'
-#gem 'pg'
+#gem 'sqlite3'
+gem 'pg'
 #gem 'taps'
 gem 'rails_admin', :git => 'git://github.com/sferik/rails_admin.git'
 gem 'thin'
@@ -42,10 +42,10 @@ group :development do
   gem "better_errors"
 end
 
-group :production do
-  #gem 'pg', '0.12.2'
-  gem 'pg'
-end
+#group :production do
+#  #gem 'pg', '0.12.2'
+#  gem 'pg'
+#end
 
 # Gems used only for assets and not required
 # in production environments by default.

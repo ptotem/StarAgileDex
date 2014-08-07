@@ -23,6 +23,8 @@ AgileDex::Application.routes.draw do
 
   match '/users/auth/:provider/callback' => 'authentications#create'
   match '/users/sign_in' => 'home#console'
+  match '/users_trial_signup_submit' => 'home#users_trial_signup_submit', :as=>"users_trial_signup_submit"
+
 
   match 'get_slides'=>'home#get_slides',:as=>'get_slides'
   match 'move_slide_up'=>'home#move_slide_up',:as=>'move_slide_up'
@@ -39,6 +41,7 @@ AgileDex::Application.routes.draw do
   match '/slides/:id/:plugin/:font/:background/(:view)', :to=>"slides#builder", :as=>"builder"
   match '/save_slide', :to=>"slides#save_slide", :as=>"save_slide"
   match '/export/:id',:to=>'presentations#export',:as=>"export"
+  match '/export_as_scorm/:id',:to=>'presentations#export_as_scorm',:as=>"export_as_scorm"
   match '/view_prez/:id',:to=>'presentations#view_prez',:as=>"view_prez"
   match '/view_deck/:id/(:slide_id)',:to=>'home#view_deck',:as=>"view_deck"
 

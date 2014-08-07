@@ -210,6 +210,8 @@ class SlidesController < ApplicationController
     @slide.font= params[:font][0]
     @slide.background=params[:background][0]
     @slide.save
+    #render :text => @slide.layout
+    #return
     render :text => 'success'
     return
   end

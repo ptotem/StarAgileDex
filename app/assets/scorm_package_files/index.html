@@ -1,0 +1,87 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <script type="text/javascript" src="sco_api.js"></script>
+    <script type="text/javascript" src="jquery-1.7.1.min.js"></script>
+    <script type="text/javascript" src="jquery.ba-postmessage.js"></script>
+    <script type="text/javascript">
+            $.receiveMessage(function(e) {alert(e.data);});
+        function initSCO() {
+            initCommunications();
+            //var path = document.location.pathname;
+            //var path_array = path.split("/");
+            //var parent_folder = path_array[path_array.length - 2];
+            var original_link = document.getElementById("docu_link").getAttributeNode("href").value;
+            var student_id = scormGetValue("cmi.core.student_id");
+            var student_name = scormGetValue("cmi.core.student_name");
+			var new_link=original_link+student_id;
+			document.getElementById("docu_link").getAttributeNode("href").value="1.html";
+            //document.getElementById("username").setAttribute("value", student_name);
+            //document.getElementById("userid").setAttribute("value", student_id);
+            startSessionTime();
+            learnerWillReturn(true);
+        }
+        //
+        //
+        // //this function is called on body unload
+        var final_score = 0;
+
+        //        window.addEventListener("message", receiveMessage, false);
+        //
+        //        $.receiveMessage(
+        //                function(e) {
+        //                    alert(e.data);
+        //                }
+        //
+        //        );
+        function termSCO() {
+            alert("exit");
+
+
+            //	  if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
+            //		xmlhttp = new XMLHttpRequest();
+            //	  }
+            //	  else {// code for IE6, IE5
+            //		xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+            //	  }
+            //	  xmlhttp.open("GET", "note.xml", false);
+            //
+            //
+            //	  xmlhttp.send();
+            //	  xmlDoc = xmlhttp.responseXML;
+            //	  var final_score = xmlDoc.getElementsByTagName("grade")[0].childNodes[0].nodeValue;
+
+
+            var final_score = document.getElementById("grade").getAttribute("value");
+            //	  var final_score=document.getElementById("ifr1").contentWindow.give_score();
+            //
+            alert("your score is :" + final_score);
+            //this specifies whether learner is allowed to pause his/her session and return again or not.
+            //if argument is true, he can return else he cant, here we say he can return
+            //thus LMS saves the current state of the session which we can use when the learner returns for the next time
+//            learnerWillReturn(false);
+//            setCompletionStatus("completed");
+//            setScore(final_score + "");
+//            setPassFail("passed");
+//            termCommunications();
+
+            //this function tells the LMS that session has ended/user has navigated away
+            //it actually calls API.LMSFinish("")
+
+
+        }
+
+
+    </script>
+
+    <title></title>
+</head>
+<body onload="initSCO()" onunload="termSCO()">
+<a href="http://localhost:6382/?employee_id=" id="docu_link">Go To Savings Application Form</a>
+<!-- <iframe src="http://localhost:6382/?employee_id=" style="height: 500px;width: 1000px" -->
+        <!-- id="ifr1"> -->
+<!-- </iframe> -->
+
+</body>
+</html>

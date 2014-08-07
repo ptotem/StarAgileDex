@@ -280,7 +280,7 @@ function show_presentation(this_presentation_id, this_presentation_name) {
                     $('#view_deck').hide();
                 }
                 ele = ele.toString().replace('[', '').replace(']', '').replace(/"/g, '');
-//                alert(ele.split('|')[2]);
+                //alert(ele.split('|')[2]);
                 if (ele != '') {
                     my_slide = ele.split('|');
                     this_id = 'slide' + my_slide[0];
@@ -483,6 +483,17 @@ function export_as_html() {
     }
 }
 
+function export_as_scorm() {
+//    alert($(this).hasClass('disabled'));
+//    if ($(this).attr('class').split(" ")[2]=="disabled"){
+    if ($(this).hasClass('disabled')){
+
+    }
+    else{
+        window.location = '/export_as_scorm/' + $('#slide_presentation_id').val();
+    }
+}
+
 
 // This function creates the live bindings for buttons, links and scrolling
 
@@ -630,6 +641,9 @@ function load_bindings() {
 
     // This function handles the export as html of a deck
     $('#export_html_btn').on('click', export_as_html);
+
+    // This function handles the export as scorm of a deck
+    $('#export_scorm_btn').on('click', export_as_scorm);
 
 
     // These functions manage the scroll bindings for the panels
