@@ -6,9 +6,9 @@ development:
   encoding: utf8
   database: agileDex_development_db
   pool: 5
-  username: nilesh
-  password: p20o20e13
-  host: 192.168.2.19
+  username: root
+  password: startv@123
+  host: 172.29.150.240
   port: 3306
   socket: /var/run/mysqld/mysqld.sock
 
@@ -17,9 +17,9 @@ test:
   encoding: utf8
   database: agileDex_test_db
   pool: 5
-  username: nilesh
-  password: p20o20e13
-  host: 192.168.2.19
+  username: root
+  password: startv@123
+  host: 172.29.150.240
   port: 3306
   socket: /var/run/mysqld/mysqld.sock
 
@@ -29,8 +29,8 @@ production:
   encoding: utf8
   database: agileDex_production_db
   pool: 5
-  username: nilesh
-  password: p20o20e13
-  host: 192.168.2.19
+  username: root
+  password: startv@123
+  host: 172.29.150.240
   port: 3306
   socket: /var/run/mysqld/mysqld.sock
