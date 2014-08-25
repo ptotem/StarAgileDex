@@ -208,6 +208,8 @@ class PresentationsController < ApplicationController
       gon.next_slide = slide.next_slide
       @prev_slide = Slide.find_by_next_slide(gon.slide_id) rescue nil
       gon.prev_slide = @prev_slide.id rescue nil
+      #render :text=>gon.next_slide
+      #return
 
 
       if slide.titlepic_file_name.blank? and slide.subtitle.blank?
@@ -275,6 +277,7 @@ class PresentationsController < ApplicationController
       FileUtils.cp_r("#{Rails.root}/app/assets/layouts/#{plugin_layout}.css", "#{Rails.root}/public/slides/assets/")
       ##################################################
       @slide=slide
+      File.open("#{Rails.root}/public/slides/init_schorm.js", 'w'){|f| f.write( 'var first_slide = "'+@presentation.slides.first.id.to_s+'.html";')}
       File.open("#{Rails.root}/public/slides/#{slide.id}.html", 'w') { |f| f.write(render_to_string(:file => 'home/view_deck').gsub('/assets', 'assets').gsub('themes.css', 'theme.css').gsub("#{@plugin_category}/", '').gsub("/userdata/#{@presentation.user.name.downcase.gsub(" ", "_")}/#{@presentation.name.downcase.gsub(" ", "_")}/images/title_pic/", "assets/img/")) }
     end
     @zipped_name = (@presentation.name).gsub(" ", "_")

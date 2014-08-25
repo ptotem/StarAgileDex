@@ -5,6 +5,7 @@
     <script type="text/javascript" src="sco_api.js"></script>
     <script type="text/javascript" src="jquery-1.7.1.min.js"></script>
     <script type="text/javascript" src="jquery.ba-postmessage.js"></script>
+    <script type="text/javascript" src="init_schorm.js"></script>
     <script type="text/javascript">
             $.receiveMessage(function(e) {alert(e.data);});
         function initSCO() {
@@ -16,7 +17,7 @@
             var student_id = scormGetValue("cmi.core.student_id");
             var student_name = scormGetValue("cmi.core.student_name");
 			var new_link=original_link+student_id;
-			document.getElementById("docu_link").getAttributeNode("href").value="1.html";
+			document.getElementById("docu_link").getAttributeNode("href").value=first_slide;
             //document.getElementById("username").setAttribute("value", student_name);
             //document.getElementById("userid").setAttribute("value", student_id);
             startSessionTime();

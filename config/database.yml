@@ -7,9 +7,8 @@ development:
   database: agileDex_development_db
   pool: 5
   username: root
-  password: startv@123
-  host: 172.29.150.240
-  port: 3306
+  password: p20o20e13
+  host: localhost
   socket: /var/run/mysqld/mysqld.sock
 
 test:
@@ -18,9 +17,8 @@ test:
   database: agileDex_test_db
   pool: 5
   username: root
-  password: startv@123
-  host: 172.29.150.240
-  port: 3306
+  password: p20o20e13
+  host: localhost
   socket: /var/run/mysqld/mysqld.sock
 
 
@@ -30,7 +28,6 @@ production:
   database: agileDex_production_db
   pool: 5
   username: root
-  password: startv@123
-  host: 172.29.150.240
-  port: 3306
+  password: p20o20e13
+  host: localhost
   socket: /var/run/mysqld/mysqld.sock
