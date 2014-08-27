@@ -170,6 +170,7 @@ class PresentationsController < ApplicationController
     require 'pathname'
     @presentation=Presentation.find(params[:id])
     system("rm -rf #{Rails.root}/public/slides/*.zip")
+
     #Please, make slides directory in public folder
     #Make Directory in public file copy all the component of assets/master,assets/background in public/slides/assets directory.
     system "mkdir #{Rails.root}/public/slides/assets"
@@ -181,6 +182,7 @@ class PresentationsController < ApplicationController
     FileUtils.cp_r("#{Rails.root}/app/assets/backgrounds/.", "#{Rails.root}/public/slides/assets/")
     FileUtils.cp_r("#{Rails.root}/public/favicon.ico", "#{Rails.root}/public/slides/assets/")
 
+    system("rm -rf #{Rails.root}/public/slides/assets/img/*")
 
     @presentation.slides.each do |slide|
 
@@ -194,6 +196,7 @@ class PresentationsController < ApplicationController
       @view_deck=FALSE
       gon.view_deck=@view_deck
       #Make directory with slide.id name in public/slides/assets/img and copying the slides images in to that directory
+
       system "mkdir #{Rails.root}/public/slides/assets/img/#{slide.id}"
       if !slide.content_blocks.blank?
         FileUtils.cp_r("#{Rails.root}/public/userdata/#{@presentation.user.name.downcase.gsub(" ", "_")}/#{@presentation.name.downcase.gsub(" ", "_")}/#{slide.id}/content_blocks/", "#{Rails.root}/public/slides/assets/img/#{slide.id}/")
