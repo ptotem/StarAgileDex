@@ -41,7 +41,7 @@
   <% end %>
 
   <% if @view_deck %>
-      <ul class="nav nav-stacked nav-pills pull-right menu_select" style="margin-top: 0px; text-align: center;">
+      <ul class="nav nav-stacked nav-pills pull-right menu_select" style="margin-top: 0px; text-align: center; display: none;">
         <li class="btn-warning" id="ad-menu-toggle_view_deck">
           <a href="#" onclick="$('.ad-menu-item').slideToggle();"><i class="icon-tasks"></i></a></li>
         <li class="active ad-menu-item"><a href="/console"><i class=""></i>Home</a></li>
@@ -49,7 +49,7 @@
         <li class="active ad-menu-item"><a id="slide_next" href=""><i class=""></i>Next</a></li>
       </ul>
   <% elsif @export %>
-      <ul class="nav nav-stacked nav-pills pull-right menu_select" style="margin-top: 0px; text-align: center;">
+      <ul class="nav nav-stacked nav-pills pull-right menu_select" style="margin-top: 0px; text-align: center; display: none;">
         <li class="btn-warning" id="ad-menu-toggle_view_deck">
           <a href="#" onclick="$('.ad-menu-item').slideToggle();"><i class="icon-tasks"></i></a></li>
         <li class="active ad-menu-item"><a id="slide_prev" href=""><i class=""></i>Prev</a></li>
